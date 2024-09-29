@@ -18,6 +18,57 @@
     
 
     <style>
+	.reviews-section {
+        padding: 30px;
+        background-color: #f4f9ff;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .reviews-section h2 {
+        color: #2C3E50;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .review-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .review {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+
+    .review img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .review p {
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .review ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .review ul li {
+        font-size: 0.9em;
+        color: #357ABD;
+    }
+	
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -313,6 +364,38 @@
         <a href="https://www.udemy.com/user/priya-d-66/" target="_blank">Redeem Your Free Coupon Now</a>
         
     </div>
+	<!-- User Reviews Section -->
+<section class="reviews-section">
+    <h2>What Our Learners Say</h2>
+    <div class="review-container">
+        <!-- Review 1 -->
+        <div class="review">
+            <img src="Review-1.JPG" alt="Jayesh Wadilie's 5-star review of CertShield">
+            <p><strong>Jayesh Wadilie</strong></p>
+            <p>"I highly recommend this course to anyone preparing for the Google Professional Cloud Security Engineer exam. The content is comprehensive, covering all aspects of cloud security in great detail. Priya's explanations are clear and concise, making even complex topics easy to understand."</p>
+            <ul class="review-highlights">
+                <li>Valuable information</li>
+                <li>Clear explanations</li>
+                <li>Engaging delivery</li>
+                <li>Helpful practice activities</li>
+                <li>Accurate course description</li>
+                <li>Knowledgeable instructor</li>
+            </ul>
+        </div>
+        <!-- Review 2 -->
+        <div class="review">
+            <img src="Review-2.JPG" alt="Rajat Swain's 5-star review of CertShield">
+            <p><strong>Rajat Swain</strong></p>
+            <p>"Really helped me to prepare for my exam. Explanation was very precise."</p>
+        </div>
+        <!-- Review 3 -->
+        <div class="review">
+            <img src="Review-3.JPG" alt="Shashanka Sharma's 5-star review of CertShield">
+            <p><strong>Shashanka Sharma</strong></p>
+            <p>"This was a great resource for studying for the exam. The questions were similar to the ones asked on the real exam and the explanations were clear. I'd recommend double-checking the answers to see what the community has to say as it is an interesting read."</p>
+        </div>
+    </div>
+</section>
 
     <!-- GCP Section -->
     <section class="section">
@@ -444,6 +527,11 @@
     <section class="section">
         <h2>Databricks Certification Exam Practice Tests</h2>
         <div class="container">
+			<div class="box databricks">
+                <a href="https://www.udemy.com/course/databricks-generative-ai-engineer-associate-practice-exam/?referralCode=23D9FF786324892DA1F7" target="_blank">
+                    Databricks Generative AI Engineer Associate: Practice Exam
+                </a>
+            </div>
             <div class="box databricks">
                 <a href="https://www.udemy.com/course/databricks-machine-learning-professional-practice-test/?referralCode=E9381C4C52F7E97BCFDD" target="_blank">
                     Databricks Machine Learning Professional
