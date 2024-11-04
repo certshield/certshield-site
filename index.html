@@ -283,11 +283,21 @@
             color: #2C3E50;
         }
 
-        .coupon-code {
-            font-size: 1.3em;
+         .coupon-code {
+            font-size: 1.6em;
             font-weight: bold;
-            color: #FF5733;
+            color: #FF1493; /* Eye-catching pink color */
             margin-top: 10px;
+            animation: blink 3s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
         }
 
         .coupon-section a {
@@ -363,8 +373,8 @@
     <div class="coupon-section">
         <h2>Free No-Cost Subscription Coupon - Giving Back to the Community</h2>
         <p>As part of our commitment to supporting learners, every month we offer a no-cost subscription coupon for our certification practice exams. This is our way of giving back to the community and helping more professionals achieve their certification goals!</p>
-		<h3>First 100 Lucky Subscriber</h3>
-        <div class="coupon-code">Use Coupon(OCT 2024): <strong>CS-FREE100</strong></div>
+		<h3>For First 100 Lucky Subscribers</h3>
+        <div class="coupon-code">Free Coupon(NOV-2024): <strong>BLCK-FRI-CYBR-MON100</strong></div>
         <p>This month's offer is valid for a limited time! Click the link below & select practice test from the profile to redeem your free subscription:</p>
         <a href="https://www.udemy.com/user/priya-d-66/" target="_blank">Redeem Your Free Coupon Now</a>
         
