@@ -187,6 +187,15 @@
     .footer-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
     .copyright{color:#99aedd;text-align:center;margin-top:10px;font-size:14px}
     .social a{color:#cfe3ff}
+
+    .month-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:14px;font-weight:800;letter-spacing:.3px;
+    background:#132a55;border:1px solid #2a57a8;color:#ffd54f;
+    padding:6px 10px;border-radius:999px;margin-left:8px
+  }
+  .coupon-note{margin-top:6px;color:#b8c9ff;font-size:12.5px}
+  .coupon-note strong{color:#fff}
   </style>
 
   <!-- ===================== STRUCTURED DATA ===================== -->
@@ -254,22 +263,36 @@
           <span class="coupon-eyebrow" aria-label="Community Offer">
             🎁 Monthly Community Offer
           </span>
-          <h1 class="coupon-title" id="coupon-title">Free Coupon — First 100 This Month</h1>
-          <p class="coupon-sub">
-            Giving back to the community: every month we share a limited <strong>no-cost subscription coupon</strong>
-            for our Udemy practice exams. For September 2025 use the code below and choose your exam on our Udemy profile.
-          </p>
-          <div class="coupon-code" aria-live="polite">
-            <span class="code-chip" title="September 2025 Coupon Code">SKILLBOOST</span>
-            <a class="btn" href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener">
-              Redeem on Udemy →
-            </a>
-          </div>
-          <p class="fine">Note: Offer is time-limited and capped at 100 redemptions each month.</p>
+          <h1 class="coupon-title" id="coupon-title">
+  Free Coupon
+  <!-- Auto month/year: set data-month/year="auto" for current month; or set e.g., data-month="October" data-year="2025" -->
+  <span id="month-badge" class="month-badge" data-month="auto" data-year="auto" aria-label="Coupon Month">Loading…</span>
+  — First 100 This Month
+</h1>
+
+<p class="coupon-sub">
+  Giving back to the community: every month we share a limited <strong>no-cost subscription coupon</strong>
+  for our Udemy practice exams. For <strong><span class="coupon-month-text" data-month="auto" data-year="auto">Loading…</span></strong>
+  use the code below and choose your exam using direct link provided below OR from our Udemy profile
+</p>
+
+<div class="coupon-code" aria-live="polite">
+  <span class="code-chip" title="Monthly Coupon Code">SKILLBOOST</span>
+  <a class="btn" href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener">
+    Redeem on Udemy →
+  </a>
+</div>
+
+<p class="fine">Note: Offer is time-limited and capped at 100 redemptions each month.</p>
+<p class="coupon-note">
+  <strong>If the coupon shows “expired” or doesn’t apply</strong>, it most likely reached the monthly limit of 100
+  redemptions. Please check back here at the <strong>start of next month</strong> for the new code.
+</p>
+
         </div>
 
         <aside class="coupon-card" aria-label="Coupon details">
-          <div class="bullet"><i>✔</i> Use the code on the Udemy profile page after selecting a practice exam.</div>
+          <div class="bullet"><i>✔</i> Select the Practice Exam using direct links provided below or use Udemy profile page to select the practice test and use the code.</div>
           <div class="bullet"><i>✔</i> 100% off (no cost) for the first 100 subscribers in the month.</div>
           <div class="bullet"><i>✔</i> Genuine, updated practice tests with explanations.</div>
         </aside>
@@ -560,7 +583,44 @@
       });
       if(!any) console.info('No matches for search:', q);
     })();
+
+    (() => {
+  const TZ = 'Asia/Kolkata';
+  const now = new Date();
+
+  function computeMonthYear(el){
+    const mAttr = (el?.dataset.month || 'auto').trim().toLowerCase();
+    const yAttr = (el?.dataset.year || 'auto').trim().toLowerCase();
+
+    const month = mAttr === 'auto'
+      ? now.toLocaleString('en-US', { month: 'long', timeZone: TZ })
+      : mAttr.charAt(0).toUpperCase() + mAttr.slice(1);
+
+    const year = yAttr === 'auto'
+      ? now.toLocaleString('en-US', { year: 'numeric', timeZone: TZ })
+      : yAttr;
+
+    return { month, year };
+  }
+
+  // Update the badge
+  const badge = document.getElementById('month-badge');
+  if (badge){
+    const { month, year } = computeMonthYear(badge);
+    badge.textContent = `${month} ${year}`;
+    badge.setAttribute('title', `${month} ${year} Coupon`);
+    badge.setAttribute('aria-label', `${month} ${year} Coupon Month`);
+  }
+
+  // Update all inline month mentions
+  document.querySelectorAll('.coupon-month-text').forEach(el => {
+    const { month, year } = computeMonthYear(el);
+    el.textContent = `${month} ${year}`;
+  });
+})();
+    
   </script>
 </body>
 </html>
+
 
