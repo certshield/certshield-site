@@ -1,636 +1,2446 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
 <head>
-  <!-- ===================== BASIC META ===================== -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#12343b">
 
-  <title>CertShield — Free Cloud, Gen AI & IT Certification Practice Exams (GCP, AWS, Azure, Databricks, ISC2, Salesforce, UiPath, OCI, ITIL, BTA, Juniper)</title>
+  <title>Free Udemy Certification Practice Exams | CertShield</title>
+  <meta name="description" content="Claim monthly free Udemy coupons for ethical practice exams and mock tests across AI, GCP, AWS, Azure, Databricks, ISC2, Salesforce, UiPath and OCI.">
+  <meta name="keywords" content="free Udemy certification practice test coupon, Udemy practice exams, Udemy practice exam courses, certification practice exams, certification practice tests, certification mock tests, Ethical CertShield Practice Exams, alternative to exam dumps, exam-style practice questions, AI certification practice test, GenAI certification mock exam, Google Cloud certification practice exam, GCP practice tests, AWS certification mock test, Azure certification practice exam, Databricks certification practice test, data engineering certification mock test, cloud certification preparation, cybersecurity certification practice exams, ISC2 practice exams, Salesforce AI certification practice test, UiPath certification practice exam, Oracle OCI Generative AI practice exam">
+  <meta name="author" content="CertShield">
+  <meta name="application-name" content="CertShield Ethical Practice Tests">
+  <link rel="canonical" href="https://certshield.co.in/">
 
-  <meta name="description" content="All CertShield Udemy practice exams in one place. Find the monthly free coupon instantly. Practice tests for GCP, AWS, Azure, Databricks, ISC2, Salesforce, UiPath, Oracle OCI, ITIL, BTA Blockchain, and Juniper. Genuine, up-to-date links with clear categories." />
-  <link rel="canonical" href="https://certshield.github.io/certshield-site/" />
+  <meta property="og:site_name" content="CertShield">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:title" content="Free Udemy Certification Practice Exams | CertShield">
+  <meta property="og:description" content="Where Knowledge Gets Tested. Find monthly free Udemy coupons and focused ethical practice tests for AI, Cloud, Data, Security, Salesforce, UiPath, Oracle OCI, Juniper, ITSM and more.">
+  <meta property="og:url" content="https://certshield.co.in/">
+  <meta property="og:image" content="https://certshield.co.in/profile3.png">
+  <meta property="og:image:alt" content="CertShield Ethical Practice Tests certification preparation page">
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="CertShield — Free AI, Cloud & IT Certification Practice Exams" />
-  <meta property="og:description" content="Find the monthly free coupon at the top. Explore verified Udemy practice tests for GCP, AWS, Azure, Databricks, ISC2, Salesforce, UiPath, OCI, ITIL, BTA & Juniper." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://certshield.github.io/certshield-site/" />
-  <meta property="og:image" content="https://certshield.github.io/certshield-site/profile3.png" />
-  <meta property="og:image:alt" content="CertShield practice exams and coupons" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Udemy Certification Practice Exams | CertShield">
+  <meta name="twitter:description" content="Ready. Set. Certified. Monthly free Udemy coupons plus ethical practice tests for AI, Cloud, Data, Security and emerging technology certifications.">
+  <meta name="twitter:image" content="https://certshield.co.in/profile3.png">
+  <meta name="twitter:image:alt" content="CertShield Ethical Practice Tests certification preparation page">
 
-  <!-- Preload small logo for faster paint -->
-  <link rel="preload" as="image" href="profile3.png" imagesrcset="profile3.png" />
+  <link rel="preload" href="profile3.png" as="image">
+  <link rel="dns-prefetch" href="//www.udemy.com">
 
-  <!-- ===================== STYLES ===================== -->
   <style>
-    :root{
-      --bg:#0b1220;
-      --card:#0f1a33;
-      --muted:#93a4c4;
-      --brand:#357ABD;
-      --brand-2:#1D4ED8;
-      --accent:#FFD54F;
-      --ok:#2ECC71;
-      --danger:#D32F2F;
-      --shadow:0 12px 30px rgba(0,0,0,.25);
-      --radius:14px;
-      --radius-sm:10px;
-      --max:1200px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,sans-serif;
-      background: linear-gradient(180deg, #0a1020 0%, #0c1530 100%);
-      color:#e8eefc;
-      line-height:1.55;
-    }
-    a{color:#cfe3ff;text-decoration:none}
-    a:hover{text-decoration:underline}
-    img{max-width:100%;height:auto;display:block}
-    .wrap{max-width:var(--max);margin-inline:auto;padding:20px}
-    .visually-hidden{position:absolute !important;height:1px;width:1px;overflow:hidden;clip:rect(1px, 1px, 1px, 1px);white-space:nowrap}
-
-    /* -------- Top Bar / Branding -------- */
-    .topbar{
-      position:sticky;top:0;z-index:50;
-      background:#0a1328cc; backdrop-filter:saturate(160%) blur(8px);
-      border-bottom:1px solid #1e2a4d;
-    }
-    .topbar-inner{display:flex;align-items:center;gap:12px;padding:10px 16px;max-width:var(--max);margin:0 auto}
-    .logo{width:44px;height:44px;border-radius:10px;box-shadow:var(--shadow)}
-    .brand-title{font-weight:700;letter-spacing:.2px}
-    .nav{
-      margin-left:auto;display:flex;gap:18px;flex-wrap:wrap;align-items:center
-    }
-    .nav a{font-size:14px;color:#c9d7ff;opacity:.95}
-    .nav a:hover{opacity:1}
-
-    /* -------- Coupon Banner -------- */
-    .coupon-banner{
-      margin:16px auto 0; border:1px solid #204a8c;
-      background: radial-gradient(1200px 400px at 20% -40%, #16356a 0%, #0b1220 60%);
-      border-radius:var(--radius); box-shadow:var(--shadow);
-      position:relative; overflow:hidden
-    }
-    .coupon-grid{
-      display:grid;grid-template-columns:1.2fr .8fr;gap:24px;padding:26px
-    }
-    .coupon-eyebrow{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:13px;color:#b8c9ff;background:#132a55;padding:6px 10px;border-radius:999px;border:1px solid #274d93
-    }
-    .coupon-title{font-size:clamp(22px,3vw,30px);margin:10px 0 6px;font-weight:800;color:#fff}
-    .coupon-sub{color:#cfe3ff;max-width:70ch;margin:0 0 12px}
-    .coupon-code{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap
-    }
-    .code-chip{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-      font-size:20px;font-weight:800;letter-spacing:.6px;
-      background:#0b1d46;border:2px dashed #4e77c9;color:#FFB3D5;
-      padding:10px 14px;border-radius:12px
-    }
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;
-      background:linear-gradient(180deg,#3b82f6,#1d4ed8);
-      color:#fff;font-weight:700;border:0;border-radius:12px;padding:12px 16px;
-      box-shadow:0 8px 18px rgba(29,78,216,.35);
-      transition:transform .06s ease, box-shadow .2s ease
-    }
-    .btn:hover{transform:translateY(-1px);}
-    .btn:active{transform:translateY(0)}
-    .fine{font-size:12px;color:#9db3e6}
-    .coupon-card{
-      border-left:1px dashed #274d93;padding-left:22px;display:flex;flex-direction:column;gap:10px;justify-content:center
-    }
-    .bullet{display:flex;align-items:flex-start;gap:10px;color:#e9f1ff}
-    .bullet i{font-style:normal;color:var(--accent)}
-
-    .sticky-cta{
-      position:fixed;right:18px;bottom:18px;z-index:60;
-      background:#132a55;border:1px solid #2a57a8;border-radius:999px;
-      box-shadow:var(--shadow);padding:8px 12px
-    }
-    .sticky-cta a{display:inline-flex;align-items:center;gap:10px;font-weight:700}
-
-    /* -------- Intro / Trust -------- */
-    .hero{
-      display:grid;gap:18px;margin-top:24px
-    }
-    .intro{
-      background:#0f1b37;border:1px solid #1e2a4d;border-radius:var(--radius);
-      padding:20px;box-shadow:var(--shadow);color:#d9e6ff
-    }
-    .trust{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:14px
-    }
-    .trust .kpi{
-      background:#0f1b37;border:1px solid #1e2a4d;border-radius:12px;padding:14px;text-align:center
-    }
-    .kpi strong{display:block;font-size:22px;color:#fff}
-
-    /* -------- Section / Cards -------- */
-    .section{margin-top:34px}
-    .section h2{
-      font-size:clamp(20px,2.4vw,26px);margin:0 0 14px;
-      color:#fff;letter-spacing:.3px
-    }
-    .grid{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:14px
-    }
-    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)} .coupon-grid{grid-template-columns:1fr}}
-    @media (max-width:560px){.grid{grid-template-columns:1fr}}
-
-    .card{
-      background:linear-gradient(180deg,#0f1a33,#0b1328);
-      border:1px solid #1e2a4d;border-radius:var(--radius-sm);
-      padding:16px;box-shadow:var(--shadow);min-height:92px;
-      display:flex;align-items:center;justify-content:space-between;gap:12px
-    }
-    .card .title{font-weight:700;color:#e9f1ff}
-    .card .badge{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid #284a8e;color:#bcd0ff;background:#0b1d46}
-
-    /* Color accents by vendor */
-    .gcp .badge{border-color:#5aa1ff}
-    .aws .badge{border-color:#ffb86b}
-    .azure .badge{border-color:#80b6ff}
-    .databricks .badge{border-color:#ff8a80}
-    .blockchain .badge{border-color:#9cc1ff}
-    .itil .badge{border-color:#9df0b2}
-    .juniper .badge{border-color:#bce07a}
-    .salesforce .badge{border-color:#c59bff}
-    .uipath .badge{border-color:#ff9cff}
-    .oci .badge{border-color:#ff8a8a}
-    .isc2 .badge{border-color:#7de0bf}
-
-    /* -------- Reviews -------- */
-    .reviews{
-      background:#0f1b37;border:1px solid #1e2a4d;border-radius:var(--radius);
-      padding:18px;box-shadow:var(--shadow)
-    }
-    .reviews .row{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:14px
-    }
-    @media (max-width:980px){.reviews .row{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.reviews .row{grid-template-columns:1fr}}
-
-    .review-img{
-      border-radius:10px;border:1px solid #213460;box-shadow:0 6px 16px rgba(0,0,0,.35)
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-strong: #eaf3f6;
+      --ink: #101827;
+      --muted: #586579;
+      --line: #d9e1ea;
+      --brand: #0f3a44;
+      --brand-2: #0f7b85;
+      --brand-3: #24506a;
+      --accent: #e4672e;
+      --accent-dark: #a93d13;
+      --gold: #f4c44f;
+      --mint: #dff7ee;
+      --success: #167a5b;
+      --danger: #a83232;
+      --shadow: 0 18px 44px rgba(16, 24, 39, 0.13);
+      --radius: 8px;
+      --max: 1180px;
     }
 
-    /* -------- Footer -------- */
-    footer{
-      margin-top:36px;padding:22px;background:#0a1328;border-top:1px solid #1e2a4d
+    * {
+      box-sizing: border-box;
     }
-    .footer-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-    .copyright{color:#99aedd;text-align:center;margin-top:10px;font-size:14px}
-    .social a{color:#cfe3ff}
 
-    .month-badge{
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:14px;font-weight:800;letter-spacing:.3px;
-    background:#132a55;border:1px solid #2a57a8;color:#ffd54f;
-    padding:6px 10px;border-radius:999px;margin-left:8px
-  }
-  .coupon-note{margin-top:6px;color:#b8c9ff;font-size:12.5px}
-  .coupon-note strong{color:#fff}
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, #eef6f8 0, var(--bg) 360px, #ffffff 100%);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: var(--brand-2);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      color: var(--accent-dark);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -60px;
+      z-index: 1000;
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin-inline: auto;
+    }
+
+    .coupon-ribbon {
+      background:
+        linear-gradient(90deg, #07181d 0%, #0f3a44 45%, #7a3414 100%);
+      color: #fff;
+      border-bottom: 4px solid var(--gold);
+      box-shadow: 0 10px 28px rgba(7, 24, 29, 0.28);
+    }
+
+    .coupon-ribbon .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-block: 12px;
+    }
+
+    .ribbon-copy {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 1rem;
+    }
+
+    .ribbon-month {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #fff3c4;
+      color: #402d05;
+      font-weight: 950;
+      box-shadow: 0 8px 18px rgba(244, 196, 79, 0.22);
+    }
+
+    .coupon-code {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 8px 16px;
+      border: 2px dashed rgba(255, 255, 255, 0.84);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.1));
+      color: #fff6d7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 1.08rem;
+      font-weight: 950;
+      letter-spacing: 0;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .coupon-code::before,
+    .coupon-code::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #0f3a44;
+      transform: translateY(-50%);
+    }
+
+    .coupon-code::before {
+      left: -6px;
+    }
+
+    .coupon-code::after {
+      right: -6px;
+    }
+
+    .ribbon-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-block: 14px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+      min-width: max-content;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      object-fit: cover;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.05rem;
+      line-height: 1.1;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .primary-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .primary-nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 7px 10px;
+      border-radius: var(--radius);
+      color: #334155;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .primary-nav a:hover,
+    .primary-nav a:focus-visible {
+      background: var(--surface-strong);
+      color: var(--brand);
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(15, 58, 68, 0.98), rgba(36, 80, 106, 0.96)),
+        url("profile3.png") center right 8% / min(340px, 42vw) no-repeat;
+      color: #fff;
+      border-bottom: 1px solid #0c262c;
+    }
+
+    .hero .container {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 40px;
+      align-items: center;
+      min-height: 560px;
+      padding-block: 58px 54px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: #f9dda1;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 860px;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(2rem, 5vw, 4rem);
+    }
+
+    .hero-text {
+      max-width: 780px;
+      margin: 18px 0 0;
+      color: #dcebea;
+      font-size: clamp(1rem, 1.4vw, 1.16rem);
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hero-proof li {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #eefbf8;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .hero-visual {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual img {
+      width: min(260px, 70vw);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+      background: #fff;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 11px 16px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #f07a3b, var(--accent-dark));
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(169, 61, 19, 0.22);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: linear-gradient(180deg, #ff8750, #8f3413);
+      color: #fff;
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 16px 28px rgba(169, 61, 19, 0.28);
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: var(--brand);
+      border-color: rgba(18, 52, 59, 0.16);
+      box-shadow: 0 8px 20px rgba(16, 24, 39, 0.08);
+    }
+
+    .btn.secondary:hover,
+    .btn.secondary:focus-visible {
+      background: var(--surface-strong);
+      color: var(--brand);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.42);
+      box-shadow: none;
+    }
+
+    .btn.ghost:hover,
+    .btn.ghost:focus-visible {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .section {
+      padding-block: 44px;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(1.45rem, 2.5vw, 2.15rem);
+    }
+
+    .section-intro {
+      max-width: 780px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .coupon-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .auto-month {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #fff7d5, #f4c44f);
+      color: #3a2700;
+      font-weight: 950;
+      box-shadow: 0 10px 18px rgba(244, 196, 79, 0.24);
+    }
+
+    .coupon-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 0;
+    }
+
+    .coupon-detail,
+    .coupon-steps {
+      padding: 24px;
+    }
+
+    .coupon-detail {
+      border-right: 1px solid var(--line);
+    }
+
+    .coupon-detail h2 {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+    }
+
+    .coupon-detail p {
+      color: var(--muted);
+    }
+
+    .coupon-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding: 14px;
+      background: linear-gradient(135deg, #0f3a44, #146c78);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 32px rgba(15, 58, 68, 0.2);
+    }
+
+    .coupon-box .coupon-code {
+      color: #3d2700;
+      background: linear-gradient(180deg, #fff8dc, #ffd36b);
+      border-color: #8f5f00;
+      font-size: clamp(1.15rem, 2vw, 1.55rem);
+      min-height: 54px;
+      padding-inline: 22px;
+      text-transform: uppercase;
+    }
+
+    .coupon-box .coupon-code::before,
+    .coupon-box .coupon-code::after {
+      background: #146c78;
+    }
+
+    .coupon-box .btn {
+      background: #ffffff;
+      color: var(--brand);
+      border-color: rgba(255, 255, 255, 0.28);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
+    }
+
+    .coupon-box .btn:hover,
+    .coupon-box .btn:focus-visible {
+      background: #fff7d5;
+      color: #3d2700;
+    }
+
+    .limit-note {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 14px;
+      background: #fff7e6;
+      border: 1px solid #f1d28f;
+      border-radius: var(--radius);
+      color: #574118;
+    }
+
+    .community-panel,
+    .dump-panel {
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .community-panel {
+      background:
+        linear-gradient(135deg, rgba(15, 58, 68, 0.96), rgba(20, 108, 120, 0.9));
+      color: #fff;
+    }
+
+    .community-panel .section-title,
+    .community-panel .section-intro {
+      color: #fff;
+    }
+
+    .community-panel .section-intro {
+      color: #d9f2ef;
+    }
+
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .community-card {
+      min-height: 170px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .community-card h3 {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 1.05rem;
+    }
+
+    .community-card p {
+      margin: 0;
+      color: #e6f5f2;
+    }
+
+    .community-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .dump-panel {
+      background: #ffffff;
+      border: 1px solid var(--line);
+    }
+
+    .dump-panel h2 {
+      margin: 0;
+    }
+
+    .dump-panel p {
+      max-width: 860px;
+      color: var(--muted);
+    }
+
+    .dump-panel strong {
+      color: var(--brand);
+    }
+
+    .coupon-steps {
+      background: #f9fbfd;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .steps strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .steps span {
+      color: var(--muted);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 22px rgba(16, 24, 39, 0.06);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--brand);
+      font-size: clamp(1.25rem, 2vw, 1.7rem);
+      line-height: 1.1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .tools {
+      position: sticky;
+      top: 73px;
+      z-index: 30;
+      background: rgba(246, 248, 251, 0.95);
+      border-block: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .tools-inner {
+      display: grid;
+      gap: 14px;
+      padding-block: 16px;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .search-label {
+      position: relative;
+      display: block;
+    }
+
+    .search-label span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .search-input {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 14px;
+      border: 1px solid #c9d3df;
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 1px 0 rgba(22, 32, 47, 0.04);
+    }
+
+    .search-input:focus {
+      outline: 3px solid rgba(20, 108, 120, 0.18);
+      border-color: var(--brand-2);
+    }
+
+    .course-count {
+      color: var(--muted);
+      font-size: 0.94rem;
+      white-space: nowrap;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      min-height: 36px;
+      padding: 7px 11px;
+      border: 1px solid #c9d3df;
+      border-radius: 999px;
+      background: #fff;
+      color: #334155;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .chip:hover,
+    .chip:focus-visible {
+      border-color: var(--brand-2);
+      color: var(--brand);
+    }
+
+    .chip[aria-pressed="true"] {
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+    }
+
+    .course-section {
+      margin-top: 38px;
+    }
+
+    .course-section[hidden],
+    .course-card[hidden] {
+      display: none;
+    }
+
+    .course-section h3 {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+    }
+
+    .course-section > p {
+      max-width: 760px;
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .course-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 250px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 24px rgba(22, 32, 47, 0.07);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(15, 123, 133, 0.38);
+      box-shadow: 0 18px 34px rgba(16, 24, 39, 0.12);
+    }
+
+    .course-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eef7f4;
+      color: var(--brand);
+      font-size: 0.76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .course-id {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .course-card h4 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1.02rem;
+      line-height: 1.28;
+      letter-spacing: 0;
+    }
+
+    .course-card p {
+      margin: 10px 0 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .course-card .btn {
+      margin-top: auto;
+      width: 100%;
+      box-shadow: none;
+    }
+
+    .trust-grid,
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      max-width: 1040px;
+      margin-inline: auto;
+    }
+
+    .trust-item,
+    .faq-item {
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .trust-item h3,
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.03rem;
+    }
+
+    .trust-item p,
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .review-card {
+      overflow: visible;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      box-shadow: 0 16px 34px rgba(22, 32, 47, 0.12);
+    }
+
+    .review-card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .disclaimer {
+      padding: 20px;
+      background: #fff7e6;
+      border: 1px solid #f1d28f;
+      border-radius: var(--radius);
+      color: #4b3a1e;
+    }
+
+    .social-panel {
+      margin-top: 26px;
+      padding: 22px;
+      background: linear-gradient(180deg, #ffffff, #f7fbfc);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .social-panel h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+    }
+
+    .social-panel p {
+      max-width: 760px;
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .social-card {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 92px;
+      padding: 14px;
+      background: #fff;
+      border: 1px solid #d8e4ec;
+      border-radius: var(--radius);
+      color: var(--ink);
+      text-decoration: none;
+      box-shadow: 0 10px 22px rgba(16, 24, 39, 0.07);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+    }
+
+    .social-card:hover,
+    .social-card:focus-visible {
+      color: var(--ink);
+      text-decoration: none;
+      transform: translateY(-3px);
+      border-color: rgba(15, 123, 133, 0.42);
+      box-shadow: 0 18px 34px rgba(16, 24, 39, 0.13);
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      box-shadow: inset 0 -10px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .social-icon.site { background: #0f7b85; }
+    .social-icon.udemy { background: #7c3aed; }
+    .social-icon.linkedin { background: #0a66c2; }
+    .social-icon.article { background: #24506a; }
+    .social-icon.youtube { background: #d92727; }
+    .social-icon.instagram { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+    .social-icon.whatsapp { background: #128c7e; }
+    .social-icon.telegram { background: #229ed9; }
+    .social-icon.medium { background: #111827; }
+
+    .social-card strong {
+      display: block;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .social-card small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .social-arrow {
+      color: var(--brand-2);
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+
+    .site-footer {
+      margin-top: 34px;
+      background:
+        linear-gradient(135deg, #07181d 0%, #0f3a44 56%, #14243a 100%);
+      color: #d8e1ea;
+      border-top: 5px solid var(--gold);
+    }
+
+    .footer-shell {
+      padding-block: 0 30px;
+    }
+
+    .footer-cta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 28px;
+      transform: translateY(-34px);
+      padding: 22px;
+      background: linear-gradient(180deg, #ffffff, #f3fbfa);
+      border: 1px solid rgba(15, 123, 133, 0.22);
+      border-radius: var(--radius);
+      box-shadow: 0 24px 52px rgba(7, 24, 29, 0.24);
+      color: var(--ink);
+    }
+
+    .footer-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--mint);
+      color: var(--brand);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-cta h2 {
+      margin: 10px 0 6px;
+      color: var(--ink);
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+    }
+
+    .footer-cta p {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .footer-cta-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.42fr);
+      gap: 20px;
+      align-items: stretch;
+      margin-top: -12px;
+    }
+
+    .footer-brand-card,
+    .footer-directory {
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.07);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.14);
+    }
+
+    .footer-brand-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .footer-brand-row img {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .footer-brand-row strong {
+      display: block;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+
+    .footer-brand-row span {
+      display: block;
+      color: #b8ccd1;
+      font-size: 0.92rem;
+    }
+
+    .footer-copy {
+      margin: 14px 0 0;
+      color: #cbd8dc;
+    }
+
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .footer-badges span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 9px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #eef8f7;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .footer-directory-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+
+    .footer-directory-head h3,
+    .footer-column h3 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .footer-directory-head h3 {
+      margin-bottom: 4px;
+      font-size: clamp(1.08rem, 2vw, 1.3rem);
+    }
+
+    .footer-directory-head p {
+      max-width: 560px;
+      margin: 0;
+      color: #cbd8dc;
+      font-size: 0.92rem;
+    }
+
+    .footer-channel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .footer-column {
+      min-width: 0;
+    }
+
+    .footer-nav,
+    .footer-links {
+      display: grid;
+      gap: 9px;
+    }
+
+    .footer-nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .site-footer a {
+      color: #fff;
+    }
+
+    .footer-nav a,
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.06);
+      text-decoration: none;
+      transition: background 0.16s ease, transform 0.16s ease, border-color 0.16s ease;
+    }
+
+    .footer-nav a:hover,
+    .footer-nav a:focus-visible,
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      background: rgba(255, 255, 255, 0.13);
+      border-color: rgba(255, 255, 255, 0.28);
+      transform: translateX(2px);
+    }
+
+    .footer-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .small {
+      color: #aebac8;
+      font-size: 0.9rem;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(194, 98, 34, 0.32);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 980px) {
+      .hero .container,
+      .coupon-main,
+      .footer-cta,
+      .footer-main,
+      .footer-channel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero .container {
+        padding-block: 42px;
+      }
+
+      .hero-visual {
+        justify-content: start;
+      }
+
+      .coupon-detail {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .stats,
+      .community-grid,
+      .course-grid,
+      .social-grid,
+      .trust-grid,
+      .faq-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tools {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .coupon-ribbon .container,
+      .header-inner,
+      .section-head,
+      .search-row {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .header-inner {
+        display: grid;
+      }
+
+      .primary-nav {
+        justify-content: start;
+      }
+
+      .search-row {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .course-count {
+        white-space: normal;
+      }
+
+      .stats,
+      .community-grid,
+      .course-grid,
+      .social-grid,
+      .trust-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ribbon-actions,
+      .hero-actions,
+      .coupon-box,
+      .footer-cta-actions {
+        width: 100%;
+      }
+
+      .ribbon-actions .btn,
+      .hero-actions .btn,
+      .coupon-box .btn,
+      .footer-cta-actions .btn {
+        width: 100%;
+      }
+
+      .footer-cta {
+        transform: translateY(-22px);
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 
-  <!-- ===================== STRUCTURED DATA ===================== -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"CertShield",
-    "url":"https://certshield.github.io/certshield-site/",
-    "description":"Free and paid practice exams for GCP, AWS, Azure, Databricks, ISC2, Salesforce, UiPath, Oracle OCI, ITIL, BTA Blockchain and Juniper.",
-    "logo":"https://certshield.github.io/certshield-site/profile3.png",
-    "sameAs":[
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "CertShield",
+    "url": "https://certshield.co.in/",
+    "logo": "https://certshield.co.in/profile3.png",
+    "description": "CertShield Ethical Practice Tests creates focused Udemy certification practice tests and mock exams for AI, cloud, data, security and emerging technology certifications.",
+    "founder": {
+      "@type": "Person",
+      "name": "Priya Dw",
+      "url": "https://www.udemy.com/user/priya-d-66/",
+      "jobTitle": "AI, Cloud and Security Practice Exam Architect"
+    },
+    "sameAs": [
+      "https://www.udemy.com/user/priya-d-66/",
       "https://www.linkedin.com/in/priya-certshield-certifications/",
+      "https://www.linkedin.com/in/priya-certshield-certifications/recent-activity/articles/",
       "https://www.youtube.com/@priyadw-certshield",
+      "https://www.instagram.com/certshield/",
+      "https://whatsapp.com/channel/0029Vb7HVKBGJP8GJMdaVf3v",
+      "https://t.me/free_quality_it_prep_exam",
       "https://medium.com/@certshield",
-      "https://certifyinitaifreecouponstips.quora.com/"
+      "https://certshield.co.in"
     ]
   }
   </script>
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "url":"https://certshield.github.io/certshield-site/",
-    "name":"CertShield Practice Exams",
-    "potentialAction":{
-      "@type":"SearchAction",
-      "target":"https://certshield.github.io/certshield-site/?q={search_term_string}",
-      "query-input":"required name=search_term_string"
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "CertShield",
+    "url": "https://certshield.co.in/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://certshield.co.in/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://certshield.co.in/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Ethical Certification Practice Tests",
+        "item": "https://certshield.co.in/#courses"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the CertShield monthly Udemy coupon work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every month, CertShield publishes a limited free Udemy coupon for each eligible practice test. Each coupon is usually limited to 100 redemptions and remains valid for the month or until the quota is consumed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are CertShield practice exams official certification exam materials?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. CertShield ethical practice tests are independent preparation resources and are not official exam materials. CertShield is not affiliated with certification owners unless explicitly stated."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do these courses contain real exam dumps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. CertShield uses ethical exam-style practice questions, mock tests and explanations for preparation. The courses do not claim to provide leaked, real or unauthorized exam content."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is CertShield an ethical alternative to certification exam dumps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. CertShield is positioned as Ethical CertShield Practice Exams, alternative to exam dumps for learners who want exam-style practice questions, mock tests and explanations without using leaked or unauthorized exam material."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does CertShield support financially weak learners and talented professionals?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CertShield's giving back initiative publishes limited monthly free Udemy coupons for eligible practice tests, helping sincere learners, career switchers and talented professionals access certification preparation resources."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Udemy practice exam courses are available on CertShield?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CertShield lists Udemy practice exam courses for AI and GenAI, GCP, AWS, Azure, Databricks, data engineering, cloud certification preparation, cybersecurity, ISC2, Salesforce, UiPath, Oracle OCI, Juniper, ITSM and blockchain certifications."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is the Udemy coupon not applying?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The coupon may have reached its monthly redemption limit or expired for the month. Check the CertShield page again at the start of the next month for the latest coupon."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "CertShield Ethical Practice Tests on Udemy",
+    "numberOfItems": 48,
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"item":{"@type":"Course","name":"CompTIA SecAI+ CY0-001 Practice Exams | 2026 Prep","url":"https://www.udemy.com/course/comptia-secai-cy0-001-practice-exams-prep/?referralCode=BD461CBEDFB8C0D51752","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":2,"item":{"@type":"Course","name":"Practice Tests for AWS ML Engineer Associate MLA-C01 Exam","url":"https://www.udemy.com/course/aws-mla-c01-ml-engineer-associate-practice-tests/?referralCode=979A5EEE23C042069021","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":3,"item":{"@type":"Course","name":"Practice Exams for AWS Certified Security Specialty SCS-C03","url":"https://www.udemy.com/course/aws-certified-security-specialty-scs-c03-practice-exams/?referralCode=BEED580002FD89C60030","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":4,"item":{"@type":"Course","name":"AWS Certified Generative AI Developer Professional Practice","url":"https://www.udemy.com/course/aws-certified-generative-ai-developer-professional-practice-mock-tests/?referralCode=38CBC86F021A3A089E40","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":5,"item":{"@type":"Course","name":"IAPP AIGP Practice Exams | AI Governance Mock Tests","url":"https://www.udemy.com/course/iapp-aigp-practice-exams-ai-governance-mock-tests/?referralCode=0548CF0CBFED9939A9C3","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":6,"item":{"@type":"Course","name":"Salesforce Agentforce Specialist Practice Exam | March 2026","url":"https://www.udemy.com/course/salesforce-certified-agentforce-specialist-practice-exam-ha/?referralCode=9F86867032DC16413456","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":7,"item":{"@type":"Course","name":"Juniper JNCIA-MistAI Practice Tests | JN0-253 Exam Prep 2026","url":"https://www.udemy.com/course/juniper-jncia-mistai-practice-tests-jn0-253-exam-prep-2025/?referralCode=8513F69E07816F09DEFD","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":8,"item":{"@type":"Course","name":"Google Cloud Security Operations Engineer Full Practice Test","url":"https://www.udemy.com/course/google-cloud-security-operations-engineer-full-practice-test/?referralCode=5D404285F3BDA379B5B7","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":9,"item":{"@type":"Course","name":"Google Cloud Generative AI Leader Exam: Practice Tests 2026","url":"https://www.udemy.com/course/google-cloud-generative-ai-leader-exam-practice-tests/?referralCode=5F7EEA76AAD96E3A7E2A","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":10,"item":{"@type":"Course","name":"Google Cloud Data Practitioner Certification Tests 2026","url":"https://www.udemy.com/course/practice-tests-for-gcp-associate-data-practitioner-exam/?referralCode=8AFE941E707855C4C24E","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":11,"item":{"@type":"Course","name":"Certified Cloud Security Professional-CCSP PracticeExam 2026","url":"https://www.udemy.com/course/certified-cloud-security-professional-ccsp-practiceexam/?referralCode=4018DA5AE424B69F5105","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":12,"item":{"@type":"Course","name":"CSSLP Certification Practice Exam | ISC2 CSSLP Mock Tests","url":"https://www.udemy.com/course/csslp-certification-isc2-csslp-mock-tests/?referralCode=345B977EF0C172A13B25","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":13,"item":{"@type":"Course","name":"ISSMP Certification Practice Exam | ISC2 ISSMP Mock Tests","url":"https://www.udemy.com/course/issmp-certification-isc2-issmp-mock-tests/?referralCode=1C7F14A07AB6DB3F4FD8","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":14,"item":{"@type":"Course","name":"ISSEP Certification Practice Exam | ISC2 ISSEP Mock Tests","url":"https://www.udemy.com/course/issep-certification-isc2-issep-mock-tests/?referralCode=115C3D1F0E21BA99E645","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":15,"item":{"@type":"Course","name":"ISSAP Certification Practice Exam | Full Length Mock Tests","url":"https://www.udemy.com/course/issap-certification-practice-exam-full-length-mock-tests/?referralCode=ADD20B971A52872908C6","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":16,"item":{"@type":"Course","name":"CISSP Certification ISC2 Practice Exam | 2026 Updated","url":"https://www.udemy.com/course/cissp-certification-isc2-practice-exam/?referralCode=D59CD49CC03272695654","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":17,"item":{"@type":"Course","name":"Oracle Cloud 2026 Generative AI Pro Practice Exam Prep","url":"https://www.udemy.com/course/oracle-cloud-2024-generative-ai-pro-practice-exam-prep/?referralCode=36C940976585264C2BDA","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":18,"item":{"@type":"Course","name":"AWS AI Practitioner AIF-C01 Practice Exams 2026","url":"https://www.udemy.com/course/aws-certified-ai-practitioner-aif-c01-practice-exam-prep/?referralCode=22D681FFBAD6628532CD","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":19,"item":{"@type":"Course","name":"UiPath Specialized AI Professional Practice Tests SAIv1 2026","url":"https://www.udemy.com/course/uipath-certified-ai-professional-uipath-saiv1-practice-ex/?referralCode=02F64B6BCAC9399EAB32","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":20,"item":{"@type":"Course","name":"Databricks Generative AI Engineer Associate: Practice Exam","url":"https://www.udemy.com/course/databricks-generative-ai-engineer-associate-practice-exam/?referralCode=23D9FF786324892DA1F7","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":21,"item":{"@type":"Course","name":"Databricks Spark Developer Associate 2026 | Practice Exams","url":"https://www.udemy.com/course/databricks-spark-developer-associate-practice-exams/?referralCode=A5353D60F7F67252A582","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":22,"item":{"@type":"Course","name":"Databricks Data Engineer Associate Practice Exam 2026","url":"https://www.udemy.com/course/pass-databricks-data-engineer-associate-practice-exams/?referralCode=467A5CC1E4155EFFCA05","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":23,"item":{"@type":"Course","name":"Databricks ML Associate Certification Practice Exams 2026","url":"https://www.udemy.com/course/databricks-machine-learningml-associate-practice-exams/?referralCode=08E0FC1AC514223FCDD9","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":24,"item":{"@type":"Course","name":"Databricks Certified Data Analyst Associate: Practice Tests","url":"https://www.udemy.com/course/databricks-certified-data-analyst-associate-practice-tests-z/?referralCode=6EA5821EF767C84BBC55","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":25,"item":{"@type":"Course","name":"BTA CBSA Exam Prep: Practice Tests & Cert Guide","url":"https://www.udemy.com/course/bta-cbsa-exam-prep-practice-tests-cert-guide/?referralCode=BB51FF7C2326B61E4FDB","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":26,"item":{"@type":"Course","name":"BTA CBBF Practice Exams: Pass on the 1st Try","url":"https://www.udemy.com/course/bta-cbbf-practice-exams-pass-on-the-1st-try/?referralCode=7467DDF61E01F5188555","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":27,"item":{"@type":"Course","name":"BTA Certified Blockchain Developer - Ethereum: Practice Exam","url":"https://www.udemy.com/course/bta-certified-blockchain-developer-ethereum-practice-exam/?referralCode=F4F74A178B0A59519CF3","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":28,"item":{"@type":"Course","name":"ITSM Foundation Exam Practice Tests & Mock Exams","url":"https://www.udemy.com/course/itsm-foundation-exam-practice-tests-mock-exams/?referralCode=77687B74E63DE2FE74FA","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":29,"item":{"@type":"Course","name":"AWS SAA-C03 Certified Solutions Architect Associate Practice","url":"https://www.udemy.com/course/aws-solutions-architect-associate-saa-c03-exam-success/?referralCode=525A9AE9040AB9CF70FB","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":30,"item":{"@type":"Course","name":"AWS SAP-C02 Certified Solutions Architect Professional Test","url":"https://www.udemy.com/course/aws-sap-c02-practice-exams-ace-the-professional-arch-exam/?referralCode=F12F147C5F8D99C4A963","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":31,"item":{"@type":"Course","name":"AWS ANS-C01 Advanced Networking Specialty Practice Exams","url":"https://www.udemy.com/course/aws-adv-networking-specialty-ans-c01-practice-exams/?referralCode=DD74691D6855EEF72F19","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":32,"item":{"@type":"Course","name":"AWS Certified DevOps Pro (DOP-C02) Practice Exams 2026","url":"https://www.udemy.com/course/aws-devops-pro-dop-c02-practice-exams-2024-pass-dop-c02/?referralCode=C45BEC7C2B3EEA55A828","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":33,"item":{"@type":"Course","name":"Databricks Certified Data Engineer Professional Tests 2026","url":"https://www.udemy.com/course/ace-databricks-de-data-eng-pro-exam-practice-tests/?referralCode=592A53A2B00BC1573C28","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":34,"item":{"@type":"Course","name":"GCP Professional Cloud Developer Practice Tests Updated 2026","url":"https://www.udemy.com/course/gcp-google-professional-cloud-developer-practice-exam/?referralCode=D657263E0D9AF17FE86F","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":35,"item":{"@type":"Course","name":"Databricks Machine Learning Professional: Practice Exam 2026","url":"https://www.udemy.com/course/databricks-machine-learning-professional-practice-test/?referralCode=E9381C4C52F7E97BCFDD","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":36,"item":{"@type":"Course","name":"AWS Certified Data Engineer Associate: DEA-C01 Practice Exam","url":"https://www.udemy.com/course/aws-certified-data-engineer-associate-dea-c01-practice-test/?referralCode=8ED2284E16293A0F642A","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":37,"item":{"@type":"Course","name":"Google Cloud Database Engineer Certification Tests 2026","url":"https://www.udemy.com/course/gcp-professional-cloud-database-engineer-practice-test/?referralCode=2A5452192B200F241269","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":38,"item":{"@type":"Course","name":"Google Cloud Pro DevOps Engineer: Full Practice Tests 2026","url":"https://www.udemy.com/course/google-professional-cloud-devops-engineer-practice-exam-test/?referralCode=77566DE33466E25A8D26","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":39,"item":{"@type":"Course","name":"Google Cloud Network Engineer Certification Tests 2026","url":"https://www.udemy.com/course/gcp-google-professional-network-engineer-practice-exam/?referralCode=EB940919016F225CA9F5","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":40,"item":{"@type":"Course","name":"Google Workspace Admin: Associate Practice Exams 2026","url":"https://www.udemy.com/course/google-cloud-professional-workspace-administrator-test/?referralCode=88B51E7633F08A004DD5","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":41,"item":{"@type":"Course","name":"GCP Security Pro: Ace the Exam with Realistic Practice Tests","url":"https://www.udemy.com/course/gcp-google-cloud-professional-security-engineer-test/?referralCode=F7F5578D91FC5C7824EA","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":42,"item":{"@type":"Course","name":"Google Associate Cloud Engineer Practice Exams 2026","url":"https://www.udemy.com/course/gcp-google-cloud-associate-cloud-engineer-practice-exam/?referralCode=EDAF6EC5C92B33CB78BE","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":43,"item":{"@type":"Course","name":"Google Cloud Digital Leader Practice Tests | CDL 2026 Prep","url":"https://www.udemy.com/course/gcp-certified-google-cloud-digital-leader-practice-exam/?referralCode=9F762E85D01BEC4F760A","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":44,"item":{"@type":"Course","name":"Google Cloud Professional ML Engineer Practice Tests | 2026","url":"https://www.udemy.com/course/google-gcp-ml-engineer-certification-practice-updated-exam/?referralCode=4F647E9B0DA7A53F550C","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":45,"item":{"@type":"Course","name":"Google Cloud Data Engineer Certification Practice Tests 2026","url":"https://www.udemy.com/course/gcp-de-professional-data-engineer-practice-exam/?referralCode=F81FDB15F9ADA3CF848F","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":46,"item":{"@type":"Course","name":"Google Professional Cloud Architect PCA Practice Tests 2026","url":"https://www.udemy.com/course/gcp-pca-professional-cloud-architect-practice-exam/?referralCode=C16AEFB5A99024CE8532","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":47,"item":{"@type":"Course","name":"Microsoft Azure AI-102 Exam Prep: AI Certification Series","url":"https://www.udemy.com/course/ai-series-microsoft-azure-ai-102-certification-exam/?referralCode=4B14E5E6B46080984148","provider":{"@type":"Organization","name":"Udemy"}}},
+      {"@type":"ListItem","position":48,"item":{"@type":"Course","name":"Azure AI-900 Practice Tests 2026 | Azure AI FundamentalsPrep","url":"https://www.udemy.com/course/microsoft-azure-ai-fundamentals-ai-900-exam-prep-practice-t/?referralCode=F75803CA7C668C89B9FC","provider":{"@type":"Organization","name":"Udemy"}}}
+    ]
   }
   </script>
 </head>
 
 <body>
-  <!-- ============ TOP BAR ============ -->
-  <div class="topbar" role="navigation" aria-label="Primary">
-    <div class="topbar-inner">
-      <img src="profile3.png" alt="CertShield logo" class="logo" width="44" height="44" />
-      <div class="brand-title">CertShield — Practice Exams Hub</div>
-      <nav class="nav">
-        <a href="#coupon">Coupon</a>
-        <a href="#gcp">GCP</a>
-        <a href="#aws">AWS</a>
-        <a href="#databricks">Databricks</a>
-        <a href="#azure">Azure</a>
-        <a href="#isc2">ISC2</a>
-        <a href="#salesforce">Salesforce</a>
-        <a href="#uipath">UiPath</a>
-        <a href="#oci">OCI</a>
-        <a href="#itil">ITIL</a>
-        <a href="#bta">BTA</a>
-        <a href="#juniper">Juniper</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#articles">Articles</a>
-      </nav>
+  <a class="skip-link" href="#main">Skip to courses</a>
+
+  <div class="coupon-ribbon" role="region" aria-label="Monthly Udemy coupon">
+    <div class="container">
+      <div class="ribbon-copy">
+        <strong><span class="ribbon-month" data-current-month>Monthly</span> free Udemy coupon:</strong>
+        <span class="coupon-code" data-coupon-code>Coupon loading</span>
+        <span>100 redemptions per eligible practice test, valid for <span data-current-month>this month</span> or until the quota is used.</span>
+      </div>
+      <div class="ribbon-actions">
+        <button class="btn secondary" type="button" data-copy-coupon>Copy Coupon</button>
+        <a class="btn" href="#courses">Browse Courses</a>
+      </div>
     </div>
   </div>
 
-  <main class="wrap">
-    <!-- ============ COUPON AT TOP ============ -->
-    <section id="coupon" class="coupon-banner" aria-labelledby="coupon-title">
-      <div class="coupon-grid">
+  <header class="site-header" aria-label="Site header">
+    <div class="container header-inner">
+      <a class="brand" href="https://certshield.co.in/" aria-label="CertShield home">
+        <img src="profile3.png" width="44" height="44" alt="CertShield logo">
+        <span>
+          <strong>CertShield</strong>
+          <span>Ethical Practice Tests</span>
+        </span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="#coupon">Coupon</a>
+        <a href="#community">Community</a>
+        <a href="#courses">Courses</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#why">Why CertShield</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener noreferrer">Subscribe on Udemy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
         <div>
-          <span class="coupon-eyebrow" aria-label="Community Offer">
-            🎁 Monthly Community Offer
-          </span>
-          <h1 class="coupon-title" id="coupon-title">
-  Free Coupon
-  <!-- Auto month/year: set data-month/year="auto" for current month; or set e.g., data-month="October" data-year="2025" -->
-  <span id="month-badge" class="month-badge" data-month="auto" data-year="auto" aria-label="Coupon Month">Loading…</span>
-  — First 100 This Month
-</h1>
+          <p class="eyebrow">Ethical Practice Tests | Where Knowledge Gets Tested</p>
+          <h1 id="hero-title">Free Udemy certification practice test coupons for AI, Cloud, Data and Security exams</h1>
+          <p class="hero-text">Ready. Set. Certified. | Practice. Perfect. Pass.<br>CertShield helps certification aspirants prepare with focused Udemy practice exams and ethical practice tests across AI, Generative AI, Cloud, Data, Security and emerging technology certifications. Find your course, apply the monthly coupon on Udemy and practice with exam-style mock tests built for honest preparation.</p>
+          <ul class="hero-proof" aria-label="CertShield highlights">
+            <li>Ethical CertShield Practice Exams, alternative to exam dumps</li>
+            <li>Monthly community coupon</li>
+            <li>Verified Udemy courses</li>
+          </ul>
+          <div class="hero-actions">
+            <a class="btn" href="#coupon">Use Monthly Coupon</a>
+            <a class="btn ghost" href="#courses">Open Course Catalog</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="profile3.png" width="260" height="260" alt="CertShield Ethical Practice Tests profile image">
+        </div>
+      </div>
+    </section>
 
-<p class="coupon-sub">
-  Giving back to the community: every month we share a limited <strong>no-cost subscription coupon</strong>
-  for our Udemy practice exams. For <strong><span class="coupon-month-text" data-month="auto" data-year="auto">Loading…</span></strong>
-  use the code below and choose your exam using direct link provided below OR from our Udemy profile
-</p>
-
-<div class="coupon-code" aria-live="polite">
-  <span class="code-chip" title="Monthly Coupon Code">AI_FOR_ALL26</span>
-  <a class="btn" href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener">
-    Redeem on Udemy →
-  </a>
-</div>
-
-<p class="fine">Note: Offer is time-limited and capped at 100 redemptions each month.</p>
-<p class="coupon-note">
-  <strong>If the coupon shows “expired” or doesn’t apply</strong>, it most likely reached the monthly limit of 100
-  redemptions. Please check back here at the <strong>start of next month</strong> for the new code.
-</p>
-
+    <section id="coupon" class="section" aria-labelledby="coupon-title">
+      <div class="container">
+        <div class="coupon-panel">
+          <div class="coupon-main">
+            <div class="coupon-detail">
+              <p class="eyebrow">Current month: <span class="auto-month" data-current-month>this month</span></p>
+              <h2 id="coupon-title">Claim the <span data-current-month>monthly</span> CertShield Udemy coupon before the 100-seat limit is consumed</h2>
+              <p>Every month, CertShield publishes a limited free Udemy coupon for each eligible practice test. Each coupon is usually limited to 100 redemptions and remains valid for <span data-current-month>the current month</span> or until the quota is consumed.</p>
+              <div class="coupon-box">
+                <span class="coupon-code" data-coupon-code>Coupon loading</span>
+                <button class="btn" type="button" data-copy-coupon>Copy Coupon</button>
+                <a class="btn secondary" href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener noreferrer">View Udemy Profile</a>
+              </div>
+              <div class="limit-note" role="note">
+                <strong>If Udemy shows the coupon as expired or unavailable, the monthly quota is likely used.</strong>
+                <span>Choose another course or return at the start of the next month for the latest free coupon cycle. The displayed month updates automatically.</span>
+              </div>
+            </div>
+            <div class="coupon-steps">
+              <h2>How to use the coupon</h2>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span><strong>Copy the coupon code.</strong><span>Use the visible monthly code above.</span></span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span><strong>Select a certification category.</strong><span>Search or filter by AI, GCP, AWS, Azure, Databricks, Security, Salesforce, UiPath, OCI, Juniper, ITSM or Blockchain.</span></span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span><strong>Open Udemy and apply the coupon.</strong><span>Click a course button, apply the coupon on Udemy and enroll before the 100-seat limit is reached.</span></span>
+                </li>
+              </ol>
+            </div>
+          </div>
         </div>
 
-        <aside class="coupon-card" aria-label="Coupon details">
-          <div class="bullet"><i>✔</i> Select the Practice Exam using direct links provided below or use Udemy profile page to select the practice test and use the code.</div>
-          <div class="bullet"><i>✔</i> 100% off (no cost) for the first 100 subscribers in the month.</div>
-          <div class="bullet"><i>✔</i> Genuine, updated practice tests with explanations.</div>
-        </aside>
+        <div class="stats" aria-label="CertShield trust indicators">
+          <div class="stat"><strong>100</strong><span>monthly free redemptions per eligible practice test</span></div>
+          <div class="stat"><strong>8,390</strong><span>total learners visible on the public Udemy profile</span></div>
+          <div class="stat"><strong>1,222</strong><span>reviews visible on the public Udemy profile</span></div>
+        </div>
       </div>
     </section>
 
-    <div class="sticky-cta" aria-hidden="false">
-      <a href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener">🎟️ Use Coupon: <strong>AI_FOR_ALL26</strong></a>
-    </div>
-
-    <!-- ============ INTRO / TRUST ============ -->
-    <section class="hero" aria-label="About CertShield">
-      <div class="intro">
-        <p><strong>CertShield</strong> curates expert-crafted practice exams for leading certifications across
-          <strong>Google Cloud (GCP)</strong>, <strong>AWS</strong>, <strong>Azure</strong>, <strong>Databricks</strong>,
-          <strong>ISC2</strong>, <strong>Salesforce</strong>, <strong>UiPath</strong>, <strong>Oracle OCI</strong>, <strong>ITIL</strong>,
-          <strong>BTA Blockchain</strong>, and <strong>Juniper</strong>. Realistic questions, detailed explanations, and constant updates help you pass with confidence.</p>
-        <p>Read our latest insights on <a href="https://medium.com/@certshield" target="_blank" rel="noopener">Medium</a>,
-           <a href="https://www.linkedin.com/article/manage/published/" target="_blank" rel="noopener">LinkedIn</a>, and join our
-           <a href="https://certifyinitaifreecouponstips.quora.com/" target="_blank" rel="noopener">Quora Space</a>.</p>
-      </div>
-
-      <div class="trust" aria-label="Trust indicators">
-        <div class="kpi"><strong>All Links Verified</strong><span>Direct to Udemy courses</span></div>
-        <div class="kpi"><strong>Multi-Cloud</strong><span>GCP • AWS • Azure • Databricks</span></div>
-        <div class="kpi"><strong>Community First</strong><span>Monthly free coupon</span></div>
-      </div>
-    </section>
-
-    <!-- ============ GCP ============ -->
-    <section id="gcp" class="section" aria-labelledby="gcp-title">
-      <h2 id="gcp-title">Practice Tests for <span class="visually-hidden">Google Cloud</span> GCP Certifications</h2>
-      <div class="grid">
-        <a class="card gcp" href="https://www.udemy.com/course/google-cloud-generative-ai-leader-exam-practice-tests/?referralCode=5F7EEA76AAD96E3A7E2A" target="_blank" rel="noopener">
-          <span class="title">Google Cloud Certified Generative AI Leader</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/google-cloud-security-operations-engineer-full-practice-test/?referralCode=5D404285F3BDA379B5B7" target="_blank" rel="noopener">
-          <span class="title">Google Cloud Security Operations Engineer</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/gcp-certified-google-cloud-digital-leader-practice-exam/?referralCode=9F762E85D01BEC4F760A" target="_blank" rel="noopener">
-          <span class="title">Cloud Digital Leader (CDL)</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/gcp-google-cloud-associate-cloud-engineer-practice-exam/?referralCode=EDAF6EC5C92B33CB78BE" target="_blank" rel="noopener">
-          <span class="title">Associate Cloud Engineer (ACE)</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/draft/6546559/?referralCode=8AFE941E707855C4C24E" target="_blank" rel="noopener">
-          <span class="title">Associate Data Practitioner (ADE)</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/gcp-pca-professional-cloud-architect-practice-exam/?referralCode=C16AEFB5A99024CE8532" target="_blank" rel="noopener">
-          <span class="title">Professional Cloud Architect (PCA)</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/gcp-de-professional-data-engineer-practice-exam/?referralCode=F81FDB15F9ADA3CF848F" target="_blank" rel="noopener">
-          <span class="title">Professional Data Engineer (PDE)</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/google-gcp-ml-engineer-certification-practice-updated-exam/?referralCode=4F647E9B0DA7A53F550C" target="_blank" rel="noopener">
-          <span class="title">Machine Learning Engineer</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/gcp-google-professional-security-engineer-test/?referralCode=F7F5578D91FC5C7824EA" target="_blank" rel="noopener">
-          <span class="title">Professional Security Engineer (PSE)</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/google-cloud-professional-workspace-administrator-test/?referralCode=88B51E7633F08A004DD5" target="_blank" rel="noopener">
-          <span class="title">Professional Workspace Administrator</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/gcp-google-professional-network-engineer-practice-exam/?referralCode=EB940919016F225CA9F5" target="_blank" rel="noopener">
-          <span class="title">Professional Network Engineer</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/google-professional-cloud-devops-engineer-practice-exam-test/?referralCode=77566DE33466E25A8D26" target="_blank" rel="noopener">
-          <span class="title">Professional Cloud DevOps Engineer</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/gcp-professional-cloud-database-engineer-practice-test/?referralCode=2A5452192B200F241269" target="_blank" rel="noopener">
-          <span class="title">Professional Cloud Database Engineer</span><span class="badge">GCP</span>
-        </a>
-        <a class="card gcp" href="https://www.udemy.com/course/gcp-google-professional-cloud-developer-practice-exam/?referralCode=D657263E0D9AF17FE86F" target="_blank" rel="noopener">
-          <span class="title">Professional Cloud Developer</span><span class="badge">GCP</span>
-        </a>
+    <section id="community" class="section" aria-labelledby="community-title">
+      <div class="container">
+        <div class="community-panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Giving back to the community</p>
+              <h2 id="community-title" class="section-title">Free monthly practice access for financially weak learners and talented professionals</h2>
+              <p class="section-intro">CertShield’s monthly coupon initiative is designed to support sincere certification aspirants who may not have the budget for every preparation resource. The goal is simple: make high-quality, ethical practice tests easier to access for motivated learners, career switchers, students and professionals building stronger futures.</p>
+            </div>
+          </div>
+          <div class="community-grid">
+            <article class="community-card">
+              <h3>Financial support through coupons</h3>
+              <p>Each eligible Udemy practice test receives a limited free coupon cycle, usually capped at 100 redemptions for the month.</p>
+            </article>
+            <article class="community-card">
+              <h3>Built for talented professionals</h3>
+              <p>Busy IT professionals can quickly select a certification path, apply the coupon and practice without wasting time on unclear links.</p>
+            </article>
+            <article class="community-card">
+              <h3>Ethical preparation only</h3>
+              <p>CertShield promotes exam-style questions, mock tests and explanations, not leaked content, real exam dumps or unauthorized material.</p>
+            </article>
+          </div>
+          <div class="community-actions">
+            <a class="btn" href="#courses">Claim a Free Practice Seat</a>
+            <a class="btn ghost" href="https://whatsapp.com/channel/0029Vb7HVKBGJP8GJMdaVf3v" target="_blank" rel="noopener noreferrer">Join WhatsApp Updates</a>
+            <a class="btn ghost" href="https://t.me/free_quality_it_prep_exam" target="_blank" rel="noopener noreferrer">Join Telegram Updates</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ============ AWS ============ -->
-    <section id="aws" class="section" aria-labelledby="aws-title">
-      <h2 id="aws-title">AWS Certification Exam Practice Tests</h2>
-      <div class="grid">
-        <a class="card aws" href="https://www.udemy.com/course/aws-certified-ai-practitioner-aif-c01-practice-exam-prep/?referralCode=22D681FFBAD6628532CD" target="_blank" rel="noopener">
-          <span class="title">AWS Certified AI Practitioner (AIF-C01)</span><span class="badge">AWS</span>
-        </a>
-        <a class="card aws" href="https://www.udemy.com/course/aws-mls-certification-machine-learning-specialty-test/?referralCode=A02512BF5CEF629DCF33" target="_blank" rel="noopener">
-          <span class="title">Machine Learning Specialty (MLS-C01)</span><span class="badge">AWS</span>
-        </a>
-        <a class="card aws" href="https://www.udemy.com/course/aws-certified-data-engineer-associate-dea-c01-practice-test/?referralCode=8ED2284E16293A0F642A" target="_blank" rel="noopener">
-          <span class="title">Data Engineer Associate (DEA-C01)</span><span class="badge">AWS</span>
-        </a>
-        <a class="card aws" href="https://www.udemy.com/course/ace-the-aws-security-specialty-exam-scs-c02-practice-set/?referralCode=3929D20305D8E460079C" target="_blank" rel="noopener">
-          <span class="title">Security Specialty (SCS-C02)</span><span class="badge">AWS</span>
-        </a>
-        <a class="card aws" href="https://www.udemy.com/course/aws-devops-pro-dop-c02-practice-exams-2024-pass-dop-c02/?referralCode=C45BEC7C2B3EEA55A828" target="_blank" rel="noopener">
-          <span class="title">DevOps Professional (DOP-C02)</span><span class="badge">AWS</span>
-        </a>
-        <a class="card aws" href="https://www.udemy.com/course/aws-adv-networking-specialty-ans-c01-practice-exams/?referralCode=DD74691D6855EEF72F19" target="_blank" rel="noopener">
-          <span class="title">Advanced Networking Specialty (ANS-C01)</span><span class="badge">AWS</span>
-        </a>
-        <a class="card aws" href="https://www.udemy.com/course/aws-sap-c02-practice-exams-ace-the-professional-arch-exam/?referralCode=F12F147C5F8D99C4A963" target="_blank" rel="noopener">
-          <span class="title">Solutions Architect Professional (SAP-C02)</span><span class="badge">AWS</span>
-        </a>
-        <a class="card aws" href="https://www.udemy.com/course/aws-solutions-architect-associate-saa-c03-exam-success/?referralCode=525A9AE9040AB9CF70FB" target="_blank" rel="noopener">
-          <span class="title">Solutions Architect Associate (SAA-C03)</span><span class="badge">AWS</span>
-        </a>
+    <section id="exam-dumps-alternative" class="section" aria-labelledby="dump-title">
+      <div class="container">
+        <div class="dump-panel">
+          <p class="eyebrow">For learners searching for exam dumps</p>
+          <h2 id="dump-title" class="section-title">Choose Ethical CertShield Practice Exams, alternative to exam dumps: practice questions, mock tests and explanations</h2>
+          <p>If you searched for certification exam dumps, CertShield points you toward a safer and more professional path. These courses are independent preparation resources with exam-style practice questions and mock exams. They do <strong>not</strong> provide leaked questions, real exam dumps or unauthorized exam content.</p>
+          <a class="btn" href="#courses">Find Ethical Practice Tests</a>
+        </div>
       </div>
     </section>
 
-    <!-- ============ BTA (Blockchain) ============ -->
-    <section id="bta" class="section" aria-labelledby="bta-title">
-      <h2 id="bta-title">Blockchain BTA Certification Practice Exams</h2>
-      <div class="grid">
-        <a class="card blockchain" href="https://www.udemy.com/course/bta-certified-blockchain-developer-ethereum-practice-exam/?referralCode=F4F74A178B0A59519CF3" target="_blank" rel="noopener">
-          <span class="title">Certified Blockchain Developer — Ethereum</span><span class="badge">BTA</span>
-        </a>
-        <a class="card blockchain" href="https://www.udemy.com/course/bta-cbbf-practice-exams-pass-on-the-1st-try/?referralCode=7467DDF61E01F5188555" target="_blank" rel="noopener">
-          <span class="title">Certified Blockchain Business Foundations (CBBF)</span><span class="badge">BTA</span>
-        </a>
-        <a class="card blockchain" href="https://www.udemy.com/course/bta-cbsa-exam-prep-practice-tests-cert-guide/?referralCode=BB51FF7C2326B61E4FDB" target="_blank" rel="noopener">
-          <span class="title">Certified Blockchain Solution Architect (CBSA)</span><span class="badge">BTA</span>
-        </a>
+    <section id="courses" class="section" aria-labelledby="courses-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="courses-title" class="section-title">Ethical certification practice tests and mock exams</h2>
+            <p class="section-intro">Search by exam code, vendor or certification area. Use this catalog for Udemy practice exam courses, cloud certification preparation, data engineering certification mock test practice, cybersecurity certification practice exams and AI certification practice tests.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tools" aria-label="Course search and filters">
+        <div class="container tools-inner">
+          <div class="search-row">
+            <label class="search-label" for="course-search">
+              <span>Search CertShield courses</span>
+              <input id="course-search" class="search-input" type="search" placeholder="Search by AWS, GCP, CISSP, AI-900, Databricks, UiPath..." autocomplete="off">
+            </label>
+            <div id="course-count" class="course-count" aria-live="polite">Showing all 48 courses</div>
+          </div>
+          <div class="chips" role="group" aria-label="Filter courses by category">
+            <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="chip" type="button" data-filter="ai" aria-pressed="false">AI & GenAI</button>
+            <button class="chip" type="button" data-filter="gcp" aria-pressed="false">GCP</button>
+            <button class="chip" type="button" data-filter="aws" aria-pressed="false">AWS</button>
+            <button class="chip" type="button" data-filter="azure" aria-pressed="false">Azure</button>
+            <button class="chip" type="button" data-filter="databricks" aria-pressed="false">Databricks</button>
+            <button class="chip" type="button" data-filter="security" aria-pressed="false">Security / ISC2</button>
+            <button class="chip" type="button" data-filter="data" aria-pressed="false">Data</button>
+            <button class="chip" type="button" data-filter="salesforce" aria-pressed="false">Salesforce</button>
+            <button class="chip" type="button" data-filter="uipath" aria-pressed="false">UiPath</button>
+            <button class="chip" type="button" data-filter="oci" aria-pressed="false">Oracle OCI</button>
+            <button class="chip" type="button" data-filter="juniper" aria-pressed="false">Juniper</button>
+            <button class="chip" type="button" data-filter="itil" aria-pressed="false">ITSM</button>
+            <button class="chip" type="button" data-filter="blockchain" aria-pressed="false">Blockchain</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <section class="course-section" data-section="ai" aria-labelledby="ai-title">
+          <h3 id="ai-title">AI, GenAI and ML certification practice tests</h3>
+          <p>Exam-style AI, governance, machine learning and automation mock tests for professionals preparing for fast-moving AI certification paths.</p>
+          <div class="course-grid">
+            <article class="course-card" data-tags="ai genai security comptia secai cy0-001 cybersecurity">
+              <div class="course-meta"><span class="badge">AI Security</span><span class="course-id">CY0-001</span></div>
+              <h4>CompTIA SecAI+ CY0-001 Practice Exams | 2026 Prep</h4>
+              <p>Focused AI security practice questions for CompTIA SecAI+ CY0-001 certification preparation.</p>
+              <a class="btn" href="https://www.udemy.com/course/comptia-secai-cy0-001-practice-exams-prep/?referralCode=BD461CBEDFB8C0D51752" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for CompTIA SecAI+ CY0-001 Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="aws ai ml machine learning mla-c01 associate">
+              <div class="course-meta"><span class="badge">AWS / ML</span><span class="course-id">MLA-C01</span></div>
+              <h4>Practice Tests for AWS ML Engineer Associate MLA-C01 Exam</h4>
+              <p>Scenario-based AWS machine learning engineering mock tests for the MLA-C01 associate exam.</p>
+              <a class="btn" href="https://www.udemy.com/course/aws-mla-c01-ml-engineer-associate-practice-tests/?referralCode=979A5EEE23C042069021" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for AWS ML Engineer Associate MLA-C01 practice tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="aws ai genai generative ai developer professional">
+              <div class="course-meta"><span class="badge">AWS / GenAI</span><span class="course-id">Professional</span></div>
+              <h4>AWS Certified Generative AI Developer Professional Practice</h4>
+              <p>Generative AI developer practice exams for AWS professionals building with modern AI services.</p>
+              <a class="btn" href="https://www.udemy.com/course/aws-certified-generative-ai-developer-professional-practice-mock-tests/?referralCode=38CBC86F021A3A089E40" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for AWS Certified Generative AI Developer Professional Practice">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="ai governance iapp aigp mock tests">
+              <div class="course-meta"><span class="badge">AI Governance</span><span class="course-id">AIGP</span></div>
+              <h4>IAPP AIGP Practice Exams | AI Governance Mock Tests</h4>
+              <p>AI governance practice questions for privacy, compliance and responsible AI certification prep.</p>
+              <a class="btn" href="https://www.udemy.com/course/iapp-aigp-practice-exams-ai-governance-mock-tests/?referralCode=0548CF0CBFED9939A9C3" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for IAPP AIGP Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="salesforce agentforce ai specialist march 2026">
+              <div class="course-meta"><span class="badge">Salesforce</span><span class="course-id">Agentforce</span></div>
+              <h4>Salesforce Agentforce Specialist Practice Exam | March 2026</h4>
+              <p>Salesforce Agentforce Specialist mock exam questions for AI-focused CRM professionals.</p>
+              <a class="btn" href="https://www.udemy.com/course/salesforce-certified-agentforce-specialist-practice-exam-ha/?referralCode=9F86867032DC16413456" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Salesforce Agentforce Specialist Practice Exam">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="juniper mistai ai jncia-mistai jn0-253">
+              <div class="course-meta"><span class="badge">Juniper</span><span class="course-id">JN0-253</span></div>
+              <h4>Juniper JNCIA-MistAI Practice Tests | JN0-253 Exam Prep 2026</h4>
+              <p>Juniper Mist AI associate practice tests for JNCIA-MistAI JN0-253 exam preparation.</p>
+              <a class="btn" href="https://www.udemy.com/course/juniper-jncia-mistai-practice-tests-jn0-253-exam-prep-2025/?referralCode=8513F69E07816F09DEFD" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Juniper JNCIA-MistAI Practice Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud genai generative ai leader">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">GenAI Leader</span></div>
+              <h4>Google Cloud Generative AI Leader Exam: Practice Tests 2026</h4>
+              <p>Google Cloud Generative AI Leader mock tests for AI strategy and cloud AI fundamentals.</p>
+              <a class="btn" href="https://www.udemy.com/course/google-cloud-generative-ai-leader-exam-practice-tests/?referralCode=5F7EEA76AAD96E3A7E2A" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Cloud Generative AI Leader practice tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="oci oracle cloud genai generative ai professional">
+              <div class="course-meta"><span class="badge">Oracle OCI</span><span class="course-id">GenAI Pro</span></div>
+              <h4>Oracle Cloud 2026 Generative AI Pro Practice Exam Prep</h4>
+              <p>Oracle Cloud Infrastructure Generative AI Professional practice questions and mock exams.</p>
+              <a class="btn" href="https://www.udemy.com/course/oracle-cloud-2024-generative-ai-pro-practice-exam-prep/?referralCode=36C940976585264C2BDA" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Oracle Cloud Generative AI Pro Practice Exam Prep">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="aws ai practitioner aif-c01 artificial intelligence">
+              <div class="course-meta"><span class="badge">AWS / AI</span><span class="course-id">AIF-C01</span></div>
+              <h4>AWS AI Practitioner AIF-C01 Practice Exams 2026</h4>
+              <p>Foundation-level AWS AI Practitioner practice exams for AIF-C01 certification candidates.</p>
+              <a class="btn" href="https://www.udemy.com/course/aws-certified-ai-practitioner-aif-c01-practice-exam-prep/?referralCode=22D681FFBAD6628532CD" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for AWS AI Practitioner AIF-C01 Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="uipath ai automation specialized professional saiv1">
+              <div class="course-meta"><span class="badge">UiPath</span><span class="course-id">SAIv1</span></div>
+              <h4>UiPath Specialized AI Professional Practice Tests SAIv1 2026</h4>
+              <p>UiPath AI Professional mock tests for automation practitioners preparing for SAIv1.</p>
+              <a class="btn" href="https://www.udemy.com/course/uipath-certified-ai-professional-uipath-saiv1-practice-ex/?referralCode=02F64B6BCAC9399EAB32" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for UiPath Specialized AI Professional Practice Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="databricks genai generative ai engineer associate">
+              <div class="course-meta"><span class="badge">Databricks</span><span class="course-id">GenAI</span></div>
+              <h4>Databricks Generative AI Engineer Associate: Practice Exam</h4>
+              <p>Databricks Generative AI Engineer Associate practice exam for data and AI engineers.</p>
+              <a class="btn" href="https://www.udemy.com/course/databricks-generative-ai-engineer-associate-practice-exam/?referralCode=23D9FF786324892DA1F7" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Databricks Generative AI Engineer Associate Practice Exam">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="databricks ml machine learning associate">
+              <div class="course-meta"><span class="badge">Databricks</span><span class="course-id">ML Associate</span></div>
+              <h4>Databricks ML Associate Certification Practice Exams 2026</h4>
+              <p>Machine learning associate practice exams for Databricks ML workflows and concepts.</p>
+              <a class="btn" href="https://www.udemy.com/course/databricks-machine-learningml-associate-practice-exams/?referralCode=08E0FC1AC514223FCDD9" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Databricks ML Associate Certification Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="databricks machine learning professional ml">
+              <div class="course-meta"><span class="badge">Databricks</span><span class="course-id">ML Pro</span></div>
+              <h4>Databricks Machine Learning Professional: Practice Exam 2026</h4>
+              <p>Professional-level Databricks machine learning practice questions for advanced ML certification prep.</p>
+              <a class="btn" href="https://www.udemy.com/course/databricks-machine-learning-professional-practice-test/?referralCode=E9381C4C52F7E97BCFDD" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Databricks Machine Learning Professional Practice Exam">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud ml machine learning engineer">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">ML Engineer</span></div>
+              <h4>Google Cloud Professional ML Engineer Practice Tests | 2026</h4>
+              <p>Google Cloud ML Engineer exam-style questions for machine learning certification preparation.</p>
+              <a class="btn" href="https://www.udemy.com/course/google-gcp-ml-engineer-certification-practice-updated-exam/?referralCode=4F647E9B0DA7A53F550C" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Cloud Professional ML Engineer Practice Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="azure ai-102 artificial intelligence microsoft">
+              <div class="course-meta"><span class="badge">Azure</span><span class="course-id">AI-102</span></div>
+              <h4>Microsoft Azure AI-102 Exam Prep: AI Certification Series</h4>
+              <p>Azure AI Engineer exam preparation with practice questions for AI-102 certification candidates.</p>
+              <a class="btn" href="https://www.udemy.com/course/ai-series-microsoft-azure-ai-102-certification-exam/?referralCode=4B14E5E6B46080984148" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Microsoft Azure AI-102 Exam Prep">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="azure ai-900 fundamentals microsoft ai">
+              <div class="course-meta"><span class="badge">Azure</span><span class="course-id">AI-900</span></div>
+              <h4>Azure AI-900 Practice Tests 2026 | Azure AI Fundamentals Prep</h4>
+              <p>Azure AI Fundamentals practice tests for AI-900 learners building a foundation in Microsoft AI services.</p>
+              <a class="btn" href="https://www.udemy.com/course/microsoft-azure-ai-fundamentals-ai-900-exam-prep-practice-t/?referralCode=F75803CA7C668C89B9FC" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Azure AI-900 Practice Tests">Enroll with Coupon</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="course-section" data-section="gcp" aria-labelledby="gcp-title">
+          <h3 id="gcp-title">Google Cloud and GCP certification practice exams</h3>
+          <p>Google Cloud certification mock tests for architects, engineers, data practitioners, security professionals and cloud administrators.</p>
+          <div class="course-grid">
+            <article class="course-card" data-tags="gcp google cloud security operations engineer cybersec secops">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">Security Ops</span></div>
+              <h4>Google Cloud Security Operations Engineer Full Practice Test</h4>
+              <p>Full-length Google Cloud Security Operations Engineer practice test for security operations preparation.</p>
+              <a class="btn" href="https://www.udemy.com/course/google-cloud-security-operations-engineer-full-practice-test/?referralCode=5D404285F3BDA379B5B7" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Cloud Security Operations Engineer Full Practice Test">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud data practitioner associate">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">Data Practitioner</span></div>
+              <h4>Google Cloud Data Practitioner Certification Tests 2026</h4>
+              <p>Associate data practitioner practice tests for Google Cloud data concepts and services.</p>
+              <a class="btn" href="https://www.udemy.com/course/practice-tests-for-gcp-associate-data-practitioner-exam/?referralCode=8AFE941E707855C4C24E" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Cloud Data Practitioner Certification Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud developer professional cloud developer">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">Developer</span></div>
+              <h4>GCP Professional Cloud Developer Practice Tests Updated 2026</h4>
+              <p>Professional Cloud Developer practice questions for building and deploying apps on Google Cloud.</p>
+              <a class="btn" href="https://www.udemy.com/course/gcp-google-professional-cloud-developer-practice-exam/?referralCode=D657263E0D9AF17FE86F" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for GCP Professional Cloud Developer Practice Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud database engineer data">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">Database</span></div>
+              <h4>Google Cloud Database Engineer Certification Tests 2026</h4>
+              <p>Database Engineer mock tests for Google Cloud database design, operations and modernization topics.</p>
+              <a class="btn" href="https://www.udemy.com/course/gcp-professional-cloud-database-engineer-practice-test/?referralCode=2A5452192B200F241269" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Cloud Database Engineer Certification Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud devops engineer professional">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">DevOps</span></div>
+              <h4>Google Cloud Pro DevOps Engineer: Full Practice Tests 2026</h4>
+              <p>Professional Cloud DevOps Engineer practice tests for reliability, operations and delivery workflows.</p>
+              <a class="btn" href="https://www.udemy.com/course/google-professional-cloud-devops-engineer-practice-exam-test/?referralCode=77566DE33466E25A8D26" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Cloud Pro DevOps Engineer Full Practice Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud network engineer networking">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">Network</span></div>
+              <h4>Google Cloud Network Engineer Certification Tests 2026</h4>
+              <p>Professional Network Engineer mock exams for Google Cloud networking architecture and operations.</p>
+              <a class="btn" href="https://www.udemy.com/course/gcp-google-professional-network-engineer-practice-exam/?referralCode=EB940919016F225CA9F5" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Cloud Network Engineer Certification Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="google workspace admin administrator associate">
+              <div class="course-meta"><span class="badge">Google Workspace</span><span class="course-id">Admin</span></div>
+              <h4>Google Workspace Admin: Associate Practice Exams 2026</h4>
+              <p>Google Workspace Administrator practice exams for associate-level administration certification prep.</p>
+              <a class="btn" href="https://www.udemy.com/course/google-cloud-professional-workspace-administrator-test/?referralCode=88B51E7633F08A004DD5" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Workspace Admin Associate Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud security engineer professional cybersecurity">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">Security</span></div>
+              <h4>GCP Security Pro: Ace the Exam with Realistic Practice Tests</h4>
+              <p>Professional Cloud Security Engineer mock tests for GCP security, identity and compliance topics.</p>
+              <a class="btn" href="https://www.udemy.com/course/gcp-google-cloud-professional-security-engineer-test/?referralCode=F7F5578D91FC5C7824EA" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for GCP Security Pro practice tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google associate cloud engineer ace">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">ACE</span></div>
+              <h4>Google Associate Cloud Engineer Practice Exams 2026</h4>
+              <p>Associate Cloud Engineer practice exams for deploying, monitoring and managing Google Cloud solutions.</p>
+              <a class="btn" href="https://www.udemy.com/course/gcp-google-cloud-associate-cloud-engineer-practice-exam/?referralCode=EDAF6EC5C92B33CB78BE" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Associate Cloud Engineer Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud digital leader cdl">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">CDL</span></div>
+              <h4>Google Cloud Digital Leader Practice Tests | CDL 2026 Prep</h4>
+              <p>Cloud Digital Leader mock tests for Google Cloud fundamentals, value propositions and services.</p>
+              <a class="btn" href="https://www.udemy.com/course/gcp-certified-google-cloud-digital-leader-practice-exam/?referralCode=9F762E85D01BEC4F760A" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Cloud Digital Leader Practice Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google cloud data engineer professional data">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">Data Engineer</span></div>
+              <h4>Google Cloud Data Engineer Certification Practice Tests 2026</h4>
+              <p>Professional Data Engineer practice tests for analytics, pipelines, governance and machine learning basics on Google Cloud.</p>
+              <a class="btn" href="https://www.udemy.com/course/gcp-de-professional-data-engineer-practice-exam/?referralCode=F81FDB15F9ADA3CF848F" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Cloud Data Engineer Certification Practice Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="gcp google professional cloud architect pca">
+              <div class="course-meta"><span class="badge">Google Cloud</span><span class="course-id">PCA</span></div>
+              <h4>Google Professional Cloud Architect PCA Practice Tests 2026</h4>
+              <p>Professional Cloud Architect exam-style questions for designing secure, scalable GCP architectures.</p>
+              <a class="btn" href="https://www.udemy.com/course/gcp-pca-professional-cloud-architect-practice-exam/?referralCode=C16AEFB5A99024CE8532" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Google Professional Cloud Architect PCA Practice Tests">Enroll with Coupon</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="course-section" data-section="aws" aria-labelledby="aws-title">
+          <h3 id="aws-title">AWS certification practice exams</h3>
+          <p>AWS certification practice tests for architecture, security, networking, DevOps and data engineering exam preparation.</p>
+          <div class="course-grid">
+            <article class="course-card" data-tags="aws security specialty scs-c03 cybersecurity">
+              <div class="course-meta"><span class="badge">AWS</span><span class="course-id">SCS-C03</span></div>
+              <h4>Practice Exams for AWS Certified Security Specialty SCS-C03</h4>
+              <p>AWS Security Specialty SCS-C03 practice exams for cloud security professionals.</p>
+              <a class="btn" href="https://www.udemy.com/course/aws-certified-security-specialty-scs-c03-practice-exams/?referralCode=BEED580002FD89C60030" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for AWS Certified Security Specialty SCS-C03 practice exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="aws saa-c03 solutions architect associate">
+              <div class="course-meta"><span class="badge">AWS</span><span class="course-id">SAA-C03</span></div>
+              <h4>AWS SAA-C03 Certified Solutions Architect Associate Practice</h4>
+              <p>Solutions Architect Associate mock exams for resilient, secure and cost-aware AWS designs.</p>
+              <a class="btn" href="https://www.udemy.com/course/aws-solutions-architect-associate-saa-c03-exam-success/?referralCode=525A9AE9040AB9CF70FB" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for AWS SAA-C03 Certified Solutions Architect Associate Practice">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="aws sap-c02 solutions architect professional">
+              <div class="course-meta"><span class="badge">AWS</span><span class="course-id">SAP-C02</span></div>
+              <h4>AWS SAP-C02 Certified Solutions Architect Professional Test</h4>
+              <p>Professional AWS architecture practice exams for SAP-C02 certification preparation.</p>
+              <a class="btn" href="https://www.udemy.com/course/aws-sap-c02-practice-exams-ace-the-professional-arch-exam/?referralCode=F12F147C5F8D99C4A963" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for AWS SAP-C02 Certified Solutions Architect Professional Test">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="aws ans-c01 advanced networking specialty">
+              <div class="course-meta"><span class="badge">AWS</span><span class="course-id">ANS-C01</span></div>
+              <h4>AWS ANS-C01 Advanced Networking Specialty Practice Exams</h4>
+              <p>Advanced Networking Specialty practice tests for AWS hybrid networking and connectivity topics.</p>
+              <a class="btn" href="https://www.udemy.com/course/aws-adv-networking-specialty-ans-c01-practice-exams/?referralCode=DD74691D6855EEF72F19" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for AWS ANS-C01 Advanced Networking Specialty Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="aws devops professional dop-c02">
+              <div class="course-meta"><span class="badge">AWS</span><span class="course-id">DOP-C02</span></div>
+              <h4>AWS Certified DevOps Pro (DOP-C02) Practice Exams 2026</h4>
+              <p>AWS DevOps Professional mock exams for deployment, monitoring, automation and reliability topics.</p>
+              <a class="btn" href="https://www.udemy.com/course/aws-devops-pro-dop-c02-practice-exams-2024-pass-dop-c02/?referralCode=C45BEC7C2B3EEA55A828" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for AWS Certified DevOps Pro DOP-C02 Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="aws data engineer associate dea-c01 data">
+              <div class="course-meta"><span class="badge">AWS</span><span class="course-id">DEA-C01</span></div>
+              <h4>AWS Certified Data Engineer Associate: DEA-C01 Practice Exam</h4>
+              <p>AWS Data Engineer Associate practice exam for data pipelines, analytics and governance topics.</p>
+              <a class="btn" href="https://www.udemy.com/course/aws-certified-data-engineer-associate-dea-c01-practice-test/?referralCode=8ED2284E16293A0F642A" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for AWS Certified Data Engineer Associate DEA-C01 Practice Exam">Enroll with Coupon</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="course-section" data-section="databricks" aria-labelledby="databricks-title">
+          <h3 id="databricks-title">Databricks data engineering and analytics practice exams</h3>
+          <p>Databricks certification mock tests for Spark developers, data engineers, analysts and lakehouse professionals.</p>
+          <div class="course-grid">
+            <article class="course-card" data-tags="databricks spark developer associate data engineering">
+              <div class="course-meta"><span class="badge">Databricks</span><span class="course-id">Spark</span></div>
+              <h4>Databricks Spark Developer Associate 2026 | Practice Exams</h4>
+              <p>Practice exams for Spark Developer Associate candidates working with Databricks and Apache Spark.</p>
+              <a class="btn" href="https://www.udemy.com/course/databricks-spark-developer-associate-practice-exams/?referralCode=A5353D60F7F67252A582" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Databricks Spark Developer Associate Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="databricks data engineer associate data">
+              <div class="course-meta"><span class="badge">Databricks</span><span class="course-id">DE Associate</span></div>
+              <h4>Databricks Data Engineer Associate Practice Exam 2026</h4>
+              <p>Associate-level Databricks Data Engineer mock questions for pipelines, SQL, Spark and lakehouse workflows.</p>
+              <a class="btn" href="https://www.udemy.com/course/pass-databricks-data-engineer-associate-practice-exams/?referralCode=467A5CC1E4155EFFCA05" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Databricks Data Engineer Associate Practice Exam">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="databricks data analyst associate sql analytics">
+              <div class="course-meta"><span class="badge">Databricks</span><span class="course-id">Analyst</span></div>
+              <h4>Databricks Certified Data Analyst Associate: Practice Tests</h4>
+              <p>Data Analyst Associate practice tests for Databricks SQL, dashboards and lakehouse analytics.</p>
+              <a class="btn" href="https://www.udemy.com/course/databricks-certified-data-analyst-associate-practice-tests-z/?referralCode=6EA5821EF767C84BBC55" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Databricks Certified Data Analyst Associate Practice Tests">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="databricks data engineer professional data engineering">
+              <div class="course-meta"><span class="badge">Databricks</span><span class="course-id">DE Pro</span></div>
+              <h4>Databricks Certified Data Engineer Professional Tests 2026</h4>
+              <p>Professional Databricks Data Engineer practice tests for advanced lakehouse and pipeline scenarios.</p>
+              <a class="btn" href="https://www.udemy.com/course/ace-databricks-de-data-eng-pro-exam-practice-tests/?referralCode=592A53A2B00BC1573C28" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Databricks Certified Data Engineer Professional Tests">Enroll with Coupon</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="course-section" data-section="security" aria-labelledby="security-title">
+          <h3 id="security-title">Cybersecurity and ISC2 certification practice exams</h3>
+          <p>Independent cybersecurity practice exams for ISC2 pathways, cloud security, software security and security leadership preparation.</p>
+          <div class="course-grid">
+            <article class="course-card" data-tags="isc2 ccsp cloud security cybersecurity">
+              <div class="course-meta"><span class="badge">ISC2</span><span class="course-id">CCSP</span></div>
+              <h4>Certified Cloud Security Professional-CCSP Practice Exam 2026</h4>
+              <p>CCSP practice exam questions for cloud security architecture, governance, risk and operations.</p>
+              <a class="btn" href="https://www.udemy.com/course/certified-cloud-security-professional-ccsp-practiceexam/?referralCode=4018DA5AE424B69F5105" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for Certified Cloud Security Professional CCSP Practice Exam">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="isc2 csslp software security cybersecurity">
+              <div class="course-meta"><span class="badge">ISC2</span><span class="course-id">CSSLP</span></div>
+              <h4>CSSLP Certification Practice Exam | ISC2 CSSLP Mock Tests</h4>
+              <p>CSSLP mock tests for secure software lifecycle, architecture, risk and secure development topics.</p>
+              <a class="btn" href="https://www.udemy.com/course/csslp-certification-isc2-csslp-mock-tests/?referralCode=345B977EF0C172A13B25" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for CSSLP Certification Practice Exam">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="isc2 issmp security management cybersecurity">
+              <div class="course-meta"><span class="badge">ISC2</span><span class="course-id">ISSMP</span></div>
+              <h4>ISSMP Certification Practice Exam | ISC2 ISSMP Mock Tests</h4>
+              <p>ISSMP practice exams for security management, governance and leadership certification preparation.</p>
+              <a class="btn" href="https://www.udemy.com/course/issmp-certification-isc2-issmp-mock-tests/?referralCode=1C7F14A07AB6DB3F4FD8" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for ISSMP Certification Practice Exam">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="isc2 issep security engineering cybersecurity">
+              <div class="course-meta"><span class="badge">ISC2</span><span class="course-id">ISSEP</span></div>
+              <h4>ISSEP Certification Practice Exam | ISC2 ISSEP Mock Tests</h4>
+              <p>ISSEP practice questions for security engineering, architecture and systems-focused exam preparation.</p>
+              <a class="btn" href="https://www.udemy.com/course/issep-certification-isc2-issep-mock-tests/?referralCode=115C3D1F0E21BA99E645" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for ISSEP Certification Practice Exam">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="isc2 issap security architecture cybersecurity">
+              <div class="course-meta"><span class="badge">ISC2</span><span class="course-id">ISSAP</span></div>
+              <h4>ISSAP Certification Practice Exam | Full Length Mock Tests</h4>
+              <p>Full-length ISSAP practice exams for security architecture and CISSP concentration preparation.</p>
+              <a class="btn" href="https://www.udemy.com/course/issap-certification-practice-exam-full-length-mock-tests/?referralCode=ADD20B971A52872908C6" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for ISSAP Certification Practice Exam">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="isc2 cissp cybersecurity security">
+              <div class="course-meta"><span class="badge">ISC2</span><span class="course-id">CISSP</span></div>
+              <h4>CISSP Certification ISC2 Practice Exam | 2026 Updated</h4>
+              <p>CISSP practice exam questions for security domains, risk, identity, architecture and operations.</p>
+              <a class="btn" href="https://www.udemy.com/course/cissp-certification-isc2-practice-exam/?referralCode=D59CD49CC03272695654" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for CISSP Certification ISC2 Practice Exam">Enroll with Coupon</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="course-section" data-section="blockchain" aria-labelledby="blockchain-title">
+          <h3 id="blockchain-title">Blockchain BTA certification practice exams</h3>
+          <p>Blockchain Training Alliance style practice tests for architecture, foundations and Ethereum developer exam preparation.</p>
+          <div class="course-grid">
+            <article class="course-card" data-tags="bta blockchain cbsa solution architect">
+              <div class="course-meta"><span class="badge">BTA</span><span class="course-id">CBSA</span></div>
+              <h4>BTA CBSA Exam Prep: Practice Tests & Cert Guide</h4>
+              <p>CBSA practice tests for blockchain solution architecture, use cases and implementation concepts.</p>
+              <a class="btn" href="https://www.udemy.com/course/bta-cbsa-exam-prep-practice-tests-cert-guide/?referralCode=BB51FF7C2326B61E4FDB" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for BTA CBSA Exam Prep">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="bta blockchain cbbf business foundations">
+              <div class="course-meta"><span class="badge">BTA</span><span class="course-id">CBBF</span></div>
+              <h4>BTA CBBF Practice Exams: Pass on the 1st Try</h4>
+              <p>Blockchain Business Foundations practice questions for core concepts, terminology and business use cases.</p>
+              <a class="btn" href="https://www.udemy.com/course/bta-cbbf-practice-exams-pass-on-the-1st-try/?referralCode=7467DDF61E01F5188555" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for BTA CBBF Practice Exams">Enroll with Coupon</a>
+            </article>
+
+            <article class="course-card" data-tags="bta blockchain developer ethereum">
+              <div class="course-meta"><span class="badge">BTA</span><span class="course-id">Ethereum</span></div>
+              <h4>BTA Certified Blockchain Developer - Ethereum: Practice Exam</h4>
+              <p>Ethereum blockchain developer practice exam for smart contract and blockchain development concepts.</p>
+              <a class="btn" href="https://www.udemy.com/course/bta-certified-blockchain-developer-ethereum-practice-exam/?referralCode=F4F74A178B0A59519CF3" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for BTA Certified Blockchain Developer Ethereum Practice Exam">Enroll with Coupon</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="course-section" data-section="itil" aria-labelledby="itil-title">
+          <h3 id="itil-title">ITSM foundation practice tests</h3>
+          <p>IT service management foundation mock exams for professionals preparing for process, service and operations certification paths.</p>
+          <div class="course-grid">
+            <article class="course-card" data-tags="itsm itil foundation practice tests mock exams service management">
+              <div class="course-meta"><span class="badge">ITSM</span><span class="course-id">Foundation</span></div>
+              <h4>ITSM Foundation Exam Practice Tests & Mock Exams</h4>
+              <p>ITSM Foundation practice tests for service management concepts, workflows and exam readiness.</p>
+              <a class="btn" href="https://www.udemy.com/course/itsm-foundation-exam-practice-tests-mock-exams/?referralCode=77687B74E63DE2FE74FA" target="_blank" rel="noopener noreferrer" aria-label="Enroll with coupon for ITSM Foundation Exam Practice Tests">Enroll with Coupon</a>
+            </article>
+          </div>
+        </section>
       </div>
     </section>
 
-    <!-- ============ Databricks ============ -->
-    <section id="databricks" class="section" aria-labelledby="dbx-title">
-      <h2 id="dbx-title">Databricks Certification Exam Practice Tests</h2>
-      <div class="grid">
-        <a class="card databricks" href="https://www.udemy.com/course/databricks-generative-ai-engineer-associate-practice-exam/?referralCode=23D9FF786324892DA1F7" target="_blank" rel="noopener">
-          <span class="title">Generative AI Engineer Associate</span><span class="badge">Databricks</span>
-        </a>
-        <a class="card databricks" href="https://www.udemy.com/course/databricks-machine-learning-professional-practice-test/?referralCode=E9381C4C52F7E97BCFDD" target="_blank" rel="noopener">
-          <span class="title">Machine Learning Professional</span><span class="badge">Databricks</span>
-        </a>
-        <a class="card databricks" href="https://www.udemy.com/course/ace-databricks-de-data-eng-pro-exam-practice-tests/?referralCode=592A53A2B00BC1573C28" target="_blank" rel="noopener">
-          <span class="title">Data Engineering Professional</span><span class="badge">Databricks</span>
-        </a>
-        <a class="card databricks" href="https://www.udemy.com/course/databricks-certified-data-analyst-associate-practice-tests-z/?referralCode=6EA5821EF767C84BBC55" target="_blank" rel="noopener">
-          <span class="title">Data Analyst Associate</span><span class="badge">Databricks</span>
-        </a>
-        <a class="card databricks" href="https://www.udemy.com/course/databricks-machine-learningml-associate-practice-exams/?referralCode=08E0FC1AC514223FCDD9" target="_blank" rel="noopener">
-          <span class="title">Machine Learning Associate</span><span class="badge">Databricks</span>
-        </a>
-        <a class="card databricks" href="https://www.udemy.com/course/pass-databricks-data-engineer-associate-practice-exams/?referralCode=467A5CC1E4155EFFCA05" target="_blank" rel="noopener">
-          <span class="title">Data Engineer Associate</span><span class="badge">Databricks</span>
-        </a>
-        <a class="card databricks" href="https://www.udemy.com/course/databricks-spark-developer-associate-practice-exams/?referralCode=A5353D60F7F67252A582" target="_blank" rel="noopener">
-          <span class="title">Spark Developer Associate</span><span class="badge">Databricks</span>
-        </a>
+    <section id="reviews" class="section" aria-labelledby="reviews-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="reviews-title" class="section-title">Learner reviews</h2>
+            <p class="section-intro">Recent learner feedback from CertShield review assets, shown to help certification candidates evaluate course quality before opening Udemy.</p>
+          </div>
+          <a class="btn secondary" href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener noreferrer">View Instructor on Udemy</a>
+        </div>
+        <div class="review-grid">
+          <div class="review-card"><img src="Review01.JPG" width="1277" height="555" loading="lazy" alt="CertShield learner review praising ethical practice test quality"></div>
+          <div class="review-card"><img src="Review02.JPG" width="1269" height="586" loading="lazy" alt="CertShield learner review describing certification exam preparation success"></div>
+          <div class="review-card"><img src="Review03.JPG" width="1254" height="441" loading="lazy" alt="CertShield learner review recommending the Udemy practice tests"></div>
+          <div class="review-card"><img src="Review04.JPG" width="1277" height="432" loading="lazy" alt="CertShield learner review for certification mock exam preparation"></div>
+        </div>
       </div>
     </section>
 
-    <!-- ============ ITIL ============ -->
-    <section id="itil" class="section" aria-labelledby="itil-title">
-      <h2 id="itil-title">ITIL Certification Exam Practice Tests</h2>
-      <div class="grid">
-        <a class="card itil" href="https://www.udemy.com/course/itil-4-mp-transition-practice-exams/?referralCode=C3976E29580FDDB81E99" target="_blank" rel="noopener">
-          <span class="title">ITIL 4 Managing Professional (MP) Transition</span><span class="badge">ITIL</span>
-        </a>
-        <a class="card itil" href="https://www.udemy.com/course/itil-4-foundation-ace-your-exam-with-practice-tests/?referralCode=77687B74E63DE2FE74FA" target="_blank" rel="noopener">
-          <span class="title">ITIL 4 Foundation</span><span class="badge">ITIL</span>
-        </a>
+    <section id="why" class="section" aria-labelledby="why-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="why-title" class="section-title">Why busy professionals use CertShield</h2>
+            <p class="section-intro">Built for focused certification preparation without misleading claims or unnecessary noise.</p>
+          </div>
+        </div>
+        <div class="trust-grid">
+          <article class="trust-item">
+            <h3>Focused exam-style practice</h3>
+            <p>Practice exams are designed around certification objectives, realistic scenarios and clear answer explanations.</p>
+          </article>
+          <article class="trust-item">
+            <h3>Wide certification coverage</h3>
+            <p>Prepare across AI, GenAI, GCP, AWS, Azure, Databricks, data engineering, cybersecurity, ISC2, Salesforce, UiPath, Oracle OCI, Juniper, ITSM and blockchain topics.</p>
+          </article>
+          <article class="trust-item">
+            <h3>Transparent coupon journey</h3>
+            <p>The coupon code, redemption limit and Udemy course links are visible before you click, so you can move quickly.</p>
+          </article>
+        </div>
+        <div class="social-panel" aria-labelledby="social-title">
+          <h3 id="social-title">Connect with CertShield</h3>
+          <p>Follow the channels that match how you learn: Udemy for practice tests, LinkedIn and Medium for exam insights, and WhatsApp or Telegram for coupon updates.</p>
+          <div class="social-grid" aria-label="CertShield official social and learning links">
+            <a class="social-card" href="https://certshield.co.in/" target="_blank" rel="noopener noreferrer" aria-label="Open CertShield main website">
+              <span class="social-icon site" aria-hidden="true">www</span>
+              <span><strong>Main Site</strong><small>Visit the official CertShield website.</small></span>
+              <span class="social-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="social-card" href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to the CertShield Udemy profile">
+              <span class="social-icon udemy" aria-hidden="true">U</span>
+              <span><strong>Subscribe on Udemy</strong><small>Browse practice tests and enroll with coupon.</small></span>
+              <span class="social-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="social-card" href="https://www.linkedin.com/in/priya-certshield-certifications/" target="_blank" rel="noopener noreferrer" aria-label="Connect with CertShield on LinkedIn">
+              <span class="social-icon linkedin" aria-hidden="true">in</span>
+              <span><strong>Connect on LinkedIn</strong><small>Professional updates and certification posts.</small></span>
+              <span class="social-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="social-card" href="https://www.linkedin.com/in/priya-certshield-certifications/recent-activity/articles/" target="_blank" rel="noopener noreferrer" aria-label="Read CertShield LinkedIn articles">
+              <span class="social-icon article" aria-hidden="true">A</span>
+              <span><strong>LinkedIn Articles</strong><small>Read certification guides and prep notes.</small></span>
+              <span class="social-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="social-card" href="https://www.youtube.com/@priyadw-certshield" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to CertShield on YouTube">
+              <span class="social-icon youtube" aria-hidden="true">YT</span>
+              <span><strong>Subscribe on YouTube</strong><small>Watch learning videos and exam tips.</small></span>
+              <span class="social-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="social-card" href="https://www.instagram.com/certshield/" target="_blank" rel="noopener noreferrer" aria-label="Follow CertShield on Instagram">
+              <span class="social-icon instagram" aria-hidden="true">IG</span>
+              <span><strong>Follow Instagram</strong><small>Quick posts, reminders and updates.</small></span>
+              <span class="social-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="social-card" href="https://whatsapp.com/channel/0029Vb7HVKBGJP8GJMdaVf3v" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to the CertShield WhatsApp channel">
+              <span class="social-icon whatsapp" aria-hidden="true">WA</span>
+              <span><strong>WhatsApp Channel</strong><small>Get monthly coupon and course updates.</small></span>
+              <span class="social-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="social-card" href="https://t.me/free_quality_it_prep_exam" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to the CertShield Telegram channel">
+              <span class="social-icon telegram" aria-hidden="true">TG</span>
+              <span><strong>Telegram Channel</strong><small>Fast coupon alerts for IT certification prep.</small></span>
+              <span class="social-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="social-card" href="https://medium.com/@certshield" target="_blank" rel="noopener noreferrer" aria-label="Read CertShield articles on Medium">
+              <span class="social-icon medium" aria-hidden="true">M</span>
+              <span><strong>Read on Medium</strong><small>Study plans, insights and preparation articles.</small></span>
+              <span class="social-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ============ Juniper ============ -->
-    <section id="juniper" class="section" aria-labelledby="juniper-title">
-      <h2 id="juniper-title">Juniper Certification Exam Practice Tests</h2>
-      <div class="grid">
-        <a class="card juniper" href="https://www.udemy.com/course/jn0-252-mist-ai-associate-jncia-mistai-full-practice-exam/?referralCode=5ABDF7B40C32545FB6EA" target="_blank" rel="noopener">
-          <span class="title">JN0-252 Mist AI Associate (JNCIA-MistAI)</span><span class="badge">Juniper</span>
-        </a>
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="faq-title" class="section-title">FAQ</h2>
+            <p class="section-intro">Quick answers before you open Udemy.</p>
+          </div>
+        </div>
+        <div class="faq-grid">
+          <article class="faq-item">
+            <h3>How often is the free Udemy coupon updated?</h3>
+            <p>CertShield publishes a limited monthly free coupon. The current page is showing the <span data-current-month>current month</span> coupon cycle and updates the month automatically.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Where do I apply the coupon?</h3>
+            <p>Click a course button, open the Udemy course page and apply the coupon code during Udemy checkout or enrollment.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Are these real exam dumps?</h3>
+            <p>No. CertShield provides ethical practice exams, mock tests and exam-style questions. The courses do not claim leaked or unauthorized exam content.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Can this help if I searched for exam dumps?</h3>
+            <p>Yes, as an ethical alternative. CertShield helps you practice with legal exam-style questions and explanations instead of risky or unauthorized dumps.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Who benefits from the community initiative?</h3>
+            <p>The free monthly coupon initiative is intended for financially weak learners, students, career switchers and talented professionals who need affordable certification preparation.</p>
+          </article>
+          <article class="faq-item">
+            <h3>What if the coupon does not work?</h3>
+            <p>The 100-seat monthly quota may already be used, or the month may have ended. Check back at the start of the next month.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Who creates these practice exams?</h3>
+            <p>Priya Dw, the CertShield practice exam creator, is listed publicly on Udemy as an AI, Cloud and Security Practice Exam Architect.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Which course should I choose first?</h3>
+            <p>Start with the course that matches your target certification vendor and exam code, then use the search box to narrow by topic.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Which Udemy practice exam courses are listed?</h3>
+            <p>CertShield covers AI and GenAI, GCP, AWS, Azure, Databricks, data engineering, cloud certification preparation, cybersecurity, ISC2, Salesforce, UiPath, Oracle OCI, Juniper, ITSM and blockchain certification practice.</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- ============ Salesforce ============ -->
-    <section id="salesforce" class="section" aria-labelledby="sf-title">
-      <h2 id="sf-title">Salesforce Certification Exam Practice Tests</h2>
-      <div class="grid">
-        <a class="card salesforce" href="https://www.udemy.com/course/salesforce-ai-specialist-certification-practice-exam/?referralCode=06512829A26CA263D915" target="_blank" rel="noopener">
-          <span class="title">Salesforce AI Specialist</span><span class="badge">Salesforce</span>
-        </a>
-        <a class="card salesforce" href="https://www.udemy.com/course/salesforce-certified-ai-associate-full-length-practice-exam/?referralCode=3750A548144FD177E815" target="_blank" rel="noopener">
-          <span class="title">Salesforce Certified AI Associate</span><span class="badge">Salesforce</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ============ UiPath ============ -->
-    <section id="uipath" class="section" aria-labelledby="uip-title">
-      <h2 id="uip-title">UiPath Certification Exam Practice Tests</h2>
-      <div class="grid">
-        <a class="card uipath" href="https://www.udemy.com/course/juniper-jncia-mistai-practice-tests-jn0-253-exam-prep-2025/?referralCode=8513F69E07816F09DEFD" target="_blank" rel="noopener">
-          <span class="title">Juniper JNCIA-MistAI Practice Tests | JN0-253 Exam Prep</span><span class="badge">UiPath</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ============ Oracle OCI ============ -->
-    <section id="oci" class="section" aria-labelledby="oci-title">
-      <h2 id="oci-title">Oracle OCI Certification Exam Practice Tests</h2>
-      <div class="grid">
-        <a class="card oci" href="https://www.udemy.com/course/oracle-cloud-2024-generative-ai-pro-practice-exam-prep/?referralCode=36C940976585264C2BDA" target="_blank" rel="noopener">
-          <span class="title">OCI 2024 Generative AI Professional</span><span class="badge">OCI</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ============ ISC2 ============ -->
-    <section id="isc2" class="section" aria-labelledby="isc2-title">
-      <h2 id="isc2-title">ISC2 Certification Exam Practice Tests</h2>
-      <div class="grid">
-        <a class="card isc2" href="https://www.udemy.com/course/cissp-certification-isc2-practice-exam/?referralCode=D59CD49CC03272695654" target="_blank" rel="noopener">
-          <span class="title">CISSP — 2025 Updated</span><span class="badge">ISC2</span>
-        </a>
-        <a class="card isc2" href="https://www.udemy.com/course/issap-certification-practice-exam-full-length-mock-tests/?referralCode=ADD20B971A52872908C6" target="_blank" rel="noopener">
-          <span class="title">ISSAP — Architecture Professional</span><span class="badge">ISC2</span>
-        </a>
-        <a class="card isc2" href="https://www.udemy.com/course/issep-certification-isc2-issep-mock-tests/?referralCode=115C3D1F0E21BA99E645" target="_blank" rel="noopener">
-          <span class="title">ISSEP — Engineering Professional</span><span class="badge">ISC2</span>
-        </a>
-        <a class="card isc2" href="https://www.udemy.com/course/issmp-certification-isc2-issmp-mock-tests/?referralCode=1C7F14A07AB6DB3F4FD8" target="_blank" rel="noopener">
-          <span class="title">ISSMP — Management Professional</span><span class="badge">ISC2</span>
-        </a>
-        <a class="card isc2" href="https://www.udemy.com/course/csslp-certification-isc2-csslp-mock-tests/?referralCode=345B977EF0C172A13B25" target="_blank" rel="noopener">
-          <span class="title">CSSLP — Secure Software Lifecycle</span><span class="badge">ISC2</span>
-        </a>
-        <a class="card isc2" href="https://www.udemy.com/course/certified-cloud-security-professional-ccsp-practiceexam/?referralCode=4018DA5AE424B69F5105" target="_blank" rel="noopener">
-          <span class="title">CCSP — Cloud Security Professional</span><span class="badge">ISC2</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ============ Reviews ============ -->
-    <section id="reviews" class="section reviews" aria-labelledby="reviews-title">
-      <h2 id="reviews-title">What Our Learners Say</h2>
-      <div class="row">
-        <img class="review-img" src="Review-1.JPG" alt="Review by Jayesh Wadilie praising course quality" />
-        <img class="review-img" src="Review-2.JPG" alt="Review by Rajat Swain sharing exam success" />
-        <img class="review-img" src="Review-3.JPG" alt="Review by Shashanka Sharma recommending course" />
-      </div>
-    </section>
-
-    <!-- ============ Articles / Resources ============ -->
-    <section id="articles" class="section" aria-labelledby="articles-title">
-      <h2 id="articles-title">Explore Articles & Career Tips</h2>
-      <div class="grid">
-        <a class="card" href="https://medium.com/@certshield" target="_blank" rel="noopener">
-          <span class="title">Medium — Certification Guides & Study Plans</span><span class="badge">Blog</span>
-        </a>
-        <a class="card" href="https://www.linkedin.com/article/manage/published/" target="_blank" rel="noopener">
-          <span class="title">LinkedIn — Exam Insights & Updates</span><span class="badge">Articles</span>
-        </a>
-        <a class="card" href="https://certifyinitaifreecouponstips.quora.com/" target="_blank" rel="noopener">
-          <span class="title">Quora Space — Free Coupons & Tips</span><span class="badge">Community</span>
-        </a>
+    <section id="disclaimer" class="section" aria-labelledby="disclaimer-title">
+      <div class="container">
+        <div class="disclaimer">
+          <h2 id="disclaimer-title" class="section-title">Independent preparation disclaimer</h2>
+          <p>CertShield practice exams are independent preparation resources and are not official exam materials. CertShield is not affiliated with Google Cloud, AWS, Microsoft, Databricks, ISC2, Salesforce, UiPath, Oracle, Juniper, ITIL, CompTIA, IAPP, BTA or other certification owners unless explicitly stated. All trademarks belong to their respective owners.</p>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- ============ FOOTER ============ -->
-  <footer aria-label="Footer">
-    <div class="wrap">
-      <div class="footer-links social" style="text-align:center">
-        Connect with me:
-        <a href="https://www.linkedin.com/in/priya-certshield-certifications/" target="_blank" rel="noopener">LinkedIn</a> ·
-        <a href="https://www.youtube.com/@priyadw-certshield" target="_blank" rel="noopener">YouTube</a> ·
-        <a href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener">Udemy</a> ·
-        <a href="https://medium.com/@certshield" target="_blank" rel="noopener">Medium</a>
+  <footer class="site-footer">
+    <div class="container footer-shell">
+      <div class="footer-cta">
+        <div>
+          <span class="footer-kicker"><span data-current-month>Monthly</span><span>coupon access</span></span>
+          <h2>Ready to practice with CertShield?</h2>
+          <p>Use the current monthly coupon, choose your certification path, and continue preparing with ethical exam-style practice tests.</p>
+        </div>
+        <div class="footer-cta-actions">
+          <a class="btn" href="#coupon">Use Coupon</a>
+          <a class="btn secondary" href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener noreferrer">Subscribe on Udemy</a>
+        </div>
       </div>
-      <p class="copyright">© 2025 CertShield — Certifications Practice Exams. All rights reserved.</p>
+
+      <div class="footer-main">
+        <div class="footer-brand-card">
+          <div class="footer-brand-row">
+            <img src="profile3.png" width="54" height="54" alt="CertShield logo">
+            <div>
+              <strong>CertShield Ethical Practice Tests</strong>
+              <span>Where Knowledge Gets Tested</span>
+            </div>
+          </div>
+          <p class="footer-copy">Ready. Set. Certified. | Practice. Perfect. Passs.<br>CertShield supports busy IT professionals, financially weak learners, and talented certification aspirants with focused Udemy practice tests and monthly community coupons.</p>
+          <div class="footer-badges" aria-label="CertShield values">
+            <span>Ethical preparation</span>
+            <span>Monthly free coupon</span>
+            <span>Verified Udemy courses</span>
+          </div>
+          <nav class="footer-nav" aria-label="Footer page navigation">
+            <a href="#coupon"><span class="footer-icon" aria-hidden="true">01</span>Coupon</a>
+            <a href="#community"><span class="footer-icon" aria-hidden="true">02</span>Community</a>
+            <a href="#courses"><span class="footer-icon" aria-hidden="true">03</span>Courses</a>
+            <a href="#reviews"><span class="footer-icon" aria-hidden="true">04</span>Reviews</a>
+            <a href="#faq"><span class="footer-icon" aria-hidden="true">05</span>FAQ</a>
+            <a href="#disclaimer"><span class="footer-icon" aria-hidden="true">06</span>Disclaimer</a>
+          </nav>
+        </div>
+
+        <div class="footer-directory" aria-label="CertShield official channels">
+          <div class="footer-directory-head">
+            <div>
+              <h3>Stay Connected</h3>
+              <p>Choose the right channel for courses, certification insights, or fast monthly coupon alerts.</p>
+            </div>
+          </div>
+          <div class="footer-channel-grid">
+            <nav class="footer-column" aria-label="Learning channels">
+              <h3>Learn</h3>
+              <div class="footer-links">
+                <a href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">U</span>Udemy</a>
+                <a href="https://www.youtube.com/@priyadw-certshield" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">YT</span>YouTube</a>
+                <a href="https://medium.com/@certshield" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">M</span>Medium</a>
+                <a href="https://www.linkedin.com/in/priya-certshield-certifications/recent-activity/articles/" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">A</span>Articles</a>
+              </div>
+            </nav>
+            <nav class="footer-column" aria-label="Professional social channels">
+              <h3>Connect</h3>
+              <div class="footer-links">
+                <a href="https://certshield.co.in/"><span class="footer-icon" aria-hidden="true">www</span>Main Site</a>
+                <a href="https://www.linkedin.com/in/priya-certshield-certifications/" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">in</span>LinkedIn</a>
+                <a href="https://www.instagram.com/certshield/" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">IG</span>Instagram</a>
+              </div>
+            </nav>
+            <nav class="footer-column" aria-label="Coupon alert channels">
+              <h3>Coupon Alerts</h3>
+              <div class="footer-links">
+                <a href="https://whatsapp.com/channel/0029Vb7HVKBGJP8GJMdaVf3v" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">WA</span>WhatsApp</a>
+                <a href="https://t.me/free_quality_it_prep_exam" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">TG</span>Telegram</a>
+                <a href="#coupon"><span class="footer-icon" aria-hidden="true">100</span>Monthly Coupon</a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="small">(c) <span data-current-year>2026</span> CertShield. All rights reserved.</div>
+        <div class="small">Independent certification preparation. Not affiliated with certification owners unless explicitly stated.</div>
+      </div>
     </div>
   </footer>
 
-  <!-- ============ SMALL JS ENHANCEMENTS ============ -->
   <script>
-    // Lightweight query param search (optional enhancement)
-    (function(){
-      const sp = new URLSearchParams(location.search);
-      const q = (sp.get('q') || '').trim().toLowerCase();
-      if(!q) return;
-      const cards = document.querySelectorAll('.card');
-      let any=false;
-      cards.forEach(c=>{
-        const txt = c.textContent.trim().toLowerCase();
-        if(txt.includes(q)){ c.style.outline='2px solid #4e77c9'; c.scrollIntoView({behavior:'smooth',block:'center'}); any=true; }
+    (function () {
+      var couponCode = "AI_FOR_ALL26";
+      var monthText = new Intl.DateTimeFormat("en-IN", {
+        month: "long",
+        year: "numeric",
+        timeZone: "Asia/Kolkata"
+      }).format(new Date());
+      var yearText = new Intl.DateTimeFormat("en-IN", {
+        year: "numeric",
+        timeZone: "Asia/Kolkata"
+      }).format(new Date());
+
+      document.querySelectorAll("[data-current-month]").forEach(function (node) {
+        node.textContent = monthText;
       });
-      if(!any) console.info('No matches for search:', q);
+
+      document.querySelectorAll("[data-current-year]").forEach(function (node) {
+        node.textContent = yearText;
+      });
+
+      document.querySelectorAll("[data-coupon-code]").forEach(function (node) {
+        node.textContent = couponCode;
+      });
+
+      document.querySelectorAll("[data-copy-coupon]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          if (!navigator.clipboard) {
+            button.textContent = "Coupon: " + couponCode;
+            return;
+          }
+
+          navigator.clipboard.writeText(couponCode).then(function () {
+            var original = button.textContent;
+            button.textContent = "Coupon Copied";
+            window.setTimeout(function () {
+              button.textContent = original;
+            }, 1800);
+          });
+        });
+      });
+
+      var searchInput = document.getElementById("course-search");
+      var countNode = document.getElementById("course-count");
+      var cards = Array.prototype.slice.call(document.querySelectorAll(".course-card"));
+      var sections = Array.prototype.slice.call(document.querySelectorAll(".course-section"));
+      var chips = Array.prototype.slice.call(document.querySelectorAll("[data-filter]"));
+      var activeFilter = "all";
+
+      function matchesFilter(card) {
+        return activeFilter === "all" || card.dataset.tags.indexOf(activeFilter) !== -1;
+      }
+
+      function matchesQuery(card, query) {
+        if (!query) {
+          return true;
+        }
+        return (card.textContent + " " + card.dataset.tags).toLowerCase().indexOf(query) !== -1;
+      }
+
+      function updateResults() {
+        var query = (searchInput.value || "").trim().toLowerCase();
+        var visible = 0;
+
+        cards.forEach(function (card) {
+          var isVisible = matchesFilter(card) && matchesQuery(card, query);
+          card.hidden = !isVisible;
+          if (isVisible) {
+            visible += 1;
+          }
+        });
+
+        sections.forEach(function (section) {
+          var visibleCards = section.querySelectorAll(".course-card:not([hidden])").length;
+          section.hidden = visibleCards === 0;
+        });
+
+        countNode.textContent = visible === 1 ? "Showing 1 course" : "Showing " + visible + " courses";
+      }
+
+      chips.forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          activeFilter = chip.dataset.filter;
+          chips.forEach(function (item) {
+            item.setAttribute("aria-pressed", String(item === chip));
+          });
+          updateResults();
+        });
+      });
+
+      searchInput.addEventListener("input", updateResults);
+
+      var params = new URLSearchParams(window.location.search);
+      var initialQuery = params.get("q");
+      if (initialQuery) {
+        searchInput.value = initialQuery;
+      }
+
+      updateResults();
     })();
-
-    (() => {
-  const TZ = 'Asia/Kolkata';
-  const now = new Date();
-
-  function computeMonthYear(el){
-    const mAttr = (el?.dataset.month || 'auto').trim().toLowerCase();
-    const yAttr = (el?.dataset.year || 'auto').trim().toLowerCase();
-
-    const month = mAttr === 'auto'
-      ? now.toLocaleString('en-US', { month: 'long', timeZone: TZ })
-      : mAttr.charAt(0).toUpperCase() + mAttr.slice(1);
-
-    const year = yAttr === 'auto'
-      ? now.toLocaleString('en-US', { year: 'numeric', timeZone: TZ })
-      : yAttr;
-
-    return { month, year };
-  }
-
-  // Update the badge
-  const badge = document.getElementById('month-badge');
-  if (badge){
-    const { month, year } = computeMonthYear(badge);
-    badge.textContent = `${month} ${year}`;
-    badge.setAttribute('title', `${month} ${year} Coupon`);
-    badge.setAttribute('aria-label', `${month} ${year} Coupon Month`);
-  }
-
-  // Update all inline month mentions
-  document.querySelectorAll('.coupon-month-text').forEach(el => {
-    const { month, year } = computeMonthYear(el);
-    el.textContent = `${month} ${year}`;
-  });
-})();
-    
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
