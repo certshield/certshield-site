@@ -458,6 +458,26 @@
       box-shadow: 0 10px 18px rgba(244, 196, 79, 0.24);
     }
 
+    [data-current-month],
+    [data-next-month] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 5px 10px;
+      border: 2px dashed #8f5f00;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #fff8dc, #ffd36b);
+      color: #3d2700;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-weight: 950;
+      line-height: 1.1;
+      margin-inline: 2px;
+      vertical-align: middle;
+      white-space: nowrap;
+      box-shadow: 0 8px 18px rgba(244, 196, 79, 0.24);
+    }
+
     .coupon-main {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
@@ -1421,7 +1441,7 @@
         "name": "How does the CertShield monthly Udemy coupon work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Every month, CertShield publishes a limited free Udemy coupon for each eligible practice test. Each coupon is usually limited to 100 redemptions and remains valid for the month or until the quota is consumed."
+          "text": "Every month, CertShield publishes a free Udemy coupon for every CertShield practice course. Each course has its own limit of 100 redemptions, and the coupon remains valid for the month or until that course's quota is consumed."
         }
       },
       {
@@ -1453,7 +1473,7 @@
         "name": "How does CertShield support financially weak learners and talented professionals?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "CertShield's giving back initiative publishes limited monthly free Udemy coupons for eligible practice tests, helping sincere learners, career switchers and talented professionals access certification preparation resources."
+          "text": "CertShield's giving back initiative publishes a monthly free Udemy coupon for every CertShield practice course, helping sincere learners, career switchers and talented professionals access certification preparation resources."
         }
       },
       {
@@ -1542,9 +1562,9 @@
   <div class="coupon-ribbon" role="region" aria-label="Monthly Udemy coupon">
     <div class="container">
       <div class="ribbon-copy">
-        <strong><span class="ribbon-month" data-current-month>Monthly</span> free Udemy coupon:</strong>
+        <strong><time class="ribbon-month" data-current-month datetime="">Current month</time> free Udemy coupon:</strong>
         <span class="coupon-code" data-coupon-code>Coupon loading</span>
-        <span>100 redemptions per eligible practice test, valid for <span data-current-month>this month</span> or until the quota is used.</span>
+        <span>Available for every CertShield course, with 100 redemptions per course for <time data-current-month datetime="">the current month</time> or until that course's quota is used.</span>
       </div>
       <div class="ribbon-actions">
         <button class="btn secondary" type="button" data-copy-coupon>Copy Coupon</button>
@@ -1580,14 +1600,14 @@
         <div>
           <p class="eyebrow">Ethical Practice Tests | Where Knowledge Gets Tested</p>
           <h1 id="hero-title">Free Udemy certification practice test coupons for AI, Cloud, Data and Security exams</h1>
-          <p class="hero-text">Ready. Set. Certified. | Practice. Perfect. Pass.<br>CertShield helps certification aspirants prepare with focused Udemy practice exams and ethical practice tests across AI, Generative AI, Cloud, Data, Security and emerging technology certifications. Find your course, apply the monthly coupon on Udemy and practice with exam-style mock tests built for honest preparation.</p>
+          <p class="hero-text">Ready. Set. Certified. | Practice. Perfect. Pass.<br>CertShield helps certification aspirants prepare with focused Udemy practice exams and ethical practice tests across AI, Generative AI, Cloud, Data, Security and emerging technology certifications. Find your course, apply the <time data-current-month datetime="">current month</time> coupon on Udemy and practice with exam-style mock tests built for honest preparation.</p>
           <ul class="hero-proof" aria-label="CertShield highlights">
             <li>Ethical CertShield Practice Exams, alternative to exam dumps</li>
-            <li>Monthly community coupon</li>
+            <li><time data-current-month datetime="">Current month</time> community coupon</li>
             <li>Verified Udemy courses</li>
           </ul>
           <div class="hero-actions">
-            <a class="btn" href="#coupon">Use Monthly Coupon</a>
+            <a class="btn" href="#coupon">Use Coupon</a>
             <a class="btn ghost" href="#courses">Open Course Catalog</a>
           </div>
         </div>
@@ -1602,17 +1622,17 @@
         <div class="coupon-panel">
           <div class="coupon-main">
             <div class="coupon-detail">
-              <p class="eyebrow">Current month: <span class="auto-month" data-current-month>this month</span></p>
-              <h2 id="coupon-title">Claim the <span data-current-month>monthly</span> CertShield Udemy coupon before the 100-seat limit is consumed</h2>
-              <p>Every month, CertShield publishes a limited free Udemy coupon for each eligible practice test. Each coupon is usually limited to 100 redemptions and remains valid for <span data-current-month>the current month</span> or until the quota is consumed.</p>
+              <p class="eyebrow">Current coupon cycle: <time class="auto-month" data-current-month datetime="">current month</time></p>
+              <h2 id="coupon-title">Use the <time data-current-month datetime="">current month</time> CertShield Udemy coupon on any CertShield course</h2>
+              <p>The free Udemy coupon displayed for <time data-current-month datetime="">the current month</time> is available for every CertShield practice course. Each course has its own limit of 100 redemptions, and the coupon remains valid through this coupon cycle or until that course's quota is consumed.</p>
               <div class="coupon-box">
                 <span class="coupon-code" data-coupon-code>Coupon loading</span>
                 <button class="btn" type="button" data-copy-coupon>Copy Coupon</button>
                 <a class="btn secondary" href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener noreferrer">View Udemy Profile</a>
               </div>
               <div class="limit-note" role="note">
-                <strong>If Udemy shows the coupon as expired or unavailable, the monthly quota is likely used.</strong>
-                <span>Choose another course or return at the start of the next month for the latest free coupon cycle. The displayed month updates automatically.</span>
+                <strong>If Udemy shows the coupon as expired or unavailable, that course's <time data-current-month datetime="">current month</time> quota is likely used.</strong>
+                <span>Choose another course or return when the <time data-next-month datetime="">next month</time> coupon cycle begins. Coupon dates update automatically from your device date.</span>
               </div>
             </div>
             <div class="coupon-steps">
@@ -1620,7 +1640,7 @@
               <ol class="steps">
                 <li>
                   <span class="step-num">1</span>
-                  <span><strong>Copy the coupon code.</strong><span>Use the visible monthly code above.</span></span>
+                  <span><strong>Copy the coupon code.</strong><span>Use the visible <time data-current-month datetime="">current month</time> code above.</span></span>
                 </li>
                 <li>
                   <span class="step-num">2</span>
@@ -1628,7 +1648,7 @@
                 </li>
                 <li>
                   <span class="step-num">3</span>
-                  <span><strong>Open Udemy and apply the coupon.</strong><span>Click a course button, apply the coupon on Udemy and enroll before the 100-seat limit is reached.</span></span>
+                  <span><strong>Open Udemy and apply the coupon.</strong><span>Click any CertShield course, apply the coupon on Udemy and enroll before that course's 100-redemption limit is reached.</span></span>
                 </li>
               </ol>
             </div>
@@ -1636,7 +1656,7 @@
         </div>
 
         <div class="stats" aria-label="CertShield trust indicators">
-          <div class="stat"><strong>100</strong><span>monthly free redemptions per eligible practice test</span></div>
+          <div class="stat"><strong>100</strong><span>free redemptions per CertShield course in <time data-current-month datetime="">the current month</time></span></div>
           <div class="stat"><strong>8,390</strong><span>total learners visible on the public Udemy profile</span></div>
           <div class="stat"><strong>1,222</strong><span>reviews visible on the public Udemy profile</span></div>
         </div>
@@ -1649,14 +1669,14 @@
           <div class="section-head">
             <div>
               <p class="eyebrow">Giving back to the community</p>
-              <h2 id="community-title" class="section-title">Free monthly practice access for financially weak learners and talented professionals</h2>
-              <p class="section-intro">CertShield’s monthly coupon initiative is designed to support sincere certification aspirants who may not have the budget for every preparation resource. The goal is simple: make high-quality, ethical practice tests easier to access for motivated learners, career switchers, students and professionals building stronger futures.</p>
+              <h2 id="community-title" class="section-title">Free <time data-current-month datetime="">current month</time> practice access for financially weak learners and talented professionals</h2>
+              <p class="section-intro">CertShield's <time data-current-month datetime="">current month</time> coupon initiative is designed to support sincere certification aspirants who may not have the budget for every preparation resource. The goal is simple: make high-quality, ethical practice tests easier to access for motivated learners, career switchers, students and professionals building stronger futures.</p>
             </div>
           </div>
           <div class="community-grid">
             <article class="community-card">
               <h3>Financial support through coupons</h3>
-              <p>Each eligible Udemy practice test receives a limited free coupon cycle, usually capped at 100 redemptions for the month.</p>
+              <p>Every CertShield Udemy practice course receives the <time data-current-month datetime="">current month</time> free coupon, with a separate limit of 100 redemptions per course.</p>
             </article>
             <article class="community-card">
               <h3>Built for talented professionals</h3>
@@ -2189,7 +2209,7 @@
             </a>
             <a class="social-card" href="https://whatsapp.com/channel/0029Vb7HVKBGJP8GJMdaVf3v" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to the CertShield WhatsApp channel">
               <span class="social-icon whatsapp" aria-hidden="true">WA</span>
-              <span><strong>WhatsApp Channel</strong><small>Get monthly coupon and course updates.</small></span>
+              <span><strong>WhatsApp Channel</strong><small>Get <time data-current-month datetime="">current month</time> coupon and course updates.</small></span>
               <span class="social-arrow" aria-hidden="true">&#8599;</span>
             </a>
             <a class="social-card" href="https://t.me/free_quality_it_prep_exam" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to the CertShield Telegram channel">
@@ -2218,7 +2238,7 @@
         <div class="faq-grid">
           <article class="faq-item">
             <h3>How often is the free Udemy coupon updated?</h3>
-            <p>CertShield publishes a limited monthly free coupon. The current page is showing the <span data-current-month>current month</span> coupon cycle and updates the month automatically.</p>
+            <p>CertShield publishes a new limited free coupon each month. This page is showing the <time data-current-month datetime="">current month</time> coupon cycle, calculated automatically from your device date.</p>
           </article>
           <article class="faq-item">
             <h3>Where do I apply the coupon?</h3>
@@ -2234,11 +2254,11 @@
           </article>
           <article class="faq-item">
             <h3>Who benefits from the community initiative?</h3>
-            <p>The free monthly coupon initiative is intended for financially weak learners, students, career switchers and talented professionals who need affordable certification preparation.</p>
+            <p>The free <time data-current-month datetime="">current month</time> coupon initiative is intended for financially weak learners, students, career switchers and talented professionals who need affordable certification preparation.</p>
           </article>
           <article class="faq-item">
             <h3>What if the coupon does not work?</h3>
-            <p>The 100-seat monthly quota may already be used, or the month may have ended. Check back at the start of the next month.</p>
+            <p>The selected course's 100-redemption quota for <time data-current-month datetime="">the current month</time> may already be used. The coupon is available separately for every CertShield course, and the next cycle begins in <time data-next-month datetime="">the next month</time>.</p>
           </article>
           <article class="faq-item">
             <h3>Who creates these practice exams?</h3>
@@ -2270,9 +2290,9 @@
     <div class="container footer-shell">
       <div class="footer-cta">
         <div>
-          <span class="footer-kicker"><span data-current-month>Monthly</span><span>coupon access</span></span>
+          <span class="footer-kicker"><time data-current-month datetime="">Current month</time><span>coupon access</span></span>
           <h2>Ready to practice with CertShield?</h2>
-          <p>Use the current monthly coupon, choose your certification path, and continue preparing with ethical exam-style practice tests.</p>
+          <p>Use the <time data-current-month datetime="">current month</time> coupon, choose your certification path, and continue preparing with ethical exam-style practice tests.</p>
         </div>
         <div class="footer-cta-actions">
           <a class="btn" href="#coupon">Use Coupon</a>
@@ -2289,10 +2309,10 @@
               <span>Where Knowledge Gets Tested</span>
             </div>
           </div>
-          <p class="footer-copy">Ready. Set. Certified. | Practice. Perfect. Passs.<br>CertShield supports busy IT professionals, financially weak learners, and talented certification aspirants with focused Udemy practice tests and monthly community coupons.</p>
+          <p class="footer-copy">Ready. Set. Certified. | Practice. Perfect. Passs.<br>CertShield supports busy IT professionals, financially weak learners, and talented certification aspirants with focused Udemy practice tests and the <time data-current-month datetime="">current month</time> community coupon.</p>
           <div class="footer-badges" aria-label="CertShield values">
             <span>Ethical preparation</span>
-            <span>Monthly free coupon</span>
+            <span><time data-current-month datetime="">Current month</time> free coupon</span>
             <span>Verified Udemy courses</span>
           </div>
           <nav class="footer-nav" aria-label="Footer page navigation">
@@ -2309,7 +2329,7 @@
           <div class="footer-directory-head">
             <div>
               <h3>Stay Connected</h3>
-              <p>Choose the right channel for courses, certification insights, or fast monthly coupon alerts.</p>
+              <p>Choose the right channel for courses, certification insights, or fast <time data-current-month datetime="">current month</time> coupon alerts.</p>
             </div>
           </div>
           <div class="footer-channel-grid">
@@ -2335,7 +2355,7 @@
               <div class="footer-links">
                 <a href="https://whatsapp.com/channel/0029Vb7HVKBGJP8GJMdaVf3v" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">WA</span>WhatsApp</a>
                 <a href="https://t.me/free_quality_it_prep_exam" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">TG</span>Telegram</a>
-                <a href="#coupon"><span class="footer-icon" aria-hidden="true">100</span>Monthly Coupon</a>
+                <a href="#coupon"><span class="footer-icon" aria-hidden="true">100</span><time data-current-month datetime="">Current month</time> Coupon</a>
               </div>
             </nav>
           </div>
@@ -2352,18 +2372,30 @@
   <script>
     (function () {
       var couponCode = "AI_FOR_ALL26";
-      var monthText = new Intl.DateTimeFormat("en-IN", {
+      var now = new Date();
+      var nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+      var monthFormatter = new Intl.DateTimeFormat("en-IN", {
         month: "long",
-        year: "numeric",
-        timeZone: "Asia/Kolkata"
-      }).format(new Date());
+        year: "numeric"
+      });
+      var monthText = monthFormatter.format(now);
+      var nextMonthText = monthFormatter.format(nextMonth);
       var yearText = new Intl.DateTimeFormat("en-IN", {
-        year: "numeric",
-        timeZone: "Asia/Kolkata"
-      }).format(new Date());
+        year: "numeric"
+      }).format(now);
+
+      function machineMonth(date) {
+        return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0");
+      }
 
       document.querySelectorAll("[data-current-month]").forEach(function (node) {
         node.textContent = monthText;
+        node.setAttribute("datetime", machineMonth(now));
+      });
+
+      document.querySelectorAll("[data-next-month]").forEach(function (node) {
+        node.textContent = nextMonthText;
+        node.setAttribute("datetime", machineMonth(nextMonth));
       });
 
       document.querySelectorAll("[data-current-year]").forEach(function (node) {

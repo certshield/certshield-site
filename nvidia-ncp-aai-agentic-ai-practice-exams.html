@@ -296,6 +296,26 @@
       letter-spacing: 0;
     }
 
+    [data-current-month],
+    [data-next-month] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 5px 10px;
+      border: 2px dashed #6f5900;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #f7ffd9, #c9ed58);
+      color: #223500;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-inline: 2px;
+      vertical-align: middle;
+      white-space: nowrap;
+      box-shadow: 0 8px 18px rgba(118, 145, 37, 0.24);
+    }
+
     .site-header {
       position: sticky;
       top: 0;
@@ -877,9 +897,9 @@
   <div class="coupon-ribbon" role="region" aria-label="Monthly Udemy coupon">
     <div class="container">
       <div class="ribbon-copy">
-        <strong><span class="month-pill" data-current-month>Monthly</span> CertShield Udemy coupon:</strong>
+        <strong><time class="month-pill" data-current-month datetime="">Current month</time> CertShield Udemy coupon:</strong>
         <span class="coupon-code" data-coupon-code>AI_FOR_ALL26</span>
-        <span>Usually limited to 100 redemptions per eligible practice course.</span>
+        <span>Available for every CertShield course, with 100 redemptions per course for <time data-current-month datetime="">the current month</time>.</span>
       </div>
       <button class="btn secondary" type="button" data-copy-coupon>Copy Coupon</button>
     </div>
@@ -1045,20 +1065,20 @@
     <section id="coupon" class="section" aria-labelledby="coupon-title">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Monthly coupon flow</p>
+          <p class="eyebrow"><time data-current-month datetime="">Current month</time> coupon flow</p>
           <h2 id="coupon-title" class="section-title">How to enroll with the CertShield Udemy coupon</h2>
-          <p class="section-intro">Every month, CertShield publishes a limited free Udemy coupon for eligible practice courses. The coupon is usually limited to 100 redemptions and remains valid for the month or until the quota is consumed.</p>
+          <p class="section-intro">For <time data-current-month datetime="">the current month</time>, CertShield publishes a free Udemy coupon for every CertShield practice course. Each course has its own limit of 100 redemptions, and the coupon remains valid through this coupon cycle or until that course's quota is consumed.</p>
         </div>
 
         <ol class="steps">
-          <li><h3>Copy the coupon</h3><p>Use the visible monthly code: <strong data-coupon-code>AI_FOR_ALL26</strong>.</p></li>
+          <li><h3>Copy the coupon</h3><p>Use the visible <time data-current-month datetime="">current month</time> code: <strong data-coupon-code>AI_FOR_ALL26</strong>.</p></li>
           <li><h3>Open the Udemy course</h3><p>Use the referral button so Udemy opens the correct NCP-AAI practice course.</p></li>
-          <li><h3>Apply and enroll</h3><p>Apply the coupon during Udemy checkout or enrollment before the 100-seat quota is used.</p></li>
+          <li><h3>Apply and enroll</h3><p>Apply the coupon during Udemy checkout or enrollment before this course's 100-redemption quota is used.</p></li>
         </ol>
 
         <div class="hero-actions">
           <button class="btn secondary" type="button" data-copy-coupon>Copy Coupon</button>
-          <a class="btn" href="https://www.udemy.com/course/nvidia-ncp-aai-agentic-ai-practice-exams-prep/?referralCode=29D4DAD7FE497A0595CB" target="_blank" rel="noopener noreferrer">Use Monthly Coupon</a>
+          <a class="btn" href="https://www.udemy.com/course/nvidia-ncp-aai-agentic-ai-practice-exams-prep/?referralCode=29D4DAD7FE497A0595CB" target="_blank" rel="noopener noreferrer">Use Coupon</a>
         </div>
       </div>
     </section>
@@ -1103,7 +1123,7 @@
           </article>
           <article class="faq-item">
             <h3>What if the coupon does not work?</h3>
-            <p>The monthly Udemy coupon may have expired or reached its redemption quota. Return during the next coupon cycle or check CertShield update channels.</p>
+            <p>The <time data-current-month datetime="">current month</time> Udemy coupon may have expired or reached this course's redemption quota. Return for the <time data-next-month datetime="">next month</time> coupon cycle or check CertShield update channels.</p>
           </article>
           <article class="faq-item">
             <h3>Is CertShield affiliated with NVIDIA?</h3>
@@ -1142,18 +1162,30 @@
   <script>
     (function () {
       var couponCode = "AI_FOR_ALL26";
-      var monthText = new Intl.DateTimeFormat("en-IN", {
+      var now = new Date();
+      var nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+      var monthFormatter = new Intl.DateTimeFormat("en-IN", {
         month: "long",
-        year: "numeric",
-        timeZone: "Asia/Kolkata"
-      }).format(new Date());
+        year: "numeric"
+      });
+      var monthText = monthFormatter.format(now);
+      var nextMonthText = monthFormatter.format(nextMonth);
       var yearText = new Intl.DateTimeFormat("en-IN", {
-        year: "numeric",
-        timeZone: "Asia/Kolkata"
-      }).format(new Date());
+        year: "numeric"
+      }).format(now);
+
+      function machineMonth(date) {
+        return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0");
+      }
 
       document.querySelectorAll("[data-current-month]").forEach(function (node) {
         node.textContent = monthText;
+        node.setAttribute("datetime", machineMonth(now));
+      });
+
+      document.querySelectorAll("[data-next-month]").forEach(function (node) {
+        node.textContent = nextMonthText;
+        node.setAttribute("datetime", machineMonth(nextMonth));
       });
 
       document.querySelectorAll("[data-current-year]").forEach(function (node) {
