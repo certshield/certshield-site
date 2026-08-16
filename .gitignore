@@ -1,0 +1,41 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+desktop.ini
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Python virtual environments, if you ever create one here
+.venv/
+venv/
+env/
+
+# --- The three build inputs: kept local-only, never committed. ---
+# The build discovers these by header/structure, not filename, so it works
+# the same whether they're tracked or not - just make sure a fresh copy of
+# each is present locally before running scripts/build.py. Since these are
+# gitignored, this machine (or your own backup) is the only copy: back up
+# the assessment Markdown file(s) yourself before relying on this.
+
+# Input A: monthly active-coupons export (rotates every month anyway)
+active_coupons_*.csv
+active_coupons_*.xlsx
+
+# Input B: instructor-referral sheet
+InstructorReferral-URL-Sheet*.csv
+InstructorReferral-URL-Sheet*.xlsx
+
+# Input C: assessment source Markdown (matches the
+# "<something>-30-question-practice-set.md" naming convention from
+# MAINTENANCE.md; the generated data/assessments/<slug>.json is what the
+# site actually serves)
+*30-question-practice-set*.md
+
+# Per-run build audit logs: one JSON per build, accumulate quickly, not
+# durable content (the current catalog/assessments/offers state in data/
+# is what matters, not the history of every rebuild)
+data/import-reports/

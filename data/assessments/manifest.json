@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-16T15:18:39.344693+00:00",
+  "assessments": [
+    {
+      "slug": "databricks-certified-generative-ai-engineer-associate",
+      "status": "published",
+      "courseId": "6209509",
+      "vendor": "Databricks",
+      "certificationName": "Databricks Certified Generative AI Engineer Associate",
+      "examCode": "Not specified in official documentation",
+      "category": "Unclassified",
+      "questionCount": 30,
+      "mcqCount": 24,
+      "msqCount": 6,
+      "domains": [
+        "Application Development",
+        "Assembling and Deploying Applications",
+        "Data Preparation",
+        "Design Applications",
+        "Evaluation and Monitoring",
+        "Governance"
+      ],
+      "estimatedDuration": "60 minutes (~2 minutes per question based on the official exam)",
+      "contentVersion": "0518341a8c77",
+      "lastReviewed": "2026-08-16",
+      "sourceFile": "databricks-certified-generative-ai-engineer-associate-30-question-practice-set-final-technically-validated-revised.md"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CertShield: Validate Inputs",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/build.py", "--task-mode", "FRAMEWORK_BUILD", "--dry-run"],
+      "problemMatcher": []
+    },
+    {
+      "label": "CertShield: Build Framework",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/build.py", "--task-mode", "FRAMEWORK_BUILD"],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "CertShield: Upsert Assessment",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/build.py", "--task-mode", "UPSERT_ASSESSMENT"],
+      "problemMatcher": []
+    },
+    {
+      "label": "CertShield: Update Monthly Offers",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/build.py", "--task-mode", "MONTHLY_OFFERS_UPDATE"],
+      "problemMatcher": []
+    },
+    {
+      "label": "CertShield: Sync New Course",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/build.py", "--task-mode", "NEW_COURSE_SYNC"],
+      "problemMatcher": []
+    },
+    {
+      "label": "CertShield: Run Tests",
+      "type": "shell",
+      "command": "python",
+      "args": ["-m", "unittest", "discover", "-s", "tests", "-v"],
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "CertShield: Production Build",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/build.py", "--task-mode", "FRAMEWORK_BUILD", "--strict"],
+      "problemMatcher": []
+    },
+    {
+      "label": "CertShield: Preview Site",
+      "type": "shell",
+      "command": "python",
+      "args": ["-m", "http.server", "8000"],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

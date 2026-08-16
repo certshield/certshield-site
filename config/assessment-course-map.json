@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "_comment": "Generated framework state: assessment_slug -> course_id. Do not hand-edit mappings unless resolving an ambiguous-candidate report from the build.",
+  "mappings": {
+    "databricks-certified-generative-ai-engineer-associate": {
+      "courseId": "6209509",
+      "resolvedAt": "2026-08-16T10:32:05.108076+00:00",
+      "resolution": "auto"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "./schema/certshield-project.schema.json",
+  "taskMode": "FRAMEWORK_BUILD",
+  "inputDiscovery": "AUTO",
+  "inputOverrides": {
+    "couponSheet": null,
+    "referralSheet": null,
+    "assessmentSearchRoots": ["."]
+  },
+  "site": {
+    "brand": "CertShield",
+    "practiceUrl": "https://practice.certshield.co.in/",
+    "mainUrl": "https://certshield.co.in/",
+    "customDomain": "practice.certshield.co.in",
+    "udemyInstructor": "Priya D"
+  },
+  "features": {
+    "assessmentsEnabled": true,
+    "offersEnabled": true,
+    "sampleDataStatus": "production"
+  },
+  "seo": {
+    "canonicalOrigin": "https://practice.certshield.co.in",
+    "defaultLanguage": "en",
+    "globalAudience": true,
+    "indexNowEnabled": false,
+    "indexNowKey": null,
+    "searchConsoleVerification": null,
+    "bingVerification": null
+  },
+  "actions": {
+    "deploy": false,
+    "push": false,
+    "createPr": false
+  }
+}
