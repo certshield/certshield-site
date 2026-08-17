@@ -484,6 +484,14 @@
     var question = this.questions[this.currentIndex];
     this.questionHost.innerHTML = "";
 
+    // The visual "card" (background/border/padding/shadow) lives on this
+    // plain wrapper div, never on the <fieldset> itself: modern browsers
+    // deliberately render <legend> straddling the fieldset's border-top,
+    // outside its padding box, per the CSS Fieldset/Legend layout spec —
+    // no amount of padding/background on the fieldset keeps the question
+    // text visually inside it. The fieldset stays for accessibility
+    // (grouping the question with its options) but carries zero styling.
+    var card = el("div", "assessment-question-card");
     var article = el("fieldset", "assessment-question");
     var legend = document.createElement("legend");
     html(legend, question.stemHtml);
@@ -512,7 +520,8 @@
       article.appendChild(label);
     });
 
-    this.questionHost.appendChild(article);
+    card.appendChild(article);
+    this.questionHost.appendChild(card);
 
     var confidenceGroup = el("div", "assessment-confidence");
     confidenceGroup.appendChild(el("p", "assessment-confidence-label", "How confident are you?"));

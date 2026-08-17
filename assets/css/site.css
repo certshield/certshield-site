@@ -1568,8 +1568,7 @@ button.button {
   scroll-margin-top: 5.5rem;
 }
 
-.assessment-question {
-  border: 0;
+.assessment-question-card {
   padding: 1.5rem;
   margin: 0 0 1.25rem;
   border-radius: var(--radius-lg);
@@ -1590,12 +1589,26 @@ button.button {
   }
 }
 
+/* Reset the fieldset to a fully neutral, borderless block: it exists only
+   for accessibility (grouping the question with its options), never for
+   visual styling — see the comment in assessment-runner.js renderQuestion. */
+.assessment-question {
+  display: block;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
 .assessment-question legend {
+  display: block;
+  float: none;
+  width: 100%;
+  padding: 0;
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--brand-950);
-  margin-bottom: 0.75rem;
-  padding: 0 0.25rem;
+  margin: 0 0 0.75rem;
 }
 
 .assessment-cardinality {
