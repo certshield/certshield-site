@@ -39,3 +39,40 @@ InstructorReferral-URL-Sheet*.xlsx
 # durable content (the current catalog/assessments/offers state in data/
 # is what matters, not the history of every rebuild)
 data/import-reports/
+
+# --- Repo-internal build tooling: not needed for GitHub Pages to serve ---
+# the site. Verified none of these are linked, fetched, or otherwise
+# referenced by any deployed page (checked assets/js/**/*.js for fetch()
+# calls and every .html file for links into these paths — both come back
+# empty). This repo is deploy-only: it holds exactly what a visitor's
+# browser needs. The build tooling, tests, docs, config and generated
+# data/ JSON that produce that output live only in the local working
+# copy, not in this public repo.
+
+# Python build pipeline (scripts/build.py etc.) - GitHub Pages is
+# static-only and never executes this; needed only to run a future build
+# locally.
+scripts/
+
+# Test suite - never executed by GitHub Pages.
+tests/
+
+# Build configuration (task mode, project config, the generated
+# assessment-course-map.json) - read only by scripts/build.py locally.
+config/
+
+# Generated intermediate JSON (catalog/assessments/offers) - confirmed not
+# fetched at runtime by any page; every page has its data baked into the
+# static HTML at build time instead.
+data/
+
+# VS Code task definitions - local editor convenience only.
+.vscode/
+
+# Repo-internal documentation and the original planning/spec document -
+# not linked from any page.
+docs/
+AGENTS.md
+MAINTENANCE.md
+README.md
+CertShield_Modular_Diagnostic_Assessment_Framework_Reviewed_Prompt.md
