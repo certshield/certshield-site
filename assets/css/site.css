@@ -1491,6 +1491,21 @@ button.button {
   font-weight: 700;
 }
 
+.assessment-progress-bar {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--brand-100);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.assessment-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-600), var(--gold));
+  transition: width 0.35s ease;
+}
+
 .assessment-navigator {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(2.4rem, 1fr));
@@ -1499,6 +1514,7 @@ button.button {
 }
 
 .assessment-nav-item {
+  position: relative;
   min-height: 2.4rem;
   border: 1px solid var(--line-strong);
   border-radius: 0.5rem;
@@ -1506,11 +1522,32 @@ button.button {
   color: var(--brand-900);
   cursor: pointer;
   font-weight: 700;
+  transition: transform 0.1s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.assessment-nav-item:hover {
+  transform: translateY(-1px);
+  border-color: var(--brand-600);
 }
 
 .assessment-nav-item.is-answered {
   background: var(--brand-100);
   border-color: var(--brand-600);
+}
+
+.assessment-nav-item.is-answered::after {
+  content: "✓";
+  position: absolute;
+  top: -0.4rem;
+  right: -0.3rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--success);
+  color: #fff;
+  font-size: 0.65rem;
+  line-height: 1.1rem;
+  text-align: center;
 }
 
 .assessment-nav-item.is-flagged {
@@ -1521,36 +1558,63 @@ button.button {
   background: var(--brand-800);
   border-color: var(--brand-800);
   color: #fff;
+  transform: scale(1.06);
+}
+
+.assessment-question-host,
+.assessment-runner-panel,
+.assessment-results-panel,
+.assessment-review-host {
+  scroll-margin-top: 5.5rem;
 }
 
 .assessment-question {
   border: 0;
-  padding: 0;
+  padding: 1.5rem;
   margin: 0 0 1.25rem;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  animation: assessment-question-in 0.25s ease;
+}
+
+@keyframes assessment-question-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .assessment-question legend {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--brand-950);
   margin-bottom: 0.75rem;
+  padding: 0 0.25rem;
 }
 
 .assessment-cardinality {
   font-weight: 700;
   color: var(--brand-700);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.9rem;
 }
 
 .assessment-option {
   display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  padding: 0.7rem 0.9rem;
-  border: 1px solid var(--line);
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 2px solid var(--line);
   border-radius: var(--radius-sm);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   cursor: pointer;
+  background: #fff;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
 .assessment-option:hover {
@@ -1558,8 +1622,22 @@ button.button {
   background: var(--brand-50);
 }
 
+.assessment-option:has(input:checked) {
+  border-color: var(--brand-700);
+  background: var(--brand-50);
+  box-shadow: 0 0 0 1px var(--brand-700);
+}
+
 .assessment-option input {
-  margin-top: 0.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+  accent-color: var(--brand-800);
+  margin: 0;
+}
+
+.assessment-option span {
+  line-height: 1.45;
 }
 
 .assessment-confidence {
@@ -1596,14 +1674,25 @@ button.button {
 .assessment-nav-row {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.75rem;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
 }
 
 .assessment-nav-row-secondary {
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.6rem;
+  margin-top: 1.25rem;
+  position: static;
+  box-shadow: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  backdrop-filter: none;
 }
 
 .assessment-submit-anytime-note {
@@ -1613,6 +1702,11 @@ button.button {
 }
 
 .assessment-submit-button {
+  font-weight: 800;
+}
+
+.assessment-timer-text.is-low-time {
+  color: var(--danger);
   font-weight: 800;
 }
 

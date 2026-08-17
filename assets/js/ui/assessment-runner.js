@@ -60,6 +60,16 @@
     return node;
   }
 
+  function prefersReducedMotion() {
+    return Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }
+
+  /** So the learner never has to hunt for the question or the next action. */
+  function scrollToElement(element) {
+    if (!element) return;
+    element.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+  }
+
   function formatClock(totalSeconds) {
     var seconds = Math.max(0, Math.round(totalSeconds));
     var minutes = Math.floor(seconds / 60);
@@ -334,11 +344,20 @@
     this.renderQuestion();
     if (this.mode === "timed") this.startTimer();
     this.saveAttempt();
+    scrollToElement(this.runnerPanel);
   };
 
   AssessmentRunner.prototype.buildRunnerChrome = function buildRunnerChrome() {
     var self = this;
     this.runnerPanel.innerHTML = "";
+
+    this.progressBar = el("div", "assessment-progress-bar");
+    this.progressBar.setAttribute("role", "progressbar");
+    this.progressBar.setAttribute("aria-valuemin", "0");
+    this.progressBar.setAttribute("aria-valuemax", String(this.questions.length));
+    this.progressFill = el("div", "assessment-progress-fill");
+    this.progressBar.appendChild(this.progressFill);
+    this.runnerPanel.appendChild(this.progressBar);
 
     var statusRow = el("div", "assessment-status-row");
     this.progressText = el("p", "assessment-progress-text");
@@ -434,6 +453,7 @@
   AssessmentRunner.prototype.updateTimerText = function updateTimerText() {
     if (!this.timerText) return;
     this.timerText.textContent = "Time remaining: " + formatClock(this.remainingSeconds);
+    this.timerText.classList.toggle("is-low-time", this.remainingSeconds <= 60);
   };
 
   AssessmentRunner.prototype.toggleFlag = function toggleFlag() {
@@ -456,6 +476,7 @@
     this.currentIndex = index;
     this.renderQuestion();
     this.saveAttempt();
+    scrollToElement(this.questionHost);
   };
 
   AssessmentRunner.prototype.renderQuestion = function renderQuestion() {
@@ -517,6 +538,11 @@
     this.nextButton.hidden = this.currentIndex === this.questions.length - 1;
     this.updateFlagButton();
     this.updateNavigatorStates();
+    if (this.progressFill) {
+      var percentage = ((this.currentIndex + 1) / this.questions.length) * 100;
+      this.progressFill.style.width = percentage + "%";
+      this.progressBar.setAttribute("aria-valuenow", String(this.currentIndex + 1));
+    }
     this.announce(this.progressText.textContent);
   };
 
@@ -834,6 +860,7 @@
     reviewButton.type = "button";
     reviewButton.addEventListener("click", function () {
       self.renderReview("all");
+      scrollToElement(self.reviewHost);
     });
     actionsRow.appendChild(reviewButton);
 
@@ -858,6 +885,7 @@
     this.announce(
       band.label + ". Accuracy " + scoreResult.accuracyPercentage + " percent on " + scoreResult.attempted + " attempted questions."
     );
+    scrollToElement(this.resultsPanel);
   };
 
   function statusKeyForBand(bandKey) {
