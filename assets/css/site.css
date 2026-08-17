@@ -1394,6 +1394,19 @@ button.button {
 
 /* ================= Diagnostic assessment engine ================= */
 
+:root {
+  --status-good: #147257;
+  --status-good-soft: #e3f5ee;
+  --status-warning: #9a5b00;
+  --status-warning-soft: #fff7df;
+  --status-serious: #d9602e;
+  --status-serious-soft: #fdeee6;
+  --status-critical: #9f3036;
+  --status-critical-soft: #fff0f1;
+  --status-muted: #5f7679;
+  --status-muted-soft: #eef3f2;
+}
+
 .assessment-summary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
@@ -1587,29 +1600,166 @@ button.button {
   margin-top: 1.25rem;
 }
 
-.assessment-validation {
-  padding: 0.85rem 1rem;
-  border-radius: var(--radius-sm);
-  background: var(--warning-soft);
-  margin: 1rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+.assessment-nav-row-secondary {
   align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
 }
 
-.assessment-safeguard-note {
-  padding: 0.85rem 1rem;
-  border-radius: var(--radius-sm);
-  background: var(--surface-soft);
-  border: 1px solid var(--line);
-  margin: 1rem 0;
+.assessment-submit-anytime-note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.assessment-submit-button {
+  font-weight: 800;
+}
+
+/* ---- results hero + band theming ---- */
+
+.assessment-results-hero {
+  padding: 1.75rem 1.5rem;
+  border-radius: var(--radius-lg);
+  margin: 1rem 0 1.5rem;
+  background: linear-gradient(135deg, var(--brand-950), var(--brand-800));
+  color: #fff;
+}
+
+.assessment-results-hero h2 {
+  color: #fff;
+  font-size: 1.7rem;
+  margin: 0.35rem 0 0.6rem;
+}
+
+.assessment-results-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--gold);
+  margin: 0;
+}
+
+.assessment-results-narrative {
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 46rem;
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.band-ready .assessment-results-hero {
+  background: linear-gradient(135deg, var(--brand-950), var(--success));
+}
+
+.band-momentum .assessment-results-hero {
+  background: linear-gradient(135deg, var(--brand-950), var(--brand-700));
+}
+
+.band-developing .assessment-results-hero,
+.band-foundation .assessment-results-hero {
+  background: linear-gradient(135deg, var(--brand-950), var(--brand-800));
+}
+
+/* ---- meter ---- */
+
+.assessment-meter-section {
+  margin: 1.5rem 0;
+}
+
+.assessment-meter-heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.assessment-meter-heading-row h3 {
+  margin: 0;
+}
+
+.assessment-meter-percentage {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--brand-950);
+}
+
+.assessment-meter-track {
+  height: 1.1rem;
+  border-radius: 999px;
+  background: var(--brand-100);
+  overflow: hidden;
+}
+
+.assessment-meter-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.assessment-meter-status-good .assessment-meter-fill {
+  background: var(--status-good);
+}
+
+.assessment-meter-status-warning .assessment-meter-fill {
+  background: var(--status-warning);
+}
+
+.assessment-meter-status-serious .assessment-meter-fill {
+  background: var(--status-serious);
+}
+
+.assessment-meter-status-critical .assessment-meter-fill {
+  background: var(--status-critical);
+}
+
+.assessment-coverage-note {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+
+/* ---- domain bar chart (SVG) ---- */
+
+.assessment-domain-chart {
+  width: 100%;
+  height: auto;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.assessment-chart-label {
+  font-size: 0.82rem;
+  fill: var(--ink);
+  dominant-baseline: middle;
+}
+
+.assessment-chart-value {
+  font-size: 0.82rem;
+  font-weight: 700;
+  fill: var(--brand-950);
+  dominant-baseline: middle;
+}
+
+.assessment-chart-track {
+  fill: var(--brand-100);
+}
+
+.assessment-chart-bar {
+  fill: var(--brand-700);
+}
+
+.assessment-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1rem 0 1.5rem;
 }
 
 .assessment-domain-table {
   width: 100%;
+  min-width: 26rem;
   border-collapse: collapse;
-  margin: 1rem 0 1.5rem;
+  margin: 0;
 }
 
 .assessment-domain-table caption {
@@ -1631,18 +1781,96 @@ button.button {
   background: var(--brand-50);
 }
 
-.assessment-calibration-list {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  gap: 0.4rem;
-  margin: 0 0 1.5rem;
+.assessment-actions-list {
+  padding-left: 1.4rem;
+  margin: 0.5rem 0 1.5rem;
 }
 
-.assessment-calibration-list li {
-  padding: 0.5rem 0.75rem;
+.assessment-actions-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* ---- confidence calibration stat tiles ---- */
+
+.assessment-calibration-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.75rem;
+  margin: 0.75rem 0 1.5rem;
+}
+
+.assessment-calibration-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.85rem 0.9rem;
   border-radius: var(--radius-sm);
-  background: var(--surface-soft);
+  border: 1px solid var(--line);
+}
+
+.assessment-calibration-icon {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.assessment-calibration-count {
+  font-size: 1.3rem;
+  color: var(--brand-950);
+}
+
+.assessment-calibration-label {
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.assessment-calibration-hint {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.assessment-calibration-tile.status-good {
+  background: var(--status-good-soft);
+  border-color: var(--status-good);
+}
+
+.assessment-calibration-tile.status-good .assessment-calibration-icon {
+  color: var(--status-good);
+}
+
+.assessment-calibration-tile.status-warning {
+  background: var(--status-warning-soft);
+  border-color: var(--status-warning);
+}
+
+.assessment-calibration-tile.status-warning .assessment-calibration-icon {
+  color: var(--status-warning);
+}
+
+.assessment-calibration-tile.status-serious {
+  background: var(--status-serious-soft);
+  border-color: var(--status-serious);
+}
+
+.assessment-calibration-tile.status-serious .assessment-calibration-icon {
+  color: var(--status-serious);
+}
+
+.assessment-calibration-tile.status-critical {
+  background: var(--status-critical-soft);
+  border-color: var(--status-critical);
+}
+
+.assessment-calibration-tile.status-critical .assessment-calibration-icon {
+  color: var(--status-critical);
+}
+
+.assessment-calibration-tile.status-muted {
+  background: var(--status-muted-soft);
+  border-color: var(--line-strong);
+}
+
+.assessment-calibration-tile.status-muted .assessment-calibration-icon {
+  color: var(--status-muted);
 }
 
 .assessment-comparison-note {
@@ -1650,16 +1878,55 @@ button.button {
   color: var(--brand-800);
 }
 
+/* ---- CTA: the natural next step, Udemy-first ---- */
+
 .assessment-cta {
-  padding: 1.25rem;
-  border-radius: var(--radius);
-  background: var(--brand-950);
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--brand-900), var(--brand-700));
   color: #fff;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
+  box-shadow: var(--shadow-lg);
 }
 
-.assessment-cta h3 {
+.assessment-cta-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--gold);
+  margin: 0 0 0.4rem;
+}
+
+.assessment-cta-heading {
   color: #fff;
+  font-size: 1.5rem;
+  margin: 0 0 0.6rem;
+}
+
+.assessment-cta-body {
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 40rem;
+  margin: 0 0 1.25rem;
+}
+
+.assessment-cta-button {
+  font-size: 1.05rem;
+  padding: 0.9rem 1.5rem;
+}
+
+.assessment-cta-secondary {
+  display: block;
+  margin-top: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.assessment-cta-secondary:hover {
+  color: #fff;
+}
+
+.assessment-cta-missing {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .assessment-review-filters {

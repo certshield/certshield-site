@@ -1,11 +1,12 @@
 /**
  * CertShield diagnostic-assessment pure scoring/readiness engine.
  *
- * Implements sections 9-11 of the CertShield Modular Diagnostic Assessment
- * Framework master prompt: exact-set MCQ/MSQ scoring, the fixed 30-question
- * readiness bands, confidence calibration, readiness safeguards (at most one
- * downgrade, fully explained), a transparent (non-composite) review ranking,
- * deterministic study actions and revenue-aware CTA routing.
+ * Scoring model: the learner can submit at any time. Only questions actually
+ * answered are scored — accuracy = correct / attempted, never penalized by
+ * questions left unanswered. Coverage (attempted / total) is tracked
+ * separately and moderates how confidently a readiness band is claimed: a
+ * high accuracy on a handful of questions reads as promising, not "exam
+ * ready" — that claim needs real breadth of evidence too.
  *
  * Pure functions only — no DOM access, no storage, no network. Exposed as
  * window.CertShieldAssessmentScoring in browsers and module.exports in
@@ -25,21 +26,78 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function createScoringApi() {
   "use strict";
 
-  var TOTAL_QUESTIONS = 30;
-
   var READINESS_BANDS = [
-    { key: "strong", label: "Strong readiness signal", min: 26, max: 30, rank: 3 },
-    { key: "targeted", label: "Targeted refinement needed", min: 21, max: 25, rank: 2 },
-    { key: "developing", label: "Developing readiness", min: 17, max: 20, rank: 1 },
-    { key: "foundation", label: "Foundation strengthening recommended", min: 0, max: 16, rank: 0 }
+    {
+      key: "ready",
+      rank: 3,
+      label: "You're Exam Ready",
+      shortLabel: "Exam Ready",
+      headline: "Your accuracy shows real command of this material.",
+      narrative:
+        "This is exactly the kind of readiness signal that means you're prepared to sit the real exam with confidence. Lock it in with full-length, timed practice before exam day.",
+      ctaLabel: "Validate With the Full Practice Exam",
+      ctaFramingByKind: {
+        coupon: "Claim today's offer and simulate the real exam before you sit it.",
+        referral: "Simulate the real exam under timed conditions before you sit it."
+      }
+    },
+    {
+      key: "momentum",
+      rank: 2,
+      label: "You're Building Real Momentum",
+      shortLabel: "Building Momentum",
+      headline: "You're getting most of this right — the fundamentals are there.",
+      narrative:
+        "A focused pass through your weakest domain and a full-length timed mock will close the gap fast. You're closer than this snapshot might feel.",
+      ctaLabel: "Close the Gap With Full Practice",
+      ctaFramingByKind: {
+        coupon: "Today's offer is the fastest way to turn this into exam-day confidence.",
+        referral: "The full practice course drills exactly the domains you need."
+      }
+    },
+    {
+      key: "developing",
+      rank: 1,
+      label: "You're Developing — Right Where Practice Pays Off",
+      shortLabel: "Developing",
+      headline: "This diagnostic just showed you exactly where to focus.",
+      narrative:
+        "That's valuable information, not a bad grade. Structured, explanation-led practice is the fastest way to convert this into real readiness.",
+      ctaLabel: "Build Your Foundation With Guided Practice",
+      ctaFramingByKind: {
+        coupon: "Today's offer gives you the full explanation-led course to build from here.",
+        referral: "The full course walks through every concept with worked explanations."
+      }
+    },
+    {
+      key: "foundation",
+      rank: 0,
+      label: "Every Expert Started Exactly Here",
+      shortLabel: "Foundation Building",
+      headline: "You now know precisely which concepts to learn first.",
+      narrative:
+        "That clarity is worth more than a score. The full practice course is built to take you from here to exam-ready, one concept at a time.",
+      ctaLabel: "Start Your Structured Path to Mastery",
+      ctaFramingByKind: {
+        coupon: "Today's offer unlocks the complete guided course to build real command of this material.",
+        referral: "The full course is built to take you from here to exam-ready."
+      }
+    }
   ];
 
-  var CTA_GUIDANCE = {
-    strong: "Validate with a full-length timed mock exam.",
-    targeted: "Practise weak domains and review explanations before a full simulation.",
-    developing: "Use the full-length course in untimed learning mode first.",
-    foundation: "Reinforce foundational concepts before treating a mock as exam simulation."
-  };
+  var COVERAGE_TIERS = [
+    { key: "full", min: 0.8, note: null },
+    {
+      key: "partial",
+      min: 0.5,
+      note: "Based on more than half the assessment — answer the rest for a fuller picture."
+    },
+    {
+      key: "limited",
+      min: 0,
+      note: "Based on a partial attempt — this is an early signal, not a complete readiness picture."
+    }
+  ];
 
   function toCleanString(value) {
     return value === null || typeof value === "undefined" ? "" : String(value).trim();
@@ -73,7 +131,7 @@
     });
   }
 
-  /** Score one question. Unanswered (wrong selection count) counts as incorrect. */
+  /** Score one question. A question not fully answered is simply "unanswered" — never wrong. */
   function scoreQuestion(question, selectedAnswers) {
     var selected = normalizeAnswerSet(selectedAnswers);
     var correctAnswers = normalizeAnswerSet(question && question.correctAnswers);
@@ -89,24 +147,6 @@
     };
   }
 
-  /** Raw readiness band from a correct count out of exactly 30 questions. */
-  function getReadinessBand(correctCount) {
-    var count = Number(correctCount) || 0;
-    for (var index = 0; index < READINESS_BANDS.length; index += 1) {
-      var band = READINESS_BANDS[index];
-      if (count >= band.min && count <= band.max) return band;
-    }
-    return READINESS_BANDS[READINESS_BANDS.length - 1];
-  }
-
-  function bandByRank(rank) {
-    for (var index = 0; index < READINESS_BANDS.length; index += 1) {
-      if (READINESS_BANDS[index].rank === rank) return READINESS_BANDS[index];
-    }
-    return READINESS_BANDS[READINESS_BANDS.length - 1];
-  }
-
-  /** Classify one question's confidence + correctness into the calibration matrix. */
   function classifyConfidence(state, confidence) {
     var clean = toCleanString(confidence).toLowerCase();
     var isSure = clean === "sure";
@@ -120,7 +160,12 @@
     return "unclassified";
   }
 
-  /** Score a full 30-question attempt: per-question detail + domain matrix. */
+  /**
+   * Score whatever was submitted. Unanswered questions are excluded from
+   * accuracy entirely (never treated as incorrect) and tracked separately
+   * as coverage. Domain "evidence" is judged by how many of that domain's
+   * questions were actually attempted, not the domain's full size.
+   */
   function scoreAssessment(questions, answers, confidences) {
     var safeQuestions = Array.isArray(questions) ? questions : [];
     var details = [];
@@ -131,7 +176,7 @@
 
     safeQuestions.forEach(function scoreCurrent(question, index) {
       var questionId = toCleanString(question && question.id) || "question-" + (index + 1);
-      var selected = answers && (answers[questionId] || answers.get && answers.get(questionId));
+      var selected = answers && (answers[questionId] || (answers.get && answers.get(questionId)));
       var result = scoreQuestion(question, selected);
       var confidence = toCleanString(
         confidences && (confidences[questionId] || (confidences.get && confidences.get(questionId)))
@@ -144,12 +189,11 @@
       else unanswered += 1;
 
       if (!domainMap.has(domain)) {
-        domainMap.set(domain, { domain: domain, total: 0, correct: 0, attempted: 0, unanswered: 0, misconceptionCount: 0 });
+        domainMap.set(domain, { domain: domain, total: 0, correct: 0, attempted: 0, misconceptionCount: 0 });
       }
       var domainEntry = domainMap.get(domain);
       domainEntry.total += 1;
       if (result.answered) domainEntry.attempted += 1;
-      else domainEntry.unanswered += 1;
       if (result.correct) domainEntry.correct += 1;
       if (confidenceClass === "misconception") domainEntry.misconceptionCount += 1;
 
@@ -168,86 +212,109 @@
     });
 
     var domains = Array.from(domainMap.values()).map(function finishDomain(entry) {
-      var percentage = entry.total ? Math.round((entry.correct / entry.total) * 100) : 0;
-      var evidenceLimited = entry.total < 3;
+      var accuracy = entry.attempted ? entry.correct / entry.attempted : null;
+      var evidenceLimited = entry.attempted < 3;
       return {
         domain: entry.domain,
         total: entry.total,
         correct: entry.correct,
         attempted: entry.attempted,
-        unanswered: entry.unanswered,
-        percentage: percentage,
-        evidenceLabel: evidenceLimited ? "Limited evidence" : "Sufficient evidence",
+        unanswered: entry.total - entry.attempted,
+        accuracy: accuracy,
+        percentage: accuracy === null ? null : Math.round(accuracy * 100),
+        evidenceLabel: entry.attempted === 0 ? "Not attempted" : evidenceLimited ? "Limited evidence" : "Sufficient evidence",
         evidenceLimited: evidenceLimited,
         misconceptionCount: entry.misconceptionCount
       };
     });
 
     var total = safeQuestions.length;
+    var attempted = correct + incorrect;
+    var accuracy = attempted ? correct / attempted : 0;
+    var coverage = total ? attempted / total : 0;
+
     return {
       total: total,
+      attempted: attempted,
       correct: correct,
       incorrect: incorrect,
       unanswered: unanswered,
-      percentage: total ? Math.round((correct / total) * 100) : 0,
-      allAnswered: unanswered === 0 && total === TOTAL_QUESTIONS,
+      accuracy: accuracy,
+      accuracyPercentage: Math.round(accuracy * 100),
+      coverage: coverage,
+      coveragePercentage: Math.round(coverage * 100),
       details: details,
       domains: domains
     };
   }
 
+  function bandByKey(key) {
+    for (var index = 0; index < READINESS_BANDS.length; index += 1) {
+      if (READINESS_BANDS[index].key === key) return READINESS_BANDS[index];
+    }
+    return READINESS_BANDS[READINESS_BANDS.length - 1];
+  }
+
+  function bandByRank(rank) {
+    for (var index = 0; index < READINESS_BANDS.length; index += 1) {
+      if (READINESS_BANDS[index].rank === rank) return READINESS_BANDS[index];
+    }
+    return READINESS_BANDS[0];
+  }
+
+  function coverageTierFor(coverage) {
+    for (var index = 0; index < COVERAGE_TIERS.length; index += 1) {
+      if (coverage >= COVERAGE_TIERS[index].min) return COVERAGE_TIERS[index];
+    }
+    return COVERAGE_TIERS[COVERAGE_TIERS.length - 1];
+  }
+
   /**
-   * Apply readiness safeguards (section 9). At most one downgrade is ever
-   * applied, and every triggered safeguard is reported so the UI can explain
-   * exactly why the band changed.
+   * Readiness band from accuracy, moderated by coverage: a limited-coverage
+   * attempt can never claim the top two bands, however high its accuracy —
+   * there simply isn't enough evidence yet. Always explains why, in plain
+   * language, never a hidden penalty.
    */
-  function applyReadinessSafeguards(scoreResult) {
-    var initialBand = getReadinessBand(scoreResult.correct);
-    var triggered = [];
-
-    if (initialBand.key === "strong" && !scoreResult.allAnswered) {
-      triggered.push({
-        key: "incomplete_attempt",
-        message: "Strong readiness requires all 30 questions answered."
-      });
+  function computeReadinessResult(scoreResult) {
+    if (scoreResult.attempted === 0) {
+      return {
+        band: bandByKey("foundation"),
+        capped: false,
+        coverageTier: coverageTierFor(0),
+        note: "Answer at least one question to get your readiness signal."
+      };
     }
 
-    var weakDomain = scoreResult.domains.find(function isWeak(domain) {
-      return !domain.evidenceLimited && domain.percentage < 50;
-    });
-    if (weakDomain) {
-      triggered.push({
-        key: "weak_domain",
-        message: "Domain \"" + weakDomain.domain + "\" scored below 50% with sufficient evidence (" +
-          weakDomain.correct + "/" + weakDomain.total + ")."
-      });
-    }
+    var accuracy = scoreResult.accuracy;
+    var rawBand =
+      accuracy >= 0.85 ? bandByKey("ready") :
+      accuracy >= 0.70 ? bandByKey("momentum") :
+      accuracy >= 0.55 ? bandByKey("developing") :
+      bandByKey("foundation");
 
-    var sureIncorrectCount = scoreResult.details.filter(function isSureIncorrect(detail) {
-      return detail.state === "incorrect" && detail.confidenceClass === "misconception";
-    }).length;
-    if (sureIncorrectCount >= 3) {
-      triggered.push({
-        key: "sure_incorrect",
-        message: sureIncorrectCount + " questions were answered incorrectly with \"Sure\" confidence, suggesting a likely misconception."
-      });
-    }
+    var coverageTier = coverageTierFor(scoreResult.coverage);
+    var finalBand = rawBand;
+    var capped = false;
 
-    var downgraded = triggered.length > 0 && initialBand.rank > 0;
-    var finalBand = downgraded ? bandByRank(initialBand.rank - 1) : initialBand;
+    if (coverageTier.key === "limited" && rawBand.rank > bandByKey("developing").rank) {
+      finalBand = bandByKey("developing");
+      capped = true;
+    }
 
     return {
-      initialBand: initialBand,
-      finalBand: finalBand,
-      downgraded: downgraded,
-      triggeredSafeguards: triggered
+      band: finalBand,
+      rawBand: rawBand,
+      capped: capped,
+      coverageTier: coverageTier,
+      note: coverageTier.note
     };
   }
 
   /**
-   * Transparent review ranking (section 10): sort domains by high-confidence
-   * errors, then incorrect rate, then unanswered count, then fragile-correct
-   * count, then evidence count. No composite/pseudo-scientific score.
+   * Transparent review ranking: domains actually attempted, ranked by
+   * high-confidence errors, then accuracy (lowest first), then evidence
+   * depth. Domains never attempted are surfaced separately, not ranked
+   * alongside real evidence.
    */
   function rankDomainsForReview(scoreResult) {
     var fragileByDomain = {};
@@ -257,42 +324,62 @@
       }
     });
 
-    return scoreResult.domains.slice().sort(function compare(left, right) {
-      var incorrectRateLeft = left.total ? (left.total - left.correct) / left.total : 0;
-      var incorrectRateRight = right.total ? (right.total - right.correct) / right.total : 0;
+    var attemptedDomains = scoreResult.domains.filter(function hasAttempts(domain) {
+      return domain.attempted > 0;
+    });
+    var unattemptedDomains = scoreResult.domains.filter(function noAttempts(domain) {
+      return domain.attempted === 0;
+    });
+
+    var ranked = attemptedDomains.slice().sort(function compare(left, right) {
+      var missedLeft = left.attempted - left.correct;
+      var missedRight = right.attempted - right.correct;
       var fragileLeft = fragileByDomain[left.domain] || 0;
       var fragileRight = fragileByDomain[right.domain] || 0;
 
       return (
         right.misconceptionCount - left.misconceptionCount ||
-        incorrectRateRight - incorrectRateLeft ||
-        right.unanswered - left.unanswered ||
+        left.accuracy - right.accuracy ||
+        missedRight - missedLeft ||
         fragileRight - fragileLeft ||
-        right.total - left.total ||
+        right.attempted - left.attempted ||
         left.domain.localeCompare(right.domain)
       );
     }).map(function withPriority(domain, index) {
       return Object.assign({ priority: index + 1 }, domain);
     });
+
+    return { ranked: ranked, unattempted: unattemptedDomains };
   }
 
-  /** Three deterministic study actions derived from the actual attempt. */
-  function computeStudyActions(scoreResult, rankedDomains, safeguardResult) {
+  /** Up to three deterministic study actions derived from the actual attempt. */
+  function computeStudyActions(scoreResult, rankedResult, readinessResult) {
     var actions = [];
-    var topDomain = rankedDomains.find(function hasSignal(domain) {
-      return domain.total - domain.correct > 0 || domain.unanswered > 0;
+    var ranked = rankedResult.ranked;
+    var weakest = ranked.find(function hasMisses(domain) {
+      return domain.correct < domain.attempted;
     });
 
-    if (topDomain) {
+    if (weakest) {
       actions.push({
-        key: "review_top_domain",
-        text: "Review \"" + topDomain.domain + "\" first — " + (topDomain.total - topDomain.correct) +
-          " of " + topDomain.total + " questions were missed or unanswered there."
+        key: "review_weakest_domain",
+        text: "Focus on \"" + weakest.domain + "\" first — " + (weakest.attempted - weakest.correct) +
+          " of " + weakest.attempted + " attempted questions there were missed."
       });
-    } else {
+    } else if (ranked.length) {
       actions.push({
         key: "maintain_strength",
-        text: "Every domain was fully correct in this attempt — revisit official references to reinforce retention."
+        text: "Every domain you attempted was fully correct — revisit the official references to lock it in."
+      });
+    }
+
+    if (rankedResult.unattempted.length) {
+      var names = rankedResult.unattempted.map(function name(domain) { return domain.domain; }).slice(0, 3).join(", ");
+      actions.push({
+        key: "cover_remaining_domains",
+        text: "You haven't attempted " + rankedResult.unattempted.length + " domain" +
+          (rankedResult.unattempted.length === 1 ? "" : "s") + " yet (" + names +
+          (rankedResult.unattempted.length > 3 ? ", …" : "") + ") — a retake covering these will sharpen your signal."
       });
     }
 
@@ -303,57 +390,43 @@
       actions.push({
         key: "resolve_misconceptions",
         text: "Revisit the " + misconceptionCount + " question" + (misconceptionCount === 1 ? "" : "s") +
-          " you answered incorrectly while marked \"Sure\" — these usually point to a specific misconception, not a knowledge gap."
-      });
-    } else {
-      var gapCount = scoreResult.details.filter(function isGap(detail) {
-        return detail.confidenceClass === "gap";
-      }).length;
-      actions.push({
-        key: "close_gaps",
-        text: gapCount > 0
-          ? "Study the " + gapCount + " question" + (gapCount === 1 ? "" : "s") + " you were unsure about or guessed on."
-          : "Retake this assessment after a study session to confirm your readiness band holds."
+          " you got wrong while feeling \"Sure\" — these usually point to one specific misconception worth clearing up."
       });
     }
 
-    if (safeguardResult.finalBand.key === "foundation" || safeguardResult.finalBand.key === "developing") {
+    if (!actions.length || actions.length < 2) {
       actions.push({
-        key: "untimed_first",
-        text: "Use untimed practice mode next so you can reason through each question without exam-pace pressure."
-      });
-    } else {
-      actions.push({
-        key: "simulate_timed",
-        text: "Retake in timed mode to confirm your pacing matches the " + TOTAL_QUESTIONS + "-question exam simulation."
+        key: "simulate_full_length",
+        text: readinessResult.band.key === "ready"
+          ? "Retake in timed mode to confirm your pacing before exam day."
+          : "Use untimed practice mode next so you can reason through each question without exam-pace pressure."
       });
     }
 
     return actions.slice(0, 3);
   }
 
-  /** Compare the current attempt to the most recent locally-stored completed attempt. */
   function compareToPreviousAttempt(current, previous) {
     if (!previous) return null;
     return {
       previousCorrect: previous.correct,
-      previousPercentage: previous.percentage,
+      previousAccuracyPercentage: previous.accuracyPercentage,
       previousBandKey: previous.bandKey,
       correctDelta: current.correct - previous.correct,
-      percentageDelta: current.percentage - previous.percentage,
+      accuracyDelta: current.accuracyPercentage - previous.accuracyPercentage,
       bandChanged: current.bandKey !== previous.bandKey
     };
   }
 
   /**
-   * Revenue-aware CTA routing (section 11). Never fabricates a link: renders
-   * no commercial button when neither a live coupon nor a locked referral
-   * exists for the mapped course.
+   * Revenue-aware CTA routing: the coupon URL only while genuinely within
+   * its scheduled window, otherwise the locked referral URL, otherwise no
+   * link at all. Never fabricates or guesses a destination.
    */
   function resolveCta(offer, nowMs) {
     var now = typeof nowMs === "number" ? nowMs : Date.now();
     if (!offer || !offer.courseId) {
-      return { available: false, reason: "no_course_mapping", url: null };
+      return { available: false, reason: "no_course_mapping", url: null, kind: null };
     }
     var start = offer.startAt ? new Date(offer.startAt).getTime() : NaN;
     var end = offer.endAt ? new Date(offer.endAt).getTime() : NaN;
@@ -366,27 +439,22 @@
     if (offer.instructorReferralUrl) {
       return { available: true, kind: "referral", url: offer.instructorReferralUrl };
     }
-    return { available: false, reason: "missing_mapping", url: null };
-  }
-
-  function ctaGuidanceForBand(bandKey) {
-    return CTA_GUIDANCE[bandKey] || CTA_GUIDANCE.foundation;
+    return { available: false, reason: "missing_mapping", url: null, kind: null };
   }
 
   return {
-    TOTAL_QUESTIONS: TOTAL_QUESTIONS,
     READINESS_BANDS: READINESS_BANDS,
     normalizeAnswerSet: normalizeAnswerSet,
     exactSetEqual: exactSetEqual,
     scoreQuestion: scoreQuestion,
     scoreAssessment: scoreAssessment,
-    getReadinessBand: getReadinessBand,
     classifyConfidence: classifyConfidence,
-    applyReadinessSafeguards: applyReadinessSafeguards,
+    computeReadinessResult: computeReadinessResult,
     rankDomainsForReview: rankDomainsForReview,
     computeStudyActions: computeStudyActions,
     compareToPreviousAttempt: compareToPreviousAttempt,
     resolveCta: resolveCta,
-    ctaGuidanceForBand: ctaGuidanceForBand
+    bandByKey: bandByKey,
+    bandByRank: bandByRank
   };
 });

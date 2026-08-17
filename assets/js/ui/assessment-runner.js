@@ -7,13 +7,16 @@
  *   <script type="application/json" data-assessment-payload>{...}</script>
  *
  * Payload shape: { slug, contentVersion, courseId, offer, meta, questions[] }
- * (see scripts/render_site.py `build_assessment_payload` for the exact
- * shape). Only the pre-sanitized *Html fields produced at build time by
+ * (see scripts/render_site.py `build_assessment_payload`). Only the
+ * pre-sanitized *Html fields produced at build time by
  * scripts/import/markdown_assessment.py are ever set via innerHTML; every
  * other value is set via textContent. No network requests are made and no
  * question, answer, confidence or personal data ever leaves the browser.
  *
- * Depends on window.CertShieldAssessmentScoring (assets/js/core/assessment-scoring.js).
+ * Submission model: the learner can submit at any time, from any point in
+ * the assessment. Only questions actually answered are scored — there is no
+ * "you must finish" gate. Depends on window.CertShieldAssessmentScoring
+ * (assets/js/core/assessment-scoring.js).
  */
 (function () {
   "use strict";
@@ -21,11 +24,21 @@
   var scoring = window.CertShieldAssessmentScoring;
   if (!scoring) return;
 
-  var STORAGE_PREFIX = "certshield.assessment.v1.";
-  var HISTORY_PREFIX = "certshield.assessment.history.v1.";
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  var STORAGE_PREFIX = "certshield.assessment.v2.";
+  var HISTORY_PREFIX = "certshield.assessment.history.v2.";
   var MAX_HISTORY = 3;
   var CONFIDENCE_OPTIONS = ["sure", "unsure", "guessing"];
   var CONFIDENCE_LABELS = { sure: "Sure", unsure: "Unsure", guessing: "Guessing" };
+
+  var CONFIDENCE_DISPLAY = {
+    stable: { label: "Stable knowledge", hint: "Correct, and you knew it", status: "good" },
+    fragile: { label: "Fragile knowledge", hint: "Correct, but not confident", status: "warning" },
+    misconception: { label: "Likely misconception", hint: "Wrong, while feeling sure", status: "critical" },
+    gap: { label: "Knowledge gap", hint: "Wrong, and you knew you weren't sure", status: "serious" },
+    guessing: { label: "Guessing", hint: "No real signal yet", status: "muted" },
+    unclassified: { label: "No confidence given", hint: "Confidence wasn't marked", status: "muted" }
+  };
 
   function el(tag, className, text) {
     var node = document.createElement(tag);
@@ -36,6 +49,14 @@
 
   function html(node, htmlString) {
     node.innerHTML = htmlString || "";
+    return node;
+  }
+
+  function svgEl(tag, attrs) {
+    var node = document.createElementNS(SVG_NS, tag);
+    Object.keys(attrs || {}).forEach(function setAttr(key) {
+      node.setAttribute(key, attrs[key]);
+    });
     return node;
   }
 
@@ -260,7 +281,7 @@
     var limitation = el(
       "p",
       "assessment-limitation-note",
-      "This 30-question diagnostic estimates readiness; it is not an official score or pass prediction. Domains with fewer than three questions carry limited evidence."
+      "Answer as many or as few questions as you like, then submit whenever you're ready — your results are based on exactly what you answered."
     );
     this.landing.appendChild(limitation);
 
@@ -345,11 +366,6 @@
     this.questionHost = el("div", "assessment-question-host");
     this.runnerPanel.appendChild(this.questionHost);
 
-    this.validationPanel = el("div", "assessment-validation");
-    this.validationPanel.hidden = true;
-    this.validationPanel.setAttribute("role", "alert");
-    this.runnerPanel.appendChild(this.validationPanel);
-
     var navRow = el("div", "assessment-nav-row");
     this.prevButton = el("button", "button button-secondary", "Previous");
     this.prevButton.type = "button";
@@ -372,12 +388,22 @@
     });
     navRow.appendChild(this.nextButton);
 
-    this.submitButton = el("button", "button button-primary", "Submit Assessment");
+    this.submitButton = el("button", "button button-primary assessment-submit-button", "Submit & See My Results");
     this.submitButton.type = "button";
     this.submitButton.addEventListener("click", function () {
-      self.requestSubmit(false);
+      self.completeAttempt();
     });
     navRow.appendChild(this.submitButton);
+
+    this.runnerPanel.appendChild(navRow);
+
+    var footerRow = el("div", "assessment-nav-row assessment-nav-row-secondary");
+    var submitAnytimeNote = el(
+      "p",
+      "assessment-submit-anytime-note",
+      "You can submit at any point — only the questions you've answered count toward your result."
+    );
+    footerRow.appendChild(submitAnytimeNote);
 
     this.restartLink = el("button", "button button-text", "Clear progress and start over");
     this.restartLink.type = "button";
@@ -387,9 +413,8 @@
         window.location.reload();
       }
     });
-    navRow.appendChild(this.restartLink);
-
-    this.runnerPanel.appendChild(navRow);
+    footerRow.appendChild(this.restartLink);
+    this.runnerPanel.appendChild(footerRow);
   };
 
   AssessmentRunner.prototype.startTimer = function startTimer() {
@@ -401,7 +426,7 @@
       if (self.remainingSeconds <= 0) {
         window.clearInterval(self.timerHandle);
         self.announce("Time is up. Submitting your assessment.");
-        self.requestSubmit(true);
+        self.completeAttempt();
       }
     }, 1000);
   };
@@ -490,7 +515,6 @@
     this.progressText.textContent = "Question " + (this.currentIndex + 1) + " of " + this.questions.length;
     this.prevButton.hidden = this.currentIndex === 0;
     this.nextButton.hidden = this.currentIndex === this.questions.length - 1;
-    this.submitButton.hidden = this.currentIndex !== this.questions.length - 1;
     this.updateFlagButton();
     this.updateNavigatorStates();
     this.announce(this.progressText.textContent);
@@ -502,7 +526,7 @@
       return input.checked;
     });
     if (inputType === "checkbox" && checked.length > question.requiredSelections) {
-      inputs.forEach(function uncheckExtra(input, index) {
+      inputs.forEach(function uncheckExtra(input) {
         if (input === checked[checked.length - 1]) input.checked = false;
       });
       this.announce("Choose exactly " + question.requiredSelections + " answers for this question.");
@@ -513,7 +537,6 @@
     this.answers[question.id] = checked.map(function value(input) {
       return input.value;
     });
-    if (!this.validationPanel.hidden) this.hideValidation();
     this.updateNavigatorStates();
     this.saveAttempt();
   };
@@ -534,68 +557,25 @@
     });
   };
 
-  AssessmentRunner.prototype.hideValidation = function hideValidation() {
-    this.validationPanel.hidden = true;
-    this.validationPanel.innerHTML = "";
-  };
-
-  AssessmentRunner.prototype.requestSubmit = function requestSubmit(force) {
-    var self = this;
-    var unansweredCount = this.questions.filter(function isUnanswered(question) {
-      return (self.answers[question.id] || []).length !== question.requiredSelections;
-    }).length;
-    var flaggedCount = Object.keys(this.flags).filter(function isFlagged(id) {
-      return self.flags[id];
-    }).length;
-
-    if (unansweredCount > 0 && !force) {
-      this.validationPanel.innerHTML = "";
-      this.validationPanel.appendChild(
-        el("p", "", "You have " + unansweredCount + " unanswered question" + (unansweredCount === 1 ? "" : "s") +
-          (flaggedCount ? " and " + flaggedCount + " flagged question" + (flaggedCount === 1 ? "" : "s") : "") + ".")
-      );
-      var reviewButton = el("button", "button button-secondary", "Review unanswered");
-      reviewButton.type = "button";
-      reviewButton.addEventListener("click", function () {
-        var index = self.questions.findIndex(function unansweredIndex(question) {
-          return (self.answers[question.id] || []).length !== question.requiredSelections;
-        });
-        if (index !== -1) self.goTo(index);
-        self.hideValidation();
-      });
-      var anywayButton = el("button", "button button-primary", "Submit anyway");
-      anywayButton.type = "button";
-      anywayButton.addEventListener("click", function () {
-        self.requestSubmit(true);
-      });
-      this.validationPanel.appendChild(reviewButton);
-      this.validationPanel.appendChild(anywayButton);
-      this.validationPanel.hidden = false;
-      return;
-    }
-
-    this.completeAttempt();
-  };
-
   AssessmentRunner.prototype.completeAttempt = function completeAttempt() {
     if (this.timerHandle) window.clearInterval(this.timerHandle);
     this.submitted = true;
     var elapsedMs = Date.now() - (this.startedAt || Date.now());
     var scoreResult = scoring.scoreAssessment(this.questions, this.answers, this.confidences);
-    var safeguardResult = scoring.applyReadinessSafeguards(scoreResult);
-    var rankedDomains = scoring.rankDomainsForReview(scoreResult);
-    var studyActions = scoring.computeStudyActions(scoreResult, rankedDomains, safeguardResult);
+    var readinessResult = scoring.computeReadinessResult(scoreResult);
+    var rankedResult = scoring.rankDomainsForReview(scoreResult);
+    var studyActions = scoring.computeStudyActions(scoreResult, rankedResult, readinessResult);
     var history = this.readHistory();
     var previous = history[0] || null;
     var comparison = scoring.compareToPreviousAttempt(
-      { correct: scoreResult.correct, percentage: scoreResult.percentage, bandKey: safeguardResult.finalBand.key },
+      { correct: scoreResult.correct, accuracyPercentage: scoreResult.accuracyPercentage, bandKey: readinessResult.band.key },
       previous
     );
 
     this.lastResult = {
       scoreResult: scoreResult,
-      safeguardResult: safeguardResult,
-      rankedDomains: rankedDomains,
+      readinessResult: readinessResult,
+      rankedResult: rankedResult,
       studyActions: studyActions,
       comparison: comparison,
       elapsedMs: elapsedMs
@@ -604,9 +584,11 @@
     this.pushHistory({
       completedAt: Date.now(),
       correct: scoreResult.correct,
+      attempted: scoreResult.attempted,
       total: scoreResult.total,
-      percentage: scoreResult.percentage,
-      bandKey: safeguardResult.finalBand.key,
+      accuracyPercentage: scoreResult.accuracyPercentage,
+      coveragePercentage: scoreResult.coveragePercentage,
+      bandKey: readinessResult.band.key,
       contentVersion: this.contentVersion
     });
     this.clearSavedAttempt();
@@ -615,121 +597,223 @@
     this.renderResults();
   };
 
+  // ---------------------------------------------------------------- charts
+
+  /** Horizontal accuracy meter: fill carries severity, track is a lighter same-ramp step. */
+  function buildMeter(percentage, statusKey) {
+    var wrapper = el("div", "assessment-meter assessment-meter-status-" + statusKey);
+    var track = el("div", "assessment-meter-track");
+    var fill = el("div", "assessment-meter-fill");
+    fill.style.width = Math.max(2, Math.min(100, percentage)) + "%";
+    track.appendChild(fill);
+    wrapper.appendChild(track);
+    return wrapper;
+  }
+
+  /**
+   * Domain accuracy bar chart: one sequential hue, bars capped at 24px thick
+   * with a 4px rounded data-end, 2px gaps, direct value labels at the tip.
+   * A single series needs no legend box (the chart's own heading names it).
+   */
+  function buildDomainBarChart(rankedDomains) {
+    if (!rankedDomains.length) return null;
+
+    var barHeight = 22;
+    var gap = 10;
+    var rowHeight = barHeight + gap;
+    var width = 560;
+    var labelWidth = 190;
+    var trackWidth = width - labelWidth - 46;
+    var height = rankedDomains.length * rowHeight;
+
+    var svg = svgEl("svg", {
+      viewBox: "0 0 " + width + " " + height,
+      role: "img",
+      "aria-label": "Domain accuracy chart",
+      class: "assessment-domain-chart"
+    });
+
+    rankedDomains.forEach(function drawRow(domain, index) {
+      var y = index * rowHeight;
+      var barY = y + (rowHeight - barHeight) / 2;
+      var pct = domain.accuracy === null ? 0 : domain.accuracy;
+      var barWidth = Math.max(4, trackWidth * pct);
+
+      var label = svgEl("text", {
+        x: 0,
+        y: barY + barHeight / 2 + 4,
+        class: "assessment-chart-label"
+      });
+      var domainName = domain.domain.length > 26 ? domain.domain.slice(0, 25) + "…" : domain.domain;
+      label.textContent = domainName;
+      svg.appendChild(label);
+
+      var track = svgEl("rect", {
+        x: labelWidth,
+        y: barY,
+        width: trackWidth,
+        height: barHeight,
+        rx: 4,
+        class: "assessment-chart-track"
+      });
+      svg.appendChild(track);
+
+      var bar = svgEl("rect", {
+        x: labelWidth,
+        y: barY,
+        width: barWidth,
+        height: barHeight,
+        rx: 4,
+        class: "assessment-chart-bar"
+      });
+      svg.appendChild(bar);
+
+      var valueLabel = svgEl("text", {
+        x: labelWidth + trackWidth + 10,
+        y: barY + barHeight / 2 + 4,
+        class: "assessment-chart-value"
+      });
+      valueLabel.textContent = domain.percentage + "%";
+      svg.appendChild(valueLabel);
+    });
+
+    return svg;
+  }
+
   // ---------------------------------------------------------------- results
 
   AssessmentRunner.prototype.renderResults = function renderResults() {
     var self = this;
     var result = this.lastResult;
     var scoreResult = result.scoreResult;
-    var safeguardResult = result.safeguardResult;
+    var readinessResult = result.readinessResult;
+    var band = readinessResult.band;
+    var meta = this.payload.meta || {};
 
     this.resultsPanel.innerHTML = "";
     this.resultsPanel.hidden = false;
+    this.resultsPanel.classList.remove(
+      "band-ready", "band-momentum", "band-developing", "band-foundation"
+    );
+    this.resultsPanel.classList.add("band-" + band.key);
 
-    var heading = el("h2", "", safeguardResult.finalBand.label);
-    this.resultsPanel.appendChild(heading);
+    var certName = meta.certificationName || "this certification";
 
-    if (safeguardResult.downgraded) {
-      var downgradeNote = el("div", "assessment-safeguard-note");
-      downgradeNote.appendChild(
-        el("p", "", "Your initial band (" + safeguardResult.initialBand.label + ") was adjusted down by one level because:")
-      );
-      var list = document.createElement("ul");
-      safeguardResult.triggeredSafeguards.forEach(function addSafeguard(item) {
-        list.appendChild(el("li", "", item.message));
-      });
-      downgradeNote.appendChild(list);
-      this.resultsPanel.appendChild(downgradeNote);
-    }
+    // ---- motivational hero ----
+    var hero = el("div", "assessment-results-hero");
+    hero.appendChild(el("p", "assessment-results-eyebrow", "Your diagnostic result"));
+    hero.appendChild(el("h2", "assessment-results-headline", band.label));
+    hero.appendChild(el("p", "assessment-results-narrative", band.headline + " " + band.narrative));
+    this.resultsPanel.appendChild(hero);
 
-    var statGrid = el("div", "assessment-summary-grid");
+    // ---- KPI row ----
+    var kpiRow = el("div", "assessment-summary-grid assessment-kpi-row");
     [
-      ["Score", scoreResult.correct + " / " + scoreResult.total],
-      ["Percentage", scoreResult.percentage + "%"],
-      ["Time taken", formatClock(result.elapsedMs / 1000)],
-      ["Unanswered", String(scoreResult.unanswered)]
+      ["Score", scoreResult.correct + " / " + scoreResult.attempted + " attempted"],
+      ["Accuracy", scoreResult.accuracyPercentage + "%"],
+      ["Coverage", scoreResult.coveragePercentage + "% of " + scoreResult.total + " questions"],
+      ["Time taken", formatClock(result.elapsedMs / 1000)]
     ].forEach(function addStat(pair) {
       var tile = el("div", "assessment-stat");
       tile.appendChild(el("span", "", pair[0]));
       tile.appendChild(el("strong", "", pair[1]));
-      statGrid.appendChild(tile);
+      kpiRow.appendChild(tile);
     });
-    this.resultsPanel.appendChild(statGrid);
-    this.resultsPanel.appendChild(
-      el(
-        "p",
-        "assessment-limitation-note",
-        "This raw percentage describes only this 30-question diagnostic. It is not an official psychometric score or pass prediction."
-      )
-    );
+    this.resultsPanel.appendChild(kpiRow);
 
-    // domain evidence matrix
-    this.resultsPanel.appendChild(el("h3", "", "Domain evidence matrix"));
-    var table = document.createElement("table");
-    table.className = "assessment-domain-table";
-    var head = document.createElement("thead");
-    var headRow = document.createElement("tr");
-    ["Domain", "Correct / Total", "Attempted", "Unanswered", "Percentage", "Evidence", "Priority"].forEach(function (label) {
-      var th = document.createElement("th");
-      th.scope = "col";
-      th.textContent = label;
-      headRow.appendChild(th);
-    });
-    head.appendChild(headRow);
-    table.appendChild(head);
-    var body = document.createElement("tbody");
-    result.rankedDomains.forEach(function addRow(domain) {
-      var row = document.createElement("tr");
-      var th = document.createElement("th");
-      th.scope = "row";
-      th.textContent = domain.domain;
-      row.appendChild(th);
-      [
-        domain.correct + " / " + domain.total,
-        String(domain.attempted),
-        String(domain.unanswered),
-        domain.percentage + "%",
-        domain.evidenceLabel,
-        String(domain.priority)
-      ].forEach(function addCell(value) {
-        var td = document.createElement("td");
-        td.textContent = value;
-        row.appendChild(td);
+    // ---- accuracy meter ----
+    var meterSection = el("div", "assessment-meter-section");
+    var meterHeadingRow = el("div", "assessment-meter-heading-row");
+    meterHeadingRow.appendChild(el("h3", "", "Accuracy on questions you answered"));
+    meterHeadingRow.appendChild(el("span", "assessment-meter-percentage", scoreResult.accuracyPercentage + "%"));
+    meterSection.appendChild(meterHeadingRow);
+    meterSection.appendChild(buildMeter(scoreResult.accuracyPercentage, statusKeyForBand(band.key)));
+    if (readinessResult.note) {
+      meterSection.appendChild(el("p", "assessment-coverage-note", readinessResult.note));
+    }
+    this.resultsPanel.appendChild(meterSection);
+
+    // ---- domain chart + table ----
+    var rankedDomains = result.rankedResult.ranked;
+    var unattemptedDomains = result.rankedResult.unattempted;
+    if (rankedDomains.length) {
+      this.resultsPanel.appendChild(el("h3", "", "Where you're strong, and where to focus"));
+      var chart = buildDomainBarChart(rankedDomains);
+      if (chart) this.resultsPanel.appendChild(chart);
+
+      var table = document.createElement("table");
+      table.className = "assessment-domain-table";
+      var head = document.createElement("thead");
+      var headRow = document.createElement("tr");
+      ["Domain", "Correct / Attempted", "Accuracy", "Evidence"].forEach(function (label) {
+        var th = document.createElement("th");
+        th.scope = "col";
+        th.textContent = label;
+        headRow.appendChild(th);
       });
-      body.appendChild(row);
-    });
-    table.appendChild(body);
-    this.resultsPanel.appendChild(table);
+      head.appendChild(headRow);
+      table.appendChild(head);
+      var body = document.createElement("tbody");
+      rankedDomains.forEach(function addRow(domain) {
+        var row = document.createElement("tr");
+        var th = document.createElement("th");
+        th.scope = "row";
+        th.textContent = domain.domain;
+        row.appendChild(th);
+        [domain.correct + " / " + domain.attempted, domain.percentage + "%", domain.evidenceLabel].forEach(function addCell(value) {
+          var td = document.createElement("td");
+          td.textContent = value;
+          row.appendChild(td);
+        });
+        body.appendChild(row);
+      });
+      table.appendChild(body);
+      var tableScroll = el("div", "assessment-table-scroll");
+      tableScroll.appendChild(table);
+      this.resultsPanel.appendChild(tableScroll);
+    }
+    if (unattemptedDomains.length) {
+      var names = unattemptedDomains.map(function name(domain) { return domain.domain; }).join(", ");
+      this.resultsPanel.appendChild(
+        el("p", "assessment-limitation-note", "Not yet attempted: " + names + ".")
+      );
+    }
 
-    // confidence calibration
-    var calibrationCounts = { stable: 0, fragile: 0, misconception: 0, gap: 0, guessing: 0, unclassified: 0 };
+    // ---- confidence calibration ----
+    var calibrationCounts = {};
     scoreResult.details.forEach(function tally(detail) {
       calibrationCounts[detail.confidenceClass] = (calibrationCounts[detail.confidenceClass] || 0) + 1;
     });
-    this.resultsPanel.appendChild(el("h3", "", "Confidence calibration"));
-    var calibrationList = document.createElement("ul");
-    calibrationList.className = "assessment-calibration-list";
-    [
-      ["stable", "Stable knowledge (correct + sure)"],
-      ["fragile", "Fragile knowledge (correct + unsure/guessing)"],
-      ["misconception", "Likely misconception (incorrect + sure)"],
-      ["gap", "Knowledge gap (incorrect + unsure/guessing)"],
-      ["guessing", "Guessing"],
-      ["unclassified", "No confidence selected"]
-    ].forEach(function addRow(pair) {
-      calibrationList.appendChild(el("li", "", pair[1] + ": " + calibrationCounts[pair[0]]));
+    var calibrationKeys = Object.keys(CONFIDENCE_DISPLAY).filter(function hasCount(key) {
+      return calibrationCounts[key] > 0;
     });
-    this.resultsPanel.appendChild(calibrationList);
+    if (calibrationKeys.length) {
+      this.resultsPanel.appendChild(el("h3", "", "How well-calibrated is your confidence?"));
+      var calibrationRow = el("div", "assessment-calibration-row");
+      calibrationKeys.forEach(function addTile(key) {
+        var display = CONFIDENCE_DISPLAY[key];
+        var tile = el("div", "assessment-calibration-tile status-" + display.status);
+        tile.appendChild(el("span", "assessment-calibration-icon", statusIcon(display.status)));
+        tile.appendChild(el("strong", "assessment-calibration-count", String(calibrationCounts[key])));
+        tile.appendChild(el("span", "assessment-calibration-label", display.label));
+        tile.appendChild(el("span", "assessment-calibration-hint", display.hint));
+        calibrationRow.appendChild(tile);
+      });
+      this.resultsPanel.appendChild(calibrationRow);
+    }
 
-    // study actions
-    this.resultsPanel.appendChild(el("h3", "", "What to do next"));
-    var actionsList = document.createElement("ol");
-    result.studyActions.forEach(function addAction(action) {
-      actionsList.appendChild(el("li", "", action.text));
-    });
-    this.resultsPanel.appendChild(actionsList);
+    // ---- study actions ----
+    if (result.studyActions.length) {
+      this.resultsPanel.appendChild(el("h3", "", "What to do next"));
+      var actionsList = document.createElement("ol");
+      actionsList.className = "assessment-actions-list";
+      result.studyActions.forEach(function addAction(action) {
+        actionsList.appendChild(el("li", "", action.text));
+      });
+      this.resultsPanel.appendChild(actionsList);
+    }
 
-    // comparison
+    // ---- comparison ----
     if (result.comparison) {
       var comparison = result.comparison;
       var deltaText = (comparison.correctDelta >= 0 ? "+" : "") + comparison.correctDelta;
@@ -737,23 +821,23 @@
         el(
           "p",
           "assessment-comparison-note",
-          "Personal progress vs. your last completed attempt: " + deltaText + " correct (" +
-            (comparison.percentageDelta >= 0 ? "+" : "") + comparison.percentageDelta + " percentage points)."
+          "Compared with your last completed attempt: " + deltaText + " correct (" +
+            (comparison.accuracyDelta >= 0 ? "+" : "") + comparison.accuracyDelta + " percentage points accuracy)."
         )
       );
     }
 
-    this.renderCta(safeguardResult.finalBand.key);
+    this.renderCta(band, certName);
 
     var actionsRow = el("div", "assessment-results-actions");
-    var reviewButton = el("button", "button button-primary", "Review all answers");
+    var reviewButton = el("button", "button button-secondary", "Review all answers");
     reviewButton.type = "button";
     reviewButton.addEventListener("click", function () {
       self.renderReview("all");
     });
     actionsRow.appendChild(reviewButton);
 
-    var printButton = el("button", "button button-secondary", "Print this report");
+    var printButton = el("button", "button button-text", "Print this report");
     printButton.type = "button";
     printButton.addEventListener("click", function () {
       window.print();
@@ -771,36 +855,54 @@
     this.reviewHost = el("div", "assessment-review-host");
     this.resultsPanel.appendChild(this.reviewHost);
 
-    this.announce("Assessment submitted. Score " + scoreResult.correct + " out of " + scoreResult.total + ".");
+    this.announce(
+      band.label + ". Accuracy " + scoreResult.accuracyPercentage + " percent on " + scoreResult.attempted + " attempted questions."
+    );
   };
 
-  AssessmentRunner.prototype.renderCta = function renderCta(bandKey) {
+  function statusKeyForBand(bandKey) {
+    return bandKey === "ready" ? "good" : bandKey === "momentum" ? "warning" : bandKey === "developing" ? "serious" : "critical";
+  }
+
+  function statusIcon(statusKey) {
+    return { good: "✓", warning: "◐", critical: "✕", serious: "△", muted: "–" }[statusKey] || "•";
+  }
+
+  AssessmentRunner.prototype.renderCta = function renderCta(band, certName) {
     var offer = this.payload.offer || {};
     var cta = scoring.resolveCta(offer, Date.now());
     var wrapper = el("div", "assessment-cta");
-    wrapper.appendChild(el("h3", "", "Continue your preparation"));
-    wrapper.appendChild(el("p", "", scoring.ctaGuidanceForBand(bandKey)));
+    var framing = (band.ctaFramingByKind && cta.kind && band.ctaFramingByKind[cta.kind]) || band.narrative;
+
+    wrapper.appendChild(el("p", "assessment-cta-eyebrow", "Your natural next step"));
+    wrapper.appendChild(el("h3", "assessment-cta-heading", band.ctaLabel));
+    wrapper.appendChild(el("p", "assessment-cta-body", framing));
 
     if (cta.available) {
       var link = document.createElement("a");
-      link.className = "button button-primary";
+      link.className = "button button-primary assessment-cta-button";
       link.href = cta.url;
       link.target = "_blank";
       link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
-      link.textContent = cta.kind === "coupon" ? "Claim current offer" : "View full-length practice course";
+      link.textContent = cta.kind === "coupon" ? "Claim Today's Offer & Start Full Practice ↗" : "Start Full Practice on Udemy ↗";
       wrapper.appendChild(link);
-      wrapper.appendChild(
-        el(
-          "p",
-          "assessment-cta-disclosure",
-          "This links to an instructor-authored Udemy course. Enrollment may generate instructor revenue."
-        )
-      );
     } else {
       wrapper.appendChild(
-        el("p", "assessment-cta-missing", "A verified course link is not yet configured for this assessment.")
+        el("p", "assessment-cta-missing", "A verified course link isn't configured for this assessment yet.")
       );
     }
+
+    var mainSiteUrl = this.payload.mainSiteUrl;
+    if (mainSiteUrl) {
+      var secondary = document.createElement("a");
+      secondary.className = "button button-text assessment-cta-secondary";
+      secondary.href = mainSiteUrl;
+      secondary.target = "_blank";
+      secondary.rel = "noopener";
+      secondary.textContent = "See full details on CertShield ↗";
+      wrapper.appendChild(secondary);
+    }
+
     this.resultsPanel.appendChild(wrapper);
   };
 
