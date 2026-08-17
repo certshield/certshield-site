@@ -12,11 +12,14 @@
   --gold: #f4b942;
   --gold-dark: #9a5b00;
   --orange: #d9602e;
+  --orange-soft: #fdeee6;
   --success: #147257;
   --success-soft: #e3f5ee;
   --danger: #9f3036;
   --danger-soft: #fff0f1;
   --warning-soft: #fff7df;
+  --muted: #5f7679;
+  --muted-soft: #eef3f2;
   --surface: #ffffff;
   --surface-soft: #f6f9f8;
   --line: #cbdad8;
@@ -1393,19 +1396,9 @@ button.button {
 }
 
 /* ================= Diagnostic assessment engine ================= */
-
-:root {
-  --status-good: #147257;
-  --status-good-soft: #e3f5ee;
-  --status-warning: #9a5b00;
-  --status-warning-soft: #fff7df;
-  --status-serious: #d9602e;
-  --status-serious-soft: #fdeee6;
-  --status-critical: #9f3036;
-  --status-critical-soft: #fff0f1;
-  --status-muted: #5f7679;
-  --status-muted-soft: #eef3f2;
-}
+/* Status colors reuse the base palette's --success/--gold-dark/--orange/
+   --danger tokens directly (see :root above) rather than a parallel
+   --status-* alias set with identical values under different names. */
 
 .assessment-summary-grid {
   display: grid;
@@ -1847,19 +1840,19 @@ button.button {
 }
 
 .assessment-meter-status-good .assessment-meter-fill {
-  background: var(--status-good);
+  background: var(--success);
 }
 
 .assessment-meter-status-warning .assessment-meter-fill {
-  background: var(--status-warning);
+  background: var(--gold-dark);
 }
 
 .assessment-meter-status-serious .assessment-meter-fill {
-  background: var(--status-serious);
+  background: var(--orange);
 }
 
 .assessment-meter-status-critical .assessment-meter-fill {
-  background: var(--status-critical);
+  background: var(--danger);
 }
 
 .assessment-coverage-note {
@@ -1977,48 +1970,48 @@ button.button {
 }
 
 .assessment-calibration-tile.status-good {
-  background: var(--status-good-soft);
-  border-color: var(--status-good);
+  background: var(--success-soft);
+  border-color: var(--success);
 }
 
 .assessment-calibration-tile.status-good .assessment-calibration-icon {
-  color: var(--status-good);
+  color: var(--success);
 }
 
 .assessment-calibration-tile.status-warning {
-  background: var(--status-warning-soft);
-  border-color: var(--status-warning);
+  background: var(--warning-soft);
+  border-color: var(--gold-dark);
 }
 
 .assessment-calibration-tile.status-warning .assessment-calibration-icon {
-  color: var(--status-warning);
+  color: var(--gold-dark);
 }
 
 .assessment-calibration-tile.status-serious {
-  background: var(--status-serious-soft);
-  border-color: var(--status-serious);
+  background: var(--orange-soft);
+  border-color: var(--orange);
 }
 
 .assessment-calibration-tile.status-serious .assessment-calibration-icon {
-  color: var(--status-serious);
+  color: var(--orange);
 }
 
 .assessment-calibration-tile.status-critical {
-  background: var(--status-critical-soft);
-  border-color: var(--status-critical);
+  background: var(--danger-soft);
+  border-color: var(--danger);
 }
 
 .assessment-calibration-tile.status-critical .assessment-calibration-icon {
-  color: var(--status-critical);
+  color: var(--danger);
 }
 
 .assessment-calibration-tile.status-muted {
-  background: var(--status-muted-soft);
+  background: var(--muted-soft);
   border-color: var(--line-strong);
 }
 
 .assessment-calibration-tile.status-muted .assessment-calibration-icon {
-  color: var(--status-muted);
+  color: var(--muted);
 }
 
 .assessment-comparison-note {
