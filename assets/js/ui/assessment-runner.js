@@ -31,6 +31,16 @@
   var CONFIDENCE_OPTIONS = ["sure", "unsure", "guessing"];
   var CONFIDENCE_LABELS = { sure: "Sure", unsure: "Unsure", guessing: "Guessing" };
 
+  // Shared flag glyph: reused on the navigator's flagged badge (as a CSS
+  // background, see site.css .assessment-nav-item.is-flagged::before) and
+  // inline here on the jump control, so "flagged" reads as one consistent
+  // icon everywhere rather than two different visual languages.
+  var FLAG_ICON_SVG =
+    '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
+    '<rect x="3" y="1" width="1.6" height="14" rx="0.4"></rect>' +
+    '<path d="M4.6 2h8.4l-2.6 3 2.6 3H4.6z"></path>' +
+    "</svg>";
+
   var CONFIDENCE_DISPLAY = {
     stable: { label: "Stable knowledge", hint: "Correct, and you knew it", status: "good" },
     fragile: { label: "Fragile knowledge", hint: "Correct, but not confident", status: "warning" },
@@ -382,6 +392,15 @@
     });
     this.runnerPanel.appendChild(this.navigator);
 
+    this.flaggedJumpButton = el("button", "assessment-flagged-jump");
+    this.flaggedJumpButton.type = "button";
+    html(this.flaggedJumpButton, FLAG_ICON_SVG + '<span class="assessment-flagged-jump-label"></span>');
+    this.flaggedJumpButton.hidden = true;
+    this.flaggedJumpButton.addEventListener("click", function () {
+      self.jumpToNextFlagged();
+    });
+    this.runnerPanel.appendChild(this.flaggedJumpButton);
+
     this.questionHost = el("div", "assessment-question-host");
     this.runnerPanel.appendChild(this.questionHost);
 
@@ -461,6 +480,7 @@
     this.flags[question.id] = !this.flags[question.id];
     this.updateNavigatorStates();
     this.updateFlagButton();
+    this.updateFlaggedJumpControl();
     this.saveAttempt();
   };
 
@@ -469,6 +489,46 @@
     var flagged = Boolean(this.flags[question.id]);
     this.flagButton.textContent = flagged ? "Unflag this question" : "Flag for review";
     this.flagButton.setAttribute("aria-pressed", String(flagged));
+  };
+
+  AssessmentRunner.prototype.flaggedIndexes = function flaggedIndexes() {
+    var self = this;
+    var indexes = [];
+    this.questions.forEach(function collect(question, index) {
+      if (self.flags[question.id]) indexes.push(index);
+    });
+    return indexes;
+  };
+
+  /** Keeps the "Flagged (N)" jump control in sync with real flag state —
+   * called after every toggle and every render, so it stays correct
+   * whether flags changed here, via resume, or on first load. */
+  AssessmentRunner.prototype.updateFlaggedJumpControl = function updateFlaggedJumpControl() {
+    if (!this.flaggedJumpButton) return;
+    var count = this.flaggedIndexes().length;
+    this.flaggedJumpButton.hidden = count === 0;
+    if (count === 0) return;
+    var label = this.flaggedJumpButton.querySelector(".assessment-flagged-jump-label");
+    if (label) {
+      label.textContent = count === 1 ? "1 flagged — jump to it" : count + " flagged — jump to next";
+    }
+    this.flaggedJumpButton.setAttribute(
+      "aria-label",
+      (count === 1 ? "1 question flagged. " : count + " questions flagged. ") + "Jump to next flagged question."
+    );
+  };
+
+  /** Cycles forward through flagged questions from the current position,
+   * wrapping around — a "find next" pattern rather than a one-shot jump. */
+  AssessmentRunner.prototype.jumpToNextFlagged = function jumpToNextFlagged() {
+    var indexes = this.flaggedIndexes();
+    if (!indexes.length) return;
+    var next = indexes.find(function isAfterCurrent(index) {
+      return index > this.currentIndex;
+    }, this);
+    var targetIndex = typeof next === "number" ? next : indexes[0];
+    this.goTo(targetIndex);
+    this.announce("Jumped to flagged question " + (targetIndex + 1) + " of " + this.questions.length + ".");
   };
 
   AssessmentRunner.prototype.goTo = function goTo(index) {
@@ -547,6 +607,7 @@
     this.nextButton.hidden = this.currentIndex === this.questions.length - 1;
     this.updateFlagButton();
     this.updateNavigatorStates();
+    this.updateFlaggedJumpControl();
     if (this.progressFill) {
       var percentage = ((this.currentIndex + 1) / this.questions.length) * 100;
       this.progressFill.style.width = percentage + "%";
