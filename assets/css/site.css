@@ -1446,6 +1446,7 @@ button.button {
   .assessment-navigator,
   .assessment-nav-row,
   .assessment-review-filters,
+  .assessment-review-toolbar,
   .assessment-cta,
   .assessment-status-row {
     display: none !important;
@@ -1454,6 +1455,17 @@ button.button {
   .assessment-review-item {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  /* A closed <details> prints nothing inside it - force every review
+     explanation open (and hide the now-meaningless toggle) so "Print this
+     report" still includes the full reasoning, not just the summary line. */
+  .assessment-review-explanation summary {
+    display: none !important;
+  }
+
+  .assessment-review-explanation > .disclosure-grid {
+    display: block !important;
   }
 }
 
@@ -2132,11 +2144,53 @@ button.button {
   color: rgba(255, 255, 255, 0.85);
 }
 
+.assessment-review-toolbar {
+  position: sticky;
+  top: 4.9rem; /* just below .site-header's own sticky ~4.86rem height - measured, not guessed */
+  z-index: 20; /* below .site-header's 50, above ordinary content */
+  margin: 1.5rem 0 1.25rem;
+  padding: 0.85rem 1rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.assessment-review-toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+}
+
+.assessment-review-back {
+  min-height: 2.4rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--brand-700);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--brand-800);
+  cursor: pointer;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.assessment-review-back:hover {
+  background: var(--brand-50);
+}
+
+.assessment-review-count {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
 .assessment-review-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin: 1.5rem 0 1rem;
+  margin: 0.75rem 0 0;
 }
 
 .assessment-review-filter {
@@ -2193,6 +2247,10 @@ button.button {
 
 .assessment-review-answer.is-unanswered .assessment-review-answer-label {
   color: var(--gold-dark);
+}
+
+.assessment-review-explanation {
+  margin-top: 0.85rem;
 }
 
 @media (max-width: 46rem) {

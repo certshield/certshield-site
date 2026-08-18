@@ -28,6 +28,7 @@
   var safeStorage = domUtils.safeStorage;
   var appendExplanationSections = domUtils.appendExplanationSections;
   var labelForOption = domUtils.labelForOption;
+  var priceSuffix = domUtils.priceSuffix;
 
   var STORAGE_PREFIX = "certshield.study.v1.";
   var FLAG_ICON_SVG =
@@ -35,23 +36,6 @@
     '<rect x="3" y="1" width="1.6" height="14" rx="0.4"></rect>' +
     '<path d="M4.6 2h8.4l-2.6 3 2.6 3H4.6z"></path>' +
     "</svg>";
-
-  /**
-   * A concrete price reduces CTA friction more than a vague "claim offer"
-   * label. Only shown for genuinely priced offer types (never "0", which
-   * would misrepresent a fully-free coupon as a paid one) and formatted as
-   * "<amount> <ISO currency code>" -- no assumed symbol -- matching the
-   * source-market framing already used on the Offers page
-   * (render_site.py's offer-card renderer), since a hardcoded currency
-   * symbol could misstate the learner's actual local price.
-   */
-  function priceSuffix(offer) {
-    var offerType = offer.offerType || "";
-    var price = String(offer.discountPrice || "").trim();
-    var currency = String(offer.currency || "").trim();
-    var showsPrice = (offerType === "best_price" || offerType === "custom_price") && price && price !== "0";
-    return showsPrice ? " — " + price + " " + currency : "";
-  }
 
   function StudyModeRunner(root) {
     this.root = root;

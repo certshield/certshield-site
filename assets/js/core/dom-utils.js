@@ -33,9 +33,26 @@
   }
 
   /** So the learner never has to hunt for the question or the next action. */
-  function scrollToElement(element) {
+  function scrollToElement(element, options) {
     if (!element) return;
-    element.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+    // "instant" is for exit/escape actions (e.g. "back to results" from deep
+    // inside a long review list) where a multi-second smooth journey back
+    // through everything just scrolled past works against the point of the
+    // button - the user asked to leave, not to re-watch the scroll. Simply
+    // passing behavior:"auto" is not enough: per spec "auto" defers to the
+    // scrolling box's own `scroll-behavior` CSS property, and this site sets
+    // `html { scroll-behavior: smooth }` globally - so it still animates
+    // unless that CSS property is overridden for the moment of the jump.
+    var instant = Boolean(options && options.instant) || prefersReducedMotion();
+    if (instant) {
+      var root = document.documentElement;
+      var previous = root.style.scrollBehavior;
+      root.style.scrollBehavior = "auto";
+      element.scrollIntoView({ behavior: "auto", block: "start" });
+      root.style.scrollBehavior = previous;
+      return;
+    }
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function formatClock(totalSeconds) {
@@ -110,6 +127,23 @@
     return option ? option.id + ". " + option.text : optionId;
   }
 
+  /**
+   * " - <amount> <ISO currency code>" for a genuinely priced offer, else "".
+   * Never shown for a free coupon (discountPrice "0") so a fully-free offer
+   * is never mislabeled as paid. No assumed currency symbol, since a
+   * source-market price isn't necessarily the visitor's local price.
+   * Mirrors price_suffix() in scripts/render_site.py exactly - keep both in
+   * sync if this changes. Shared here since both runners show a CTA price.
+   */
+  function priceSuffix(offer) {
+    offer = offer || {};
+    var offerType = offer.offerType || "";
+    var price = String(offer.discountPrice || "").trim();
+    var currency = String(offer.currency || "").trim();
+    var showsPrice = (offerType === "best_price" || offerType === "custom_price") && price && price !== "0";
+    return showsPrice ? " — " + price + " " + currency : "";
+  }
+
   globalObject.CertShieldDomUtils = {
     el: el,
     html: html,
@@ -119,6 +153,7 @@
     formatClock: formatClock,
     safeStorage: safeStorage,
     appendExplanationSections: appendExplanationSections,
-    labelForOption: labelForOption
+    labelForOption: labelForOption,
+    priceSuffix: priceSuffix
   };
 })(typeof window !== "undefined" ? window : this);

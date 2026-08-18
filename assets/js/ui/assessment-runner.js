@@ -945,8 +945,22 @@
       link.href = cta.url;
       link.target = "_blank";
       link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
-      link.textContent = cta.kind === "coupon" ? "Claim Today's Offer & Start Full Practice ↗" : "Start Full Practice on Udemy ↗";
+      link.textContent =
+        cta.kind === "coupon"
+          ? "Claim Today's Offer & Start Full Practice" + domUtils.priceSuffix(offer) + " ↗"
+          : "Start Full Practice on Udemy ↗";
       wrapper.appendChild(link);
+
+      var referralUrl = offer.instructorReferralUrl;
+      if (cta.kind === "coupon" && referralUrl && referralUrl !== cta.url) {
+        var referralLink = document.createElement("a");
+        referralLink.className = "button button-text assessment-cta-secondary";
+        referralLink.href = referralUrl;
+        referralLink.target = "_blank";
+        referralLink.rel = "noopener";
+        referralLink.textContent = "Prefer to skip the free-seat cap? Enroll directly ↗";
+        wrapper.appendChild(referralLink);
+      }
     } else {
       wrapper.appendChild(
         el("p", "assessment-cta-missing", "A verified course link isn't configured for this assessment yet.")
@@ -969,10 +983,41 @@
 
   // ----------------------------------------------------------------- review
 
+  var REVIEW_EXPLANATION_PROMPTS = {
+    correct: "Show full explanation",
+    incorrect: "Show full explanation — see where this went wrong",
+    unanswered: "Show full explanation — see what you missed"
+  };
+
+  /**
+   * The review screen holds all 30 questions' full 10-section explanations
+   * at once, which made it a very long, one-directional scroll with no way
+   * back to the results/CTA short of scrolling all the way up. Two fixes,
+   * both reusing patterns already proven elsewhere on this site: each
+   * question's explanation collapses behind a <details class="disclosure">
+   * (same component as the homepage/directory "coming soon" sections) so
+   * the default view is a short, scannable list of just stem + your/correct
+   * answer + state; and a sticky toolbar (filters + a live count + a "back
+   * to results" exit) stays reachable at any scroll depth, positioned just
+   * below the site's own sticky header.
+   */
   AssessmentRunner.prototype.renderReview = function renderReview(filterKey) {
     var self = this;
     var scoreResult = this.lastResult.scoreResult;
     this.reviewHost.innerHTML = "";
+
+    var toolbar = el("div", "assessment-review-toolbar");
+    var toolbarTop = el("div", "assessment-review-toolbar-row");
+    var backButton = el("button", "assessment-review-back", "↑ Back to results");
+    backButton.type = "button";
+    backButton.addEventListener("click", function () {
+      scrollToElement(self.resultsPanel, { instant: true });
+    });
+    toolbarTop.appendChild(backButton);
+    var countText = el("p", "assessment-review-count");
+    countText.setAttribute("aria-live", "polite");
+    toolbarTop.appendChild(countText);
+    toolbar.appendChild(toolbarTop);
 
     var filterBar = el("div", "assessment-review-filters");
     [
@@ -991,7 +1036,8 @@
       });
       filterBar.appendChild(button);
     });
-    this.reviewHost.appendChild(filterBar);
+    toolbar.appendChild(filterBar);
+    this.reviewHost.appendChild(toolbar);
 
     var details = scoreResult.details.filter(function matches(detail) {
       switch (filterKey) {
@@ -1009,6 +1055,8 @@
           return true;
       }
     });
+
+    countText.textContent = "Showing " + details.length + " of " + scoreResult.details.length + " questions";
 
     if (!details.length) {
       this.reviewHost.appendChild(el("p", "", "No questions match this filter."));
@@ -1048,7 +1096,14 @@
         el("p", "assessment-review-state", detail.state + " · confidence: " + detail.confidenceClass)
       );
 
-      domUtils.appendExplanationSections(article, question);
+      var explanationDetails = el("details", "disclosure assessment-review-explanation");
+      var summary = el("summary");
+      summary.appendChild(el("span", "", REVIEW_EXPLANATION_PROMPTS[detail.state] || REVIEW_EXPLANATION_PROMPTS.correct));
+      explanationDetails.appendChild(summary);
+      var explanationBody = el("div", "disclosure-grid");
+      explanationDetails.appendChild(explanationBody);
+      domUtils.appendExplanationSections(explanationBody, question);
+      article.appendChild(explanationDetails);
 
       self.reviewHost.appendChild(article);
     });
