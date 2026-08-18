@@ -319,6 +319,9 @@ h3 {
 
 .hero-art img {
   width: min(100%, 19rem);
+  height: auto; /* the img's width="1536" height="1536" HTML attributes otherwise win over
+    aspect-ratio for the height, since aspect-ratio only fills in a dimension that's
+    actually auto - without this the box renders 295px wide by 1536px tall. */
   aspect-ratio: 1;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 2rem;
