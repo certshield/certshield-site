@@ -199,6 +199,7 @@
 
     function apply() {
       const queryWords = normalise(search ? search.value : '').split(/\s+/).filter(Boolean);
+      const isActiveSearch = queryWords.length > 0 || Object.keys(state).some(function (name) { return state[name] && state[name] !== 'all'; });
       let visible = 0;
       let runtimeAvailable = 0;
 
@@ -217,7 +218,21 @@
         });
         const show = matchesText && matchesGroups && item.getAttribute('data-runtime-expired') !== 'true';
         item.hidden = !show;
-        if (show) visible += 1;
+        if (show) {
+          visible += 1;
+          // Only auto-open for a genuine active search/filter match inside a
+          // collapsed <details> (e.g. the "coming soon" disclosure) - a
+          // closed <details> hides its content regardless of the item's own
+          // hidden state, so a real match must still reach the person who
+          // searched for it. With no active search, "visible" just means
+          // "not filtered out", which must NOT force every disclosure open
+          // on a plain page load. Never auto-closes: opening is a one-way
+          // reveal so nothing collapses while someone's reading it.
+          if (isActiveSearch) {
+            const details = item.closest('details');
+            if (details && !details.open) details.open = true;
+          }
+        }
       });
 
       if (count) count.textContent = visible + (visible === 1 ? ' result' : ' results');

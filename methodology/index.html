@@ -57,12 +57,14 @@
       <p>How CertShield Practice builds, scores and safeguards every 30-question diagnostic.</p>
     </div></section>
     <section class="section section-white"><div class="wrap reading-width">
+      <h2>Two Ways to Practice</h2>
+      <p>Every assessment offers a choice before you begin. <strong>Diagnostic Mode</strong> is the honest, evidence-based readiness check described on this page: you answer blind, then get a domain-level readiness signal. <strong>Study Mode</strong> is a lower-pressure alternative for learners who aren't ready to be tested cold — each question reveals its full explanation immediately after you attempt it, so you still get the retrieval-practice benefit of answering first, just without a score on the line. Study Mode never computes or shows a readiness band; it reports only what you covered and how accurate you were, so its output can never be mistaken for Diagnostic Mode's result. Everything below this section describes Diagnostic Mode specifically.</p>
       <h2>How Questions Are Created</h2>
-      <p>Every question is original CertShield content, written from verified official certification blueprints and documentation — never copied exam content, leaked material or recalled questions. Each question is reviewed for answer accuracy, selection cardinality, and current product terminology before publication, with a visible technical-validation date on every assessment page.</p>
+      <p>Every question is original CertShield content, written from verified official certification blueprints and documentation — never copied exam content, leaked material or recalled questions. Each question is reviewed for answer accuracy, selection cardinality, and current product terminology before publication, with a visible technical-validation date on every assessment page. Both modes draw from the exact same question set.</p>
       <h2>How Scoring Works</h2>
       <p>You can submit whenever you want — there's no requirement to finish all 30 questions first. Only questions you actually answered are scored: <strong>accuracy is correct ÷ attempted</strong>, never penalized by questions you left unanswered. A multi-answer question is correct only when your selected set exactly matches the correct set — extra or missing selections make it incorrect, the same as if you hadn't answered.</p>
       <p>Alongside accuracy, your results also show <strong>coverage</strong> — how much of the 30-question set you actually attempted. Coverage doesn't change your accuracy number, but it moderates how much confidence your readiness band claims: see below.</p>
-      <h2 id="readiness">Readiness Bands</h2>
+      <h2 id="readiness">Readiness Bands (Diagnostic Mode only)</h2>
       <div class="assessment-table-scroll"><table class="assessment-domain-table">
         <thead><tr><th scope="col">Accuracy on attempted questions</th><th scope="col">Readiness signal</th></tr></thead>
         <tbody>
@@ -102,8 +104,11 @@
   </footer>
 
   <script src="../assets/js/core/assessment-scoring.js" defer></script>
+  <script src="../assets/js/core/dom-utils.js" defer></script>
   <script src="../assets/js/site.js" defer></script>
   <script src="../assets/js/offers.js" defer></script>
   <script src="../assets/js/ui/assessment-runner.js" defer></script>
+  <script src="../assets/js/ui/study-mode-runner.js" defer></script>
+  <script src="../assets/js/ui/assessment-mode-select.js" defer></script>
 </body>
 </html>

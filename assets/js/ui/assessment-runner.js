@@ -1,9 +1,12 @@
 /**
- * CertShield diagnostic-assessment runner UI.
+ * CertShield diagnostic-assessment runner UI ("Diagnostic Mode").
  *
  * DOM contract
  * ------------
- * Root: [data-assessment-runner] containing a JSON payload script:
+ * Instantiated on demand by assets/js/ui/assessment-mode-select.js once the
+ * learner picks Diagnostic Mode (never self-initializes on page load — the
+ * mode selector owns that). Root: [data-assessment-runner] containing a
+ * JSON payload script:
  *   <script type="application/json" data-assessment-payload>{...}</script>
  *
  * Payload shape: { slug, contentVersion, courseId, offer, meta, questions[] }
@@ -16,15 +19,23 @@
  * Submission model: the learner can submit at any time, from any point in
  * the assessment. Only questions actually answered are scored — there is no
  * "you must finish" gate. Depends on window.CertShieldAssessmentScoring
- * (assets/js/core/assessment-scoring.js).
+ * (assets/js/core/assessment-scoring.js) and window.CertShieldDomUtils
+ * (assets/js/core/dom-utils.js).
  */
 (function () {
   "use strict";
 
   var scoring = window.CertShieldAssessmentScoring;
-  if (!scoring) return;
+  var domUtils = window.CertShieldDomUtils;
+  if (!scoring || !domUtils) return;
 
-  var SVG_NS = "http://www.w3.org/2000/svg";
+  var el = domUtils.el;
+  var html = domUtils.html;
+  var svgEl = domUtils.svgEl;
+  var scrollToElement = domUtils.scrollToElement;
+  var formatClock = domUtils.formatClock;
+  var safeStorage = domUtils.safeStorage;
+
   var STORAGE_PREFIX = "certshield.assessment.v2.";
   var HISTORY_PREFIX = "certshield.assessment.history.v2.";
   var MAX_HISTORY = 3;
@@ -50,57 +61,9 @@
     unclassified: { label: "No confidence given", hint: "Confidence wasn't marked", status: "muted" }
   };
 
-  function el(tag, className, text) {
-    var node = document.createElement(tag);
-    if (className) node.className = className;
-    if (typeof text !== "undefined") node.textContent = text;
-    return node;
-  }
-
-  function html(node, htmlString) {
-    node.innerHTML = htmlString || "";
-    return node;
-  }
-
-  function svgEl(tag, attrs) {
-    var node = document.createElementNS(SVG_NS, tag);
-    Object.keys(attrs || {}).forEach(function setAttr(key) {
-      node.setAttribute(key, attrs[key]);
-    });
-    return node;
-  }
-
-  function prefersReducedMotion() {
-    return Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }
-
-  /** So the learner never has to hunt for the question or the next action. */
-  function scrollToElement(element) {
-    if (!element) return;
-    element.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
-  }
-
-  function formatClock(totalSeconds) {
-    var seconds = Math.max(0, Math.round(totalSeconds));
-    var minutes = Math.floor(seconds / 60);
-    var remainder = seconds % 60;
-    return String(minutes) + ":" + (remainder < 10 ? "0" : "") + String(remainder);
-  }
-
   function parseDurationMinutes(text) {
     var match = /(\d+)\s*minute/i.exec(text || "");
     return match ? Number(match[1]) : 60;
-  }
-
-  function safeStorage() {
-    try {
-      var testKey = "__certshield_test__";
-      window.localStorage.setItem(testKey, "1");
-      window.localStorage.removeItem(testKey);
-      return window.localStorage;
-    } catch (error) {
-      return null;
-    }
   }
 
   function AssessmentRunner(root) {
@@ -1066,19 +1029,11 @@
       article.appendChild(stem);
 
       var yourAnswer = detail.selectedAnswers.length
-        ? detail.selectedAnswers.map(function labelFor(id) {
-            var option = question.options.find(function findOption(candidate) {
-              return candidate.id === id;
-            });
-            return option ? option.id + ". " + option.text : id;
-          }).join("; ")
+        ? detail.selectedAnswers.map(function label(id) { return domUtils.labelForOption(question, id); }).join("; ")
         : "Not answered";
-      var correctAnswer = detail.correctAnswers.map(function labelFor(id) {
-        var option = question.options.find(function findOption(candidate) {
-          return candidate.id === id;
-        });
-        return option ? option.id + ". " + option.text : id;
-      }).join("; ");
+      var correctAnswer = detail.correctAnswers
+        .map(function label(id) { return domUtils.labelForOption(question, id); })
+        .join("; ");
 
       article.appendChild(el("p", "", "Your answer: " + yourAnswer));
       article.appendChild(el("p", "", "Correct answer: " + correctAnswer));
@@ -1086,59 +1041,14 @@
         el("p", "assessment-review-state", detail.state + " · confidence: " + detail.confidenceClass)
       );
 
-      var sectionOrder = [
-        ["examReasoningExplanation", "Exam Reasoning Explanation"],
-        ["keyExamClues", "Key Exam Clues"],
-        ["whyThisIsCorrect", "Why This Is Correct"],
-        ["whyOtherOptionsAreNotBestFit", "Why the Other Options Are Not the Best Fit"],
-        ["examTrap", "Exam Trap"],
-        ["foundationConcept", "Foundation Concept"],
-        ["realWorldConnection", "Real-World Connection"],
-        ["memoryHook", "Memory Hook"],
-        ["thirtySecondTakeaway", "30-Second Exam Takeaway"]
-      ];
-      sectionOrder.forEach(function addSection(pair) {
-        var body = question.sections && question.sections[pair[0]];
-        if (!body) return;
-        article.appendChild(el("h5", "", pair[1]));
-        var container = el("div", "");
-        html(container, body);
-        article.appendChild(container);
-      });
-
-      if (question.officialReferences && question.officialReferences.length) {
-        article.appendChild(el("h5", "", "Official References"));
-        var refList = document.createElement("ul");
-        question.officialReferences.forEach(function addRef(reference) {
-          var li = document.createElement("li");
-          var link = document.createElement("a");
-          link.href = reference.url;
-          link.target = "_blank";
-          link.rel = "noopener";
-          link.textContent = reference.title;
-          li.appendChild(link);
-          refList.appendChild(li);
-        });
-        article.appendChild(refList);
-      }
+      domUtils.appendExplanationSections(article, question);
 
       self.reviewHost.appendChild(article);
     });
   };
 
-  function initAll() {
-    Array.from(document.querySelectorAll("[data-assessment-runner]")).forEach(function initOne(root) {
-      if (root.getAttribute("data-assessment-initialized") === "true") return;
-      root.setAttribute("data-assessment-initialized", "true");
-      new AssessmentRunner(root);
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initAll);
-  } else {
-    initAll();
-  }
-
-  window.CertShieldAssessmentRunner = { AssessmentRunner: AssessmentRunner, initAll: initAll };
+  // Does not self-initialize: assets/js/ui/assessment-mode-select.js is the
+  // single entry point that instantiates this once the learner picks
+  // Diagnostic Mode, so both runners can share one mode-choice screen.
+  window.CertShieldAssessmentRunner = { AssessmentRunner: AssessmentRunner };
 }());

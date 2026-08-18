@@ -442,6 +442,124 @@
     return { available: false, reason: "missing_mapping", url: null, kind: null };
   }
 
+  // ------------------------------------------------------------------
+  // Study Mode: attempt-then-reveal learning, no readiness band. These
+  // functions are pure and deliberately separate from the Diagnostic Mode
+  // functions above — Study Mode never computes or implies a readiness
+  // signal, only a coverage/accuracy summary, so the two experiences can
+  // never be confused with each other.
+  // ------------------------------------------------------------------
+
+  var STUDY_NUDGE_MIN_QUESTIONS = 3; // don't nudge before the learner has found their footing
+  var STUDY_NUDGE_COOLDOWN = 5; // minimum questions between any two nudges
+
+  /**
+   * Decide whether to show an inline conversion nudge after this question's
+   * reveal, and which one. Responds to real signal (a real milestone with a
+   * real coupon deadline outranks everything; a wrong answer or a streak
+   * outranks a generic reminder) rather than firing on a flat timer alone.
+   * Returns null when nothing should show. Pure — the caller owns all
+   * cooldown/streak state and passes it in.
+   *
+   * context: {
+   *   questionsAnswered, totalQuestions, questionsSinceLastNudge,
+   *   lastState ('correct'|'incorrect'), streak (consecutive correct),
+   *   offer ({ startAt, endAt } or falsy)
+   * }
+   */
+  function selectStudyNudge(context) {
+    var answered = context.questionsAnswered || 0;
+    var total = context.totalQuestions || 0;
+    if (answered < STUDY_NUDGE_MIN_QUESTIONS || total === 0) return null;
+
+    var milestoneHit = isAtCoverageMilestone(answered, total);
+    var offerNote = milestoneHit ? realOfferDeadlineNote(context.offer) : null;
+    if (milestoneHit && offerNote) {
+      return {
+        key: "milestone",
+        headline: "You're " + Math.round((answered / total) * 100) + "% through the free set.",
+        body: offerNote
+      };
+    }
+
+    if (context.questionsSinceLastNudge < STUDY_NUDGE_COOLDOWN) return null;
+
+    if (context.lastState === "incorrect") {
+      return {
+        key: "need",
+        headline: "Right where practice pays off.",
+        body: "This is exactly the kind of scenario the full course drills — a worked explanation for every question, not just this free set."
+      };
+    }
+    if ((context.streak || 0) >= 3) {
+      return {
+        key: "confidence",
+        headline: "You're on a roll.",
+        body: "You clearly get this pattern — see it applied across the full course's complete question bank."
+      };
+    }
+    return {
+      key: "generic",
+      headline: "Enjoying the explanations?",
+      body: "This free set is a preview — the full course goes much deeper on every domain."
+    };
+  }
+
+  function isAtCoverageMilestone(answered, total) {
+    var third = Math.round(total / 3);
+    var twoThirds = Math.round((total * 2) / 3);
+    return answered === third || answered === twoThirds;
+  }
+
+  /** Only ever states a real, already-known coupon deadline — never invents urgency. */
+  function realOfferDeadlineNote(offer) {
+    if (!offer || !offer.endAt) return null;
+    var end = new Date(offer.endAt);
+    if (isNaN(end.getTime())) return null;
+    var now = new Date();
+    var daysLeft = Math.ceil((end.getTime() - now.getTime()) / (24 * 60 * 60 * 1000));
+    if (daysLeft <= 0) return null;
+    return "Today's offer on the full course ends in " + daysLeft + " day" + (daysLeft === 1 ? "" : "s") + ".";
+  }
+
+  /**
+   * A warm, factual close-out for a Study Mode session — coverage and
+   * accuracy only, never a readiness label, so it can never be mistaken
+   * for the Diagnostic Mode's honest readiness signal.
+   */
+  function summarizeStudySession(scoreResult) {
+    var accuracy = scoreResult.accuracyPercentage;
+    var ctaFraming =
+      scoreResult.attempted === 0
+        ? "start"
+        : accuracy >= 70
+        ? "strong"
+        : "building";
+    return {
+      attempted: scoreResult.attempted,
+      correct: scoreResult.correct,
+      total: scoreResult.total,
+      accuracyPercentage: accuracy,
+      coveragePercentage: scoreResult.coveragePercentage,
+      ctaFraming: ctaFraming
+    };
+  }
+
+  var STUDY_CTA_COPY = {
+    start: {
+      heading: "Ready to go deeper?",
+      body: "The full course walks through every domain with the same worked explanations, at your own pace."
+    },
+    building: {
+      heading: "You now know exactly what to study next.",
+      body: "That clarity is the hard part. The full course is built to take you from here to exam-ready, one concept at a time."
+    },
+    strong: {
+      heading: "You're picking this up fast.",
+      body: "Keep the momentum going — the full course has the complete question bank and every domain in depth."
+    }
+  };
+
   return {
     READINESS_BANDS: READINESS_BANDS,
     normalizeAnswerSet: normalizeAnswerSet,
@@ -455,6 +573,9 @@
     compareToPreviousAttempt: compareToPreviousAttempt,
     resolveCta: resolveCta,
     bandByKey: bandByKey,
-    bandByRank: bandByRank
+    bandByRank: bandByRank,
+    selectStudyNudge: selectStudyNudge,
+    summarizeStudySession: summarizeStudySession,
+    STUDY_CTA_COPY: STUDY_CTA_COPY
   };
 });
