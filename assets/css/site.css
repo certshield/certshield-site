@@ -2179,6 +2179,22 @@ button.button {
   text-transform: capitalize;
 }
 
+.assessment-review-answer-label {
+  font-weight: 800;
+}
+
+.assessment-review-answer.is-correct .assessment-review-answer-label {
+  color: var(--success);
+}
+
+.assessment-review-answer.is-incorrect .assessment-review-answer-label {
+  color: var(--danger);
+}
+
+.assessment-review-answer.is-unanswered .assessment-review-answer-label {
+  color: var(--gold-dark);
+}
+
 @media (max-width: 46rem) {
   .assessment-navigator {
     grid-template-columns: repeat(auto-fill, minmax(2rem, 1fr));

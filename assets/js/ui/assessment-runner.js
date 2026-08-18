@@ -1035,8 +1035,15 @@
         .map(function label(id) { return domUtils.labelForOption(question, id); })
         .join("; ");
 
-      article.appendChild(el("p", "", "Your answer: " + yourAnswer));
-      article.appendChild(el("p", "", "Correct answer: " + correctAnswer));
+      var yourAnswerLine = el("p", "assessment-review-answer is-" + detail.state);
+      yourAnswerLine.appendChild(el("span", "assessment-review-answer-label", "Your answer:"));
+      yourAnswerLine.appendChild(document.createTextNode(" " + yourAnswer));
+      article.appendChild(yourAnswerLine);
+
+      var correctAnswerLine = el("p", "assessment-review-answer is-correct");
+      correctAnswerLine.appendChild(el("span", "assessment-review-answer-label", "Correct answer:"));
+      correctAnswerLine.appendChild(document.createTextNode(" " + correctAnswer));
+      article.appendChild(correctAnswerLine);
       article.appendChild(
         el("p", "assessment-review-state", detail.state + " · confidence: " + detail.confidenceClass)
       );
