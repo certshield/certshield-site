@@ -22,7 +22,7 @@ CertShield Practice is the legitimate alternative. Every question is **original 
 > [!TIP]
 > - **Highly rated on Udemy.** The full-length practice exams behind every free diagnostic below are highly rated, best-selling Udemy courses from the same instructor — see the live rating on each course page.
 > - **Technically validated, with a visible date.** Every free assessment states exactly when it was last checked against current official certification documentation, right on its page — see the <a href="https://practice.certshield.co.in/methodology/" target="_blank" rel="noopener">assessment methodology</a> for exactly how scoring and validation work.
-> - **Built by a real, credentialed instructor.** Maintained by <a href="https://www.linkedin.com/in/priya-certshield-certifications/" target="_blank" rel="noopener">Priya D</a> — connect on LinkedIn.
+> - **Built & Maintained by ** <a href="https://www.linkedin.com/in/priya-certshield-certifications/" target="_blank" rel="noopener">Priya D</a> — connect on LinkedIn.
 > - **Nothing tracked.** No signup. Progress saves only in your own browser.
 
 ## Free practice tests available now
