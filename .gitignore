@@ -74,5 +74,9 @@ data/
 docs/
 AGENTS.md
 MAINTENANCE.md
-README.md
 CertShield_Modular_Diagnostic_Assessment_Framework_Reviewed_Prompt.md
+
+# README.md is deliberately tracked (not gitignored): it's GitHub's own
+# repo landing page and a real public-discovery surface for search/GitHub
+# topics, unlike the local-only build tooling above - see MAINTENANCE.md /
+# docs/ for the developer-facing equivalent, which stay local-only.
