@@ -1,8 +1,13 @@
 # CertShield Practice
 
-**Free certification mock exams and practice tests** — original, explanation-led practice questions for Databricks, AI, Cloud, Data, and Security certifications. No signup, no paywall on the diagnostic, no leaked or recalled exam content.
+**Free certification mock exams and practice tests** — original, explanation-led practice questions for Databricks, AI, Cloud, Data, and Security certifications, built on ethical practice.
 
-### [Start a Free 30-Question Diagnostic → practice.certshield.co.in](https://practice.certshield.co.in/)
+<a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Practice-100%25%20Free-2ea44f" alt="100% Free"></a>
+<a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Signup-Not%20Required-0366d6" alt="No Signup Required"></a>
+<a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Certifications-5%20Live-6f42c1" alt="5 Certifications Live"></a>
+<a href="https://practice.certshield.co.in/methodology/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Questions-Original%20%26%20Explained-d73a49" alt="Original & Explained Questions"></a>
+
+### <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener">Start a Free 30-Question Diagnostic → practice.certshield.co.in</a>
 
 ---
 
@@ -14,26 +19,28 @@ CertShield Practice is the legitimate alternative. Every question is **original 
 
 ## Trusted, not just free
 
-- **Highly rated on Udemy.** The full-length practice exams behind every free diagnostic below are highly rated, best-selling Udemy courses from the same instructor — see the live rating on each course page.
-- **Technically validated, with a visible date.** Every free assessment states exactly when it was last checked against current official certification documentation, right on its page — see the [assessment methodology](https://practice.certshield.co.in/methodology/) for exactly how scoring and validation work.
-- **Built by a real, named instructor.** Maintained by [Priya D](https://www.udemy.com/user/priya-d-66/) — view her full public instructor profile and course catalog directly on Udemy.
-- **Nothing tracked.** No signup, no account, no email. Progress saves only in your own browser.
+> [!TIP]
+> - **Highly rated on Udemy.** The full-length practice exams behind every free diagnostic below are highly rated, best-selling Udemy courses from the same instructor — see the live rating on each course page.
+> - **Technically validated, with a visible date.** Every free assessment states exactly when it was last checked against current official certification documentation, right on its page — see the <a href="https://practice.certshield.co.in/methodology/" target="_blank" rel="noopener">assessment methodology</a> for exactly how scoring and validation work.
+> - **Built by a real, credentialed instructor.** Maintained by <a href="https://www.linkedin.com/in/priya-certshield-certifications/" target="_blank" rel="noopener">Priya D</a> — connect on LinkedIn.
+> - **Nothing tracked.** No signup. Progress saves only in your own browser.
 
 ## Free practice tests available now
 
-Each free diagnostic is 30 original questions with domain-level scoring and a fully explained answer for every question. Prefer to go straight to the complete question bank? The instructor links go to the same certification's full-length Udemy practice exam.
+Each free diagnostic is 30 original questions with domain-level scoring and a fully explained answer for every question. Prefer to go straight to the complete question bank? The Udemy links go to the same certification's full-length practice exam.
 
 | Certification | Free 30-Question Diagnostic | Full-Length Udemy Practice Exam |
 |---|---|---|
-| Databricks Certified Generative AI Engineer Associate | [Start Free →](https://practice.certshield.co.in/assessments/databricks-certified-generative-ai-engineer-associate/) | [View on Udemy →](https://www.udemy.com/course/databricks-generative-ai-engineer-associate-practice-exam/?referralCode=23D9FF786324892DA1F7) |
-| Databricks Certified Machine Learning Associate | [Start Free →](https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-associate/) | [View on Udemy →](https://www.udemy.com/course/databricks-machine-learningml-associate-practice-exams/?referralCode=08E0FC1AC514223FCDD9) |
-| Databricks Certified Machine Learning Professional | [Start Free →](https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-professional/) | [View on Udemy →](https://www.udemy.com/course/databricks-machine-learning-professional-practice-test/?referralCode=E9381C4C52F7E97BCFDD) |
-| Databricks Certified Data Engineer Associate | [Start Free →](https://practice.certshield.co.in/assessments/databricks-certified-data-engineer-associate/) | [View on Udemy →](https://www.udemy.com/course/pass-databricks-data-engineer-associate-practice-exams/?referralCode=467A5CC1E4155EFFCA05) |
-| Databricks Certified Data Engineer Professional | [Start Free →](https://practice.certshield.co.in/assessments/databricks-certified-data-engineer-professional/) | [View on Udemy →](https://www.udemy.com/course/ace-databricks-de-data-eng-pro-exam-practice-tests/?referralCode=592A53A2B00BC1573C28) |
+| Databricks Certified Generative AI Engineer Associate | <a href="https://practice.certshield.co.in/assessments/databricks-certified-generative-ai-engineer-associate/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-generative-ai-engineer-associate-practice-exam/?referralCode=23D9FF786324892DA1F7" target="_blank" rel="noopener">View on Udemy →</a> |
+| Databricks Certified Machine Learning Associate | <a href="https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-associate/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-machine-learningml-associate-practice-exams/?referralCode=08E0FC1AC514223FCDD9" target="_blank" rel="noopener">View on Udemy →</a> |
+| Databricks Certified Machine Learning Professional | <a href="https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-professional/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-machine-learning-professional-practice-test/?referralCode=E9381C4C52F7E97BCFDD" target="_blank" rel="noopener">View on Udemy →</a> |
+| Databricks Certified Data Engineer Associate | <a href="https://practice.certshield.co.in/assessments/databricks-certified-data-engineer-associate/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/pass-databricks-data-engineer-associate-practice-exams/?referralCode=467A5CC1E4155EFFCA05" target="_blank" rel="noopener">View on Udemy →</a> |
+| Databricks Certified Data Engineer Professional | <a href="https://practice.certshield.co.in/assessments/databricks-certified-data-engineer-professional/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/ace-databricks-de-data-eng-pro-exam-practice-tests/?referralCode=592A53A2B00BC1573C28" target="_blank" rel="noopener">View on Udemy →</a> |
 
-More certifications — AWS, Google Cloud, (ISC)², CompTIA, and others — are in progress; see the [full directory](https://practice.certshield.co.in/assessments/) for what's live and what's coming soon.
+More certifications — AWS, Google Cloud, (ISC)², CompTIA, and others — are in progress; see the <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener">full directory</a> for what's live and what's coming soon.
 
-> **Looking for a current discount?** Instructor coupons rotate monthly. Check **[Current Community Offers](https://practice.certshield.co.in/offers/)** for the live, up-to-date price on any course above before you enroll.
+> [!NOTE]
+> **Looking for a current discount?** Instructor coupons rotate monthly. Check <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">Current Community Offers</a> for the live, up-to-date price on any course above before you enroll.
 
 ## Two ways to practice
 
@@ -55,10 +62,6 @@ No. The 30-question diagnostic is free with no signup; progress saves only in yo
 
 **What's the difference between the free diagnostic and the Udemy course?**
 The free diagnostic is 30 questions built to give an honest readiness signal. The full-length Udemy practice exam from the same instructor covers the complete question bank in much greater depth.
-
-## About this repository
-
-This repository is the static site (HTML/CSS/JS) that GitHub Pages serves at `practice.certshield.co.in`. It's generated by a Python build pipeline maintained outside of what's tracked here; the published pages in this repo are the deploy output, not the source templates.
 
 ## Disclaimer
 
