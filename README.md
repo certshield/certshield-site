@@ -7,6 +7,9 @@
 <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Certifications-5%20Live-6f42c1" alt="5 Certifications Live"></a>
 <a href="https://practice.certshield.co.in/methodology/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Questions-Original%20%26%20Explained-d73a49" alt="Original & Explained Questions"></a>
 
+> [!TIP]
+> **Two things learners come here for: it's free, and it gives back.** Start with the **30-question diagnostic below — free, no signup, right now.** When you're ready for the full practice exam, check today's <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">Community Offers</a> — discounted pricing the instructor sets aside specifically for learners who practice here first.
+
 ### <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener">Start a Free 30-Question Diagnostic → practice.certshield.co.in</a>
 
 ---
@@ -40,7 +43,7 @@ Each free diagnostic is 30 original questions with domain-level scoring and a fu
 More certifications — AWS, Google Cloud, (ISC)², CompTIA, and others — are in progress; see the <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener">full directory</a> for what's live and what's coming soon.
 
 > [!NOTE]
-> **Looking for a current discount?** Instructor coupons rotate monthly. Check <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">Current Community Offers</a> for the live, up-to-date price on any course above before you enroll.
+> **Already picked your certification?** Coupons rotate monthly — check <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">Current Community Offers</a> for today's price before you enroll.
 
 ## Two ways to practice
 
