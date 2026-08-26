@@ -32,7 +32,10 @@ InstructorReferral-URL-Sheet*.xlsx
 # Input C: assessment source Markdown (matches the
 # "<something>-30-question-practice-set.md" naming convention from
 # MAINTENANCE.md; the generated data/assessments/<slug>.json is what the
-# site actually serves)
+# site actually serves). Kept in 30-free-questions/ to stay out of the repo
+# root; the whole folder is ignored (belt-and-suspenders with the filename
+# pattern below, which still covers a stray file dropped at the root).
+30-free-questions/
 *30-question-practice-set*.md
 
 # Per-run build audit logs: one JSON per build, accumulate quickly, not
