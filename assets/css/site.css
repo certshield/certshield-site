@@ -415,6 +415,41 @@ button.button {
   cursor: not-allowed;
 }
 
+.sibling-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.sibling-links li {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+}
+
+.sibling-links a {
+  display: inline-block;
+  padding: 0.55rem 0.9rem;
+  font-weight: 700;
+  color: var(--brand-700);
+  text-decoration: none;
+}
+
+.sibling-links a:hover {
+  color: var(--brand-950);
+  text-decoration: underline;
+}
+
+.sibling-links span {
+  padding-right: 0.9rem;
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.88em;
+}
+
 .trust-strip {
   border-bottom: 1px solid var(--line);
   background: #fff;
