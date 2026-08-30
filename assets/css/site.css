@@ -716,6 +716,19 @@ button.button {
   color: #4c6260;
 }
 
+.exam-facts-domains {
+  margin-top: 1.5rem;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.55rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
 .empty-state,
 .notice {
   border: 1px solid var(--line);
