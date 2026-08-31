@@ -1,10 +1,10 @@
 # CertShield Practice
 
-**Free certification mock exams and practice tests** — original, explanation-led practice questions for Databricks, Anthropic Claude, Google Cloud, NVIDIA, and CompTIA certifications, built on ethical practice.
+**Free certification mock exams and practice tests** — original, explanation-led practice questions for Databricks, Anthropic Claude, Google Cloud, NVIDIA, CompTIA, and IAPP certifications, built on ethical practice.
 
 <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Practice-100%25%20Free-2ea44f" alt="100% Free"></a>
 <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Signup-Not%20Required-0366d6" alt="No Signup Required"></a>
-<a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Certifications-11%20Live-6f42c1" alt="11 Certifications Live"></a>
+<a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Certifications-12%20Live-6f42c1" alt="12 Certifications Live"></a>
 <a href="https://practice.certshield.co.in/methodology/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Questions-Original%20%26%20Explained-d73a49" alt="Original & Explained Questions"></a>
 
 > [!TIP]
@@ -45,6 +45,7 @@ Every free diagnostic includes domain-level scoring and a fully explained answer
 | Databricks Certified Machine Learning Associate | 30 | <a href="https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-associate/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-machine-learningml-associate-practice-exams/?referralCode=08E0FC1AC514223FCDD9" target="_blank" rel="noopener">View on Udemy →</a> |
 | Databricks Certified Machine Learning Professional | 30 | <a href="https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-professional/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-machine-learning-professional-practice-test/?referralCode=E9381C4C52F7E97BCFDD" target="_blank" rel="noopener">View on Udemy →</a> |
 | Google Cloud Generative AI Leader | 30 | <a href="https://practice.certshield.co.in/assessments/generative-ai-leader/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/google-cloud-generative-ai-leader-exam-practice-tests/?referralCode=5F7EEA76AAD96E3A7E2A" target="_blank" rel="noopener">View on Udemy →</a> |
+| IAPP Certified AI Governance Professional (AIGP) | 30 | <a href="https://practice.certshield.co.in/assessments/certified-ai-governance-professional-aigp/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/iapp-aigp-practice-exams-ai-governance-mock-tests/?referralCode=0548CF0CBFED9939A9C3" target="_blank" rel="noopener">View on Udemy →</a> |
 | NVIDIA-Certified Professional: Agentic AI (NCP-AAI) | 30 | <a href="https://practice.certshield.co.in/assessments/nvidia-certified-professional-agentic-ai/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/nvidia-ncp-aai-agentic-ai-practice-exams-prep/?referralCode=29D4DAD7FE497A0595CB" target="_blank" rel="noopener">View on Udemy →</a> |
 
 *CCAR-F has no linked full-length Udemy course yet — the free diagnostic stands on its own until one is published.*
@@ -77,4 +78,4 @@ The free diagnostic (30 questions for most certifications, 50 for CCAR-F) is bui
 
 ## Disclaimer
 
-CertShield Practice is an independent preparation resource. It is not affiliated with, endorsed by, or an official product of Databricks, Anthropic, Google Cloud, NVIDIA, CompTIA, or any other certification vendor referenced on this site. A diagnostic result is not a guarantee of exam readiness or a passing score.
+CertShield Practice is an independent preparation resource. It is not affiliated with, endorsed by, or an official product of Databricks, Anthropic, Google Cloud, NVIDIA, CompTIA, IAPP, or any other certification vendor referenced on this site. A diagnostic result is not a guarantee of exam readiness or a passing score.
