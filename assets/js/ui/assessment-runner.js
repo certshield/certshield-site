@@ -965,7 +965,7 @@
         referralLink.href = referralUrl;
         referralLink.target = "_blank";
         referralLink.rel = "noopener";
-        referralLink.textContent = "Prefer to skip the free-seat cap? Enroll directly ↗";
+        referralLink.textContent = "Free seats full? Enroll directly ↗";
         wrapper.appendChild(referralLink);
       }
     } else {

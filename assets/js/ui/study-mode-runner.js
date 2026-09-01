@@ -641,11 +641,13 @@
 
   /** The richest, highest-intent CTA moment: primary is whichever URL
    * resolveCta picks (coupon while genuinely active, else the referral).
-   * The referral is surfaced as a secondary option only when there's a
-   * real free-seat cap to skip (isFreeOfferType + offerIsCapped) — for an
-   * unlimited-redemption paid coupon there's no cap to skip, so the
-   * secondary link would just steer a learner to pay full price for no
-   * reason and is correctly omitted. */
+   * The referral is surfaced as a secondary fallback only when there's a
+   * real free-seat cap that could genuinely run out (isFreeOfferType +
+   * offerIsCapped) — for an unlimited-redemption paid coupon there's
+   * nothing to run out of, so the secondary link would just steer a
+   * learner to pay full price for no reason and is correctly omitted.
+   * Copy is framed as a fallback ("Free seats full?"), never as something
+   * a learner would want to opt into over a free seat. */
   StudyModeRunner.prototype.renderSummaryCta = function renderSummaryCta(copy, meta) {
     var offer = this.payload.offer || {};
     var cta = scoring.resolveCta(offer, Date.now());
@@ -676,7 +678,7 @@
         secondary.href = referralUrl;
         secondary.target = "_blank";
         secondary.rel = "noopener";
-        secondary.textContent = "Prefer to skip the free-seat cap? Enroll directly ↗";
+        secondary.textContent = "Free seats full? Enroll directly ↗";
         wrapper.appendChild(secondary);
       }
     } else {
