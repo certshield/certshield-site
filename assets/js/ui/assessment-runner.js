@@ -940,6 +940,9 @@
     wrapper.appendChild(el("p", "assessment-cta-body", framing));
 
     if (cta.available) {
+      var badge = domUtils.offerBadgeEl(offer, cta.kind);
+      if (badge) wrapper.appendChild(badge);
+
       var link = document.createElement("a");
       link.className = "button button-primary assessment-cta-button";
       link.href = cta.url;
@@ -947,12 +950,16 @@
       link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
       link.textContent =
         cta.kind === "coupon"
-          ? "Claim Today's Offer & Start Full Practice" + domUtils.priceSuffix(offer) + " ↗"
+          ? (domUtils.isFreeOfferType(offer.offerType) ? "Claim Your Free Seat" : "Claim Today's Offer" + domUtils.priceSuffix(offer)) +
+            " & Start Full Practice ↗"
           : "Start Full Practice on Udemy ↗";
       wrapper.appendChild(link);
 
+      var urgency = domUtils.offerUrgencyEl(offer, cta.kind);
+      if (urgency) wrapper.appendChild(urgency);
+
       var referralUrl = offer.instructorReferralUrl;
-      if (cta.kind === "coupon" && referralUrl && referralUrl !== cta.url) {
+      if (cta.kind === "coupon" && referralUrl && referralUrl !== cta.url && domUtils.isFreeOfferType(offer.offerType) && domUtils.offerIsCapped(offer)) {
         var referralLink = document.createElement("a");
         referralLink.className = "button button-text assessment-cta-secondary";
         referralLink.href = referralUrl;

@@ -144,6 +144,83 @@
     return showsPrice ? " — " + price + " " + currency : "";
   }
 
+  /**
+   * Offer-type vocabulary shared with the friendly badge labels on the
+   * Offers page and homepage preview (render_site.py OFFER_TYPE_LABELS /
+   * OFFER_TYPE_BADGE_CLASS) - keep both in sync if this changes.
+   */
+  var OFFER_TYPE_LABELS = {
+    free_targeted: "Community Free Access",
+    free_open: "Flash Free Access",
+    best_price: "Current Udemy Best Price",
+    custom_price: "Instructor Special Price"
+  };
+  var OFFER_TYPE_BADGE_CLASS = {
+    free_targeted: "badge-free-targeted",
+    free_open: "badge-free-open",
+    best_price: "badge-best-price",
+    custom_price: "badge-custom-price"
+  };
+
+  function isFreeOfferType(offerType) {
+    return offerType === "free_open" || offerType === "free_targeted";
+  }
+
+  /** True only for a real, finite maximumRedemptions - never inferred, never fabricated. */
+  function offerIsCapped(offer) {
+    var redemptions = String((offer || {}).maximumRedemptions || "").trim();
+    return Boolean(redemptions) && redemptions.toLowerCase() !== "unlimited";
+  }
+
+  function formatOfferEndDate(endAt) {
+    if (!endAt) return "";
+    var date = new Date(endAt);
+    if (isNaN(date.getTime())) return "";
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  }
+
+  /** Shared CTA microcopy - mirrors cta_button_label() in scripts/render_site.py. */
+  function ctaButtonLabel(offer, kind) {
+    if (kind !== "coupon") return "Start Full Practice on Udemy";
+    return isFreeOfferType((offer || {}).offerType) ? "Claim Your Free Seat" : "Claim Today's Offer" + priceSuffix(offer);
+  }
+
+  /** The same green/amber/orange offer-type pill used on the Offers page and
+   * homepage preview, reused here so a learner learns the color once and
+   * recognizes it everywhere. Returns null (append nothing) when there's no
+   * active coupon to badge. */
+  function offerBadgeEl(offer, kind) {
+    if (kind !== "coupon") return null;
+    var offerType = (offer || {}).offerType || "";
+    var label = OFFER_TYPE_LABELS[offerType];
+    if (!label) return null;
+    return el("p", "offer-badge badge " + (OFFER_TYPE_BADGE_CLASS[offerType] || ""), label);
+  }
+
+  /**
+   * Honest urgency line: the real redemption cap for a free+capped offer,
+   * otherwise the real campaign end date. Never fabricates a claimed-seats
+   * counter - only maximumRedemptions and endAt from the coupon export are
+   * ever shown. Returns null when there's nothing true to say.
+   */
+  function offerUrgencyEl(offer, kind) {
+    if (kind !== "coupon") return null;
+    offer = offer || {};
+    var endText = formatOfferEndDate(offer.endAt);
+    if (isFreeOfferType(offer.offerType) && offerIsCapped(offer)) {
+      var p = el("p", "offer-urgency");
+      var strong = document.createElement("strong");
+      strong.textContent = "Only " + offer.maximumRedemptions + " free seats";
+      p.appendChild(strong);
+      if (endText) p.appendChild(document.createTextNode(" — through " + endText));
+      return p;
+    }
+    if (endText) {
+      return el("p", "offer-urgency", "Instructor pricing confirmed through " + endText + ".");
+    }
+    return null;
+  }
+
   globalObject.CertShieldDomUtils = {
     el: el,
     html: html,
@@ -154,6 +231,12 @@
     safeStorage: safeStorage,
     appendExplanationSections: appendExplanationSections,
     labelForOption: labelForOption,
-    priceSuffix: priceSuffix
+    priceSuffix: priceSuffix,
+    isFreeOfferType: isFreeOfferType,
+    offerIsCapped: offerIsCapped,
+    formatOfferEndDate: formatOfferEndDate,
+    ctaButtonLabel: ctaButtonLabel,
+    offerBadgeEl: offerBadgeEl,
+    offerUrgencyEl: offerUrgencyEl
   };
 })(typeof window !== "undefined" ? window : this);

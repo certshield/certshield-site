@@ -35,7 +35,7 @@ Every free diagnostic includes domain-level scoring and a fully explained answer
 
 | Certification | Free Questions | Free Diagnostic | Full-Length Udemy Practice Exam |
 |---|---|---|---|
-| Claude Certified Architect – Foundations (CCAR-F) | 50 | <a href="https://practice.certshield.co.in/assessments/claude-certified-architect-foundations/" target="_blank" rel="noopener">Start Free →</a> | *Full exam not yet published* |
+| Claude Certified Architect – Foundations (CCAR-F) | 50 | <a href="https://practice.certshield.co.in/assessments/claude-certified-architect-foundations/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/claude-certified-architect-foundations-practice-exams-ccar-f/?referralCode=49689E72AE99079AA7BF" target="_blank" rel="noopener">View on Udemy →</a> |
 | CompTIA SecAI+ (CY0-001) | 30 | <a href="https://practice.certshield.co.in/assessments/secai/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/comptia-secai-cy0-001-practice-exams-prep/?referralCode=BD461CBEDFB8C0D51752" target="_blank" rel="noopener">View on Udemy →</a> |
 | Databricks Certified Associate Developer for Apache Spark | 30 | <a href="https://practice.certshield.co.in/assessments/databricks-certified-associate-developer-for-apache-spark/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-spark-developer-associate-practice-exams/?referralCode=A5353D60F7F67252A582" target="_blank" rel="noopener">View on Udemy →</a> |
 | Databricks Certified Data Analyst Associate | 30 | <a href="https://practice.certshield.co.in/assessments/databricks-certified-data-analyst-associate/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-certified-data-analyst-associate-practice-tests-z/?referralCode=6EA5821EF767C84BBC55" target="_blank" rel="noopener">View on Udemy →</a> |
@@ -47,8 +47,6 @@ Every free diagnostic includes domain-level scoring and a fully explained answer
 | Google Cloud Generative AI Leader | 30 | <a href="https://practice.certshield.co.in/assessments/generative-ai-leader/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/google-cloud-generative-ai-leader-exam-practice-tests/?referralCode=5F7EEA76AAD96E3A7E2A" target="_blank" rel="noopener">View on Udemy →</a> |
 | IAPP Certified AI Governance Professional (AIGP) | 30 | <a href="https://practice.certshield.co.in/assessments/certified-ai-governance-professional-aigp/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/iapp-aigp-practice-exams-ai-governance-mock-tests/?referralCode=0548CF0CBFED9939A9C3" target="_blank" rel="noopener">View on Udemy →</a> |
 | NVIDIA-Certified Professional: Agentic AI (NCP-AAI) | 30 | <a href="https://practice.certshield.co.in/assessments/nvidia-certified-professional-agentic-ai/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/nvidia-ncp-aai-agentic-ai-practice-exams-prep/?referralCode=29D4DAD7FE497A0595CB" target="_blank" rel="noopener">View on Udemy →</a> |
-
-*CCAR-F has no linked full-length Udemy course yet — the free diagnostic stands on its own until one is published.*
 
 More certifications — AWS, additional (ISC)² and CompTIA credentials, and others — are in progress; see the <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener">full directory</a> for what's live and what's coming soon.
 

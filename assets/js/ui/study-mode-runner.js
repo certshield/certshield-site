@@ -28,7 +28,11 @@
   var safeStorage = domUtils.safeStorage;
   var appendExplanationSections = domUtils.appendExplanationSections;
   var labelForOption = domUtils.labelForOption;
-  var priceSuffix = domUtils.priceSuffix;
+  var isFreeOfferType = domUtils.isFreeOfferType;
+  var offerIsCapped = domUtils.offerIsCapped;
+  var ctaButtonLabel = domUtils.ctaButtonLabel;
+  var offerBadgeEl = domUtils.offerBadgeEl;
+  var offerUrgencyEl = domUtils.offerUrgencyEl;
 
   var STORAGE_PREFIX = "certshield.study.v1.";
   var FLAG_ICON_SVG =
@@ -527,7 +531,8 @@
       link.href = cta.url;
       link.target = "_blank";
       link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
-      link.textContent = cta.kind === "coupon" ? "See Today's Offer ↗" : "See the Full Course ↗";
+      link.textContent =
+        cta.kind === "coupon" ? (isFreeOfferType(offer.offerType) ? "See Today's Free Offer ↗" : "See Today's Offer ↗") : "See the Full Course ↗";
       card.appendChild(link);
     }
     var dismiss = el("button", "study-nudge-dismiss", "Dismiss");
@@ -635,11 +640,12 @@
   };
 
   /** The richest, highest-intent CTA moment: primary is whichever URL
-   * resolveCta picks (coupon while genuinely active, else the referral),
-   * with the referral surfaced as a clearly-framed secondary option
-   * whenever a coupon is primary and a distinct referral URL exists —
-   * "skip the free-seat cap, start immediately" is a real, honest reason
-   * for a learner to prefer it, not a revenue pitch. */
+   * resolveCta picks (coupon while genuinely active, else the referral).
+   * The referral is surfaced as a secondary option only when there's a
+   * real free-seat cap to skip (isFreeOfferType + offerIsCapped) — for an
+   * unlimited-redemption paid coupon there's no cap to skip, so the
+   * secondary link would just steer a learner to pay full price for no
+   * reason and is correctly omitted. */
   StudyModeRunner.prototype.renderSummaryCta = function renderSummaryCta(copy, meta) {
     var offer = this.payload.offer || {};
     var cta = scoring.resolveCta(offer, Date.now());
@@ -649,17 +655,22 @@
     wrapper.appendChild(el("p", "assessment-cta-body", copy.body));
 
     if (cta.available) {
+      var badge = offerBadgeEl(offer, cta.kind);
+      if (badge) wrapper.appendChild(badge);
+
       var link = document.createElement("a");
       link.className = "button button-primary assessment-cta-button";
       link.href = cta.url;
       link.target = "_blank";
       link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
-      link.textContent =
-        cta.kind === "coupon" ? "Claim Today's Offer" + priceSuffix(offer) + " ↗" : "Start Full Practice on Udemy ↗";
+      link.textContent = ctaButtonLabel(offer, cta.kind) + " ↗";
       wrapper.appendChild(link);
 
+      var urgency = offerUrgencyEl(offer, cta.kind);
+      if (urgency) wrapper.appendChild(urgency);
+
       var referralUrl = offer.instructorReferralUrl;
-      if (cta.kind === "coupon" && referralUrl && referralUrl !== cta.url) {
+      if (cta.kind === "coupon" && referralUrl && referralUrl !== cta.url && isFreeOfferType(offer.offerType) && offerIsCapped(offer)) {
         var secondary = document.createElement("a");
         secondary.className = "button button-text assessment-cta-secondary";
         secondary.href = referralUrl;

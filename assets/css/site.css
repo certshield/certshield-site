@@ -692,28 +692,34 @@ button.button {
   letter-spacing: 0.025em;
 }
 
+/* !important on each: these badges are used inside .card-classed containers
+   (offer cards, the assessment CTA card, homepage preview cards), and the
+   more specific .card p { color: var(--ink-soft) } rule above otherwise
+   silently wins over a plain single-class color, flattening every badge
+   type to the same muted gray text - matches the existing .card-eyebrow /
+   .offer-price precedent for this exact problem. */
 .badge-free-targeted,
 .badge-free-open {
   border-color: #8ac7b4;
   background: var(--success-soft);
-  color: #075941;
+  color: #075941 !important;
 }
 
 .badge-best-price {
   border-color: #e5c271;
   background: var(--warning-soft);
-  color: #704400;
+  color: #704400 !important;
 }
 
 .badge-custom-price {
   border-color: #e3a687;
   background: #fff0e8;
-  color: #873312;
+  color: #873312 !important;
 }
 
 .badge-coming-soon {
   background: #edf2f1;
-  color: #4c6260;
+  color: #4c6260 !important;
 }
 
 .exam-facts-domains {
@@ -1014,6 +1020,20 @@ button.button {
 .offer-price {
   color: var(--brand-950) !important;
   font-weight: 850;
+}
+
+/* Deliberately no explicit color here: this markup is reused verbatim
+   inside .assessment-cta's dark gradient card (white text) and inside
+   plain white .card CTAs (dark ink text) - inheriting the parent's
+   already-correct color keeps it readable in both instead of needing a
+   light/dark override pair for one line of fine print. */
+.offer-urgency {
+  margin: 0.65rem 0 0;
+  font-size: 0.88rem;
+}
+
+.offer-urgency strong {
+  font-weight: 800;
 }
 
 .offer-cta {
