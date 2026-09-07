@@ -400,7 +400,7 @@
     article.appendChild(legend);
 
     if (question.cardinalityInstruction) {
-      article.appendChild(el("p", "assessment-cardinality", question.cardinalityInstruction));
+      article.appendChild(html(el("p", "assessment-cardinality"), question.cardinalityInstructionHtml));
     }
 
     var isRevealed = Boolean(this.revealed[question.id]);

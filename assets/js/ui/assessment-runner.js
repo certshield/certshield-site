@@ -521,7 +521,7 @@
     article.appendChild(legend);
 
     if (question.cardinalityInstruction) {
-      article.appendChild(el("p", "assessment-cardinality", question.cardinalityInstruction));
+      article.appendChild(html(el("p", "assessment-cardinality"), question.cardinalityInstructionHtml));
     }
 
     var inputType = question.selectionMode === "multiple" ? "checkbox" : "radio";
