@@ -1,10 +1,10 @@
 # CertShield Practice
 
-**Free certification mock exams and practice tests** — original, explanation-led practice questions for Google Cloud, Databricks, Anthropic Claude, Juniper Networks, NVIDIA, CompTIA, IAPP, and UiPath certifications, built on ethical practice.
+**Free certification mock exams and practice tests** — original, explanation-led practice questions for Google Cloud, Databricks, Anthropic Claude, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, and UiPath certifications, built on ethical practice.
 
 <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Practice-100%25%20Free-2ea44f" alt="100% Free"></a>
 <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Signup-Not%20Required-0366d6" alt="No Signup Required"></a>
-<a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Certifications-29%20Live-6f42c1" alt="29 Certifications Live"></a>
+<a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Certifications-31%20Live-6f42c1" alt="31 Certifications Live"></a>
 <a href="https://practice.certshield.co.in/methodology/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Questions-Original%20%26%20Explained-d73a49" alt="Original & Explained Questions"></a>
 
 > [!TIP]
@@ -66,6 +66,13 @@ Every free diagnostic includes domain-level scoring and a fully explained answer
 | Databricks Certified Machine Learning Associate | 30 | <a href="https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-associate/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-machine-learningml-associate-practice-exams/?referralCode=08E0FC1AC514223FCDD9" target="_blank" rel="noopener">View on Udemy →</a> |
 | Databricks Certified Machine Learning Professional | 30 | <a href="https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-professional/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-machine-learning-professional-practice-test/?referralCode=E9381C4C52F7E97BCFDD" target="_blank" rel="noopener">View on Udemy →</a> |
 
+### ISC2 (2 certifications)
+
+| Certification | Free Questions | Free Diagnostic | Full-Length Udemy Practice Exam |
+|---|---|---|---|
+| ISSAP Information Systems Security Architecture | 30 | <a href="https://practice.certshield.co.in/assessments/issap-information-systems-security-architecture/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/issap-certification-practice-exam-full-length-mock-tests/?referralCode=ADD20B971A52872908C6" target="_blank" rel="noopener">View on Udemy →</a> |
+| ISSMP Information Systems Security Management | 30 | <a href="https://practice.certshield.co.in/assessments/issmp-information-systems-security-management/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/issmp-certification-isc2-issmp-mock-tests/?referralCode=1C7F14A07AB6DB3F4FD8" target="_blank" rel="noopener">View on Udemy →</a> |
+
 ### Anthropic, CompTIA, IAPP, Juniper Networks, NVIDIA & UiPath (6 certifications)
 
 | Certification | Free Questions | Free Diagnostic | Full-Length Udemy Practice Exam |
@@ -77,7 +84,7 @@ Every free diagnostic includes domain-level scoring and a fully explained answer
 | NVIDIA-Certified Professional: Agentic AI (NCP-AAI) | 30 | <a href="https://practice.certshield.co.in/assessments/nvidia-certified-professional-agentic-ai/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/nvidia-ncp-aai-agentic-ai-practice-exams-prep/?referralCode=29D4DAD7FE497A0595CB" target="_blank" rel="noopener">View on Udemy →</a> |
 | UiPath Specialized AI Professional (UiPath-SAIv1) | 30 | <a href="https://practice.certshield.co.in/assessments/uipath-specialized-ai-professional/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/uipath-certified-ai-professional-uipath-saiv1-practice-ex/?referralCode=02F64B6BCAC9399EAB32" target="_blank" rel="noopener">View on Udemy →</a> |
 
-More certifications — AWS, (ISC)², Blockchain Training Alliance, Salesforce, and additional Databricks and Google Cloud credentials — are in progress; see the <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener">full directory</a> for what's live and what's coming soon.
+More certifications — AWS, Blockchain Training Alliance, Salesforce, and additional Databricks, Google Cloud, and ISC2 credentials — are in progress; see the <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener">full directory</a> for what's live and what's coming soon.
 
 > [!NOTE]
 > **Already picked your certification?** Coupons rotate monthly — check <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">Current Community Offers</a> for today's price before you enroll.
@@ -105,4 +112,4 @@ The free diagnostic (30 questions for most certifications, 50 for CCAR-F) is bui
 
 ## Disclaimer
 
-CertShield Practice is an independent preparation resource. It is not affiliated with, endorsed by, or an official product of Google Cloud, Databricks, Anthropic, Juniper Networks, NVIDIA, CompTIA, IAPP, UiPath, or any other certification vendor referenced on this site. A diagnostic result is not a guarantee of exam readiness or a passing score.
+CertShield Practice is an independent preparation resource. It is not affiliated with, endorsed by, or an official product of Google Cloud, Databricks, Anthropic, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, UiPath, or any other certification vendor referenced on this site. A diagnostic result is not a guarantee of exam readiness or a passing score.
