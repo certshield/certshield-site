@@ -1,10 +1,10 @@
 # CertShield Practice
 
-**Free certification mock exams and practice tests** — original, explanation-led practice questions for Google Cloud, Databricks, Anthropic Claude, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, and UiPath certifications, built on ethical practice.
+**Free certification mock exams and practice tests** — original, explanation-led practice questions for AWS, Google Cloud, Databricks, Anthropic Claude, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, Salesforce, and UiPath certifications, built on ethical practice.
 
 <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Practice-100%25%20Free-2ea44f" alt="100% Free"></a>
 <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Signup-Not%20Required-0366d6" alt="No Signup Required"></a>
-<a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Certifications-31%20Live-6f42c1" alt="31 Certifications Live"></a>
+<a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Certifications-42%20Live-6f42c1" alt="42 Certifications Live"></a>
 <a href="https://practice.certshield.co.in/methodology/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Questions-Original%20%26%20Explained-d73a49" alt="Original & Explained Questions"></a>
 
 > [!TIP]
@@ -32,6 +32,17 @@ CertShield Practice is the legitimate alternative. Every question is **original 
 ## Free practice tests available now
 
 Every free diagnostic includes domain-level scoring and a fully explained answer for every question — no signup required. Prefer to go straight to the complete question bank? The Udemy links go to the same certification's full-length practice exam.
+
+### AWS (6 certifications)
+
+| Certification | Free Questions | Free Diagnostic | Full-Length Udemy Practice Exam |
+|---|---|---|---|
+| AWS Certified AI Practitioner (AIF-C01) | 30 | <a href="https://practice.certshield.co.in/assessments/aws-certified-ai-practitioner/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/aws-certified-ai-practitioner-aif-c01-practice-exam-prep/?referralCode=22D681FFBAD6628532CD" target="_blank" rel="noopener">View on Udemy →</a> |
+| AWS Certified Data Engineer - Associate (DEA-C01) | 30 | <a href="https://practice.certshield.co.in/assessments/aws-certified-data-engineer-associate/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/aws-certified-data-engineer-associate-dea-c01-practice-test/?referralCode=8ED2284E16293A0F642A" target="_blank" rel="noopener">View on Udemy →</a> |
+| AWS Certified DevOps Engineer - Professional (DOP-C02) | 30 | <a href="https://practice.certshield.co.in/assessments/aws-certified-devops-engineer-professional/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/aws-devops-pro-dop-c02-practice-exams-2024-pass-dop-c02/?referralCode=C45BEC7C2B3EEA55A828" target="_blank" rel="noopener">View on Udemy →</a> |
+| AWS Certified Generative AI Developer - Professional (AIP-C01) | 30 | <a href="https://practice.certshield.co.in/assessments/aws-certified-generative-ai-developer-professional/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/aws-certified-generative-ai-developer-professional-practice-mock-tests/?referralCode=38CBC86F021A3A089E40" target="_blank" rel="noopener">View on Udemy →</a> |
+| AWS Certified Security - Specialty (SCS-C03) | 30 | <a href="https://practice.certshield.co.in/assessments/aws-certified-security-specialty/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/aws-certified-security-specialty-scs-c03-practice-exams/?referralCode=BEED580002FD89C60030" target="_blank" rel="noopener">View on Udemy →</a> |
+| AWS Certified Solutions Architect - Associate (SAA-C03) | 30 | <a href="https://practice.certshield.co.in/assessments/aws-certified-solutions-architect-associate/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/aws-solutions-architect-associate-saa-c03-exam-success/?referralCode=525A9AE9040AB9CF70FB" target="_blank" rel="noopener">View on Udemy →</a> |
 
 ### Google Cloud (15 certifications)
 
@@ -66,14 +77,18 @@ Every free diagnostic includes domain-level scoring and a fully explained answer
 | Databricks Certified Machine Learning Associate | 30 | <a href="https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-associate/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-machine-learningml-associate-practice-exams/?referralCode=08E0FC1AC514223FCDD9" target="_blank" rel="noopener">View on Udemy →</a> |
 | Databricks Certified Machine Learning Professional | 30 | <a href="https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-professional/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/databricks-machine-learning-professional-practice-test/?referralCode=E9381C4C52F7E97BCFDD" target="_blank" rel="noopener">View on Udemy →</a> |
 
-### ISC2 (2 certifications)
+### ISC2 (6 certifications)
 
 | Certification | Free Questions | Free Diagnostic | Full-Length Udemy Practice Exam |
 |---|---|---|---|
+| CCSP Certified Cloud Security Professional | 30 | <a href="https://practice.certshield.co.in/assessments/certified-cloud-security-professional-ccsp/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/certified-cloud-security-professional-ccsp-practiceexam/?referralCode=4018DA5AE424B69F5105" target="_blank" rel="noopener">View on Udemy →</a> |
+| CISSP Certified Information Systems Security Professional | 30 | <a href="https://practice.certshield.co.in/assessments/certified-information-systems-security-professional-cissp/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/cissp-certification-isc2-practice-exam/?referralCode=D59CD49CC03272695654" target="_blank" rel="noopener">View on Udemy →</a> |
+| CSSLP Certified Secure Software Lifecycle Professional | 30 | <a href="https://practice.certshield.co.in/assessments/certified-secure-software-lifecycle-professional-csslp/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/csslp-certification-isc2-csslp-mock-tests/?referralCode=345B977EF0C172A13B25" target="_blank" rel="noopener">View on Udemy →</a> |
 | ISSAP Information Systems Security Architecture | 30 | <a href="https://practice.certshield.co.in/assessments/issap-information-systems-security-architecture/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/issap-certification-practice-exam-full-length-mock-tests/?referralCode=ADD20B971A52872908C6" target="_blank" rel="noopener">View on Udemy →</a> |
+| ISSEP Information Systems Security Engineering | 30 | <a href="https://practice.certshield.co.in/assessments/issep-information-systems-security-engineering/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/issep-certification-isc2-issep-mock-tests/?referralCode=115C3D1F0E21BA99E645" target="_blank" rel="noopener">View on Udemy →</a> |
 | ISSMP Information Systems Security Management | 30 | <a href="https://practice.certshield.co.in/assessments/issmp-information-systems-security-management/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/issmp-certification-isc2-issmp-mock-tests/?referralCode=1C7F14A07AB6DB3F4FD8" target="_blank" rel="noopener">View on Udemy →</a> |
 
-### Anthropic, CompTIA, IAPP, Juniper Networks, NVIDIA & UiPath (6 certifications)
+### Anthropic, CompTIA, IAPP, Juniper Networks, NVIDIA, Salesforce & UiPath (7 certifications)
 
 | Certification | Free Questions | Free Diagnostic | Full-Length Udemy Practice Exam |
 |---|---|---|---|
@@ -82,9 +97,10 @@ Every free diagnostic includes domain-level scoring and a fully explained answer
 | IAPP Certified AI Governance Professional (AIGP) | 30 | <a href="https://practice.certshield.co.in/assessments/certified-ai-governance-professional-aigp/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/iapp-aigp-practice-exams-ai-governance-mock-tests/?referralCode=0548CF0CBFED9939A9C3" target="_blank" rel="noopener">View on Udemy →</a> |
 | Juniper Mist AI, Associate (JNCIA-MistAI / JN0-253) | 30 | <a href="https://practice.certshield.co.in/assessments/mist-ai-associate-jncia-mistai/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/juniper-jncia-mistai-practice-tests-jn0-253-exam-prep-2025/?referralCode=8513F69E07816F09DEFD" target="_blank" rel="noopener">View on Udemy →</a> |
 | NVIDIA-Certified Professional: Agentic AI (NCP-AAI) | 30 | <a href="https://practice.certshield.co.in/assessments/nvidia-certified-professional-agentic-ai/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/nvidia-ncp-aai-agentic-ai-practice-exams-prep/?referralCode=29D4DAD7FE497A0595CB" target="_blank" rel="noopener">View on Udemy →</a> |
+| Salesforce Certified Agentforce Specialist | 30 | <a href="https://practice.certshield.co.in/assessments/salesforce-certified-agentforce-specialist/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/salesforce-certified-agentforce-specialist-practice-exam-ha/?referralCode=9F86867032DC16413456" target="_blank" rel="noopener">View on Udemy →</a> |
 | UiPath Specialized AI Professional (UiPath-SAIv1) | 30 | <a href="https://practice.certshield.co.in/assessments/uipath-specialized-ai-professional/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/uipath-certified-ai-professional-uipath-saiv1-practice-ex/?referralCode=02F64B6BCAC9399EAB32" target="_blank" rel="noopener">View on Udemy →</a> |
 
-More certifications — AWS, Blockchain Training Alliance, Salesforce, and additional Databricks, Google Cloud, and ISC2 credentials — are in progress; see the <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener">full directory</a> for what's live and what's coming soon.
+More certifications — Blockchain Training Alliance, and additional Databricks, Google Cloud, and ISC2 credentials — are in progress; see the <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener">full directory</a> for what's live and what's coming soon.
 
 > [!NOTE]
 > **Already picked your certification?** Coupons rotate monthly — check <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">Current Community Offers</a> for today's price before you enroll.
@@ -112,4 +128,4 @@ The free diagnostic (30 questions for most certifications, 50 for CCAR-F) is bui
 
 ## Disclaimer
 
-CertShield Practice is an independent preparation resource. It is not affiliated with, endorsed by, or an official product of Google Cloud, Databricks, Anthropic, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, UiPath, or any other certification vendor referenced on this site. A diagnostic result is not a guarantee of exam readiness or a passing score.
+CertShield Practice is an independent preparation resource. It is not affiliated with, endorsed by, or an official product of AWS, Google Cloud, Databricks, Anthropic, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, Salesforce, UiPath, or any other certification vendor referenced on this site. A diagnostic result is not a guarantee of exam readiness or a passing score.
