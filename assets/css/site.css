@@ -1041,6 +1041,97 @@ button.button {
   margin-top: auto;
 }
 
+.offer-mission {
+  max-width: 48rem;
+  margin: 1rem 0 0;
+  font-size: 1.08rem;
+}
+
+.offer-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.25rem;
+  margin: 1.75rem 0 0;
+}
+
+.offer-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.offer-stat-value {
+  color: #fff;
+  font-size: 2.1rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.offer-stat-label {
+  max-width: 12rem;
+  color: #bcd8d5;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.offers-section + .offers-section {
+  margin-top: 3rem;
+}
+
+.offer-tier-availability {
+  margin: 0.6rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.offer-tier-availability-live {
+  color: var(--success);
+}
+
+.offer-tier-availability-upcoming {
+  color: var(--gold-dark);
+}
+
+.offer-tier-availability-ended {
+  color: var(--muted);
+}
+
+.offer-tier-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.85rem 0 0;
+  padding: 0.75rem 0 0;
+  border-top: 1px dashed var(--line);
+  list-style: none;
+}
+
+.offer-tier-secondary {
+  font-size: 0.83rem;
+}
+
+.offer-tier-secondary .badge {
+  margin-right: 0.5rem;
+}
+
+.offer-tier-detail {
+  color: var(--ink-soft);
+}
+
+a.offer-tier-link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.5rem;
+  color: inherit;
+}
+
+a.offer-tier-link:hover .offer-tier-detail {
+  color: var(--brand-700);
+}
+
 .exam-snapshot {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
