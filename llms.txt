@@ -1,0 +1,88 @@
+# CertShield Practice
+
+> Free, original certification mock exams and readiness diagnostics — no signup required. Every question is written from official certification blueprints and current vendor documentation, never copied from a real exam, and ships with a full explanation, not just an answer key.
+
+CertShield Practice is an independent preparation resource; it is not affiliated with, endorsed by, or an official product of any certification vendor referenced on the site. Each certification page states that exam's own official question count, duration, passing score, fee, and domain weights, sourced directly from the vendor's own exam guide, plus a Frequently Asked Questions section answering common questions about that specific exam. A diagnostic result is not a guarantee of exam readiness or a passing score.
+
+## Amazon Web Services (AWS)
+
+- [AWS Certified AI Practitioner](https://practice.certshield.co.in/assessments/aws-certified-ai-practitioner/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [AWS Certified Data Engineer - Associate](https://practice.certshield.co.in/assessments/aws-certified-data-engineer-associate/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [AWS Certified DevOps Engineer - Professional](https://practice.certshield.co.in/assessments/aws-certified-devops-engineer-professional/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [AWS Certified Generative AI Developer - Professional](https://practice.certshield.co.in/assessments/aws-certified-generative-ai-developer-professional/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [AWS Certified Security - Specialty](https://practice.certshield.co.in/assessments/aws-certified-security-specialty/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [AWS Certified Solutions Architect - Associate](https://practice.certshield.co.in/assessments/aws-certified-solutions-architect-associate/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## Anthropic
+
+- [Claude Certified Architect – Foundations](https://practice.certshield.co.in/assessments/claude-certified-architect-foundations/): Free 50-question mock exam with domain-level scoring and a full explanation for every answer
+
+## CompTIA
+
+- [SecAI+](https://practice.certshield.co.in/assessments/secai/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## Databricks
+
+- [Databricks Certified Associate Developer for Apache Spark](https://practice.certshield.co.in/assessments/databricks-certified-associate-developer-for-apache-spark/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Databricks Certified Context Engineer Associate](https://practice.certshield.co.in/assessments/databricks-certified-context-engineer-associate/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Databricks Certified Data Analyst Associate](https://practice.certshield.co.in/assessments/databricks-certified-data-analyst-associate/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Databricks Certified Data Engineer Associate](https://practice.certshield.co.in/assessments/databricks-certified-data-engineer-associate/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Databricks Certified Data Engineer Professional](https://practice.certshield.co.in/assessments/databricks-certified-data-engineer-professional/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Databricks Certified Generative AI Engineer Associate](https://practice.certshield.co.in/assessments/databricks-certified-generative-ai-engineer-associate/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Databricks Certified Machine Learning Associate](https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-associate/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Databricks Certified Machine Learning Professional](https://practice.certshield.co.in/assessments/databricks-certified-machine-learning-professional/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## Google Cloud
+
+- [Associate Cloud Engineer](https://practice.certshield.co.in/assessments/associate-cloud-engineer/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Associate Data Practitioner](https://practice.certshield.co.in/assessments/associate-data-practitioner/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Associate Google Workspace Administrator](https://practice.certshield.co.in/assessments/associate-google-workspace-administrator/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Cloud Digital Leader](https://practice.certshield.co.in/assessments/cloud-digital-leader/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Generative AI Leader](https://practice.certshield.co.in/assessments/generative-ai-leader/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Agentic Architect](https://practice.certshield.co.in/assessments/professional-agentic-architect/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Cloud Architect](https://practice.certshield.co.in/assessments/professional-cloud-architect/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Cloud Database Engineer](https://practice.certshield.co.in/assessments/professional-cloud-database-engineer/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Cloud DevOps Engineer](https://practice.certshield.co.in/assessments/professional-cloud-devops-engineer/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Cloud Developer](https://practice.certshield.co.in/assessments/professional-cloud-developer/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Cloud Network Engineer](https://practice.certshield.co.in/assessments/professional-cloud-network-engineer/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Cloud Security Engineer](https://practice.certshield.co.in/assessments/professional-cloud-security-engineer/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Data Engineer](https://practice.certshield.co.in/assessments/professional-data-engineer/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Machine Learning Engineer](https://practice.certshield.co.in/assessments/professional-machine-learning-engineer/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Professional Security Operations Engineer](https://practice.certshield.co.in/assessments/professional-security-operations-engineer/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## IAPP
+
+- [Certified AI Governance Professional (AIGP)](https://practice.certshield.co.in/assessments/certified-ai-governance-professional-aigp/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## ISC2
+
+- [Certified Cloud Security Professional (CCSP)](https://practice.certshield.co.in/assessments/certified-cloud-security-professional-ccsp/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Certified Information Systems Security Professional (CISSP)](https://practice.certshield.co.in/assessments/certified-information-systems-security-professional-cissp/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [Certified Secure Software Lifecycle Professional (CSSLP)](https://practice.certshield.co.in/assessments/certified-secure-software-lifecycle-professional-csslp/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [ISSAP Information Systems Security Architecture](https://practice.certshield.co.in/assessments/issap-information-systems-security-architecture/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [ISSEP Information Systems Security Engineering](https://practice.certshield.co.in/assessments/issep-information-systems-security-engineering/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+- [ISSMP Information Systems Security Management](https://practice.certshield.co.in/assessments/issmp-information-systems-security-management/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## Juniper Networks
+
+- [Mist AI, Associate (JNCIA-MistAI)](https://practice.certshield.co.in/assessments/mist-ai-associate-jncia-mistai/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## NVIDIA
+
+- [NVIDIA-Certified Professional: Agentic AI](https://practice.certshield.co.in/assessments/nvidia-certified-professional-agentic-ai/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## Salesforce
+
+- [Salesforce Certified Agentforce Specialist](https://practice.certshield.co.in/assessments/salesforce-certified-agentforce-specialist/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## UiPath
+
+- [UiPath Specialized AI Professional](https://practice.certshield.co.in/assessments/uipath-specialized-ai-professional/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
+
+## Site
+
+- [Homepage](https://practice.certshield.co.in/): Certification directory and how the free diagnostics work
+- [All certifications](https://practice.certshield.co.in/assessments/): Every certification covered, including any not yet published
+- [Community Offers](https://practice.certshield.co.in/offers/): Current discount or free-access coupons for the full-length Udemy practice exams
+- [Methodology](https://practice.certshield.co.in/methodology/): How diagnostic scoring, confidence and readiness bands are calculated
+- [About](https://practice.certshield.co.in/about/): About CertShield Practice and the instructor
