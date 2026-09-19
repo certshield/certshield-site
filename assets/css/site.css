@@ -863,6 +863,15 @@ button.button {
   padding: clamp(3.4rem, 7vw, 6rem) 0;
 }
 
+.hero-offer-note {
+  font-weight: 700;
+}
+
+.hero-offer-note a {
+  color: var(--gold);
+  text-decoration-thickness: 0.12em;
+}
+
 .page-hero p {
   max-width: 48rem;
   margin: 1rem 0 0;
