@@ -259,16 +259,32 @@ a:hover {
   gap: clamp(2rem, 6vw, 5rem);
 }
 
+/* #aee7e2 is a light-on-dark color meant only for the page-hero's dark
+   gradient (see the .page-hero override below), but most .eyebrow uses
+   sit on a plain light section background, where it's nearly invisible -
+   the same class of bug as .breadcrumbs was. !important matches the
+   existing .card-eyebrow / badge-* precedent for this exact problem: a
+   plain single-class color otherwise silently loses to a more specific
+   selector that happens to also match the same element (e.g.
+   ".section-heading p", which matches any <p> including one classed
+   "eyebrow"). The .page-hero override needs !important too so it still
+   wins there despite the higher specificity tie-break rules that would
+   otherwise apply among two !important declarations. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   margin: 0 0 1rem;
-  color: #aee7e2;
+  color: var(--brand-700) !important;
   font-size: 0.79rem;
   font-weight: 850;
   letter-spacing: 0.13em;
   text-transform: uppercase;
+}
+
+.page-hero .eyebrow,
+.hero .eyebrow {
+  color: #aee7e2 !important;
 }
 
 .eyebrow::before {
@@ -407,6 +423,17 @@ button.button {
   background: transparent;
   color: var(--brand-950);
   text-decoration: underline;
+}
+
+/* The 404 page's "Homepage" link is the one .button-text used inside
+   .page-hero's dark gradient - var(--brand-700) (designed for light
+   backgrounds) is nearly invisible there. */
+.page-hero .button-text {
+  color: #fff;
+}
+
+.page-hero .button-text:hover {
+  color: var(--gold);
 }
 
 .button[aria-disabled="true"],
@@ -1714,6 +1741,13 @@ a.offer-tier-link:hover .offer-tier-detail {
 .assessment-cta-missing {
   font-size: 0.86rem;
   color: var(--ink-soft);
+}
+
+/* The Offers page hero's "Snapshot generated" note reuses this class inside
+   .page-hero's dark gradient, where --ink-soft (designed for light
+   backgrounds) is nearly invisible - same bug shape as .breadcrumbs. */
+.page-hero .assessment-limitation-note {
+  color: #bcd8d5;
 }
 
 .assessment-landing-actions,

@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4F34PBW6XL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-4F34PBW6XL');
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
@@ -80,7 +89,8 @@
       <h2>Confidence Calibration</h2>
       <p>Marking your confidence as Sure, Unsure or Guessing never changes your accuracy. It classifies each answer as stable knowledge (correct + sure), fragile knowledge (correct + unsure/guessing), a likely misconception (incorrect + sure), or a knowledge gap (incorrect + unsure/guessing) — so you know not just what you missed, but how confidently you missed it.</p>
       <h2 id="privacy">Privacy</h2>
-      <p>This diagnostic makes no network requests while you take it. Your answers, confidence ratings and progress are stored only in your browser's local storage, namespaced to this assessment, and are never transmitted anywhere. Clearing your browser storage clears your history.</p>
+      <p>The diagnostic itself makes no network requests while you take it. Your answers, confidence ratings and progress are stored only in your browser's local storage, namespaced to this assessment, and are never transmitted anywhere — not to CertShield, not to any analytics tool. Clearing your browser storage clears your history.</p>
+      <p>Like most websites, pages on this site are measured with Google Analytics, which records standard traffic data — page views, referring sites, approximate location, device type — for every visitor. It has no access to your diagnostic answers, confidence ratings or results; those never leave local storage.</p>
       <h2>Disclaimer</h2>
       <p>CertShield Practice is an independent preparation resource. It is not affiliated with, endorsed by, or an official product of any certification vendor referenced on this site. A diagnostic result is not a guarantee of exam readiness or a passing score.</p>
     </div></section>
