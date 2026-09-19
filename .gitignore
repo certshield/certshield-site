@@ -43,6 +43,13 @@ InstructorReferral-URL-Sheet*.xlsx
 # is what matters, not the history of every rebuild)
 data/import-reports/
 
+# Google Search Console "Performance on Search" exports (queries, pages,
+# countries, clicks/impressions/CTR/position) - real traffic and business
+# data, not meant for a public repo. Matches GSC's own default export
+# filename ("<site>-Performance-on-Search-<date>.xlsx/.csv").
+*-Performance-on-Search-*.xlsx
+*-Performance-on-Search-*.csv
+
 # --- Repo-internal build tooling: not needed for GitHub Pages to serve ---
 # the site. Verified none of these are linked, fetched, or otherwise
 # referenced by any deployed page (checked assets/js/**/*.js for fetch()
