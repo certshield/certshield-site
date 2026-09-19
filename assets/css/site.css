@@ -878,9 +878,14 @@ button.button {
   font-size: 1.08rem;
 }
 
+/* This nav always renders on the page's plain light background (it sits
+   directly inside <main>, before the dark .page-hero section, never inside
+   it - see page_shell in render_site.py) - #bcd8d5/#d9efed were a light
+   hero-only palette left over from an earlier layout and were nearly
+   invisible here (fails contrast on the near-white body background). */
 .breadcrumbs {
   margin-bottom: 1.1rem;
-  color: #bcd8d5;
+  color: var(--ink-soft);
   font-size: 0.86rem;
 }
 
@@ -896,10 +901,17 @@ button.button {
 .breadcrumbs li + li::before {
   content: "/";
   margin-right: 0.45rem;
+  color: var(--line-strong);
 }
 
 .breadcrumbs a {
-  color: #d9efed;
+  color: var(--brand-700);
+  font-weight: 700;
+}
+
+.breadcrumbs a:hover {
+  color: var(--brand-950);
+  text-decoration-thickness: 0.12em;
 }
 
 .filter-toolbar {
