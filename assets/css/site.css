@@ -1143,7 +1143,7 @@ button.button {
 }
 
 .offer-tier-availability-ended {
-  color: var(--muted);
+  color: var(--danger);
 }
 
 .offer-tier-list {
