@@ -33,6 +33,7 @@
   var ctaButtonLabel = domUtils.ctaButtonLabel;
   var offerBadgeEl = domUtils.offerBadgeEl;
   var offerUrgencyEl = domUtils.offerUrgencyEl;
+  var markCtaForTracking = domUtils.markCtaForTracking;
 
   var STORAGE_PREFIX = "certshield.study.v1.";
   var FLAG_ICON_SVG =
@@ -533,6 +534,7 @@
       link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
       link.textContent =
         cta.kind === "coupon" ? (isFreeOfferType(offer.offerType) ? "See Today's Free Offer ↗" : "See Today's Offer ↗") : "See the Full Course ↗";
+      markCtaForTracking(link, offer, cta.kind, this.payload.courseId);
       card.appendChild(link);
     }
     var dismiss = el("button", "study-nudge-dismiss", "Dismiss");
@@ -666,6 +668,7 @@
       link.target = "_blank";
       link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
       link.textContent = ctaButtonLabel(offer, cta.kind) + " ↗";
+      markCtaForTracking(link, offer, cta.kind, this.payload.courseId);
       wrapper.appendChild(link);
 
       var urgency = offerUrgencyEl(offer, cta.kind);
@@ -679,6 +682,7 @@
         secondary.target = "_blank";
         secondary.rel = "noopener";
         secondary.textContent = "Free seats full? Enroll directly ↗";
+        markCtaForTracking(secondary, offer, "referral", this.payload.courseId);
         wrapper.appendChild(secondary);
       }
     } else {

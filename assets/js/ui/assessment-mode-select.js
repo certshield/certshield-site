@@ -13,6 +13,23 @@
   if (!domUtils) return;
   var el = domUtils.el;
 
+  /**
+   * GA4 has zero visibility into whether a landing visitor ever actually
+   * starts practicing (only pageviews) - this is the one place both modes'
+   * entry point passes through, so it's the cheapest single spot to fix
+   * that. Slug is read from the URL rather than threaded through as a
+   * parameter since every assessment page's runner root lives at exactly
+   * one URL, `/assessments/<slug>/`.
+   */
+  function trackAssessmentStart(mode) {
+    if (typeof window.gtag !== "function") return;
+    var match = window.location.pathname.match(/\/assessments\/([^/]+)\/?/);
+    window.gtag("event", "assessment_start", {
+      mode: mode,
+      assessment_slug: match ? match[1] : ""
+    });
+  }
+
   function renderModeChoice(root) {
     var chooser = el("div", "mode-select");
     chooser.appendChild(el("p", "mode-select-eyebrow", "Choose how you want to practice"));
@@ -45,11 +62,13 @@
     diagnosticButton.addEventListener("click", function () {
       var RunnerModule = window.CertShieldAssessmentRunner;
       if (!RunnerModule) return;
+      trackAssessmentStart("diagnostic");
       new RunnerModule.AssessmentRunner(root);
     });
     studyButton.addEventListener("click", function () {
       var RunnerModule = window.CertShieldStudyModeRunner;
       if (!RunnerModule) return;
+      trackAssessmentStart("study");
       new RunnerModule.StudyModeRunner(root);
     });
   }

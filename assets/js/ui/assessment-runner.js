@@ -953,6 +953,7 @@
           ? (domUtils.isFreeOfferType(offer.offerType) ? "Claim Your Free Seat" : "Claim Today's Offer" + domUtils.priceSuffix(offer)) +
             " & Start Full Practice ↗"
           : "Start Full Practice on Udemy ↗";
+      domUtils.markCtaForTracking(link, offer, cta.kind, this.payload.courseId);
       wrapper.appendChild(link);
 
       var urgency = domUtils.offerUrgencyEl(offer, cta.kind);
@@ -966,6 +967,7 @@
         referralLink.target = "_blank";
         referralLink.rel = "noopener";
         referralLink.textContent = "Free seats full? Enroll directly ↗";
+        domUtils.markCtaForTracking(referralLink, offer, "referral", this.payload.courseId);
         wrapper.appendChild(referralLink);
       }
     } else {

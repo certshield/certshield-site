@@ -166,6 +166,23 @@
     return offerType === "free_open" || offerType === "free_targeted";
   }
 
+  /**
+   * Marks an outbound CTA <a> with the data-* attributes site.js's single
+   * delegated click listener reads to fire a GA4 `cta_click` event - the
+   * same 4 fields on every surface (assessment landing page, Offers page,
+   * Diagnostic/Study Mode results, Study Mode's mid-session nudge) so none
+   * of them need their own gtag() call or can drift out of sync with the
+   * others. A no-op if courseId is falsy (nothing to attribute the click
+   * to) rather than sending a half-empty event.
+   */
+  function markCtaForTracking(link, offer, kind, courseId) {
+    if (!link || !courseId) return;
+    link.setAttribute("data-ga-cta", "1");
+    link.setAttribute("data-cta-kind", kind || "");
+    link.setAttribute("data-offer-type", (offer || {}).offerType || "");
+    link.setAttribute("data-course-id", courseId);
+  }
+
   /** True only for a real, finite maximumRedemptions - never inferred, never fabricated. */
   function offerIsCapped(offer) {
     var redemptions = String((offer || {}).maximumRedemptions || "").trim();
@@ -237,6 +254,7 @@
     formatOfferEndDate: formatOfferEndDate,
     ctaButtonLabel: ctaButtonLabel,
     offerBadgeEl: offerBadgeEl,
-    offerUrgencyEl: offerUrgencyEl
+    offerUrgencyEl: offerUrgencyEl,
+    markCtaForTracking: markCtaForTracking
   };
 })(typeof window !== "undefined" ? window : this);

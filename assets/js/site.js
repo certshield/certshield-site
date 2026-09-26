@@ -281,10 +281,36 @@
     });
   }
 
+  /**
+   * One delegated listener for every outbound CTA on the site - static
+   * server-rendered ones (assessment landing page, Offers page cards, both
+   * marked with the same data-ga-cta attributes in render_site.py) and the
+   * Diagnostic/Study Mode runners' JS-built CTA links (marked via
+   * CertShieldDomUtils.markCtaForTracking). Delegation means this single
+   * listener also covers a CTA element created after this script ran (the
+   * runners build theirs well after page load), so no per-surface listener
+   * is needed anywhere else. Before this, GA4 had zero conversion-side
+   * signal on this site - only default pageviews - so there was no way to
+   * tell which certification's offer actually got clicked.
+   */
+  function initialiseCtaTracking() {
+    document.addEventListener('click', function (event) {
+      const link = event.target.closest('[data-ga-cta]');
+      if (!link || typeof window.gtag !== 'function') return;
+      window.gtag('event', 'cta_click', {
+        cta_kind: link.getAttribute('data-cta-kind') || '',
+        offer_type: link.getAttribute('data-offer-type') || '',
+        course_id: link.getAttribute('data-course-id') || '',
+        link_url: link.href
+      });
+    });
+  }
+
   function initialise() {
     initialiseNavigation();
     initialiseYears();
     initialiseCourseSearch();
+    initialiseCtaTracking();
     document.querySelectorAll(SELECTORS.filterRoot).forEach(initialiseFilters);
     document.documentElement.classList.add('js-ready');
   }

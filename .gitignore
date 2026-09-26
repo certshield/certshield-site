@@ -50,6 +50,21 @@ data/import-reports/
 *-Performance-on-Search-*.xlsx
 *-Performance-on-Search-*.csv
 
+# Google Analytics 4 report exports (landing pages, acquisition, events) -
+# same real traffic/business-data sensitivity as the GSC exports above.
+# No fixed GA4 export filename convention, so this matches a "-GA4-" tag
+# anywhere in the name (e.g. "practice.certshield.co.in-GA4-Landing-Pages-<date>.csv") -
+# name dropped files accordingly.
+*-GA4-*.xlsx
+*-GA4-*.csv
+
+# Whole-folder drop point for GSC + GA4 report exports (bulk GSC exports
+# come as a folder of per-tab CSVs - Chart.csv, Queries.csv, Pages.csv,
+# etc. - whose generic names wouldn't match the patterns above on their
+# own). Same real traffic/business-data sensitivity; same whole-folder
+# treatment as 30-free-questions/ above.
+GSC-GA4-Report/
+
 # --- Repo-internal build tooling: not needed for GitHub Pages to serve ---
 # the site. Verified none of these are linked, fetched, or otherwise
 # referenced by any deployed page (checked assets/js/**/*.js for fetch()
