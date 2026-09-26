@@ -1,8 +1,8 @@
 # CertShield Practice
 
-> Free, original certification mock exams and readiness diagnostics — no signup required. Every question is written from official certification blueprints and current vendor documentation, never copied from a real exam, and ships with a full explanation, not just an answer key.
+> Free, original certification mock exams and readiness diagnostics — no signup required. Every question is written from official certification blueprints and current official documentation, never copied from a real exam, and ships with a full explanation, not just an answer key.
 
-CertShield Practice is an independent preparation resource; it is not affiliated with, endorsed by, or an official product of any certification vendor referenced on the site. Each certification page states that exam's own official question count, duration, passing score, fee, and domain weights, sourced directly from the vendor's own exam guide, plus a Frequently Asked Questions section answering common questions about that specific exam. A diagnostic result is not a guarantee of exam readiness or a passing score.
+CertShield Practice is an independent preparation resource; it is not affiliated with, endorsed by, or an official product of any certifying body referenced on the site. Each certification page states that exam's own official question count, duration, passing score, fee, and domain weights, sourced directly from that certifying body's own exam guide, plus a Frequently Asked Questions section answering common questions about that specific exam. A diagnostic result is not a guarantee of exam readiness or a passing score.
 
 ## Amazon Web Services (AWS)
 

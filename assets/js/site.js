@@ -115,7 +115,7 @@
     container.hidden = false;
     if (!matches.length) {
       container.innerHTML = '<div class="empty-state" role="status"><strong>No matching CertShield practice set found.</strong>' +
-        '<p>Try a vendor, certification name, or exam code. You can also browse the complete directory.</p>' +
+        '<p>Try a certifying body, certification name, or exam code. You can also browse the complete directory.</p>' +
         '<div class="card-actions"><a class="button button-secondary" href="assessments/">Browse all assessments</a>' +
         '<a class="button button-text" href="https://certshield.co.in/?utm_source=certshield_practice&amp;utm_medium=referral&amp;utm_campaign=certification_search">Explore full practice exams</a></div></div>';
       return;

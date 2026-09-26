@@ -1,11 +1,13 @@
 # CertShield Practice
 
-**Free certification mock exams and practice tests** — original, explanation-led practice questions for AWS, Google Cloud, Databricks, Anthropic Claude, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, Salesforce, and UiPath certifications, built on ethical practice.
+**Free certification mock exams and practice tests** — 1,280+ original, explanation-led practice questions across 42 live certifications from AWS, Google Cloud, Databricks, Anthropic Claude, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, Salesforce, and UiPath, built on ethical practice.
 
 <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Practice-100%25%20Free-2ea44f" alt="100% Free"></a>
 <a href="https://practice.certshield.co.in/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Signup-Not%20Required-0366d6" alt="No Signup Required"></a>
 <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Certifications-42%20Live-6f42c1" alt="42 Certifications Live"></a>
 <a href="https://practice.certshield.co.in/methodology/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Questions-Original%20%26%20Explained-d73a49" alt="Original & Explained Questions"></a>
+<a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Original%20Questions-1%2C280-e36209" alt="1,280 Original Questions"></a>
+<a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Offers-Free%20%2B%20Discounted-0c6570" alt="Free and Discounted Offers"></a>
 
 > [!TIP]
 > **Two things learners come here for: it's free, and it gives back.** Start with the **free mock exam below — no signup, right now.** When you're ready for the full practice exam, check today's <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">Community Offers</a> — discounted pricing the instructor sets aside specifically for learners who practice here first.
@@ -14,24 +16,35 @@
 
 ---
 
+## Contents
+
+- [Why Not Just Search for Exam Dumps?](#why-not-just-search-for-exam-dumps)
+- [Trusted, Not Just Free](#trusted-not-just-free)
+- [Free Practice Tests Available Now](#free-practice-tests-available-now) — 42 certifications, 11 certifying bodies
+- [Current Offers](#current-offers) — free community seats and instructor-priced coupons
+- [Two Ways to Practice](#two-ways-to-practice)
+- [FAQ](#faq)
+
+---
+
 ## Why not just search for exam dumps?
 
-"Exam dumps" and "braindumps" promise real, leaked exam questions — but using them violates most certification vendors' terms of service, and the content is frequently outdated, wrong, or memorized with no explanation of *why* an answer is correct. A wrong answer copied from a dump site teaches nothing; getting flagged for using one can get an exam result invalidated entirely.
+"Exam dumps" and "braindumps" promise real, leaked exam questions — but using them violates most certifying bodies' terms of service, and the content is frequently outdated, wrong, or memorized with no explanation of *why* an answer is correct. A wrong answer copied from a dump site teaches nothing; getting flagged for using one can get an exam result invalidated entirely.
 
-CertShield Practice is the legitimate alternative. Every question is **original content**, written from official certification blueprints and current vendor documentation — never copied from a real exam — and every question ships with a full, structured explanation, not just an answer key.
+CertShield Practice is the legitimate alternative. Every question is **original content**, written from official certification blueprints and current official documentation — never copied from a real exam — and every question ships with a full, structured explanation, not just an answer key.
 
 ## Trusted, not just free
 
 > [!TIP]
 > - **Highly rated on Udemy.** The full-length practice exams behind every free diagnostic below are highly rated, best-selling Udemy courses from the same instructor — see the live rating on each course page.
 > - **Technically validated, with a visible date.** Every free assessment states exactly when it was last checked against current official certification documentation, right on its page — see the <a href="https://practice.certshield.co.in/methodology/" target="_blank" rel="noopener">assessment methodology</a> for exactly how scoring and validation work.
-> - **Sourced from the real exam, not guesswork.** Every assessment page shows the official exam's own question count, time limit, passing score (where the vendor publishes one), and domain weighting — pulled directly from that vendor's own exam guide, with a link to the source document where one is publicly available.
+> - **Sourced from the real exam, not guesswork.** Every assessment page shows the official exam's own question count, time limit, passing score (where the certifying body publishes one), and domain weighting — pulled directly from that certifying body's own exam guide, with a link to the source document where one is publicly available.
 > - **Built & Maintained by** <a href="https://www.linkedin.com/in/priya-certshield-certifications/" target="_blank" rel="noopener">Priya D</a> — connect on LinkedIn.
 > - **Nothing tracked.** No signup. Progress saves only in your own browser.
 
 ## Free practice tests available now
 
-Every free diagnostic includes domain-level scoring and a fully explained answer for every question — no signup required. Prefer to go straight to the complete question bank? The Udemy links go to the same certification's full-length practice exam.
+**42 certifications live today, spanning 1,280 original questions across 11 certifying bodies** — with new certifications added regularly. Every free diagnostic includes domain-level scoring and a fully explained answer for every question — no signup required. Prefer to go straight to the complete question bank? The Udemy links go to the same certification's full-length practice exam.
 
 ### AWS (6 certifications)
 
@@ -53,7 +66,7 @@ Every free diagnostic includes domain-level scoring and a fully explained answer
 | Associate Google Workspace Administrator | 30 | <a href="https://practice.certshield.co.in/assessments/associate-google-workspace-administrator/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/google-cloud-professional-workspace-administrator-test/?referralCode=88B51E7633F08A004DD5" target="_blank" rel="noopener">View on Udemy →</a> |
 | Cloud Digital Leader | 30 | <a href="https://practice.certshield.co.in/assessments/cloud-digital-leader/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/gcp-certified-google-cloud-digital-leader-practice-exam/?referralCode=9F762E85D01BEC4F760A" target="_blank" rel="noopener">View on Udemy →</a> |
 | Generative AI Leader | 30 | <a href="https://practice.certshield.co.in/assessments/generative-ai-leader/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/google-cloud-generative-ai-leader-exam-practice-tests/?referralCode=5F7EEA76AAD96E3A7E2A" target="_blank" rel="noopener">View on Udemy →</a> |
-| Professional Agentic Architect *(beta)* | 30 | <a href="https://practice.certshield.co.in/assessments/professional-agentic-architect/" target="_blank" rel="noopener">Start Free →</a> | Full course in development — check back soon |
+| Professional Agentic Architect *(beta)* | 30 | <a href="https://practice.certshield.co.in/assessments/professional-agentic-architect/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://practice.certshield.co.in/offers/#offer-professional-agentic-architect" target="_blank" rel="noopener">View Current Offer →</a> |
 | Professional Cloud Architect | 30 | <a href="https://practice.certshield.co.in/assessments/professional-cloud-architect/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/gcp-pca-professional-cloud-architect-practice-exam/?referralCode=C16AEFB5A99024CE8532" target="_blank" rel="noopener">View on Udemy →</a> |
 | Professional Cloud Database Engineer | 30 | <a href="https://practice.certshield.co.in/assessments/professional-cloud-database-engineer/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/gcp-professional-cloud-database-engineer-practice-test/?referralCode=2A5452192B200F241269" target="_blank" rel="noopener">View on Udemy →</a> |
 | Professional Cloud Developer | 30 | <a href="https://practice.certshield.co.in/assessments/professional-cloud-developer/" target="_blank" rel="noopener">Start Free →</a> | <a href="https://www.udemy.com/course/gcp-google-professional-cloud-developer-practice-exam/?referralCode=D657263E0D9AF17FE86F" target="_blank" rel="noopener">View on Udemy →</a> |
@@ -102,8 +115,16 @@ Every free diagnostic includes domain-level scoring and a fully explained answer
 
 More certifications — Blockchain Training Alliance, and additional Databricks, Google Cloud, and ISC2 credentials — are in progress; see the <a href="https://practice.certshield.co.in/assessments/" target="_blank" rel="noopener">full directory</a> for what's live and what's coming soon.
 
-> [!NOTE]
-> **Already picked your certification?** Coupons rotate monthly — check <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">Current Community Offers</a> for today's price before you enroll.
+## Current offers
+
+**Two things learners come here for: it's free, and it gives back.** Every month, the instructor sets aside two kinds of offers for learners who practice here first — never generic mass-market promo codes:
+
+- **Free Community Seats** — a limited number of completely free enrollments the instructor sets aside directly, first come first served, until the seat cap or the listed date runs out, whichever comes first.
+- **Instructor-Priced Offers** — discounted pricing on the full-length practice exam, below Udemy's own standard price, as a thank-you to learners who try the free diagnostic first.
+
+Offers rotate monthly, sometimes with a shorter flash-sale window layered on top. <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">Current Offers</a> always reflects what's live right now, with the exact start and end date for every offer — not what was live when this README was last updated. Udemy always confirms final availability, pricing, and your own local currency at checkout.
+
+### <a href="https://practice.certshield.co.in/offers/" target="_blank" rel="noopener">See Today's Offers → practice.certshield.co.in/offers</a>
 
 ## Two ways to practice
 
@@ -115,7 +136,7 @@ Both modes run entirely in your browser — no account, no email, no tracking.
 ## FAQ
 
 **Is this an official practice exam?**
-No. CertShield Practice is an independent preparation resource, not affiliated with or endorsed by any certification vendor named on this site.
+No. CertShield Practice is an independent preparation resource, not affiliated with or endorsed by any certifying body named on this site.
 
 **Is this the same as an exam dump?**
 No — every question is original, written from public blueprints and documentation, never copied real exam content. See [Why not just search for exam dumps?](#why-not-just-search-for-exam-dumps) above.
@@ -126,6 +147,9 @@ No. Every diagnostic is free with no signup; progress saves only in your browser
 **What's the difference between the free diagnostic and the Udemy course?**
 The free diagnostic (30 questions for most certifications, 50 for CCAR-F) is built to give an honest readiness signal. The full-length Udemy practice exam from the same instructor covers the complete question bank in much greater depth.
 
+**Are the coupons and discounts on the offers page real?**
+Yes — every offer links to a live, verifiable Udemy coupon or the instructor's own referral pricing, with an exact start and end date. Nothing is a fake countdown or an expired code left up for show; see [Current Offers](#current-offers) above for how the two offer types work.
+
 ## Disclaimer
 
-CertShield Practice is an independent preparation resource. It is not affiliated with, endorsed by, or an official product of AWS, Google Cloud, Databricks, Anthropic, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, Salesforce, UiPath, or any other certification vendor referenced on this site. A diagnostic result is not a guarantee of exam readiness or a passing score.
+CertShield Practice is an independent preparation resource. It is not affiliated with, endorsed by, or an official product of AWS, Google Cloud, Databricks, Anthropic, Juniper Networks, NVIDIA, CompTIA, IAPP, ISC2, Salesforce, UiPath, or any other certifying body referenced on this site. A diagnostic result is not a guarantee of exam readiness or a passing score.
