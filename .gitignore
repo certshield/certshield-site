@@ -29,6 +29,13 @@ active_coupons_*.xlsx
 InstructorReferral-URL-Sheet*.csv
 InstructorReferral-URL-Sheet*.xlsx
 
+# Monthly bulk-coupon plan CSVs (+ their .terms.json): dropped in
+# monthly-offers/ and expanded into the Input A above by
+# scripts/expand_bulk_coupons.py. Local-only, never committed. The root-level
+# pattern is belt-and-suspenders for a plan file dropped at the repo root.
+monthly-offers/
+CertShield_Udemy_Bulk_Coupons_*.csv
+
 # Input C: assessment source Markdown (matches the
 # "<something>-30-question-practice-set.md" naming convention from
 # MAINTENANCE.md; the generated data/assessments/<slug>.json is what the

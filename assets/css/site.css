@@ -1180,6 +1180,102 @@ a.offer-tier-link:hover .offer-tier-detail {
   color: var(--brand-700);
 }
 
+/* Offers page: one row per offer window inside each course card. Status is
+   carried by [data-status] (set at build time, re-evaluated by offers.js)
+   so the colors follow a row as it flips Scheduled -> Live -> Expired. */
+.offer-row-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.offer-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.55rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--line-strong);
+  border-radius: 0.72rem;
+  background: var(--surface-soft);
+  padding: 0.8rem 0.9rem;
+}
+
+.offer-row[data-status="live"] {
+  border-left-color: var(--success);
+  background: #fff;
+}
+
+.offer-row[data-status="scheduled"] {
+  border-left-color: var(--gold);
+}
+
+.offer-row-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 0.6rem;
+}
+
+.offer-status {
+  font-size: 0.74rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.offer-row[data-status="live"] .offer-status {
+  color: var(--success);
+}
+
+.offer-row[data-status="scheduled"] .offer-status {
+  color: var(--gold-dark);
+}
+
+.offer-row[data-status="expired"] .offer-status {
+  color: var(--danger);
+}
+
+.offer-row .offer-row-price {
+  margin: 0;
+  color: var(--brand-950);
+  font-size: 1.2rem;
+  font-weight: 850;
+}
+
+.offer-row .offer-row-note,
+.offer-row .offer-row-validity {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+}
+
+.offer-row .offer-row-note {
+  font-weight: 700;
+}
+
+.offer-row-action .offer-cta {
+  width: 100%;
+  min-height: 2.75rem;
+  margin-top: 0;
+}
+
+.offer-row-action a.offer-cta::after {
+  content: "↗";
+}
+
+/* A disabled Scheduled / Expired control: legible, clearly inert (no hover
+   change, no pointer), unlike the faded generic .button:disabled. */
+.offer-row-action .offer-cta-disabled,
+.offer-row-action .offer-cta-disabled:hover {
+  border-color: var(--line);
+  background: #e4ecea;
+  color: #3d5a60;
+  opacity: 1;
+}
+
 .exam-snapshot {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

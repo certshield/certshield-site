@@ -16,6 +16,7 @@ CertShield Practice is an independent preparation resource; it is not affiliated
 ## Anthropic
 
 - [Claude Certified Architect – Foundations](https://practice.certshield.co.in/assessments/claude-certified-architect-foundations/): Free 50-question mock exam with domain-level scoring and a full explanation for every answer
+- [Claude Certified Architect – Professional](https://practice.certshield.co.in/assessments/claude-certified-architect-professional/): Free 30-question mock exam with domain-level scoring and a full explanation for every answer
 
 ## CompTIA
 

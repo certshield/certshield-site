@@ -227,7 +227,7 @@
     if (isFreeOfferType(offer.offerType) && offerIsCapped(offer)) {
       var p = el("p", "offer-urgency");
       var strong = document.createElement("strong");
-      strong.textContent = "Only " + offer.maximumRedemptions + " free seats";
+      strong.textContent = "Up to " + offer.maximumRedemptions + " enrollments—subject to availability";
       p.appendChild(strong);
       if (endText) p.appendChild(document.createTextNode(" — through " + endText));
       return p;
