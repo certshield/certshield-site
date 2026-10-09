@@ -79,7 +79,7 @@
     if (!url) return '';
     try {
       const parsed = new URL(url, window.location.href);
-      if (parsed.hostname !== 'certshield.co.in' && parsed.hostname !== 'www.certshield.co.in') return url;
+      if (['certshield.academy', 'www.certshield.academy', 'certshield.co.in', 'www.certshield.co.in'].indexOf(parsed.hostname) === -1) return url;
       parsed.searchParams.set('utm_source', 'certshield_practice');
       parsed.searchParams.set('utm_medium', 'referral');
       parsed.searchParams.set('utm_campaign', campaign || 'certification_search');
@@ -117,7 +117,7 @@
       container.innerHTML = '<div class="empty-state" role="status"><strong>No matching CertShield practice set found.</strong>' +
         '<p>Try a certifying body, certification name, or exam code. You can also browse the complete directory.</p>' +
         '<div class="card-actions"><a class="button button-secondary" href="assessments/">Browse all assessments</a>' +
-        '<a class="button button-text" href="https://certshield.co.in/?utm_source=certshield_practice&amp;utm_medium=referral&amp;utm_campaign=certification_search">Explore full practice exams</a></div></div>';
+        '<a class="button button-text" href="https://certshield.academy/?utm_source=certshield_practice&amp;utm_medium=referral&amp;utm_campaign=certification_search">Explore full practice exams</a></div></div>';
       return;
     }
 
