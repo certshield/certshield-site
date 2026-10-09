@@ -151,6 +151,29 @@
     return a === b ? 0 : (a < b ? -1 : 1);
   }
 
+  // Which live window is THE button for a course: a free seat first, then the
+  // lowest paid price, then whichever ends first. Mirrors window_priority_key()
+  // in scripts/catalog.py and offerPriorityKey() in assessment-scoring.js.
+  function priorityKey(rank, price, endMs) {
+    return [rank, rank === 2 ? price : 0, endMs];
+  }
+
+  function compareKeys(left, right) {
+    for (let index = 0; index < left.length; index += 1) {
+      if (left[index] !== right[index]) return left[index] < right[index] ? -1 : 1;
+    }
+    return 0;
+  }
+
+  function rowPriorityKey(row) {
+    const end = parseDate(row.getAttribute('data-end-at'));
+    return priorityKey(
+      Number(row.getAttribute('data-rank')),
+      Number(row.getAttribute('data-price')),
+      end ? end.getTime() : Infinity
+    );
+  }
+
   function offerRowTimes(row) {
     const start = parseDate(row.getAttribute('data-start-at'));
     const end = parseDate(row.getAttribute('data-end-at'));
@@ -161,13 +184,13 @@
     };
   }
 
-  function setOfferRowAction(row, status) {
+  function setOfferRowAction(row, status, isWinner) {
     const slot = row.querySelector('[data-offer-action]');
     if (!slot) return;
     const couponUrl = row.getAttribute('data-coupon-url') || '';
     let control;
 
-    if (status === 'live' && couponUrl.indexOf('https://') === 0) {
+    if (status === 'live' && couponUrl.indexOf('https://') === 0 && isWinner !== false) {
       control = document.createElement('a');
       control.className = 'button offer-cta';
       control.setAttribute('href', couponUrl);
@@ -189,7 +212,7 @@
       if (status === 'scheduled') {
         control.textContent = row.getAttribute('data-label-scheduled') || 'Scheduled';
       } else {
-        control.textContent = status === 'live' ? 'Unavailable' : 'Expired';
+        control.textContent = status === 'live' ? (couponUrl ? 'Use the offer above' : 'Unavailable') : 'Expired';
       }
     }
 
@@ -223,9 +246,16 @@
       changed = true;
       row.setAttribute('data-status', status);
       setText(row, '[data-offer-status]', OFFER_ROW_STATUS_LABEL[status]);
-      setOfferRowAction(row, status);
+      setOfferRowAction(row, status, true);
     });
     if (!changed) return false;
+
+    // One Enroll link per course: of the rows that are live, only the best one is a link.
+    scope.querySelectorAll('[data-offer-row-list]').forEach(function (list) {
+      Array.from(list.querySelectorAll('[data-offer-row][data-status="live"]'))
+        .sort(function (a, b) { return compareKeys(rowPriorityKey(a), rowPriorityKey(b)); })
+        .forEach(function (row, index) { setOfferRowAction(row, 'live', index === 0); });
+    });
 
     // Live -> Scheduled -> Expired inside every card, then earliest start.
     scope.querySelectorAll('[data-offer-row-list]').forEach(function (list) {
@@ -233,7 +263,11 @@
         .sort(function (a, b) {
           const left = offerRowTimes(a);
           const right = offerRowTimes(b);
-          return compareNumbers(left.rank, right.rank) || compareNumbers(left.start, right.start);
+          if (left.rank !== right.rank) return compareNumbers(left.rank, right.rank);
+          // live rows: the winning offer first; the others by start
+          return left.rank === OFFER_ROW_RANK.live
+            ? compareKeys(rowPriorityKey(a), rowPriorityKey(b))
+            : compareNumbers(left.start, right.start);
         })
         .forEach(function (row) { list.appendChild(row); });
     });
@@ -272,37 +306,115 @@
     return true;
   }
 
-  // --- Assessment pages: never leave an expired coupon showing as live ---
-  // The offer card on an assessment page is a build-time snapshot. Once its
-  // live window has closed this hides every coupon-specific element (and the
-  // hero "currently free" line), keeps the referral link as a plain course
-  // link, and sends the visitor to /offers/, which is always current.
-  function expireStaleAssessmentOffers(root, now) {
+  // --- Course pages: ONE button, always the right one ---
+  // The offer card on an assessment page is a build-time snapshot. In the
+  // browser the same ladder the build used is re-run against the clock using
+  // the offers embedded in the page, so the button is correct even when the
+  // page was built days ago: a live free seat, else the lowest live paid
+  // coupon, else the locked referral link. If the answer differs from what
+  // was built, only the button, its badge and its tracking are updated; the
+  // dated detail lines that went stale are replaced by a link to /offers/.
+
+  const OFFER_TYPE_TEXT = Object.freeze({
+    free_open: 'Flash Free Access',
+    free_targeted: 'Community Free Access',
+    best_price: 'Current Udemy Best Price',
+    custom_price: 'Instructor Special Price'
+  });
+  const OFFER_TYPE_CLASS = Object.freeze({
+    free_open: 'badge-free-open',
+    free_targeted: 'badge-free-targeted',
+    best_price: 'badge-best-price',
+    custom_price: 'badge-custom-price'
+  });
+
+  function windowRank(window) {
+    return window.offerType === 'free_open' ? 0 : (window.offerType === 'free_targeted' ? 1 : 2);
+  }
+
+  function windowKey(window) {
+    const rank = windowRank(window);
+    let price = parseFloat(window.discountPrice);
+    if (rank === 2 && (!isFinite(price) || price <= 0)) price = Infinity;
+    const end = parseDate(window.endAt);
+    return priorityKey(rank, price, end ? end.getTime() : Infinity);
+  }
+
+  function resolveDestination(offer, nowMs) {
+    const windows = Array.isArray(offer.windows) && offer.windows.length ? offer.windows : [offer];
+    const live = windows.filter(function (window) {
+      const start = parseDate(window.startAt);
+      const end = parseDate(window.endAt);
+      return window.couponUrl && start && end && start.getTime() <= nowMs && nowMs < end.getTime();
+    }).sort(function (a, b) { return compareKeys(windowKey(a), windowKey(b)); });
+    if (live.length) return { kind: 'coupon', url: live[0].couponUrl, window: live[0] };
+    if (offer.instructorReferralUrl) return { kind: 'referral', url: offer.instructorReferralUrl, window: null };
+    return null;
+  }
+
+  function readPageOffer() {
+    const holder = document.querySelector('[data-assessment-payload]');
+    if (!holder) return null;
+    try {
+      const payload = JSON.parse(holder.textContent);
+      return payload && payload.offer ? payload.offer : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function buttonLabel(dest) {
+    if (dest.kind === 'referral') return 'Start Full Practice on Udemy';
+    const window = dest.window;
+    if (windowRank(window) < 2) return 'Claim Your Free Seat';
+    const price = String(window.discountPrice || '').trim();
+    return 'Claim Today’s Offer' + (price && price !== '0' ? ' — ' + price + ' ' + (window.currency || '') : '');
+  }
+
+  function resolveAssessmentCard(root, now) {
     const scope = root || document;
-    const current = now instanceof Date ? now : new Date(now || Date.now());
-    scope.querySelectorAll('[data-offer-live-until]').forEach(function (card) {
-      const until = parseDate(card.getAttribute('data-offer-live-until'));
-      if (!until || current.getTime() < until.getTime() || card.hasAttribute('data-offer-ended')) return;
-      card.setAttribute('data-offer-ended', 'true');
+    const card = scope.querySelector('[data-offer-card]');
+    const link = card ? card.querySelector('a.button-primary') : null;
+    if (!card || !link) return;
+    const offer = readPageOffer();
+    if (!offer) return;
+    const dest = resolveDestination(offer, (now instanceof Date ? now : new Date(now || Date.now())).getTime());
+    if (!dest || link.getAttribute('href') === dest.url) return; // the built page is already right
 
-      card.querySelectorAll(
-        '.offer-badge, .offer-urgency, .offer-tier-list, .assessment-cta-disclosure, a.button-primary'
-      ).forEach(function (node) { node.hidden = true; });
-      scope.querySelectorAll('.hero-offer-note').forEach(function (node) { node.hidden = true; });
+    link.setAttribute('href', dest.url);
+    link.textContent = buttonLabel(dest) + ' ↗';
+    link.setAttribute('data-cta-kind', dest.kind);
+    link.setAttribute('data-offer-type', dest.window ? dest.window.offerType : (offer.offerType || ''));
 
-      const referral = card.querySelector('[data-cta-kind="referral"]');
-      if (referral) referral.textContent = 'View the full course on Udemy ↗';
+    let badge = card.querySelector('.offer-badge');
+    if (dest.kind === 'coupon') {
+      if (!badge) {
+        badge = document.createElement('p');
+        card.insertBefore(badge, link);
+      }
+      badge.className = 'offer-badge badge ' + (OFFER_TYPE_CLASS[dest.window.offerType] || '');
+      badge.textContent = OFFER_TYPE_TEXT[dest.window.offerType] || '';
+      badge.hidden = false;
+    } else if (badge) {
+      badge.hidden = true;
+    }
 
+    // Dated detail written at build time (live window, upcoming list, price caveat, hero line) is no longer reliable.
+    card.querySelectorAll('.offer-urgency, .offer-tier-list, .assessment-cta-disclosure').forEach(function (node) {
+      if (!node.hasAttribute('data-offer-refreshed')) node.hidden = true;
+    });
+    scope.querySelectorAll('.hero-offer-note').forEach(function (node) { node.hidden = true; });
+    if (!card.querySelector('[data-offer-refreshed]')) {
       const note = document.createElement('p');
       note.className = 'offer-urgency';
-      note.textContent = 'The offer shown here has ended. ';
-      const link = document.createElement('a');
-      link.setAttribute('href', card.getAttribute('data-offers-url') || '../../offers/');
-      link.textContent = 'See current offers and dates';
-      note.appendChild(link);
-      const heading = card.querySelector('h3');
-      card.insertBefore(note, heading ? heading.nextSibling : card.firstChild);
-    });
+      note.setAttribute('data-offer-refreshed', '');
+      note.appendChild(document.createTextNode('Offers and dates update automatically. '));
+      const more = document.createElement('a');
+      more.setAttribute('href', card.getAttribute('data-offers-url') || '../../offers/');
+      more.textContent = 'See every offer and its dates';
+      note.appendChild(more);
+      link.parentNode.insertBefore(note, link.nextSibling);
+    }
   }
 
   function refreshOffers(root, now) {
@@ -340,15 +452,15 @@
   function initialise() {
     // Rows first: refreshOffers() then notifies the filter engine, which
     // re-reads each card's (possibly just-updated) data-status.
-    expireStaleAssessmentOffers(document, new Date());
+    resolveAssessmentCard(document, new Date());
     refreshOfferRows(document, new Date());
     refreshOffers(document, new Date());
 
     // Keep an open tab honest when a window opens or closes while it is read.
-    if (document.querySelector('[data-offer-row], [data-offer-live-until]')) {
+    if (document.querySelector('[data-offer-row], [data-offer-card]')) {
       window.setInterval(function () {
         const now = new Date();
-        expireStaleAssessmentOffers(document, now);
+        resolveAssessmentCard(document, now);
         if (!refreshOfferRows(document, now)) return;
         document.querySelectorAll('[data-filter-root]').forEach(function (filterRoot) {
           filterRoot.dispatchEvent(new CustomEvent('certshield:offers-updated', { detail: {} }));
@@ -364,7 +476,8 @@
     formatExpiry: formatExpiry,
     offerRowStatus: offerRowStatus,
     refreshOfferRows: refreshOfferRows,
-    expireStaleAssessmentOffers: expireStaleAssessmentOffers,
+    resolveAssessmentCard: resolveAssessmentCard,
+    resolveDestination: resolveDestination,
     refreshOffers: refreshOffers
   };
 

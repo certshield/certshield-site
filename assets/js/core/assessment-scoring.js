@@ -419,25 +419,66 @@
   }
 
   /**
-   * Revenue-aware CTA routing: the coupon URL only while genuinely within
-   * its scheduled window, otherwise the locked referral URL, otherwise no
-   * link at all. Never fabricates or guesses a destination.
+   * Which live coupon window is THE button for a course: a free seat first
+   * (free_open, then free_targeted), then the lowest-priced paid coupon, then
+   * whichever ends first. A paid window with no real price never beats one
+   * that has a price. Mirrors window_priority_key() in scripts/catalog.py and
+   * offerPriorityKey() in assets/js/offers.js - keep all three in sync.
+   */
+  function offerPriorityKey(window) {
+    var rank = window.offerType === "free_open" ? 0 : window.offerType === "free_targeted" ? 1 : 2;
+    var price = 0;
+    if (rank === 2) {
+      price = parseFloat(window.discountPrice);
+      if (!isFinite(price) || price <= 0) price = Infinity;
+    }
+    var end = window.endAt ? new Date(window.endAt).getTime() : NaN;
+    return [rank, price, isFinite(end) ? end : Infinity];
+  }
+
+  function compareOfferPriority(a, b) {
+    var left = offerPriorityKey(a);
+    var right = offerPriorityKey(b);
+    for (var i = 0; i < left.length; i += 1) {
+      if (left[i] !== right[i]) return left[i] < right[i] ? -1 : 1;
+    }
+    return 0;
+  }
+
+  function liveCouponWindows(offer, now) {
+    var windows = Array.isArray(offer.windows) && offer.windows.length ? offer.windows : [offer];
+    return windows.filter(function (window) {
+      var start = window.startAt ? new Date(window.startAt).getTime() : NaN;
+      var end = window.endAt ? new Date(window.endAt).getTime() : NaN;
+      return window.couponUrl && isFinite(start) && isFinite(end) && start <= now && now < end;
+    });
+  }
+
+  /**
+   * Revenue-aware CTA routing, ONE destination: the best coupon that is
+   * genuinely live right now (see offerPriorityKey), otherwise the locked
+   * instructor referral URL, otherwise no link at all. Never fabricates or
+   * guesses a destination and never combines a coupon with a referral code.
+   * `offer` in the result is the page's offer with the winning window's own
+   * fields (offerType, price, dates, couponUrl) laid over it, so callers label
+   * the button for the window it actually points at.
    */
   function resolveCta(offer, nowMs) {
     var now = typeof nowMs === "number" ? nowMs : Date.now();
     if (!offer || !offer.courseId) {
       return { available: false, reason: "no_course_mapping", url: null, kind: null };
     }
-    var start = offer.startAt ? new Date(offer.startAt).getTime() : NaN;
-    var end = offer.endAt ? new Date(offer.endAt).getTime() : NaN;
-    var withinCouponWindow =
-      offer.couponUrl && Number.isFinite(start) && Number.isFinite(end) && start <= now && now < end;
-
-    if (withinCouponWindow) {
-      return { available: true, kind: "coupon", url: offer.couponUrl };
+    var live = liveCouponWindows(offer, now).sort(compareOfferPriority);
+    if (live.length) {
+      var winner = live[0];
+      var merged = {};
+      var key;
+      for (key in offer) if (Object.prototype.hasOwnProperty.call(offer, key)) merged[key] = offer[key];
+      for (key in winner) if (Object.prototype.hasOwnProperty.call(winner, key)) merged[key] = winner[key];
+      return { available: true, kind: "coupon", url: winner.couponUrl, offer: merged };
     }
     if (offer.instructorReferralUrl) {
-      return { available: true, kind: "referral", url: offer.instructorReferralUrl };
+      return { available: true, kind: "referral", url: offer.instructorReferralUrl, offer: offer };
     }
     return { available: false, reason: "missing_mapping", url: null, kind: null };
   }
@@ -572,6 +613,7 @@
     computeStudyActions: computeStudyActions,
     compareToPreviousAttempt: compareToPreviousAttempt,
     resolveCta: resolveCta,
+    offerPriorityKey: offerPriorityKey,
     bandByKey: bandByKey,
     bandByRank: bandByRank,
     selectStudyNudge: selectStudyNudge,

@@ -492,7 +492,10 @@
       questionsSinceLastNudge: this.questionsSinceLastNudge,
       lastState: result.state,
       streak: this.streak,
-      offer: this.payload.offer
+      offer: (function (payloadOffer) {
+        var resolved = scoring.resolveCta(payloadOffer || {}, Date.now());
+        return resolved.kind === "coupon" ? resolved.offer : null;
+      })(this.payload.offer)
     });
     if (nudge) {
       this.questionsSinceLastNudge = 0;
@@ -523,6 +526,7 @@
 
     var offer = this.payload.offer || {};
     var cta = scoring.resolveCta(offer, Date.now());
+    if (cta.offer) offer = cta.offer;
     var card = el("div", "study-nudge-card");
     card.appendChild(el("p", "study-nudge-headline", nudge.headline));
     card.appendChild(el("p", "study-nudge-body", nudge.body));
@@ -641,18 +645,15 @@
     scrollToElement(this.summaryPanel);
   };
 
-  /** The richest, highest-intent CTA moment: primary is whichever URL
-   * resolveCta picks (coupon while genuinely active, else the referral).
-   * The referral is surfaced as a secondary fallback only when there's a
-   * real free-seat cap that could genuinely run out (isFreeOfferType +
-   * offerIsCapped) — for an unlimited-redemption paid coupon there's
-   * nothing to run out of, so the secondary link would just steer a
-   * learner to pay full price for no reason and is correctly omitted.
-   * Copy is framed as a fallback ("Free seats full?"), never as something
-   * a learner would want to opt into over a free seat. */
+  /** The richest, highest-intent CTA moment: ONE button, to whichever URL
+   * resolveCta picks (the best genuinely live coupon - a free seat first, then
+   * the lowest paid price - else the locked instructor referral link). There
+   * is deliberately no second "enroll another way" link: two different
+   * buttons for the same course make the learner choose between them. */
   StudyModeRunner.prototype.renderSummaryCta = function renderSummaryCta(copy, meta) {
     var offer = this.payload.offer || {};
     var cta = scoring.resolveCta(offer, Date.now());
+    if (cta.offer) offer = cta.offer;
     var wrapper = el("div", "assessment-cta");
     wrapper.appendChild(el("p", "assessment-cta-eyebrow", "Your natural next step"));
     wrapper.appendChild(el("h3", "assessment-cta-heading", copy.heading));
@@ -673,18 +674,6 @@
 
       var urgency = offerUrgencyEl(offer, cta.kind);
       if (urgency) wrapper.appendChild(urgency);
-
-      var referralUrl = offer.instructorReferralUrl;
-      if (cta.kind === "coupon" && referralUrl && referralUrl !== cta.url && isFreeOfferType(offer.offerType) && offerIsCapped(offer)) {
-        var secondary = document.createElement("a");
-        secondary.className = "button button-text assessment-cta-secondary";
-        secondary.href = referralUrl;
-        secondary.target = "_blank";
-        secondary.rel = "noopener";
-        secondary.textContent = "Free seats full? Enroll directly ↗";
-        markCtaForTracking(secondary, offer, "referral", this.payload.courseId);
-        wrapper.appendChild(secondary);
-      }
     } else {
       wrapper.appendChild(el("p", "assessment-cta-missing", "A verified course link isn't configured for this assessment yet."));
     }

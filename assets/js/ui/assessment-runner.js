@@ -932,6 +932,7 @@
   AssessmentRunner.prototype.renderCta = function renderCta(band, certName) {
     var offer = this.payload.offer || {};
     var cta = scoring.resolveCta(offer, Date.now());
+    if (cta.offer) offer = cta.offer; // label the button for the window it points at
     var wrapper = el("div", "assessment-cta");
     var framing = (band.ctaFramingByKind && cta.kind && band.ctaFramingByKind[cta.kind]) || band.narrative;
 
@@ -958,18 +959,6 @@
 
       var urgency = domUtils.offerUrgencyEl(offer, cta.kind);
       if (urgency) wrapper.appendChild(urgency);
-
-      var referralUrl = offer.instructorReferralUrl;
-      if (cta.kind === "coupon" && referralUrl && referralUrl !== cta.url && domUtils.isFreeOfferType(offer.offerType) && domUtils.offerIsCapped(offer)) {
-        var referralLink = document.createElement("a");
-        referralLink.className = "button button-text assessment-cta-secondary";
-        referralLink.href = referralUrl;
-        referralLink.target = "_blank";
-        referralLink.rel = "noopener";
-        referralLink.textContent = "Free seats full? Enroll directly ↗";
-        domUtils.markCtaForTracking(referralLink, offer, "referral", this.payload.courseId);
-        wrapper.appendChild(referralLink);
-      }
     } else {
       wrapper.appendChild(
         el("p", "assessment-cta-missing", "A verified course link isn't configured for this assessment yet.")
