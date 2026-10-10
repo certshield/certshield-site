@@ -326,6 +326,7 @@
 
     this.progressBar = el("div", "assessment-progress-bar");
     this.progressBar.setAttribute("role", "progressbar");
+    this.progressBar.setAttribute("aria-label", "Assessment progress");
     this.progressBar.setAttribute("aria-valuemin", "0");
     this.progressBar.setAttribute("aria-valuemax", String(this.questions.length));
     this.progressFill = el("div", "assessment-progress-fill");
@@ -607,6 +608,7 @@
       var answered = (self.answers[question.id] || []).length === question.requiredSelections;
       var flagged = Boolean(self.flags[question.id]);
       button.classList.toggle("is-current", index === self.currentIndex);
+      if (index === self.currentIndex) domUtils.keepInView(self.navigator, button);
       button.classList.toggle("is-answered", answered);
       button.classList.toggle("is-flagged", flagged);
       button.setAttribute(
@@ -827,7 +829,7 @@
         body.appendChild(row);
       });
       table.appendChild(body);
-      var tableScroll = el("div", "assessment-table-scroll");
+      var tableScroll = domUtils.makeScrollRegion(el("div", "assessment-table-scroll"), "Domain results (scrollable table)");
       tableScroll.appendChild(table);
       this.resultsPanel.appendChild(tableScroll);
     }

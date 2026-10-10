@@ -135,7 +135,7 @@ Every offer for every certification is listed with its price, exact dates and ti
 - **Diagnostic Mode** — answer every question blind, then get an honest, evidence-based readiness signal by domain. This is the real test-yourself mode; nothing is shown until you submit.
 - **Study Mode** — attempt each question, then see its full explanation immediately. Lower-pressure, self-paced learning with no score on the line, for anyone not ready to be tested cold yet.
 
-Both modes run entirely in your browser — no account, no email, no tracking.
+Both modes run entirely in your browser — no account, no email, and your answers never leave your device. Analytics is off unless you choose to allow it ([privacy policy](https://practice.certshield.academy/privacy/)).
 
 ## FAQ
 

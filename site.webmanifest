@@ -1,6 +1,9 @@
 {
+  "id": "/",
   "name": "CertShield Practice",
   "short_name": "CertShield",
+  "description": "Free certification mock exams and readiness diagnostics with domain-level scoring.",
+  "lang": "en",
   "start_url": "/",
   "display": "browser",
   "background_color": "#f6f9f8",

@@ -93,18 +93,20 @@
    * Mode's per-question reveal, so the teaching content is one shared
    * rendering path, not two.
    */
-  function appendExplanationSections(container, question) {
+  function appendExplanationSections(container, question, headingTag) {
+    // h5 under the review list's h4 question titles; Study Mode has no question heading, so it passes "h3" (never skip a level)
+    var tag = headingTag || "h5";
     EXPLANATION_SECTION_ORDER.forEach(function addSection(pair) {
       var body = question.sections && question.sections[pair[0]];
       if (!body) return;
-      container.appendChild(el("h5", "", pair[1]));
+      container.appendChild(el(tag, "", pair[1]));
       var body_el = el("div", "");
       html(body_el, body);
       container.appendChild(body_el);
     });
 
     if (question.officialReferences && question.officialReferences.length) {
-      container.appendChild(el("h5", "", "Official References"));
+      container.appendChild(el(tag, "", "Official References"));
       var refList = document.createElement("ul");
       question.officialReferences.forEach(function addRef(reference) {
         var li = document.createElement("li");
@@ -118,6 +120,23 @@
       });
       container.appendChild(refList);
     }
+  }
+
+  /**
+   * On a phone the question navigator is ONE scrolling row (not four rows of buttons that push the question below the fold). This keeps
+   * the current question's button in view by moving only the row - scrollIntoView() would drag the whole page with it.
+   */
+  function keepInView(container, item) {
+    if (!container || !item || container.scrollWidth <= container.clientWidth) return;
+    container.scrollLeft = Math.max(0, item.offsetLeft - (container.clientWidth - item.offsetWidth) / 2);
+  }
+
+  /** A horizontally scrolling table wrapper must be reachable and nameable from the keyboard (WCAG 2.1.1 / axe scrollable-region-focusable). */
+  function makeScrollRegion(node, label) {
+    node.setAttribute("tabindex", "0");
+    node.setAttribute("role", "region");
+    node.setAttribute("aria-label", label);
+    return node;
   }
 
   function labelForOption(question, optionId) {
@@ -277,6 +296,8 @@
     formatClock: formatClock,
     safeStorage: safeStorage,
     appendExplanationSections: appendExplanationSections,
+    keepInView: keepInView,
+    makeScrollRegion: makeScrollRegion,
     labelForOption: labelForOption,
     priceSuffix: priceSuffix,
     isFreeOfferType: isFreeOfferType,

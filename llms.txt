@@ -87,3 +87,4 @@ CertShield Practice is an independent preparation resource; it is not affiliated
 - [Community Offers](https://practice.certshield.academy/offers/): Current discount or free-access coupons for the full-length Udemy practice exams
 - [Methodology](https://practice.certshield.academy/methodology/): How diagnostic scoring, confidence and readiness bands are calculated
 - [About](https://practice.certshield.academy/about/): About CertShield Practice and the instructor
+- [Privacy Policy](https://practice.certshield.academy/privacy/): What the site stores in your browser and how optional analytics works

@@ -306,7 +306,77 @@
     });
   }
 
+  /**
+   * Google Analytics is opt-in. The page ships no Google script and no inline gtag snippet; the tag loads here only after "Allow
+   * analytics". The choice is remembered in localStorage (so the banner shows once) and the footer's "Analytics settings" re-opens
+   * it, because withdrawing consent must be as easy as giving it. Choosing "No thanks" stops the tag and removes its cookies.
+   */
+  const CONSENT_KEY = 'certshield.consent.v1';
+
+  function readConsent() {
+    try { return window.localStorage.getItem(CONSENT_KEY); } catch (error) { return null; }
+  }
+
+  function writeConsent(value) {
+    try { window.localStorage.setItem(CONSENT_KEY, value); } catch (error) { /* private mode: the choice applies to this page view only */ }
+  }
+
+  function loadAnalytics(measurementId) {
+    window['ga-disable-' + measurementId] = false;
+    if (window.__csAnalyticsLoaded) return;
+    window.__csAnalyticsLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId);
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+    document.head.appendChild(script);
+  }
+
+  function stopAnalytics(measurementId) {
+    window['ga-disable-' + measurementId] = true;
+    try {
+      document.cookie.split(';').forEach(function (cookie) {
+        const name = cookie.split('=')[0].trim();
+        if (!/^_ga(_|$)/.test(name)) return;
+        const gone = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+        document.cookie = gone;
+        document.cookie = gone + ';domain=' + location.hostname;
+        document.cookie = gone + ';domain=.' + location.hostname;
+      });
+    } catch (error) { /* cookies unavailable: nothing to remove */ }
+  }
+
+  function initialiseAnalyticsConsent() {
+    const meta = document.querySelector('meta[name="cs-ga"]');
+    const measurementId = meta ? meta.getAttribute('content') : '';
+    const banner = document.querySelector('[data-consent]');
+    if (!measurementId || !banner) return;
+
+    const choice = readConsent();
+    if (choice === 'yes') loadAnalytics(measurementId);
+    else if (!choice) banner.hidden = false;
+
+    banner.addEventListener('click', function (event) {
+      const button = event.target.closest('[data-consent-choice]');
+      if (!button) return;
+      const value = button.getAttribute('data-consent-choice');
+      writeConsent(value);
+      banner.hidden = true;
+      if (value === 'yes') loadAnalytics(measurementId); else stopAnalytics(measurementId);
+    });
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('[data-consent-open]')) return;
+      banner.hidden = false;
+      const first = banner.querySelector('button');
+      if (first) first.focus();
+    });
+  }
+
   function initialise() {
+    initialiseAnalyticsConsent();
     initialiseNavigation();
     initialiseYears();
     initialiseCourseSearch();

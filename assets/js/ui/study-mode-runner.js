@@ -226,6 +226,10 @@
     this.runnerPanel.innerHTML = "";
 
     this.progressBar = el("div", "assessment-progress-bar");
+    this.progressBar.setAttribute("role", "progressbar");
+    this.progressBar.setAttribute("aria-label", "Study progress");
+    this.progressBar.setAttribute("aria-valuemin", "0");
+    this.progressBar.setAttribute("aria-valuemax", String(this.questions.length));
     this.progressFill = el("div", "assessment-progress-fill");
     this.progressBar.appendChild(this.progressFill);
     this.runnerPanel.appendChild(this.progressBar);
@@ -377,6 +381,7 @@
       var correct = isRevealed && scoring.scoreQuestion(question, self.answers[question.id]).correct;
       var flagged = Boolean(self.flags[question.id]);
       button.classList.toggle("is-current", index === self.currentIndex);
+      if (index === self.currentIndex) domUtils.keepInView(self.navigator, button);
       button.classList.toggle("is-answered", isRevealed && correct);
       button.classList.toggle("is-incorrect", isRevealed && !correct);
       button.classList.toggle("is-flagged", flagged);
@@ -455,6 +460,7 @@
     this.updateScoreText();
     if (this.progressFill) {
       this.progressFill.style.width = ((this.currentIndex + 1) / this.questions.length) * 100 + "%";
+      this.progressBar.setAttribute("aria-valuenow", String(this.currentIndex + 1));
     }
     this.announce(this.progressText.textContent + (isRevealed ? ", already answered" : ""));
   };
@@ -516,7 +522,7 @@
       var correctLabel = result.correctAnswers.map(function label(id) { return labelForOption(question, id); }).join("; ");
       panel.appendChild(el("p", "", "Correct answer: " + correctLabel));
     }
-    appendExplanationSections(panel, question);
+    appendExplanationSections(panel, question, "h3"); // Study Mode's panel sits straight under the page's h2
     this.questionHost.appendChild(panel);
   };
 
@@ -632,7 +638,7 @@
         body.appendChild(row);
       });
       table.appendChild(body);
-      var tableScroll = el("div", "assessment-table-scroll");
+      var tableScroll = domUtils.makeScrollRegion(el("div", "assessment-table-scroll"), "Domain summary (scrollable table)");
       tableScroll.appendChild(table);
       this.summaryPanel.appendChild(tableScroll);
     }
