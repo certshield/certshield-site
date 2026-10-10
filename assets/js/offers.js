@@ -306,26 +306,23 @@
     return true;
   }
 
-  // --- Course pages: ONE button, always the right one ---
-  // The offer card on an assessment page is a build-time snapshot. In the
-  // browser the same ladder the build used is re-run against the clock using
-  // the offers embedded in the page, so the button is correct even when the
-  // page was built days ago: a live free seat, else the lowest live paid
-  // coupon, else the locked referral link. If the answer differs from what
-  // was built, only the button, its badge and its tracking are updated; the
-  // dated detail lines that went stale are replaced by a link to /offers/.
+  // --- Course pages: ONE Udemy link; offers are text ---
+  // The button on an assessment page is always the course's locked instructor
+  // referral link. A live free seat or price is described next to it as text
+  // and claimed on this site's Offers page, so the page never asks the reader to
+  // choose between two ways into Udemy. That offer text is a build-time
+  // snapshot, so in the browser the live window is re-evaluated against the
+  // clock using the offers embedded in the page (the same priority order the
+  // build and the Offers page use). The button does not change - only its
+  // offer-type tracking value does (which offer was live when the reader left
+  // for Udemy) - and when the live offer is no longer the one the page was
+  // built with, the stale dated lines are replaced by a link to the Offers page.
 
   const OFFER_TYPE_TEXT = Object.freeze({
     free_open: 'Flash Free Access',
     free_targeted: 'Community Free Access',
     best_price: 'Current Udemy Best Price',
     custom_price: 'Instructor Special Price'
-  });
-  const OFFER_TYPE_CLASS = Object.freeze({
-    free_open: 'badge-free-open',
-    free_targeted: 'badge-free-targeted',
-    best_price: 'badge-best-price',
-    custom_price: 'badge-custom-price'
   });
 
   function windowRank(window) {
@@ -340,16 +337,28 @@
     return priorityKey(rank, price, end ? end.getTime() : Infinity);
   }
 
-  function resolveDestination(offer, nowMs) {
+  // The offer that is genuinely live right now and wins the priority order, or null.
+  function liveWindowOf(offer, nowMs) {
     const windows = Array.isArray(offer.windows) && offer.windows.length ? offer.windows : [offer];
     const live = windows.filter(function (window) {
       const start = parseDate(window.startAt);
       const end = parseDate(window.endAt);
       return window.couponUrl && start && end && start.getTime() <= nowMs && nowMs < end.getTime();
     }).sort(function (a, b) { return compareKeys(windowKey(a), windowKey(b)); });
-    if (live.length) return { kind: 'coupon', url: live[0].couponUrl, window: live[0] };
-    if (offer.instructorReferralUrl) return { kind: 'referral', url: offer.instructorReferralUrl, window: null };
+    return live.length ? live[0] : null;
+  }
+
+  // Where the button points: the locked referral link. Only a course with no referral URL falls back to its best
+  // live coupon. `live` is the offer to mention as text, whichever way the button goes.
+  function resolveDestination(offer, nowMs) {
+    const live = liveWindowOf(offer, nowMs);
+    if (offer.instructorReferralUrl) return { kind: 'referral', url: offer.instructorReferralUrl, window: null, live: live };
+    if (live) return { kind: 'coupon', url: live.couponUrl, window: live, live: live };
     return null;
+  }
+
+  function liveKeyOf(window) {
+    return window ? (window.offerType || '') + '|' + (window.couponCode || '') : '';
   }
 
   function readPageOffer() {
@@ -379,42 +388,53 @@
     const offer = readPageOffer();
     if (!offer) return;
     const dest = resolveDestination(offer, (now instanceof Date ? now : new Date(now || Date.now())).getTime());
-    if (!dest || link.getAttribute('href') === dest.url) return; // the built page is already right
+    if (!dest) return;
 
-    link.setAttribute('href', dest.url);
-    link.textContent = buttonLabel(dest) + ' ↗';
-    link.setAttribute('data-cta-kind', dest.kind);
-    link.setAttribute('data-offer-type', dest.window ? dest.window.offerType : (offer.offerType || ''));
-
-    let badge = card.querySelector('.offer-badge');
-    if (dest.kind === 'coupon') {
-      if (!badge) {
-        badge = document.createElement('p');
-        card.insertBefore(badge, link);
-      }
-      badge.className = 'offer-badge badge ' + (OFFER_TYPE_CLASS[dest.window.offerType] || '');
-      badge.textContent = OFFER_TYPE_TEXT[dest.window.offerType] || '';
-      badge.hidden = false;
-    } else if (badge) {
-      badge.hidden = true;
+    // The built button is already the referral link; only a course with no referral URL can need its coupon swapped.
+    if (link.getAttribute('href') !== dest.url) {
+      link.setAttribute('href', dest.url);
+      link.textContent = buttonLabel(dest) + ' ↗';
+      link.setAttribute('data-cta-kind', dest.kind);
     }
+    // Which offer is live right now, recorded on the cta_click event.
+    const liveType = dest.live ? (dest.live.offerType || '') : '';
+    if (link.getAttribute('data-offer-type') !== liveType) link.setAttribute('data-offer-type', liveType);
 
-    // Dated detail written at build time (live window, upcoming list, price caveat, hero line) is no longer reliable.
-    card.querySelectorAll('.offer-urgency, .offer-tier-list, .assessment-cta-disclosure').forEach(function (node) {
-      if (!node.hasAttribute('data-offer-refreshed')) node.hidden = true;
-    });
+    // Is the offer text written at build time still the offer that is live? If not, replace the dated lines.
+    const liveKey = liveKeyOf(dest.live);
+    const shown = card.hasAttribute('data-live-shown') ? card.getAttribute('data-live-shown') : (card.getAttribute('data-live-offer') || '');
+    if (shown === liveKey) return;
+    card.setAttribute('data-live-shown', liveKey);
+
+    card.querySelectorAll('.offer-live, .offer-tier-list').forEach(function (node) { node.hidden = true; });
     scope.querySelectorAll('.hero-offer-note').forEach(function (node) { node.hidden = true; });
-    if (!card.querySelector('[data-offer-refreshed]')) {
-      const note = document.createElement('p');
+    let note = card.querySelector('[data-offer-refreshed]');
+    if (!note) {
+      note = document.createElement('p');
       note.className = 'offer-urgency';
       note.setAttribute('data-offer-refreshed', '');
-      note.appendChild(document.createTextNode('Offers and dates update automatically. '));
-      const more = document.createElement('a');
-      more.setAttribute('href', card.getAttribute('data-offers-url') || '../../offers/');
-      more.textContent = 'See every offer and its dates';
-      note.appendChild(more);
       link.parentNode.insertBefore(note, link.nextSibling);
     }
+    while (note.firstChild) note.removeChild(note.firstChild);
+    const more = document.createElement('a');
+    more.setAttribute('href', card.getAttribute('data-offers-url') || '../../offers/');
+    if (dest.live) {
+      const label = document.createElement('strong');
+      label.textContent = OFFER_TYPE_TEXT[dest.live.offerType] || 'An offer';
+      note.appendChild(label);
+      note.appendChild(document.createTextNode(' is live for this course right now. '));
+      more.textContent = 'See the dates and claim it on the Offers page →';
+      if (offer.courseId) {
+        more.setAttribute('data-ga-cta', '1');
+        more.setAttribute('data-cta-kind', 'offers_link');
+        more.setAttribute('data-offer-type', dest.live.offerType || '');
+        more.setAttribute('data-course-id', offer.courseId);
+      }
+    } else {
+      note.appendChild(document.createTextNode('Offers and dates update automatically. '));
+      more.textContent = 'See every offer and its dates';
+    }
+    note.appendChild(more);
   }
 
   function refreshOffers(root, now) {

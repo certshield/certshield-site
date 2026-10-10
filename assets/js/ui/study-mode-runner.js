@@ -34,6 +34,8 @@
   var offerBadgeEl = domUtils.offerBadgeEl;
   var offerUrgencyEl = domUtils.offerUrgencyEl;
   var markCtaForTracking = domUtils.markCtaForTracking;
+  var liveOfferNoteEl = domUtils.liveOfferNoteEl;
+  var offersPageUrl = domUtils.offersPageUrl;
 
   var STORAGE_PREFIX = "certshield.study.v1.";
   var FLAG_ICON_SVG =
@@ -492,10 +494,8 @@
       questionsSinceLastNudge: this.questionsSinceLastNudge,
       lastState: result.state,
       streak: this.streak,
-      offer: (function (payloadOffer) {
-        var resolved = scoring.resolveCta(payloadOffer || {}, Date.now());
-        return resolved.kind === "coupon" ? resolved.offer : null;
-      })(this.payload.offer)
+      // the offer that is live right now (null when none) - its real deadline feeds the milestone nudge
+      offer: scoring.resolveCta(this.payload.offer || {}, Date.now()).liveOffer
     });
     if (nudge) {
       this.questionsSinceLastNudge = 0;
@@ -524,9 +524,8 @@
     var existing = this.questionHost.querySelector(".study-nudge-card");
     if (existing) existing.remove();
 
-    var offer = this.payload.offer || {};
-    var cta = scoring.resolveCta(offer, Date.now());
-    if (cta.offer) offer = cta.offer;
+    var cta = scoring.resolveCta(this.payload.offer || {}, Date.now());
+    var offer = cta.offer || {}; // only matters for the coupon fallback
     var card = el("div", "study-nudge-card");
     card.appendChild(el("p", "study-nudge-headline", nudge.headline));
     card.appendChild(el("p", "study-nudge-body", nudge.body));
@@ -535,11 +534,18 @@
       link.className = "button button-secondary study-nudge-cta";
       link.href = cta.url;
       link.target = "_blank";
-      link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
+      link.rel = "sponsored noopener";
       link.textContent =
         cta.kind === "coupon" ? (isFreeOfferType(offer.offerType) ? "See Today's Free Offer ↗" : "See Today's Offer ↗") : "See the Full Course ↗";
-      markCtaForTracking(link, offer, cta.kind, this.payload.courseId);
+      markCtaForTracking(link, cta.liveOffer || {}, cta.kind, this.payload.courseId);
       card.appendChild(link);
+      if (cta.kind === "referral" && cta.liveOffer) {
+        // the live offer is a mention with an internal link, never a second way into Udemy
+        var offerLink = el("a", "study-nudge-offer-link", "Today's offer →");
+        offerLink.href = offersPageUrl(this.payload.slug);
+        markCtaForTracking(offerLink, cta.liveOffer, "offers_link", this.payload.courseId);
+        card.appendChild(offerLink);
+      }
     }
     var dismiss = el("button", "study-nudge-dismiss", "Dismiss");
     dismiss.type = "button";
@@ -645,35 +651,38 @@
     scrollToElement(this.summaryPanel);
   };
 
-  /** The richest, highest-intent CTA moment: ONE button, to whichever URL
-   * resolveCta picks (the best genuinely live coupon - a free seat first, then
-   * the lowest paid price - else the locked instructor referral link). There
-   * is deliberately no second "enroll another way" link: two different
-   * buttons for the same course make the learner choose between them. */
+  /** The richest, highest-intent CTA moment: ONE button, to the locked
+   * instructor referral link (resolveCta). A live offer - a free seat first,
+   * then the lowest paid price - is mentioned below it as text with a link to
+   * claim it on the Offers page. There is deliberately no second "enroll
+   * another way" link: two different buttons for the same course make the
+   * learner choose between them. */
   StudyModeRunner.prototype.renderSummaryCta = function renderSummaryCta(copy, meta) {
-    var offer = this.payload.offer || {};
-    var cta = scoring.resolveCta(offer, Date.now());
-    if (cta.offer) offer = cta.offer;
+    var cta = scoring.resolveCta(this.payload.offer || {}, Date.now());
+    var offer = cta.offer || {}; // only matters for the coupon fallback
     var wrapper = el("div", "assessment-cta");
     wrapper.appendChild(el("p", "assessment-cta-eyebrow", "Your natural next step"));
     wrapper.appendChild(el("h3", "assessment-cta-heading", copy.heading));
     wrapper.appendChild(el("p", "assessment-cta-body", copy.body));
 
     if (cta.available) {
-      var badge = offerBadgeEl(offer, cta.kind);
+      var badge = offerBadgeEl(offer, cta.kind); // coupon fallback only
       if (badge) wrapper.appendChild(badge);
 
       var link = document.createElement("a");
       link.className = "button button-primary assessment-cta-button";
       link.href = cta.url;
       link.target = "_blank";
-      link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
+      link.rel = "sponsored noopener";
       link.textContent = ctaButtonLabel(offer, cta.kind) + " ↗";
-      markCtaForTracking(link, offer, cta.kind, this.payload.courseId);
+      markCtaForTracking(link, cta.liveOffer || {}, cta.kind, this.payload.courseId);
       wrapper.appendChild(link);
 
-      var urgency = offerUrgencyEl(offer, cta.kind);
+      var urgency = offerUrgencyEl(offer, cta.kind); // coupon fallback only
       if (urgency) wrapper.appendChild(urgency);
+
+      var liveNote = cta.kind === "referral" ? liveOfferNoteEl(cta.liveOffer, offersPageUrl(this.payload.slug), this.payload.courseId) : null;
+      if (liveNote) wrapper.appendChild(liveNote);
     } else {
       wrapper.appendChild(el("p", "assessment-cta-missing", "A verified course link isn't configured for this assessment yet."));
     }

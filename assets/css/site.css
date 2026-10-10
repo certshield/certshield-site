@@ -1084,6 +1084,49 @@ button.button {
   font-weight: 800;
 }
 
+/* A live offer is described as text inside the course card (and under the results button); claiming it happens on
+   the Offers page, so the only Udemy link next to it is the course button. */
+.offer-live {
+  margin: 0.85rem 0 0;
+  padding: 0.75rem 0 0;
+  border-top: 1px dashed var(--line);
+}
+
+.offer-live .offer-urgency {
+  margin-top: 0.35rem;
+}
+
+.offer-claim {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.assessment-cta .offer-live {
+  border-top-color: rgba(255, 255, 255, 0.3);
+}
+
+.assessment-cta .offer-claim a,
+.assessment-cta .offer-live a {
+  color: #fff;
+}
+
+.study-nudge-offer-link {
+  display: inline-block;
+  margin-left: 1rem;
+  font-weight: 800;
+}
+
+/* The course-page "Claim this offer" link lands on the course's card on the Offers page. */
+.offer-card {
+  scroll-margin-top: 5.5rem;
+}
+
+.offer-card:target {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
 .offer-cta {
   align-self: flex-start;
   margin-top: auto;

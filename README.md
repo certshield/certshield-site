@@ -126,7 +126,7 @@ New certifications are added regularly; see the <a href="https://practice.certsh
 - **Instructor Special Price** — a discounted price on the full-length practice exam, below Udemy's standard price, as a thank-you to learners who try the free diagnostic first.
 - **Current Udemy Best Price** — Udemy's lowest available price tier for the course, offered for a short window.
 
-Every offer for every certification is listed with its price, exact dates and times (with the time zone the coupon uses) and a status — **Live**, **Scheduled** or **Expired** — sorted Live first. Statuses switch automatically in your browser the moment a window opens or closes, so the page stays correct between updates. To keep things simple there is **one Enroll button per course**: the best offer that is live right now — a free seat first, otherwise the lowest price — and your course page always shows that same single button, so you never have to choose between two links. <a href="https://practice.certshield.academy/offers/" target="_blank" rel="noopener">Current Offers</a> always reflects what's live right now — not what was live when this README was last updated. Udemy always confirms final availability, pricing, and your own local currency at checkout.
+Every offer for every certification is listed with its price, exact dates and times (with the time zone the coupon uses) and a status — **Live**, **Scheduled** or **Expired** — sorted Live first. Statuses switch automatically in your browser the moment a window opens or closes, so the page stays correct between updates. To keep things simple, each course has **one Enroll button on the Offers page** — the best offer that is live right now, a free seat first, otherwise the lowest price — and each course page has **one link to the course on Udemy** (it opens at Udemy's current price) that mentions a live offer as text and points you to the Offers page to claim it, so you never have to choose between two links. <a href="https://practice.certshield.academy/offers/" target="_blank" rel="noopener">Current Offers</a> always reflects what's live right now — not what was live when this README was last updated. Udemy always confirms final availability, pricing, and your own local currency at checkout.
 
 ### <a href="https://practice.certshield.academy/offers/" target="_blank" rel="noopener">See Today's Offers → practice.certshield.academy/offers</a>
 
@@ -152,7 +152,7 @@ No. Every diagnostic is free with no signup; progress saves only in your browser
 The free diagnostic (30 questions for most certifications, 50 for CCAR-F) is built to give an honest readiness signal. The full-length Udemy practice exam from the same instructor covers the complete question bank in much greater depth.
 
 **Are the coupons and discounts on the offers page real?**
-Yes — every offer links to a live, verifiable Udemy coupon or the instructor's own referral pricing, with an exact start and end date. Nothing is a fake countdown or an expired code left up for show; see [Current Offers](#current-offers) above for how the two offer types work.
+Yes — every offer on the Offers page links to a live, verifiable Udemy coupon with an exact start and end date. Nothing is a fake countdown or an expired code left up for show; see [Current Offers](#current-offers) above for how the offer types work.
 
 ## Disclaimer
 

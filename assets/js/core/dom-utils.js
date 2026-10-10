@@ -238,6 +238,36 @@
     return null;
   }
 
+  /** The Offers page card for this assessment - where a live offer is claimed. */
+  function offersPageUrl(slug) {
+    var holder = document.querySelector("[data-offers-url]");
+    var fromPage = holder ? holder.getAttribute("data-offers-url") : "";
+    return fromPage || "../../offers/#offer-" + (slug || "");
+  }
+
+  /**
+   * Text-only mention of an offer that is live right now - its type badge and
+   * the real cap/dates line - plus an internal link to claim it on the Offers
+   * page. It never carries a Udemy URL: the course button above it is the
+   * page's only link to Udemy. Returns null when nothing is live. Mirrors
+   * offer_live_html() in scripts/render_site.py.
+   */
+  function liveOfferNoteEl(liveOffer, offersUrl, courseId) {
+    if (!liveOffer || !OFFER_TYPE_LABELS[liveOffer.offerType]) return null;
+    var wrapper = el("div", "offer-live");
+    var badge = offerBadgeEl(liveOffer, "coupon");
+    if (badge) wrapper.appendChild(badge);
+    var urgency = offerUrgencyEl(liveOffer, "coupon");
+    if (urgency) wrapper.appendChild(urgency);
+    var claim = el("p", "offer-claim");
+    var link = el("a", "", "Claim this offer on the Offers page \u2192");
+    link.href = offersUrl;
+    markCtaForTracking(link, liveOffer, "offers_link", courseId);
+    claim.appendChild(link);
+    wrapper.appendChild(claim);
+    return wrapper;
+  }
+
   globalObject.CertShieldDomUtils = {
     el: el,
     html: html,
@@ -255,6 +285,8 @@
     ctaButtonLabel: ctaButtonLabel,
     offerBadgeEl: offerBadgeEl,
     offerUrgencyEl: offerUrgencyEl,
+    offersPageUrl: offersPageUrl,
+    liveOfferNoteEl: liveOfferNoteEl,
     markCtaForTracking: markCtaForTracking
   };
 })(typeof window !== "undefined" ? window : this);

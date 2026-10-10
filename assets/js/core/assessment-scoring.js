@@ -419,11 +419,12 @@
   }
 
   /**
-   * Which live coupon window is THE button for a course: a free seat first
-   * (free_open, then free_targeted), then the lowest-priced paid coupon, then
-   * whichever ends first. A paid window with no real price never beats one
+   * Which live coupon window is THE offer for a course (the one the Offers page
+   * makes its Enroll link and the course page mentions as live): a free seat
+   * first (free_open, then free_targeted), then the lowest-priced paid coupon,
+   * then whichever ends first. A paid window with no real price never beats one
    * that has a price. Mirrors window_priority_key() in scripts/catalog.py and
-   * offerPriorityKey() in assets/js/offers.js - keep all three in sync.
+   * windowKey() in assets/js/offers.js - keep all three in sync.
    */
   function offerPriorityKey(window) {
     var rank = window.offerType === "free_open" ? 0 : window.offerType === "free_targeted" ? 1 : 2;
@@ -455,32 +456,36 @@
   }
 
   /**
-   * Revenue-aware CTA routing, ONE destination: the best coupon that is
-   * genuinely live right now (see offerPriorityKey), otherwise the locked
-   * instructor referral URL, otherwise no link at all. Never fabricates or
-   * guesses a destination and never combines a coupon with a referral code.
-   * `offer` in the result is the page's offer with the winning window's own
-   * fields (offerType, price, dates, couponUrl) laid over it, so callers label
-   * the button for the window it actually points at.
+   * Revenue-aware CTA routing, ONE destination: the course's locked instructor
+   * referral URL - always. A live free seat or price is not a second route: it
+   * is described as text and claimed on the Offers page, so `liveOffer` (the
+   * page's offer with the best genuinely live window's own fields laid over it,
+   * see offerPriorityKey; null when nothing is live) is returned for callers to
+   * MENTION, never to link. Only a course with no locked referral URL falls
+   * back to its best live coupon (also an instructor-paid link); with neither
+   * there is no link at all. Never fabricates or guesses a destination and
+   * never combines a coupon with a referral code.
    */
   function resolveCta(offer, nowMs) {
     var now = typeof nowMs === "number" ? nowMs : Date.now();
     if (!offer || !offer.courseId) {
-      return { available: false, reason: "no_course_mapping", url: null, kind: null };
+      return { available: false, reason: "no_course_mapping", url: null, kind: null, liveOffer: null };
     }
     var live = liveCouponWindows(offer, now).sort(compareOfferPriority);
+    var liveOffer = null;
     if (live.length) {
-      var winner = live[0];
-      var merged = {};
+      liveOffer = {};
       var key;
-      for (key in offer) if (Object.prototype.hasOwnProperty.call(offer, key)) merged[key] = offer[key];
-      for (key in winner) if (Object.prototype.hasOwnProperty.call(winner, key)) merged[key] = winner[key];
-      return { available: true, kind: "coupon", url: winner.couponUrl, offer: merged };
+      for (key in offer) if (Object.prototype.hasOwnProperty.call(offer, key)) liveOffer[key] = offer[key];
+      for (key in live[0]) if (Object.prototype.hasOwnProperty.call(live[0], key)) liveOffer[key] = live[0][key];
     }
     if (offer.instructorReferralUrl) {
-      return { available: true, kind: "referral", url: offer.instructorReferralUrl, offer: offer };
+      return { available: true, kind: "referral", url: offer.instructorReferralUrl, offer: offer, liveOffer: liveOffer };
     }
-    return { available: false, reason: "missing_mapping", url: null, kind: null };
+    if (liveOffer) {
+      return { available: true, kind: "coupon", url: live[0].couponUrl, offer: liveOffer, liveOffer: liveOffer };
+    }
+    return { available: false, reason: "missing_mapping", url: null, kind: null, liveOffer: null };
   }
 
   // ------------------------------------------------------------------

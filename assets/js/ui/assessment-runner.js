@@ -930,9 +930,8 @@
   }
 
   AssessmentRunner.prototype.renderCta = function renderCta(band, certName) {
-    var offer = this.payload.offer || {};
-    var cta = scoring.resolveCta(offer, Date.now());
-    if (cta.offer) offer = cta.offer; // label the button for the window it points at
+    var cta = scoring.resolveCta(this.payload.offer || {}, Date.now());
+    var offer = cta.offer || {}; // only matters for the coupon fallback: label the button for the window it points at
     var wrapper = el("div", "assessment-cta");
     var framing = (band.ctaFramingByKind && cta.kind && band.ctaFramingByKind[cta.kind]) || band.narrative;
 
@@ -941,24 +940,32 @@
     wrapper.appendChild(el("p", "assessment-cta-body", framing));
 
     if (cta.available) {
-      var badge = domUtils.offerBadgeEl(offer, cta.kind);
+      var badge = domUtils.offerBadgeEl(offer, cta.kind); // coupon fallback only
       if (badge) wrapper.appendChild(badge);
 
       var link = document.createElement("a");
       link.className = "button button-primary assessment-cta-button";
       link.href = cta.url;
       link.target = "_blank";
-      link.rel = cta.kind === "coupon" ? "sponsored noopener" : "noopener";
+      link.rel = "sponsored noopener";
       link.textContent =
         cta.kind === "coupon"
           ? (domUtils.isFreeOfferType(offer.offerType) ? "Claim Your Free Seat" : "Claim Today's Offer" + domUtils.priceSuffix(offer)) +
             " & Start Full Practice ↗"
           : "Start Full Practice on Udemy ↗";
-      domUtils.markCtaForTracking(link, offer, cta.kind, this.payload.courseId);
+      // data-offer-type records which offer was live when the reader left for Udemy
+      domUtils.markCtaForTracking(link, cta.liveOffer || {}, cta.kind, this.payload.courseId);
       wrapper.appendChild(link);
 
-      var urgency = domUtils.offerUrgencyEl(offer, cta.kind);
+      var urgency = domUtils.offerUrgencyEl(offer, cta.kind); // coupon fallback only
       if (urgency) wrapper.appendChild(urgency);
+
+      // A live offer is a mention, not a second way in: text plus a link to claim it on the Offers page.
+      var liveNote =
+        cta.kind === "referral"
+          ? domUtils.liveOfferNoteEl(cta.liveOffer, domUtils.offersPageUrl(this.payload.slug), this.payload.courseId)
+          : null;
+      if (liveNote) wrapper.appendChild(liveNote);
     } else {
       wrapper.appendChild(
         el("p", "assessment-cta-missing", "A verified course link isn't configured for this assessment yet.")
