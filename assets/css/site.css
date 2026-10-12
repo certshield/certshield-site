@@ -233,7 +233,7 @@ a:hover {
     radial-gradient(circle at 86% 12%, rgba(46, 186, 181, 0.2), transparent 27rem),
     linear-gradient(135deg, var(--brand-950), var(--brand-800));
   color: #fff;
-  padding: clamp(4.2rem, 9vw, 7.7rem) 0 clamp(3.6rem, 7vw, 6.2rem);
+  padding: clamp(2.4rem, 6vw, 4.6rem) 0 clamp(2.6rem, 5vw, 4.2rem);
 }
 
 .hero::after {
@@ -317,6 +317,14 @@ h3 {
 .hero h1,
 .page-hero h1 {
   color: #fff;
+  font-size: clamp(2rem, 4.8vw, 3.7rem);
+}
+
+.hero-vendors {
+  max-width: 49rem;
+  margin: 1.25rem 0 0;
+  color: #bfe3df;
+  font-size: 0.95rem;
 }
 
 .hero-copy {
@@ -885,7 +893,7 @@ button.button {
 .page-hero {
   background: linear-gradient(135deg, var(--brand-950), var(--brand-800));
   color: #d9efed;
-  padding: clamp(3.4rem, 7vw, 6rem) 0;
+  padding: clamp(2.2rem, 5vw, 3.8rem) 0;
 }
 
 .hero-offer-note {
