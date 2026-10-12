@@ -19,7 +19,7 @@
     contact: script.getAttribute('data-contact') || 'contact@certshield.academy',
     turnstile: script.getAttribute('data-turnstile-sitekey') || ''
   };
-  var MAX = 2000, MIN = 10, KEY = 'certshield.feedback.draft';
+  var MAX = 2000, MIN = 3, KEY = 'certshield.feedback.draft';
   var TYPES = [
     ['error', 'Found an error', 'What is wrong? Name the question or the sentence you saw.'],
     ['idea', 'Idea', 'What would make CertShield more useful for you?'],
@@ -232,7 +232,7 @@
     if (e) e.preventDefault();
     if (busy) return;
     var msg = els.msg.value.trim(), email = els.email.value.trim();
-    if (msg.length < MIN) { say('Please write a few words so we can act on it.', true); els.msg.focus(); return; }
+    if (msg.length < MIN) { say('Please type a short message first.', true); els.msg.focus(); return; }
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { els.reply.open = true; say('That email address looks incomplete. Fix it or leave it empty.', true); els.email.focus(); return; }
     var c = context(), withCtx = !els.ctx.hasAttribute('data-off');
     if (cfg.turnstile && !tsToken) {
