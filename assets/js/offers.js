@@ -376,8 +376,8 @@
     if (dest.kind === 'referral') return 'Start Full Practice on Udemy';
     const window = dest.window;
     if (windowRank(window) < 2) return 'Claim Your Free Seat';
-    const price = String(window.discountPrice || '').trim();
-    return 'Claim Today’s Offer' + (price && price !== '0' ? ' — ' + price + ' ' + (window.currency || '') : '');
+    // A rupee price is shown only to visitors in India (price-locale.js); everyone else gets the plain label.
+    return 'Claim Today’s Offer' + (globalThis.CertShieldPrice ? globalThis.CertShieldPrice.suffix(window) : '');
   }
 
   function resolveAssessmentCard(root, now) {

@@ -147,20 +147,23 @@
   }
 
   /**
-   * " - <amount> <ISO currency code>" for a genuinely priced offer, else "".
-   * Never shown for a free coupon (discountPrice "0") so a fully-free offer
-   * is never mislabeled as paid. No assumed currency symbol, since a
-   * source-market price isn't necessarily the visitor's local price.
-   * Mirrors price_suffix() in scripts/render_site.py exactly - keep both in
-   * sync if this changes. Shared here since both runners show a CTA price.
+   * True for a best_price / custom_price offer with a real (non-zero) discount price - never for a free coupon.
+   * Mirrors is_priced_offer() in scripts/render_site.py.
+   */
+  function isPricedOffer(offer) {
+    offer = offer || {};
+    var price = String(offer.discountPrice || "").trim();
+    return (offer.offerType === "best_price" || offer.offerType === "custom_price") && Boolean(price) && price !== "0";
+  }
+
+  /**
+   * " \u2014 <amount>" for a priced offer when this visitor may see it, else "". A rupee price is shown only to
+   * visitors in India (see price-locale.js); a global visitor gets the plain label, because Udemy shows their own
+   * currency at checkout. Mirrors price_reveal() in scripts/render_site.py.
    */
   function priceSuffix(offer) {
-    offer = offer || {};
-    var offerType = offer.offerType || "";
-    var price = String(offer.discountPrice || "").trim();
-    var currency = String(offer.currency || "").trim();
-    var showsPrice = (offerType === "best_price" || offerType === "custom_price") && price && price !== "0";
-    return showsPrice ? " — " + price + " " + currency : "";
+    var locale = globalObject.CertShieldPrice;
+    return locale ? locale.suffix(offer) : "";
   }
 
   /**
@@ -300,6 +303,7 @@
     makeScrollRegion: makeScrollRegion,
     labelForOption: labelForOption,
     priceSuffix: priceSuffix,
+    isPricedOffer: isPricedOffer,
     isFreeOfferType: isFreeOfferType,
     offerIsCapped: offerIsCapped,
     formatOfferEndDate: formatOfferEndDate,

@@ -3110,3 +3110,8 @@ html:has(dialog.fb[open]) { overflow: hidden; }
   .fb-fab, .fb-fab span { transition: none; }
   .fb-ok { animation: none; }
 }
+
+/* rupee prices: hidden placeholders that price-locale.js reveals for visitors in India */
+[data-in-price][hidden] {
+  display: none !important;
+}
