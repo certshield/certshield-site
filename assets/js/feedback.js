@@ -27,7 +27,7 @@
     ['other', 'Other', 'Tell us anything else.']
   ];
   var dlg, els, fab, lastQ = '', openedAt = 0, busy = false;
-  var tsId = null, tsToken = '', tsLoading = false, tsFailed = false, waiting = false;
+  var tsId = null, tsToken = '', tsLoading = false, tsFailed = false, tsRetries = 0, waiting = false;
 
   function el(tag, cls, text) {
     var n = d.createElement(tag);
@@ -124,6 +124,8 @@
 
     els.ts = el('div', 'fb-ts');
     form.appendChild(els.ts);
+    els.human = el('p', 'fb-human'); els.human.setAttribute('role', 'status'); els.human.setAttribute('aria-live', 'polite');
+    form.appendChild(els.human);
 
     var pv = el('p', 'fb-priv', 'We receive your message, the page address and your browser language, plus your email only if you add it.' + (cfg.turnstile ? ' Cloudflare Turnstile checks that you are not a bot.' : '') + ' ');
     var pa = el('a', '', 'Privacy'); pa.href = cfg.privacy; pv.appendChild(pa);
@@ -191,22 +193,32 @@
     openedAt = Date.now(); waiting = false;
     dlg.showModal();
     els.msg.focus();
+    if (tsFailed && tsId !== null && tsRetries < 2) { tsRetries++; tsFailed = false; human('Checking that you are human…'); resetTurnstile(); }   /* one more go for a transient error */
     ensureTurnstile();
   }
   function close() { if (dlg && dlg.open) dlg.close(); }
 
-  /* Cloudflare Turnstile: loaded on first open, rendered explicitly into .fb-ts, one fresh token per send. */
+  /* Cloudflare Turnstile: loaded on first open, rendered explicitly into .fb-ts, one fresh token per send.
+   * The widget is usually invisible, so a status line tells the visitor what the check is doing; the box only opens when Cloudflare needs a tick. */
+  function human(text, cls) {
+    if (!els || !els.human) return;
+    els.human.textContent = text;
+    els.human.className = 'fb-human' + (cls ? ' ' + cls : '');
+  }
   function ensureTurnstile() {
     if (!cfg.turnstile || tsId !== null || tsLoading || tsFailed) return;
     var render = function () {
       try {
         tsId = window.turnstile.render(els.ts, {
           sitekey: cfg.turnstile, action: 'feedback', appearance: 'interaction-only',
-          callback: function (t) { tsToken = t; if (waiting) { waiting = false; submit(); } },
-          'expired-callback': function () { tsToken = ''; },
-          'error-callback': function () { tsToken = ''; tsFailed = true; if (waiting) { waiting = false; submit(); } }
+          callback: function (t) { tsToken = t; human('✓ Human check passed', 'is-ok'); if (waiting) { waiting = false; submit(); } },
+          'expired-callback': function () { tsToken = ''; human('Checking again…'); },
+          'before-interactive-callback': function () { els.ts.classList.add('is-open'); human('Please tick the box to confirm you are human.'); },
+          'after-interactive-callback': function () { els.ts.classList.remove('is-open'); },
+          'error-callback': function () { tsToken = ''; tsFailed = true; els.ts.classList.remove('is-open'); human('The human check could not run. You can email us instead.', 'is-bad'); if (waiting) { waiting = false; submit(); } }
         });
-      } catch (e) { tsFailed = true; }
+        human('Checking that you are human…');
+      } catch (e) { tsFailed = true; human('The human check could not run. You can email us instead.', 'is-bad'); }
     };
     if (window.turnstile) { render(); return; }
     tsLoading = true;
@@ -214,11 +226,12 @@
     s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
     s.async = true; s.defer = true;
     s.onload = function () { tsLoading = false; render(); };
-    s.onerror = function () { tsLoading = false; tsFailed = true; if (waiting) { waiting = false; submit(); } };
+    s.onerror = function () { tsLoading = false; tsFailed = true; human('The human check could not load (an ad blocker, perhaps). You can email us instead.', 'is-bad'); if (waiting) { waiting = false; submit(); } };
     d.head.appendChild(s);
   }
   function resetTurnstile() {
     tsToken = '';
+    if (tsId !== null) human('Checking again…');
     if (tsId !== null && window.turnstile) { try { window.turnstile.reset(tsId); } catch (e) { /* the next open renders a fresh one */ } }
   }
 

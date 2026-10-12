@@ -3060,7 +3060,11 @@ html:has(dialog.fb[open]) { overflow: hidden; }
 .fb-reply .fb-label { margin-top: 8px; }
 .fb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .fb-ts { margin: 0 0 10px; }
-.fb-ts:empty { display: none; }
+.fb-ts:empty, .fb-ts:not(.is-open) { height: 0; margin: 0; overflow: hidden; }
+.fb-human { min-height: 1.3em; margin: 0 0 8px; color: var(--fb-soft); font-size: 0.82rem; }
+.fb-human:empty { display: none; }
+.fb-human.is-ok { color: var(--fb-ok); font-weight: 650; }
+.fb-human.is-bad { color: var(--fb-bad); font-weight: 600; }
 .fb-priv { margin: 0 0 10px; color: var(--fb-soft); font-size: 0.8rem; }
 .fb-priv a, .fb-mail { color: var(--fb-link); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
 .fb-status { min-height: 1.4em; margin: 0 0 8px; color: var(--fb-soft); font-size: 0.88rem; }
