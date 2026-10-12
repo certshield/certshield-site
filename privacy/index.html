@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; https://www.googletagmanager.com; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: https://*.google-analytics.com https://*.googletagmanager.com; font-src &#x27;self&#x27;; connect-src &#x27;self&#x27; https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;; form-action &#x27;self&#x27;; manifest-src &#x27;self&#x27;; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; https://www.googletagmanager.com https://challenges.cloudflare.com; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: https://*.google-analytics.com https://*.googletagmanager.com; font-src &#x27;self&#x27;; connect-src &#x27;self&#x27; https://certshield.academy https://challenges.cloudflare.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://challenges.cloudflare.com; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;; form-action &#x27;self&#x27;; manifest-src &#x27;self&#x27;; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
@@ -60,14 +60,15 @@
     <section class="page-hero"><div class="wrap">
       <p class="eyebrow">Your data</p>
       <h1>Privacy Policy</h1>
-      <p>What CertShield Practice stores, what it does not collect, and how optional analytics works. Last updated 10 October 2026.</p>
+      <p>What CertShield Practice stores, what it does not collect, and how optional analytics works. Last updated 12 October 2026.</p>
     </div></section>
     <section class="section section-white"><div class="wrap reading-width">
       <h2>The short version</h2>
-      <p>CertShield Practice has no accounts, no sign-up and no forms that collect personal data. The diagnostics run in your browser: your answers, confidence ratings and progress stay on your device and are never sent to us. Google Analytics, the only tracking tool on the site, loads <strong>only if you choose “Allow analytics”</strong>.</p>
+      <p>CertShield Practice has no accounts and no sign-up; the only form is the optional Feedback box described below. The diagnostics run in your browser: your answers, confidence ratings and progress stay on your device and are never sent to us. Google Analytics, the only tracking tool on the site, loads <strong>only if you choose “Allow analytics”</strong>.</p>
       <h2>What is stored in your browser</h2>
       <ul>
         <li><strong>Practice progress:</strong> your answers, flags and place in each assessment so you can resume where you stopped, plus a short history of your earlier attempts so you can compare them.</li>
+        <li><strong>An unsent feedback draft:</strong> if you close the Feedback box before sending, your text is kept for this browser tab only (session storage) and is deleted when you send it or close the tab.</li>
         <li><strong>Your analytics choice:</strong> whether you chose “Allow analytics” or “No thanks”.</li>
       </ul>
       <p>This is kept in your browser's local storage on your own device. Clear it in your browser settings at any time; the start-over option inside an assessment clears that assessment's progress.</p>
@@ -76,10 +77,12 @@
       <p>If you choose “No thanks”, nothing from Google is loaded. You can change your mind at any time with <strong>Analytics settings</strong> in the footer; choosing “No thanks” stops the tag and removes its cookies.</p>
       <h2>Links to Udemy and other sites</h2>
       <p>The full-length practice exams are CertShield's own courses, sold and delivered by Udemy. Course buttons and offer links on this site carry CertShield's instructor referral or coupon code, so Udemy credits CertShield when you enrol, at no extra cost to you. Udemy's own privacy policy applies once you leave this site, as do the policies of the official vendor documentation sites we link to for further reading.</p>
+      <h2>Feedback box (optional)</h2>
+      <p>The Feedback button lets you write to us. Nothing is sent until you press “Send feedback”. We then receive what you wrote, the address of the page (and, in a quiz, the question you were on), your browser's language and, only if you add it, your email address so we can reply. The message travels over an encrypted connection to certshield.academy, which passes it to our email provider, Brevo, for delivery to <a href="mailto:contact@certshield.academy">contact@certshield.academy</a>. A Cloudflare Turnstile check, loaded only when you open the box (never on page load), confirms you are not a bot; it is covered by Cloudflare's own privacy policy. We keep no copy on this website and use the message only to improve the site and to reply to you. Please do not include personal details you would not want us to see.</p>
       <h2>Children</h2>
       <p>This site is a study aid for certification candidates and is not directed at children. We do not knowingly collect personal data from anyone.</p>
       <h2>Your rights and contact</h2>
-      <p>Because we hold no personal data about you on this site, there is normally nothing to access, correct or delete here. For any privacy question, including about data in Google Analytics if you allowed it, email <a href="mailto:contact@certshield.academy">contact@certshield.academy</a>.</p>
+      <p>Apart from feedback you choose to send us, we hold no personal data about you on this site, so there is normally nothing to access, correct or delete here. To have a feedback message deleted, or for any other privacy question, including about data in Google Analytics if you allowed it, email <a href="mailto:contact@certshield.academy">contact@certshield.academy</a>.</p>
       <p>The same principles apply on <a href="https://certshield.academy/privacy/" target="_blank" rel="noopener">certshield.academy</a>. This page is written in plain language and describes how the site works today; it is not legal advice.</p>
     </div></section>
     
@@ -90,11 +93,11 @@
       <div class="footer-grid">
         <div>
           <h2>CertShield Practice</h2>
-          <p class="footer-note">Free 30+ question certification readiness diagnostics with transparent scoring, domain evidence and explanation-led review.</p>
+          <p class="footer-note">Free 30+ question certification mock exams: a score for every exam topic and every answer explained.</p>
         </div>
         <div><h3>Practice</h3><ul><li><a href="../assessments/">All assessments</a></li><li><a href="../offers/">Current offers</a></li><li><a href="../methodology/">Methodology</a></li></ul></div>
         <div><h3>CertShield</h3><ul><li><a href="https://certshield.academy/?utm_source=certshield_practice&amp;utm_medium=referral&amp;utm_campaign=footer" target="_blank" rel="noopener">About CertShield ↗</a></li><li><a href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener noreferrer">Instructor profile ↗</a></li></ul></div>
-        <div><h3>About</h3><ul><li><a href="../about/">About CertShield Practice</a></li><li><a href="../privacy/">Privacy policy</a></li><li><a href="https://certshield.academy/terms/" target="_blank" rel="noopener">Terms of use ↗</a></li><li><a href="https://certshield.academy/disclaimer/" target="_blank" rel="noopener">Independence &amp; disclaimer ↗</a></li><li><button class="link-button" type="button" data-consent-open>Analytics settings</button></li></ul></div>
+        <div><h3>About</h3><ul><li><a href="../about/">About CertShield Practice</a></li><li><a href="mailto:contact@certshield.academy?subject=CertShield%20Practice%20feedback" data-feedback-open>Send feedback</a></li><li><a href="../privacy/">Privacy policy</a></li><li><a href="https://certshield.academy/terms/" target="_blank" rel="noopener">Terms of use ↗</a></li><li><a href="https://certshield.academy/disclaimer/" target="_blank" rel="noopener">Independence &amp; disclaimer ↗</a></li><li><button class="link-button" type="button" data-consent-open>Analytics settings</button></li></ul></div>
       </div>
       <div class="footer-bottom">
         <span>© <span data-current-year>2026</span> CertShield. Independent preparation.</span>
@@ -110,5 +113,6 @@
 
   <script src="../assets/js/site.js" defer></script>
   <script src="../assets/js/offers.js" defer></script>
+  <script src="../assets/js/feedback.js" data-endpoint="https://certshield.academy/api/feedback" data-site="practice" data-privacy="../privacy/" data-turnstile-sitekey="0x4AAAAAAFUiHu3cwKNwYshQ" defer></script>
 </body>
 </html>

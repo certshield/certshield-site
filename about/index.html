@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; https://www.googletagmanager.com; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: https://*.google-analytics.com https://*.googletagmanager.com; font-src &#x27;self&#x27;; connect-src &#x27;self&#x27; https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;; form-action &#x27;self&#x27;; manifest-src &#x27;self&#x27;; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; https://www.googletagmanager.com https://challenges.cloudflare.com; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: https://*.google-analytics.com https://*.googletagmanager.com; font-src &#x27;self&#x27;; connect-src &#x27;self&#x27; https://certshield.academy https://challenges.cloudflare.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://challenges.cloudflare.com; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;; form-action &#x27;self&#x27;; manifest-src &#x27;self&#x27;; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
@@ -80,11 +80,11 @@
       <div class="footer-grid">
         <div>
           <h2>CertShield Practice</h2>
-          <p class="footer-note">Free 30+ question certification readiness diagnostics with transparent scoring, domain evidence and explanation-led review.</p>
+          <p class="footer-note">Free 30+ question certification mock exams: a score for every exam topic and every answer explained.</p>
         </div>
         <div><h3>Practice</h3><ul><li><a href="../assessments/">All assessments</a></li><li><a href="../offers/">Current offers</a></li><li><a href="../methodology/">Methodology</a></li></ul></div>
         <div><h3>CertShield</h3><ul><li><a href="https://certshield.academy/?utm_source=certshield_practice&amp;utm_medium=referral&amp;utm_campaign=footer" target="_blank" rel="noopener">About CertShield ↗</a></li><li><a href="https://www.udemy.com/user/priya-d-66/" target="_blank" rel="noopener noreferrer">Instructor profile ↗</a></li></ul></div>
-        <div><h3>About</h3><ul><li><a href="../about/">About CertShield Practice</a></li><li><a href="../privacy/">Privacy policy</a></li><li><a href="https://certshield.academy/terms/" target="_blank" rel="noopener">Terms of use ↗</a></li><li><a href="https://certshield.academy/disclaimer/" target="_blank" rel="noopener">Independence &amp; disclaimer ↗</a></li><li><button class="link-button" type="button" data-consent-open>Analytics settings</button></li></ul></div>
+        <div><h3>About</h3><ul><li><a href="../about/">About CertShield Practice</a></li><li><a href="mailto:contact@certshield.academy?subject=CertShield%20Practice%20feedback" data-feedback-open>Send feedback</a></li><li><a href="../privacy/">Privacy policy</a></li><li><a href="https://certshield.academy/terms/" target="_blank" rel="noopener">Terms of use ↗</a></li><li><a href="https://certshield.academy/disclaimer/" target="_blank" rel="noopener">Independence &amp; disclaimer ↗</a></li><li><button class="link-button" type="button" data-consent-open>Analytics settings</button></li></ul></div>
       </div>
       <div class="footer-bottom">
         <span>© <span data-current-year>2026</span> CertShield. Independent preparation.</span>
@@ -100,5 +100,6 @@
 
   <script src="../assets/js/site.js" defer></script>
   <script src="../assets/js/offers.js" defer></script>
+  <script src="../assets/js/feedback.js" data-endpoint="https://certshield.academy/api/feedback" data-site="practice" data-privacy="../privacy/" data-turnstile-sitekey="0x4AAAAAAFUiHu3cwKNwYshQ" defer></script>
 </body>
 </html>
