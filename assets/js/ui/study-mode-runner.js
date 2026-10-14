@@ -577,6 +577,8 @@
     var rankedResult = scoring.rankDomainsForReview(scoreResult);
 
     this.clearSaved();
+    // Guarded for the same reason as in assessment-runner.js: analytics must never block the summary.
+    if (domUtils.trackAssessmentEvent) domUtils.trackAssessmentEvent("assessment_complete", "study");
     this.runnerPanel.hidden = true;
     this.renderSummary(summary, rankedResult);
   };

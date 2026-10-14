@@ -653,6 +653,8 @@
       contentVersion: this.contentVersion
     });
     this.clearSavedAttempt();
+    // Guarded: scripts are cached for minutes, so a runner may briefly run beside an older dom-utils.js. Analytics must never block the results.
+    if (domUtils.trackAssessmentEvent) domUtils.trackAssessmentEvent("assessment_complete", "diagnostic");
 
     this.runnerPanel.hidden = true;
     this.renderResults();

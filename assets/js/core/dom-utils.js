@@ -205,6 +205,17 @@
     link.setAttribute("data-course-id", courseId);
   }
 
+  /**
+   * Sends one GA4 funnel event (`assessment_start`, `assessment_complete`) with the practice mode and the assessment slug,
+   * read from the URL since every runner root lives at exactly one URL, `/assessments/<slug>/`. A no-op until the visitor
+   * has allowed analytics (window.gtag only exists then). Start -> complete -> `cta_click` is the funnel GA4 can now show.
+   */
+  function trackAssessmentEvent(name, mode) {
+    if (typeof window.gtag !== "function") return;
+    var match = window.location.pathname.match(/\/assessments\/([^/]+)\/?/);
+    window.gtag("event", name, { mode: mode, assessment_slug: match ? match[1] : "" });
+  }
+
   /** True only for a real, finite maximumRedemptions - never inferred, never fabricated. */
   function offerIsCapped(offer) {
     var redemptions = String((offer || {}).maximumRedemptions || "").trim();
@@ -312,6 +323,7 @@
     offerUrgencyEl: offerUrgencyEl,
     offersPageUrl: offersPageUrl,
     liveOfferNoteEl: liveOfferNoteEl,
-    markCtaForTracking: markCtaForTracking
+    markCtaForTracking: markCtaForTracking,
+    trackAssessmentEvent: trackAssessmentEvent
   };
 })(typeof window !== "undefined" ? window : this);

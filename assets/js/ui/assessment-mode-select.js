@@ -22,12 +22,7 @@
    * one URL, `/assessments/<slug>/`.
    */
   function trackAssessmentStart(mode) {
-    if (typeof window.gtag !== "function") return;
-    var match = window.location.pathname.match(/\/assessments\/([^/]+)\/?/);
-    window.gtag("event", "assessment_start", {
-      mode: mode,
-      assessment_slug: match ? match[1] : ""
-    });
+    if (domUtils.trackAssessmentEvent) domUtils.trackAssessmentEvent("assessment_start", mode);
   }
 
   function renderModeChoice(root) {
