@@ -3128,3 +3128,16 @@ html:has(dialog.fb[open]) { overflow: hidden; }
 .learn-band p { margin: 0; max-width: 46rem; }
 .learn-band .eyebrow { margin-bottom: 0; }
 .learn-band-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+
+/* ---------------------------------------------------------------- the official logo
+   The artwork is made for light surfaces, so on the dark header and footer it sits on a white plate rather than being recoloured. */
+.brand-logo-img { display: block; flex: none; box-sizing: content-box; height: auto; max-width: 100%; border-radius: 0.6rem; background: #fff; padding: 0.3rem 0.6rem; }
+.brand-footer { display: inline-flex; margin-bottom: 0.9rem; }
+.brand-footer .brand-logo-img { padding: 0.6rem 1rem; border-radius: 0.9rem; }
+.brand-sub { padding-left: 0.85rem; border-left: 1px solid rgba(255, 255, 255, 0.35); }
+@media (max-width: 43rem) {
+  .brand-logo-img { width: 7.6rem; padding: 0.25rem 0.5rem; }
+  .brand-footer .brand-logo-img { width: 10rem; padding: 0.6rem 1rem; }
+  .brand-sub { padding-left: 0.6rem; }
+  .brand-sub strong { font-size: 0.95rem; }
+}
