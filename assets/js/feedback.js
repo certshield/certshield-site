@@ -17,7 +17,8 @@
     site: script.getAttribute('data-site') || location.hostname,
     privacy: script.getAttribute('data-privacy') || '/privacy/',
     contact: script.getAttribute('data-contact') || 'contact@certshield.academy',
-    turnstile: script.getAttribute('data-turnstile-sitekey') || ''
+    turnstile: script.getAttribute('data-turnstile-sitekey') || '',
+    reply: script.getAttribute('data-reply') !== 'off'      /* data-reply="off": no email field at all (the CertShield Learn pages collect no personal information) */
   };
   var MAX = 2000, MIN = 3, KEY = 'certshield.feedback.draft';
   var TYPES = [
@@ -116,7 +117,7 @@
     var le = el('label', 'fb-label', 'Email'); le.setAttribute('for', 'fb-email');
     els.email = attr(el('input', 'fb-email'), { id: 'fb-email', type: 'email', autocomplete: 'email', maxlength: '120', placeholder: 'you@example.com' });
     det.appendChild(le); det.appendChild(els.email);
-    els.reply = det; form.appendChild(det);
+    els.reply = det; if (cfg.reply) form.appendChild(det);
 
     var hp = attr(el('div', 'fb-hp'), { 'aria-hidden': 'true' });
     els.hp = attr(el('input'), { type: 'text', name: 'website', tabindex: '-1', autocomplete: 'off' });
@@ -127,7 +128,7 @@
     els.human = el('p', 'fb-human'); els.human.setAttribute('role', 'status'); els.human.setAttribute('aria-live', 'polite');
     form.appendChild(els.human);
 
-    var pv = el('p', 'fb-priv', 'We receive your message, the page address and your browser language, plus your email only if you add it.' + (cfg.turnstile ? ' Cloudflare Turnstile checks that you are not a bot.' : '') + ' ');
+    var pv = el('p', 'fb-priv', 'We receive your message, the page address and your browser language' + (cfg.reply ? ', plus your email only if you add it.' : '.') + (cfg.turnstile ? ' Cloudflare Turnstile checks that you are not a bot.' : '') + ' ');
     var pa = el('a', '', 'Privacy'); pa.href = cfg.privacy; pv.appendChild(pa);
     form.appendChild(pv);
 
@@ -145,7 +146,7 @@
     els.doneTitle = el('h2', '', 'Thank you!'); els.doneTitle.tabIndex = -1;
     var dc = el('button', 'fb-send', 'Close'); dc.type = 'button';
     els.done.appendChild(ok); els.done.appendChild(els.doneTitle);
-    els.done.appendChild(el('p', '', 'Your note is in our inbox. If you left an email, we will reply there.'));
+    els.done.appendChild(el('p', '', cfg.reply ? 'Your note is in our inbox. If you left an email, we will reply there.' : 'Your note is in our inbox. Thank you.'));
     els.done.appendChild(dc);
 
     dlg.appendChild(form); dlg.appendChild(els.done);

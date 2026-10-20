@@ -207,12 +207,12 @@
 
   /**
    * Sends one GA4 funnel event (`assessment_start`, `assessment_complete`) with the practice mode and the assessment slug,
-   * read from the URL since every runner root lives at exactly one URL, `/assessments/<slug>/`. A no-op until the visitor
+   * read from the URL since every runner root lives at exactly one URL, `/assessments/<slug>/` (or `/learn/exams/<slug>/`, the free edition). A no-op until the visitor
    * has allowed analytics (window.gtag only exists then). Start -> complete -> `cta_click` is the funnel GA4 can now show.
    */
   function trackAssessmentEvent(name, mode) {
     if (typeof window.gtag !== "function") return;
-    var match = window.location.pathname.match(/\/assessments\/([^/]+)\/?/);
+    var match = window.location.pathname.match(/\/(?:assessments|learn\/exams)\/([^/]+)\/?/);
     window.gtag("event", name, { mode: mode, assessment_slug: match ? match[1] : "" });
   }
 

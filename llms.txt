@@ -88,3 +88,13 @@ CertShield Practice is an independent preparation resource; it is not affiliated
 - [Methodology](https://practice.certshield.academy/methodology/): How diagnostic scoring, confidence and readiness bands are calculated
 - [About](https://practice.certshield.academy/about/): About CertShield Practice and the instructor
 - [Privacy Policy](https://practice.certshield.academy/privacy/): What the site stores in your browser and how optional analytics works
+
+## Free study layer
+
+A separate, promo-free part of this site: free mock exams that show the score as an honest range, a map of nine exam traps, and tools that run in the browser. Nothing here is for sale and no sign-up is needed.
+
+- [Free mock exams](https://practice.certshield.academy/learn/): 43 certifications, 1,310 explained questions, score shown as an honest range
+- [All free mock exams](https://practice.certshield.academy/learn/exams/): Search by certifying body, certification name or exam code
+- [Honest score calculator](https://practice.certshield.academy/learn/readiness/): Enter any practice-test result and see the range it supports, by total or by exam topic
+- [Trap Atlas](https://practice.certshield.academy/learn/trap-atlas/): The nine ways certification questions mislead, with how to spot and beat each
+- [How scoring works](https://practice.certshield.academy/learn/method/): The method behind the ranges and the Error Signature, and what is not claimed
