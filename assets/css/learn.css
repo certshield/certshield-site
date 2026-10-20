@@ -214,3 +214,16 @@ details.disclosure { margin-top: 1rem; }
   .lr-hero { background: #fff; color: #000; border: 1px solid #000; }
   .lr-hero .lr-range, .lr-hero .lr-sentence, .lr-hero .lr-kicker { color: #000; }
 }
+
+/* ---------------------------------------------------------------- the way back to the practice site's home page */
+.lx-topbar { background: var(--brand-50); border-bottom: 1px solid var(--line); font-size: 0.86rem; }
+.lx-topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 2.5rem; }
+.lx-topbar a, .lx-back { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ink-soft); font-weight: 650; text-decoration: none; }
+.lx-topbar a { padding: 0.55rem 0; }
+.lx-topbar a:hover, .lx-back:hover { color: var(--brand-700); text-decoration: underline; }
+.lx-back strong { color: inherit; }
+.lx-topbar .lx-back strong { color: var(--ink); }
+.lx-topbar-x { margin-left: auto; }
+@media (max-width: 26rem) { .lx-hide-sm { display: none; } }
+@media (max-width: 21rem) { .lx-hide-xs { display: none; } }
+@media print { .lx-topbar { display: none; } }
