@@ -52,7 +52,28 @@
     if (domUtils.trackAssessmentEvent) domUtils.trackAssessmentEvent(name, mode);
   }
 
+  // How many questions are already answered in a saved attempt on this device (0 when there is none, or when the questions have changed since).
+  function savedAnswers(storageKey, contentVersion) {
+    try {
+      var raw = window.localStorage.getItem(storageKey);
+      if (!raw) return 0;
+      var saved = JSON.parse(raw);
+      if (!saved || saved.contentVersion !== contentVersion || !saved.answers) return 0;
+      return Object.keys(saved.answers).filter(function count(id) {
+        var a = saved.answers[id];
+        return Array.isArray(a) ? a.length > 0 : Boolean(a);
+      }).length;
+    } catch (error) {
+      return 0;
+    }
+  }
+
   function renderModeChoice(root) {
+    var meta = null;
+    try { meta = JSON.parse(document.querySelector("[data-assessment-payload]").textContent); } catch (error) { meta = null; }
+    var total = meta && meta.questions ? meta.questions.length : 0;
+    var mockDone = meta ? savedAnswers("certshield.assessment.v2." + meta.slug, meta.contentVersion) : 0;
+    var studyDone = meta ? savedAnswers("certshield.study.v1." + meta.slug, meta.contentVersion) : 0;
     var chooser = el("div", "mode-select");
     chooser.appendChild(el("p", "mode-select-eyebrow", "Choose how you want to practise"));
     var grid = el("div", "mode-select-grid");
@@ -60,14 +81,16 @@
     var exam = el("div", "mode-select-card");
     exam.appendChild(el("h3", "", "Mock exam"));
     exam.appendChild(el("p", "", "Answer first, then see everything at the end: your score as an honest range, your result for every exam topic and the traps that caught you. Timed or untimed."));
-    var examButton = el("button", "button button-primary", "Start the mock exam");
+    if (mockDone) exam.appendChild(el("p", "mode-select-progress", "In progress on this device: " + mockDone + " of " + total + " answered. Your answers are waiting."));
+    var examButton = el("button", "button button-primary", mockDone ? "Resume the mock exam" : "Start the mock exam");
     examButton.type = "button";
     exam.appendChild(examButton);
 
     var study = el("div", "mode-select-card");
     study.appendChild(el("h3", "", "Study mode"));
     study.appendChild(el("p", "", "See the explanation right after each answer, and the trap type behind it. No score, no pressure: just learning."));
-    var studyButton = el("button", "button button-secondary", "Start studying");
+    if (studyDone) study.appendChild(el("p", "mode-select-progress", "In progress on this device: " + studyDone + " of " + total + " answered. Your place is saved."));
+    var studyButton = el("button", "button button-secondary", studyDone ? "Resume studying" : "Start studying");
     studyButton.type = "button";
     study.appendChild(studyButton);
 

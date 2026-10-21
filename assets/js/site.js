@@ -206,7 +206,11 @@
       items.forEach(function (item) {
         if (item.getAttribute('data-runtime-expired') !== 'true') runtimeAvailable += 1;
         const text = normalise(item.getAttribute('data-search') || item.textContent);
-        const matchesText = queryWords.every(function (word) { return text.includes(word); });
+        // A word matches where a word of the exam's text starts ("aws" must not match inside "laws"); a squashed query still finds an exam
+        // code typed without its hyphen or space ("saac03" finds SAA-C03). Short squashed fragments would match across word borders, so they are ignored.
+        const squashed = queryWords.join('');
+        const matchesText = queryWords.every(function (word) { return (' ' + text).includes(' ' + word); })
+          || (squashed.length >= 5 && text.replace(/ /g, '').includes(squashed));
         const matchesGroups = Object.keys(state).every(function (name) {
           const expected = state[name];
           if (!expected || expected === 'all') return true;
@@ -398,3 +402,16 @@
     initialise();
   }
 }());
+
+// A mistyped /learn/ address gets the free library's pages, not the shop's buttons (GitHub Pages serves this 404 page at the address that was typed).
+(function () {
+  const panel = document.querySelector('[data-learn-404]');
+  if (!panel || window.location.pathname.indexOf('/learn/') !== 0) return;
+  panel.hidden = false;
+  const shop = document.querySelector('[data-nf-shop]');
+  if (shop) shop.hidden = true;
+  const heading = document.querySelector('h1');
+  if (heading) heading.textContent = 'That page isn’t in the free library';
+  const lede = document.querySelector('.page-hero p');
+  if (lede) lede.textContent = 'The address may have a typo, or the page may have moved. These pages are here.';
+})();

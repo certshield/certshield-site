@@ -227,3 +227,17 @@ details.disclosure { margin-top: 1rem; }
 @media (max-width: 26rem) { .lx-hide-sm { display: none; } }
 @media (max-width: 21rem) { .lx-hide-xs { display: none; } }
 @media print { .lx-topbar { display: none; } }
+
+/* ---------------------------------------------------------------- find an exam from the hub, and the notice that an attempt is waiting */
+.lx-find { display: flex; gap: 0.6rem; max-width: 36rem; margin-top: 1.2rem; }
+.lx-find input { flex: 1 1 auto; min-width: 0; border: 2px solid transparent; border-radius: var(--radius-sm); background: #fff; color: var(--ink); padding: 0.8rem 1rem; font: inherit; }
+.lx-find input:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.lx-find .button { flex: none; }
+@media (max-width: 30rem) { .lx-find { flex-direction: column; } }
+.mode-select-progress { margin: 0 0 0.8rem; color: var(--brand-700); font-weight: 700; }
+@media print { .lx-find { display: none; } }
+/* the topics table on a mock exam page fits a phone instead of hiding its last column behind a sideways scroll */
+@media (max-width: 34rem) {
+  .assessment-domain-table.lx-table { min-width: 0; }
+  .lx-table th, .lx-table td { padding: 0.5rem 0.45rem; font-size: 0.88rem; }
+}
