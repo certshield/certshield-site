@@ -137,6 +137,7 @@
   const OFFER_ROW_RANK = Object.freeze({ live: 0, scheduled: 1, expired: 2 });
   const OFFER_ROW_STATUS_LABEL = Object.freeze({ live: 'Live', scheduled: 'Scheduled', expired: 'Expired' });
   const OFFER_ROW_LIVE_LABEL = 'Enroll on Udemy';
+  const OFFER_ROW_FREE_LABEL = 'Claim free seat';   // a free coupon is claimed, not bought (mirrors OFFER_CTA_FREE_LABEL in scripts/render_site.py)
 
   function offerRowStatus(startAt, endAt, now) {
     const current = (now instanceof Date ? now : new Date(now || Date.now())).getTime();
@@ -196,7 +197,7 @@
       control.setAttribute('href', couponUrl);
       control.setAttribute('target', '_blank');
       control.setAttribute('rel', 'noopener sponsored');
-      control.textContent = OFFER_ROW_LIVE_LABEL;
+      control.textContent = /^free_/.test(row.getAttribute('data-offer-type') || '') ? OFFER_ROW_FREE_LABEL : OFFER_ROW_LIVE_LABEL;
       const courseId = row.getAttribute('data-course-id');
       if (courseId) {
         control.setAttribute('data-ga-cta', '1');
@@ -232,7 +233,8 @@
     } else {
       when = -group.reduce(function (value, row) { return Math.max(value, row.end); }, -Infinity);
     }
-    return { rank: best, when: when, name: (card.getAttribute('data-course-name') || '').toLowerCase() };
+    // badge: Bestseller (0) before Highest Rated (1) before the rest, as the build ordered the cards (data-badge-rank)
+    return { badge: Number(card.getAttribute('data-badge-rank') || 9), rank: best, when: when, name: (card.getAttribute('data-course-name') || '').toLowerCase() };
   }
 
   function refreshOfferRows(root, now) {
@@ -290,7 +292,8 @@
       Array.from(grid.querySelectorAll('.offer-card'))
         .map(function (card) { return { card: card, key: offerCardKey(card) }; })
         .sort(function (a, b) {
-          return compareNumbers(a.key.rank, b.key.rank) ||
+          return compareNumbers(a.key.badge, b.key.badge) ||
+            compareNumbers(a.key.rank, b.key.rank) ||
             compareNumbers(a.key.when, b.key.when) ||
             compareNumbers(a.key.name, b.key.name);
         })

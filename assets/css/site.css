@@ -3141,3 +3141,160 @@ html:has(dialog.fb[open]) { overflow: hidden; }
   .brand-sub { padding-left: 0.6rem; }
   .brand-sub strong { font-size: 0.95rem; }
 }
+
+/* ---------- Udemy first: the label, the badge chip, the gold Enroll button, the home ticket (same words and rules as certshield.academy) ---------- */
+.rated {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  max-width: 100%;
+  margin: 0 0 1rem;
+  padding: 0.4rem 0.9rem 0.4rem 0.45rem;
+  border: 1px solid rgba(244, 185, 66, 0.6);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.22), rgba(244, 185, 66, 0.1));
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+.rated-star { margin: 0 0.1rem 0 0.35rem; color: var(--gold); }
+.rated-lead {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffdc8a, var(--gold));
+  color: var(--brand-950);
+  font-size: 0.74rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.rated-bar { opacity: 0.55; font-weight: 400; }
+.rated-txt { min-width: 0; }
+.rated--light { border-color: rgba(154, 91, 0, 0.4); background: var(--warning-soft); color: var(--gold-dark); }
+.rated--light .rated-star { color: var(--gold-dark); }
+.card .rated { margin-bottom: 0.8rem; }
+.chip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffdc8a, var(--gold));
+  color: var(--brand-950);
+  font-size: 0.74rem;
+  font-weight: 800;
+  vertical-align: middle;
+}
+.button-enroll {
+  background: linear-gradient(180deg, #ffdc8a, var(--gold));
+  color: var(--brand-950);
+  box-shadow: 0 8px 24px rgba(244, 185, 66, 0.35);
+}
+.button-enroll:hover { background: linear-gradient(180deg, #ffe6a8, #ffd16c); color: var(--brand-950); }
+.button-small { min-height: 2.5rem; padding: 0.5rem 0.9rem; font-size: 0.92rem; }
+.enroll-ticket {
+  max-width: 42rem;
+  margin-top: 1.4rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.08);
+}
+.enroll-ticket-title { margin: 0 0 0.6rem; color: #fff; font-weight: 850; }
+.enroll-ticket-list { display: grid; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+.enroll-ticket-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 0.9rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.07);
+}
+.ticket-name { flex: 1 1 14rem; min-width: 0; color: #fff; line-height: 1.35; }
+.ticket-name b { font-weight: 800; }
+@media (max-width: 560px) {
+  .enroll-ticket-list .button { width: 100%; }
+}
+
+/* ---------- Offers page: the question, the tagline, one status line, the badge-holders first, then every exam (one campaign, one path) ---------- */
+.page-hero.offers-hero { padding: clamp(1.1rem, 2.6vw, 2rem) 0 clamp(1.4rem, 3vw, 2.4rem); }
+.page-hero .offers-title { max-width: none; margin: 0 0 0.6rem; font-size: clamp(1.55rem, 6vw, 2.1rem); line-height: 1.12; }
+@media (min-width: 800px) {
+  .page-hero .offers-title { font-size: clamp(1.15rem, 2.65vw, 2.3rem); white-space: nowrap; }
+}
+.offers-tagline { margin: 0 0 1rem; color: var(--gold); font-size: clamp(0.98rem, 0.92rem + 0.35vw, 1.18rem); font-weight: 800; line-height: 1.45; }
+.offers-tagline i { margin: 0 0.55ch; font-style: normal; font-weight: 400; opacity: 0.55; }
+.offers-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.8rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 1rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #d9efed;
+  font-size: 0.95rem;
+}
+.offers-status b { color: #fff; }
+.offers-status-item[hidden] { display: none; }
+.offers-status:has([data-offers-stat]:not([hidden])) .offers-status-none { display: none; }
+.offers-pill { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #fff; color: var(--brand-950); font-size: 0.78rem; font-weight: 800; }
+.offers-pill-live { background: #c9f2dc; color: #0c4a33; }
+.offers-pill-scheduled { background: #fdeee6; color: #8a3a12; }
+.offers-when { color: #bfe3df; font-size: 0.88rem; }
+.offers-sec { padding-block: clamp(1.1rem, 2.6vw, 1.8rem) 0; }
+.offers-sec + .offers-sec { padding-top: clamp(1.4rem, 3vw, 2.2rem); }
+.offers-sec h2 { margin: 0 0 0.9rem; font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem); }
+.offers-toolbar { margin-bottom: 1rem; }
+.offers-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.6rem; }
+.offers-grid .offer-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.8rem 1.1rem;
+}
+.offers-grid .offer-card-main { min-width: 0; flex: 1 1 18rem; }
+.offers-grid .offer-card h3 { margin: 0; font-size: 1.02rem; line-height: 1.3; }
+.offers-grid .offer-card-meta { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.88rem; }
+.offers-grid .offer-row-list { flex: 0 0 auto; margin: 0; }
+#top .offer-card { border-left: 4px solid var(--gold); background: linear-gradient(90deg, #fff7df, #fff 60%); }
+.offers-grid .offer-row.offer-row-lean { display: flex; align-items: center; gap: 0.75rem; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.offer-row-lean .offer-status { font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.offers-status .offer-stat-value { color: inherit; font-size: inherit; font-weight: 800; line-height: inherit; }
+.offer-row-lean .offer-row-action .offer-cta { width: auto; min-width: 11rem; }
+body[data-page-type="offers"] .offer-row-lean a.offer-cta {
+  background: linear-gradient(180deg, #ffdc8a, var(--gold));
+  color: var(--brand-950);
+  box-shadow: 0 8px 24px rgba(244, 185, 66, 0.3);
+}
+body[data-page-type="offers"] .offer-row-lean a.offer-cta:hover { background: linear-gradient(180deg, #ffe6a8, #ffd16c); }
+.offers-foot { margin: 0; padding-block: clamp(1.2rem, 3vw, 2rem) clamp(1.6rem, 4vw, 2.6rem); color: var(--muted); }
+@media (max-width: 640px) {
+  .offers-grid .offer-row-list, .offer-row-lean, .offer-row-lean .offer-row-action { width: 100%; }
+  .offer-row-lean .offer-row-action { flex: 1 1 auto; }
+  .offer-row-lean .offer-row-action .offer-cta { width: 100%; }
+  .page-hero.offers-hero .hero-actions .button { flex: 1 1 0; }
+}
+.page-hero .rated, .hero .rated { display: flex; width: fit-content; }
+.rated:not(.rated--lead) { flex-wrap: nowrap; align-items: flex-start; }
+@media (max-width: 700px) {
+  .rated-bar { display: none; }
+}
+@media (max-width: 600px) {
+  .page-hero h1 { font-size: 1.7rem; line-height: 1.12; }
+}
