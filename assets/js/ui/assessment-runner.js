@@ -987,6 +987,14 @@
       wrapper.appendChild(secondary);
     }
 
+    // Free-seat email alerts: the box is in the footer; site.js jumps to it and puts the cursor in it (and the link disappears once someone has signed up).
+    var seatLink = document.createElement("a");
+    seatLink.className = "button button-text assessment-cta-secondary assessment-cta-seat";
+    seatLink.href = "#seat-foot";
+    seatLink.setAttribute("data-seat-jump", "");
+    seatLink.textContent = "Get the next free seats by email";
+    wrapper.appendChild(seatLink);
+
     this.resultsPanel.appendChild(wrapper);
   };
 

@@ -306,6 +306,12 @@
         stat.hidden = counts[key] === 0;
       });
     });
+    // the free-seat sign-up ticket's headline follows the same clock (the three wordings ride on the heading, so the page carries one)
+    const roundNow = counts.live ? 'live' : (counts.scheduled ? 'soon' : 'none');
+    document.querySelectorAll('[data-seat-headline]').forEach(function (heading) {
+      const text = heading.getAttribute('data-r-' + roundNow);
+      if (text) heading.textContent = text;
+    });
     return true;
   }
 

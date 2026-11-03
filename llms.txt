@@ -84,7 +84,7 @@ CertShield Practice is an independent preparation resource; it is not affiliated
 
 - [Homepage](https://practice.certshield.academy/): Certification directory and how the free diagnostics work
 - [All certifications](https://practice.certshield.academy/assessments/): Every certification covered, including any not yet published
-- [Free seats on Bestselling & Highest Rated Udemy practice exams](https://practice.certshield.academy/offers/): 10 free seats on each of 43 practice exams (AI, Agentic AI, data, cloud and security certifications), first come, first served, from 2026-11-01 07:35 PST to 2026-11-06 07:35 PST; pick an exam and press Claim free seat, and Udemy opens with the coupon already applied.
+- [Free seats on Bestselling & Highest Rated Udemy practice exams](https://practice.certshield.academy/offers/): 10 free seats on each of 43 practice exams (AI, Agentic AI, data, cloud and security certifications), first come, first served, from 2026-11-01 07:35 PST to 2026-11-06 07:35 PST; pick an exam and press Claim free seat, and Udemy opens with the coupon already applied. Free email alerts when a new round opens: use the "Notify me" box on the Offers page or in any page footer (the follow links for the WhatsApp and Arattai channels are on every page).
 - [Methodology](https://practice.certshield.academy/methodology/): How diagnostic scoring, confidence and readiness bands are calculated
 - [About](https://practice.certshield.academy/about/): About CertShield Practice and the instructor
 - [Privacy Policy](https://practice.certshield.academy/privacy/): What the site stores in your browser and how optional analytics works

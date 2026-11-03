@@ -379,7 +379,165 @@
     });
   }
 
+  /**
+   * Free-seat email alerts (the "Free Seat Pass"). A page carries only the email box and the button. The first time someone clicks into a box this adds
+   * the consent checkbox, the Cloudflare verification and the privacy line, so that text is not repeated on every page and Turnstile loads only for people
+   * who start to sign up (the feedback box loads it the same way). The form posts to Brevo (the list "CertShield's Giving Back Offers"); after a sign-up every
+   * box on every page collapses to "You're on the list" (a flag in local storage; nothing else is stored and nothing is sent anywhere else).
+   */
+  const SEAT_KEY = 'certshield.seat.v1';
+  const TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  const turnstileWaiters = [];
+
+  function flushTurnstileWaiters() {
+    while (turnstileWaiters.length) turnstileWaiters.shift()();
+  }
+
+  function withTurnstile(callback) {
+    if (window.turnstile) { callback(); return; }
+    turnstileWaiters.push(callback);
+    if (document.querySelector('script[src*="challenges.cloudflare.com/turnstile"]')) {
+      // another script (the feedback box) already asked for it: wait for it
+      let tries = 0;
+      const timer = window.setInterval(function () {
+        tries += 1;
+        if (window.turnstile) { window.clearInterval(timer); flushTurnstileWaiters(); } else if (tries > 75) window.clearInterval(timer);
+      }, 200);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = TURNSTILE_SRC;
+    script.async = true;
+    script.defer = true;
+    script.addEventListener('load', flushTurnstileWaiters);
+    document.head.appendChild(script);
+  }
+
+  function seatTextLink(href, text, external) {
+    const link = document.createElement('a');
+    link.href = href;
+    link.textContent = text;
+    if (external) { link.target = '_blank'; link.rel = 'nofollow noopener'; }
+    return link;
+  }
+
+  function openSeatForm(form) {
+    if (form.getAttribute('data-seat-open') === 'true') return;
+    form.setAttribute('data-seat-open', 'true');
+    form.classList.add('is-open');
+    const more = document.createElement('div');
+    more.className = 'seat-more';
+    const label = document.createElement('label');
+    label.className = 'sub-optin';
+    const box = document.createElement('input');
+    box.type = 'checkbox';
+    box.name = form.getAttribute('data-consent-field') || 'OPT_IN';
+    box.value = '1';
+    box.required = true;
+    const words = document.createElement('span');
+    words.appendChild(document.createTextNode('I agree to receive CertShield’s special offers and accept the '));
+    words.appendChild(seatTextLink(form.getAttribute('data-privacy') || '/privacy/', 'data privacy statement', false));
+    words.appendChild(document.createTextNode('.'));
+    label.appendChild(box);
+    label.appendChild(words);
+    const captcha = document.createElement('div');
+    captcha.className = 'seat-captcha';
+    const fine = document.createElement('p');
+    fine.className = 'sub-fine';
+    fine.appendChild(document.createTextNode('We use Brevo as our marketing platform. Submitting this form sends your data to Brevo for processing under '));
+    fine.appendChild(seatTextLink('https://www.brevo.com/en/legal/privacypolicy/', 'Brevo’s privacy policy', true));
+    fine.appendChild(document.createTextNode('. Unsubscribe any time.'));
+    more.appendChild(label);
+    more.appendChild(captcha);
+    more.appendChild(fine);
+    form.appendChild(more);
+    const sitekey = form.getAttribute('data-captcha-sitekey');
+    if (sitekey) {
+      withTurnstile(function () {
+        try { window.turnstile.render(captcha, { sitekey: sitekey, theme: 'auto', size: 'flexible' }); } catch (error) { /* the box still works once the verification loads */ }
+      });
+    }
+  }
+
+  function markSeatDone(pass, keepMessage) {
+    pass.classList.add('seat-done');
+    document.documentElement.classList.add('seat-any');
+    const message = pass.querySelector('[data-sub-msg]');
+    if (message && !keepMessage && !message.textContent) message.textContent = '✓ You’re on the list. Watch your inbox for the next round.';
+  }
+
+  function initialiseSeatPass() {
+    const forms = document.querySelectorAll('[data-sub-form]');
+    if (!forms.length) return;
+    let stored = false;
+    try { stored = window.localStorage.getItem(SEAT_KEY) === '1'; } catch (error) { /* private mode: it just asks again next time */ }
+    if (stored) document.querySelectorAll('[data-seat-pass]').forEach(function (pass) { markSeatDone(pass, false); });
+
+    document.addEventListener('focusin', function (event) {
+      const form = event.target.closest && event.target.closest('[data-sub-form]');
+      if (form) openSeatForm(form);
+    });
+    // a link to a sign-up (the hero, the free-test results): jump to it and put the cursor in its email box
+    document.addEventListener('click', function (event) {
+      const link = event.target.closest && event.target.closest('[data-seat-jump]');
+      if (!link) return;
+      const target = document.querySelector(link.getAttribute('href') || '#seat-foot');
+      const input = target && target.querySelector('input[type=email]');
+      if (input) window.setTimeout(function () { try { input.focus(); } catch (error) { /* ignore */ } }, 400);
+    });
+
+    forms.forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const pass = form.closest('[data-seat-pass]');
+        const message = form.parentNode.querySelector('[data-sub-msg]');
+        const email = form.querySelector('input[type=email]');
+        const button = form.querySelector('button[type=submit]');
+        openSeatForm(form);
+        message.classList.remove('sub-msg-ok');
+        if (!email.value || email.value.indexOf('@') < 1) { message.textContent = 'Please enter a valid email address.'; return; }
+        const consent = form.querySelector('input[type=checkbox][required]');
+        if (consent && !consent.checked) { message.textContent = 'Please check the box to agree before subscribing.'; return; }
+        const token = form.querySelector('input[name="cf-turnstile-response"]');
+        if (form.querySelector('.seat-captcha') && (!token || !token.value)) { message.textContent = 'Please wait a moment for the verification to finish, then try again.'; return; }
+        message.textContent = 'Subscribing…';
+        button.disabled = true;
+        window.fetch(form.action, { method: 'POST', body: new window.FormData(form), mode: 'no-cors' }).then(function () {
+          message.classList.add('sub-msg-ok');
+          // the confirmation email often lands in spam, so the one thing to actually do must be impossible to miss
+          message.textContent = 'Thanks! Check your inbox for an email from CertShield to confirm. Not there within a minute or two? Check your spam or junk folder, then click “Yes, subscribe me to this list”.';
+          form.reset();
+          try { window.localStorage.setItem(SEAT_KEY, '1'); } catch (error) { /* ignore */ }
+          document.querySelectorAll('[data-seat-pass]').forEach(function (other) { markSeatDone(other, other === pass); });
+        }).catch(function () {
+          message.classList.remove('sub-msg-ok');
+          message.textContent = 'Something went wrong. Please try again, or follow a channel from the panel.';
+        }).then(function () { button.disabled = false; });
+      });
+    });
+  }
+
+  /** The Follow panel: pinned open on wide screens; on tablets a tab opens it, and a tap elsewhere or Esc closes it. */
+  function initialiseDock() {
+    const dock = document.querySelector('[data-dock]');
+    const tab = document.querySelector('[data-dock-tab]');
+    if (!dock || !tab) return;
+    function set(open) {
+      dock.classList.toggle('is-open', open);
+      tab.setAttribute('aria-expanded', String(open));
+    }
+    tab.addEventListener('click', function () { set(!dock.classList.contains('is-open')); });
+    document.addEventListener('click', function (event) {
+      if (dock.classList.contains('is-open') && !dock.contains(event.target)) set(false);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && dock.classList.contains('is-open')) { set(false); tab.focus(); }
+    });
+  }
+
   function initialise() {
+    initialiseSeatPass();
+    initialiseDock();
     initialiseAnalyticsConsent();
     initialiseNavigation();
     initialiseYears();
