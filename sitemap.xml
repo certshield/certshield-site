@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://practice.certshield.academy/</loc><lastmod>2026-11-19</lastmod></url>
-  <url><loc>https://practice.certshield.academy/assessments/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://practice.certshield.academy/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://practice.certshield.academy/assessments/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/associate-google-workspace-administrator/</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/aws-certified-ai-practitioner/</loc><lastmod>2026-09-15</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/aws-certified-data-engineer-associate/</loc><lastmod>2026-09-13</lastmod></url>
@@ -14,11 +14,11 @@
   <url><loc>https://practice.certshield.academy/assessments/secai/</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/databricks-certified-associate-developer-for-apache-spark/</loc><lastmod>2026-08-30</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/databricks-certified-context-engineer-associate/</loc><lastmod>2026-09-10</lastmod></url>
-  <url><loc>https://practice.certshield.academy/assessments/databricks-certified-data-analyst-associate/</loc><lastmod>2026-08-24</lastmod></url>
+  <url><loc>https://practice.certshield.academy/assessments/databricks-certified-data-analyst-associate/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/databricks-certified-data-engineer-associate/</loc><lastmod>2026-08-21</lastmod></url>
-  <url><loc>https://practice.certshield.academy/assessments/databricks-certified-data-engineer-professional/</loc><lastmod>2026-08-22</lastmod></url>
+  <url><loc>https://practice.certshield.academy/assessments/databricks-certified-data-engineer-professional/</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/databricks-certified-generative-ai-engineer-associate/</loc><lastmod>2026-08-16</lastmod></url>
-  <url><loc>https://practice.certshield.academy/assessments/databricks-certified-machine-learning-associate/</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://practice.certshield.academy/assessments/databricks-certified-machine-learning-associate/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/databricks-certified-machine-learning-professional/</loc><lastmod>2026-08-19</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/associate-cloud-engineer/</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/associate-data-practitioner/</loc><lastmod>2026-09-09</lastmod></url>
@@ -28,12 +28,12 @@
   <url><loc>https://practice.certshield.academy/assessments/professional-cloud-architect/</loc><lastmod>2026-09-07</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/professional-cloud-database-engineer/</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/professional-cloud-developer/</loc><lastmod>2026-09-07</lastmod></url>
-  <url><loc>https://practice.certshield.academy/assessments/professional-cloud-devops-engineer/</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://practice.certshield.academy/assessments/professional-cloud-devops-engineer/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/professional-cloud-network-engineer/</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/professional-cloud-security-engineer/</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/professional-data-engineer/</loc><lastmod>2026-09-04</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/professional-machine-learning-engineer/</loc><lastmod>2026-09-06</lastmod></url>
-  <url><loc>https://practice.certshield.academy/assessments/professional-security-operations-engineer/</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://practice.certshield.academy/assessments/professional-security-operations-engineer/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/certified-ai-governance-professional-aigp/</loc><lastmod>2026-08-31</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/certified-cloud-security-professional-ccsp/</loc><lastmod>2026-09-13</lastmod></url>
   <url><loc>https://practice.certshield.academy/assessments/certified-secure-software-lifecycle-professional-csslp/</loc><lastmod>2026-09-13</lastmod></url>
@@ -49,8 +49,8 @@
   <url><loc>https://practice.certshield.academy/methodology/</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://practice.certshield.academy/about/</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://practice.certshield.academy/privacy/</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://practice.certshield.academy/learn/</loc><lastmod>2026-11-19</lastmod></url>
-  <url><loc>https://practice.certshield.academy/learn/exams/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://practice.certshield.academy/learn/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://practice.certshield.academy/learn/exams/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://practice.certshield.academy/learn/readiness/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://practice.certshield.academy/learn/trap-atlas/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://practice.certshield.academy/learn/trap-atlas/look-alike/</loc><lastmod>2026-10-21</lastmod></url>
